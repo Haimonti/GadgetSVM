@@ -124,7 +124,7 @@ public class SPegasosGadget extends Classifier
   public double wt_norm = 0.0;
   public double m_loss_value = 0.0;
   public int dimension = 0;
-  public double EPSILON_VAL = 0.01;
+  public double EPSILON_VAL = 0.001;
   public int num_converge_iters = 0;
   
   

@@ -120,7 +120,7 @@ public class SPegasos extends Classifier
   public int con_iter_limit = 10;
   public double wt_norm = 0.0;
   public double m_loss_value = 0.0;
-  public double EPSILON_VAL = 0.01;
+  public double EPSILON_VAL = 0.001;
   
    
   /** Holds the current iteration number */

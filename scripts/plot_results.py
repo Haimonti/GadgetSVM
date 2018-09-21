@@ -203,7 +203,7 @@ if __name__ == "__main__":
     
     # equalize the length of both the dataframes, according to train time.
 
-
+    """
     if len(df_pegasos_run_means) > len(df_gadget_run_means):
         max_len = len(df_pegasos_run_means)
         min_len = len(df_gadget_run_means)
@@ -232,7 +232,7 @@ if __name__ == "__main__":
         df_pegasos_run_means[args.xtype + "_time"].iloc[min_len:max_len] = time_vals
     assert len(df_gadget_run_means) == len(df_pegasos_run_means)
     assert len(df_gadget_run_stds) == len(df_pegasos_run_stds)
-
+    """
     # Plot results
     fig, ax = plot_gadget_results(df_gadget_run_means, df_gadget_run_stds, type=args.xtype)
     fig, ax = plot_pegasos_results(df_pegasos_run_means, df_pegasos_run_stds, fig, ax, type=args.xtype)
@@ -241,9 +241,9 @@ if __name__ == "__main__":
     #fig1.savefig(os.path.join(args.data_folder, "gadget_objective.png"))
     # Set the legend and scale
 
-    ax[0].set_yscale('log')
+    #ax[0].set_yscale('log')
     #ax[1].set_yscale('log')
-    ax[0].set_xscale('log')
+    #ax[0].set_xscale('log')
     #ax[1].set_xscale('log')
     
     ax[0].legend()

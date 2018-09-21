@@ -41,7 +41,7 @@ public class CentPegasos {
 		// Evaluate
         double[] spegasosPred=new double[testingSet.numInstances()];
 		 double[] actual=new double[testingSet.numInstances()];
-		 int acc=0; 
+		 double acc=0; 
 		 int clIndex = testingSet.classIndex();
 		 System.out.println("Class index: " + clIndex);
 		 System.out.println("Num test attributes: " + testingSet.numAttributes());
@@ -55,7 +55,7 @@ public class CentPegasos {
 			 }
         
         }
-		 double testAccuracy = (double)acc/testingSet.numInstances();
+		 double testAccuracy = acc/(double)testingSet.numInstances();
 		 
 		 return testAccuracy;
 		
@@ -78,6 +78,7 @@ public class CentPegasos {
 		long trainTimePerIter, startTime;
 		int converged = 0;
 		double accuracy = 0.0;
+		final int NUM_CONVERGE_ITERS = 10;
 	    
 		// Read the data
 		startTime = System.nanoTime();
@@ -107,7 +108,7 @@ public class CentPegasos {
 	    // Initialize the csv file to store the results
 	    String csv_filename = parentPath + "/" + "run" + numRun +"/cent_pegasos_results" + ".csv";
 		String headerString = "iter,obj_value,loss_value,wt_norm,obj_value_difference,converged,";
-		headerString += "num_converge_iters,accuracy,zero_one_error,train_time,read_init_time\n";
+		headerString += "num_converge_iters,accuracy,zero_one_error,train_time,read_init_time,m_t\n";
 		BufferedWriter bw = new BufferedWriter(new FileWriter(csv_filename));
   		bw.write(headerString);
   		bw.close();
@@ -134,7 +135,7 @@ public class CentPegasos {
 	          opString = "";
         	  opString += iter + "," + cModel.m_obj_value + "," + cModel.m_loss_value+","+cModel.wt_norm+","+cModel.m_obj_value_diff+",";
 	          opString += converged + "," + cModel.num_converge_iters +"," + accuracy + "," + (1.0 - accuracy);
-	          opString += ","+ trainTimeInDouble + "," + readInitTimeInDouble + "\n"; 
+	          opString += ","+ trainTimeInDouble + "," + readInitTimeInDouble + "," + cModel.m_t + "\n"; 
 	          System.out.println(opString);
 	        // Write to file
 	  		bw = new BufferedWriter(new FileWriter(csv_filename, true));
@@ -144,7 +145,7 @@ public class CentPegasos {
 	  		
 	        	// Check if the algorithm has converged
 	  				
-				     if(cModel.num_converge_iters == 10) {
+				     if(cModel.num_converge_iters == NUM_CONVERGE_ITERS) {
 				    	 converged = 1; 
 				     }
 				    

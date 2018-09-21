@@ -166,7 +166,7 @@ public class GadgetProtocol implements CDProtocol {
 		// Evaluate
         double[] spegasosPred=new double[testingSet.numInstances()];
 		 double[] actual=new double[testingSet.numInstances()];
-		 int acc=0; 
+		 double acc=0; 
 		 int clIndex = testingSet.classIndex();
 		 System.out.println("Class index: " + clIndex);
 		 System.out.println("Num test attributes: " + testingSet.numAttributes());
@@ -185,7 +185,7 @@ public class GadgetProtocol implements CDProtocol {
 			 }
         
         }
-		 double testAccuracy = (double)acc/testingSet.numInstances();
+		 double testAccuracy = acc/(double)testingSet.numInstances();
 		 System.out.println("Accuracy "+(double)acc/testingSet.numInstances());
 		 return testAccuracy;
 		
