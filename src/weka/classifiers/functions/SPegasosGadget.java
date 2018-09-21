@@ -119,12 +119,13 @@ public class SPegasosGadget extends Classifier
   public double m_obj_value = 0.0;
   public double m_obj_value_prev = 0.0;
   public double m_obj_value_diff = (double)Integer.MAX_VALUE;
-  public int num_converge_iters = 0;
+  
   public int con_iter_limit = 10;
   public double wt_norm = 0.0;
   public double m_loss_value = 0.0;
   public int dimension = 0;
-  public double EPSILON_VAL = 0.001;
+  public double EPSILON_VAL = 0.01;
+  public int num_converge_iters = 0;
   
   
   
@@ -522,11 +523,25 @@ public class SPegasosGadget extends Classifier
   }
   
   public void train(Instances data) throws Exception {
-    for (int e = 0; e < m_epochs; e++) {
-      for (int i = 0; i < data.numInstances(); i++) {
+	  
+      for (int i = 0; i < 1; i++) {
         updateClassifier(data.instance(i));
       }
-    }
+      
+      // Check if the obj value difference is below EPSILON_VAL
+      // Increment counter if it is
+      if (m_obj_value_diff <= EPSILON_VAL) {
+    	  num_converge_iters++;
+      }
+      
+      //reset the convergence counter if the objective value difference slips above EPSILON_VAL
+      if (m_obj_value_diff > EPSILON_VAL) {
+    	  num_converge_iters = 0;
+      }
+      // Once it reaches 10, it should stop training. Handled by GadgetProtocol code.
+      
+     
+	      
   }
   
   protected static double dotProd(Instance inst1, double[] weights, int classIndex) {
@@ -630,6 +645,7 @@ public class SPegasosGadget extends Classifier
       m_obj_value_diff = Math.abs(m_obj_value - m_obj_value_prev);
       m_obj_value_prev = m_obj_value;
       
+      /*
       if(m_obj_value_diff <= EPSILON_VAL) {
     	  num_converge_iters++;
       }
@@ -639,10 +655,11 @@ public class SPegasosGadget extends Classifier
     	  num_converge_iters = 0;
       }
       
-      
+      */
       wt_norm = norm;
       
-      /*
+      
+      // Apply projection
       double scale2 = Math.min(1.0, (1.0 / (m_lambda * norm)));
       if (scale2 < 1.0) {
         scale2 = Math.sqrt(scale2);
@@ -651,7 +668,8 @@ public class SPegasosGadget extends Classifier
             m_weights[j] *= scale2;
           }
         }
-      }*/
+      }
+      
       
     }
   }

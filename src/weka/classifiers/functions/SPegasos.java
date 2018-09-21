@@ -120,7 +120,7 @@ public class SPegasos extends Classifier
   public int con_iter_limit = 10;
   public double wt_norm = 0.0;
   public double m_loss_value = 0.0;
-  public double EPSILON_VAL = 0.001;
+  public double EPSILON_VAL = 0.01;
   
    
   /** Holds the current iteration number */
@@ -458,6 +458,7 @@ public class SPegasos extends Classifier
   public void reset() {
     m_t = 2;
     m_weights = null;
+    num_converge_iters = 0;
   }
 
   /**
@@ -508,9 +509,9 @@ public class SPegasos extends Classifier
     m_weights = new double[data.numAttributes() + 1];
     m_data = new Instances(data, 0);
     
-    if (data.numInstances() > 0) {
-      train(data);    
-    }
+    //if (data.numInstances() > 0) {
+    //  train(data);    
+    //
   }
   
   private void train(Instances data) throws Exception {

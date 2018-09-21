@@ -18,8 +18,6 @@
 
 package peersim.gossip;
 
-import java.util.Iterator;
-import java.util.TreeMap;
 
 import peersim.config.*;
 import peersim.core.*;

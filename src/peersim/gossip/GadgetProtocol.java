@@ -81,7 +81,8 @@ public class GadgetProtocol implements CDProtocol {
 	public static int t = 0;
 	
 	public static boolean optimizationDone = false;	
-
+	
+	public double EPSILON_VAL = 0.01;
 	/** Linkable identifier */
 	protected int lid;
 	/** Learning parameter for GADGET, different from lambda parameter in pegasos */
@@ -96,7 +97,7 @@ public class GadgetProtocol implements CDProtocol {
 	public static int end = 0;
 	
 	public static boolean pushsumobserverflag = false;
-
+	public static final int CONVERGENCE_COUNT = 10;
 	
 	private double oldWeight;
 	
@@ -247,64 +248,46 @@ public class GadgetProtocol implements CDProtocol {
 	 */
 	public void nextCycle(Node node, int pid) {
 		
-		//System.out.println("The number of GADGET iterations is " + T);
-		
+		// Gets the current cycle of Gadget
 		int iter = CDState.getCycle();
-		//System.out.println("The current cycle is: " + CDState.getCycle());
-		double EPSILON_VAL = 0.01;
+		
+		// Initializes the Pegasos Node
 		PegasosNode pn = (PegasosNode)node;
-		//System.out.println("Current node is: " +  pn.getID());
-		//System.out.println("Neighbor node is: " +  pid);
+		
+		
 		resourcepath = pn.getResourcePath();
 		peg_lambda = pn.getPegasosLambda();
 		max_iter = pn.getMaxIter();
 		exam_per_iter = pn.getExamPerIter();
 		
-		//System.out.println("Weight vector of node " + pn.getID() +" before pushsum is "); 
-		//System.out.println(pn.wtvector);
-		
 
-		//System.out.println("Weight vector of node " + pn.getID() +" after pushsum is "); 
-		//System.out.println(pn.wtvector);
-		
-		
-		//String trainfilename = pn.getResourcePath() + "/" + "t_" + pn.getID() + ".dat";
-		//String modelfilename = pn.getResourcePath() + "/" + "m_" + pn.getID() + ".dat";
-		//String testfilename = pn.getResourcePath() + "/" + "tst_" + pn.getID() + ".dat";
-		
 		int num_examples = pn.trainData.numInstances();	
-		//LearningParameter lp = new LearningParameter(peg_lambda, max_iter, exam_per_iter, 0, iter+1);
-		
-		
+	
 		// If converged = 0, then algorithm has not converged yet
+		// Start the clock to observe training time
 		long startTime = System.nanoTime();
 		if(pn.converged == 0){
 			
 			System.out.println("Training the model.");
 			try {
 				
-				// Set iteration number
-				//pn.pegasosClassifier.setIter((double)iter%num_examples);
-				// Update the classifier
-				//System.out.println(iter%num_examples);
 				
-				// Set the iteration number for the next classifier run
-				pn.pegasosClassifier.m_t = iter+2;
-				if (pn.pegasosClassifier.m_t == 0) {
-					pn.pegasosClassifier.m_t = 2;
-				}
-				
-				System.out.println("m_t: "+ pn.pegasosClassifier.m_t);
-				System.out.println("Iter%num_examples: " + iter%num_examples);
-				//System.out.println("pn.pegasosClassifier.m_t % num_examples: " + pn.pegasosClassifier.m_t % num_examples);
-				//pn.pegasosClassifier.updateClassifier(pn.trainData.instance(iter%num_examples));
-				//pn.pegasosClassifier.train(pn.trainData);
 				
 				// Randomize the examples 
-				pn.trainData.randomize(new Random(42));
-				for (int i = 0; i < pn.trainData.numInstances(); i++) {
-			        pn.pegasosClassifier.updateClassifier(pn.trainData.instance(i));
-				}
+				pn.trainData.randomize(new Random(System.currentTimeMillis()));
+				
+				// Setting m_t here
+				
+				pn.pegasosClassifier.m_t = iter+2;
+				pn.pegasosClassifier.train(pn.trainData);
+
+				// Check if the algorithm has converged
+				  
+			     if(pn.pegasosClassifier.num_converge_iters == CONVERGENCE_COUNT) {
+			    	 pn.converged = 1; // Algorithm has converged on this node.
+			    	 end++;
+			     }
+				
 				
 				System.out.println("Obj. value: " + pn.pegasosClassifier.m_obj_value);
 				
@@ -314,7 +297,7 @@ public class GadgetProtocol implements CDProtocol {
 				// Get norm
 				double norm = 0;
 			      for (int k = 0; k < pn.wtvector.length - 1; k++) {
-			        if (k != pn.trainData.instance(num_examples-1).classIndex()) {
+			        if (k != pn.trainData.classIndex()) {
 			          norm += (pn.wtvector[k] * pn.wtvector[k]);
 			        }
 			      }
@@ -326,32 +309,36 @@ public class GadgetProtocol implements CDProtocol {
 			      if (scale2 < 1.0) {
 			        scale2 = Math.sqrt(scale2);
 			        for (int j = 0; j < pn.wtvector.length - 1; j++) {
-			          if (j != pn.trainData.instance(num_examples-1).classIndex()) {
+			          if (j != pn.trainData.classIndex()) {
 			        	  pn.wtvector[j] *= scale2;
 			          }
 			        }
 			      }
 			      
 			      System.out.println("Difference: " + pn.pegasosClassifier.m_obj_value_diff);
-			   // Check if the algorithm has converged
-			     if(pn.pegasosClassifier.num_converge_iters == 10) {
-			    	 pn.converged = 1; // Algorithm has converged on this node.
-			    	 end++;
-			     }
+			   
 			    
 			   
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 			
-		System.out.println("Number of converged nodes: " + end);
-		//pushsum1(node, pn, pid);
+		
+		pushsum1(node, pn, pid);
 		
 		long trainTimePerIter = System.nanoTime() - startTime;
+		pn.trainTime += trainTimePerIter;
+		
+
+		
+		
+		
+		}
 		
 		// Get the accuracy of the test set. We don't include the accuracy calculation within
-		// the training time.
+				// the training time.
+		//pushsum1(node, pn, pid);
 		try {
 			pn.accuracy = getAccuracy(pn.pegasosClassifier, pn.testData);
 		} catch (Exception e1) {
@@ -359,34 +346,32 @@ public class GadgetProtocol implements CDProtocol {
 			e1.printStackTrace();
 		}
 		
-		pn.trainTime += trainTimePerIter;
-		/*System.out.println("Node: " + pn.getID() + ", Iter: " + iter%num_examples + ", " + 
-				"Obj. value: " + pn.pegasosClassifier.m_obj_value + ", Loss value: " + pn.pegasosClassifier.m_loss_value + 
-				", Wt. norm: " + pn.pegasosClassifier.wt_norm);
-		*/
+		if(pn.converged == 1) {
+			pn.pegasosClassifier.num_converge_iters = CONVERGENCE_COUNT;
+		}
 		double trainTimeInDouble = (double)pn.trainTime/1e9;
 		double readInitTimeInDouble = (double)pn.readInitTime/1e9;
-		String csv_filename = resourcepath + "/" + "node_" + pn.getID() + ".csv";
+		
+		
+		String csv_filename = resourcepath + "/run" + pn.numRun + "/node_" + pn.getID()  + ".csv";
+		System.out.println("Storing in " + csv_filename);
 		String opString = pn.getID() + "," + iter + "," + pn.pegasosClassifier.m_obj_value + ","+pn.pegasosClassifier.m_loss_value;
 		opString +=  ","+pn.pegasosClassifier.wt_norm + ","+pn.pegasosClassifier.m_obj_value_diff;
 		opString += "," + pn.converged + "," + pn.pegasosClassifier.num_converge_iters + "," + pn.accuracy + ","+ (1.0 - pn.accuracy); 
 		opString += ","+ trainTimeInDouble + "," + readInitTimeInDouble + "\n"; 
 		
-		
 		// Write to file
-		try {
-		BufferedWriter bw = new BufferedWriter(new FileWriter(csv_filename, true));
-		bw.write(opString);
-		
-		bw.close();
-		}
-		catch(Exception e) {
-			
-		}
-		
-		}
+				try {
+				BufferedWriter bw = new BufferedWriter(new FileWriter(csv_filename, true));
+				bw.write(opString);
+				
+				bw.close();
+				}
+				catch(Exception e) {
+					
+				}
 
-
+		
 	}
 
 	/**

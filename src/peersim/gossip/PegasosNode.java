@@ -31,8 +31,13 @@ import java.io.IOException;
 import java.io.LineNumberReader;
 import java.net.MalformedURLException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import peersim.config.*;
 import peersim.core.*;
@@ -169,6 +174,7 @@ public class PegasosNode implements Node {
 	public double obj_value;
 	double[] wtvector=null;
 	private int numNodes;
+	public int numRun;
 	public int converged = 0;
 	public double accuracy = 0.0;
 	public double trainTime = 0.0;
@@ -208,6 +214,7 @@ public class PegasosNode implements Node {
 			protocol[i] = p; 
 		}
 		numNodes = Configuration.getInt(prefix + "." + PAR_SIZE, 20);
+		numRun = Configuration.getInt(prefix + "." + "run", 0);
 		System.out.println("Number of nodes is ####### "+numNodes);
 	}
 	
@@ -303,8 +310,19 @@ public class PegasosNode implements Node {
 		String global_test_filename = resourcepath + "/" + dataset_name + "-test.dat";
 		//System.out.println(global_train_filename+ " "+ global_test_filename);
 		
+		// Create a folder for this run if it does not exist
+		File directory = new File(resourcepath + "/run" + result.numRun);
+	    if (! directory.exists()){
+	        directory.mkdir();
+	        // If you require it to make the entire directory path including parents,
+	        // use directory.mkdirs(); here instead.
+	    }
+	    
+	    
+		
+		
 		// Create headers to store the results
-		String csv_filename = resourcepath + "/" + "node_" + result.getID() + ".csv";
+		String csv_filename = resourcepath + "/run" + result.numRun + "/node_" + result.getID() + ".csv";
 		String opString = "node,iter,obj_value,loss_value,wt_norm,obj_value_difference,converged,";
 		opString += "num_converge_iters,accuracy,zero_one_error,train_time,read_init_time\n";
 		
@@ -336,6 +354,18 @@ public class PegasosNode implements Node {
 			DataSource globalTrainSource = new DataSource(global_train_filename);
 			globalTrainingSet = globalTrainSource.getDataSet();
 			dimension = globalTrainingSet.numAttributes();
+			
+			//----------------------------------------------------
+			// Create a list of integers
+		    //List<Integer> range = IntStream.rangeClosed(0, globalTrainingSet.numInstances())
+		   // 	    .boxed().collect(Collectors.toList());
+		    //List<Integer> solution = new ArrayList<>();
+		    //for (int i = 1; i <= 6; i++) {
+		     //   solution.add(i);
+		   // }
+		    //Collections.shuffle(solution);
+		    //----------------------------------------------------
+			
 			trainSource = new DataSource(trainfilename);
 			testSource = new DataSource(testfilename);
 		    trainingSet = trainSource.getDataSet();
@@ -376,7 +406,7 @@ public class PegasosNode implements Node {
 	 * global weights obtained to global_<id>.dat files in resourcepath
 	*/
 	public void writeGlobalWeights() {
-		String filename = resourcepath + "/" + "global_" + this.getID() + ".dat";
+		String filename = resourcepath + "/run"+this.numRun + "/global_" + this.getID() + ".dat";
 		String opString = "";
 		for (int i = 0; i < this.wtvector.length;i++) {
 			if (this.wtvector[i] != 0.0) {

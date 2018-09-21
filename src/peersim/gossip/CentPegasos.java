@@ -3,18 +3,18 @@ package peersim.gossip;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.Random;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.functions.SPegasos;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
-import weka.core.converters.SVMLightLoader;
 
 public class CentPegasos {
 
 	public static SPegasos trainPegasosClassifier(Instances trainingSet, double lambda) {
 
-	    SPegasos cModel = new SPegasos();
+	    SPegasos cModel2 = new SPegasos();
 	    // Set options
 	    String[] options  = new String[8];
 	    options[0] = "-L"; 
@@ -26,14 +26,15 @@ public class CentPegasos {
 	    options[6] = "-E";
 	    options[7] = "1";
 	        try {
-	        	cModel.setOptions(options);
-				cModel.buildClassifier(trainingSet);
-			   
+	        	cModel2.setOptions(options);
+	        	System.out.println("Num converge iters: " + cModel2.num_converge_iters);
+				cModel2.buildClassifier(trainingSet);
+				System.out.println("Num converge iters: " + cModel2.num_converge_iters);
 	        } catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	    return cModel;
+	    return cModel2;
 	}
 	
 	public static double getAccuracy(Classifier cModel, Instances testingSet) throws Exception {
@@ -47,12 +48,7 @@ public class CentPegasos {
 		 for (int i = 0; i < testingSet.numInstances(); i++)
 		 {
 			 spegasosPred[i]=cModel.classifyInstance(testingSet.instance(i));
-			 //System.out.println(sgdPred[i]);	
-			// actual[i]=Double.parseDouble(testingSet.instance(i).getClass().toString());
 			 actual[i] = testingSet.instance(i).classValue();
-			 //System.out.println("Actual: "+actual[i]);
-			 //System.out.println("Pred: "+spegasosPred[i]);
-			 //System.out.println("=====");
 			 if(spegasosPred[i]==actual[i])
 			 {
 				 acc=acc+1;
@@ -68,36 +64,48 @@ public class CentPegasos {
 	
 	public static void main(String[] args) throws Exception {
 	
-		
+		// Parse arguments
 		String globalTrainFilepath = args[0];
 		String globalTestFilepath = args[1];
 		System.out.println(globalTrainFilepath + " " + globalTestFilepath);
 		double pegasosLambda = Double.parseDouble(args[2]);
-		
 		long epochs = Long.parseLong(args[3]);
+		int numRun = Integer.parseInt(args[4]);
+		
+		// Init some variables
 		double readInitTimeInDouble;
 		double trainTimeInDouble = 0.0;
 		long trainTimePerIter, startTime;
 		int converged = 0;
 		double accuracy = 0.0;
 	    
+		// Read the data
 		startTime = System.nanoTime();
 		DataSource globalTrainSource = new DataSource(globalTrainFilepath);
 		DataSource globalTestSource = new DataSource(globalTestFilepath);
 		Instances globalTrainingSet = globalTrainSource.getDataSet();
 	    Instances globalTestingSet = globalTestSource.getDataSet();
 	    readInitTimeInDouble = (double)(System.nanoTime() - startTime)/(double)1e9;
-	    SPegasos cModel = trainPegasosClassifier(globalTrainingSet, pegasosLambda);
 	    
+	    // Build the model
+	    SPegasos cModel = trainPegasosClassifier(globalTrainingSet, pegasosLambda);
+	    System.out.println("Num converge iters: " + cModel.num_converge_iters);
 	    // Get the parent directory
 	    File file = new File(globalTrainFilepath);
 	    String parentPath = file.getAbsoluteFile().getParent();
 	   
 	    System.out.println(parentPath);
-	    String csv_filename = parentPath + "/" + "cent_pegasos_results.csv";
-		
 	    
-		
+	    // Create a new folder for run
+	    File directory = new File(parentPath + "/" + "run" + numRun);
+	    if (! directory.exists()){
+	        directory.mkdir();
+	        // If you require it to make the entire directory path including parents,
+	        // use directory.mkdirs(); here instead.
+	    }
+	    
+	    // Initialize the csv file to store the results
+	    String csv_filename = parentPath + "/" + "run" + numRun +"/cent_pegasos_results" + ".csv";
 		String headerString = "iter,obj_value,loss_value,wt_norm,obj_value_difference,converged,";
 		headerString += "num_converge_iters,accuracy,zero_one_error,train_time,read_init_time\n";
 		BufferedWriter bw = new BufferedWriter(new FileWriter(csv_filename));
@@ -106,20 +114,17 @@ public class CentPegasos {
   		
 		String opString;
 		
-		
 	    for (int iter = 0; iter < epochs; iter++) {
-	        
+	    	System.out.println("Num converge iters: " + cModel.num_converge_iters);
 	          if (converged == 0) {
+	        	  globalTrainingSet.randomize(new Random(System.currentTimeMillis()));
 	        	  startTime = System.nanoTime();
 	        	  cModel.m_t = iter+2;
-					if (cModel.m_t == 0) {
-						cModel.m_t = 2;
-					}
-				//System.out.println("m_t: " + cModel.m_t);
-	        	  cModel.updateClassifier(globalTrainingSet.instance(iter%globalTrainingSet.numInstances()));
+	        	  // Update the classifier
+	        	  cModel.updateClassifier(globalTrainingSet.instance(0));
 	        	  trainTimePerIter = System.nanoTime() - startTime;
 	        	  trainTimeInDouble += (double)trainTimePerIter / (double)1e9;
-	        	  //System.out.println("Iter%num_examples: " + iter%globalTrainingSet.numInstances());
+	    
 	        	  
 		          //System.out.println("obj_value: " + cModel.m_obj_value);
 		          
@@ -138,6 +143,7 @@ public class CentPegasos {
 	  		bw.close();
 	  		
 	        	// Check if the algorithm has converged
+	  				
 				     if(cModel.num_converge_iters == 10) {
 				    	 converged = 1; 
 				     }
