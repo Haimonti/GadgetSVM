@@ -123,7 +123,7 @@ public class SPegasosGadget extends Classifier
   public int con_iter_limit = 10;
   public double wt_norm = 0.0;
   public double m_loss_value = 0.0;
-  public int dimension = 0;
+  public int m_dimension = 0;
   public double EPSILON_VAL = 0.001;
   public int num_converge_iters = 0;
   
@@ -511,10 +511,8 @@ public class SPegasosGadget extends Classifier
       data = Filter.useFilter(data, m_normalize);
     }
     
-    if(dimension == 0) {
-    	dimension = data.numAttributes();
-    }
-    m_weights = new double[dimension];
+ 
+    m_weights = new double[m_dimension];
     m_data = new Instances(data, 0);
     
    // if (data.numInstances() > 0) {

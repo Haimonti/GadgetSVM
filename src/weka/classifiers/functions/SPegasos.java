@@ -121,7 +121,7 @@ public class SPegasos extends Classifier
   public double wt_norm = 0.0;
   public double m_loss_value = 0.0;
   public double EPSILON_VAL = 0.001;
-  
+  public int m_dimension;
    
   /** Holds the current iteration number */
   public double m_t;
@@ -468,7 +468,7 @@ public class SPegasos extends Classifier
    * @throws Exception if the classifier can't be built successfully.
    */
   public void buildClassifier(Instances data) throws Exception {
-    reset();
+    
     
     // can classifier handle the data?
     getCapabilities().testWithFail(data);
@@ -506,7 +506,7 @@ public class SPegasos extends Classifier
       data = Filter.useFilter(data, m_normalize);
     }
     
-    m_weights = new double[data.numAttributes() + 1];
+    m_weights = new double[m_dimension + 1];
     m_data = new Instances(data, 0);
     
     //if (data.numInstances() > 0) {

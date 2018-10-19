@@ -113,6 +113,7 @@ public class PegasosNode implements Node {
 	private static final String PAR_MAXITER = "maxiter";
 	private static final String PAR_EXAM_PER_ITER = "examperiter";
 	private static final String PAR_REPLACE = "replace";
+	private static final String PAR_DIM = "dim";
         //private static final String PAR_ITER= "iter"; 
 
 	/** used to generate unique IDs */
@@ -131,6 +132,7 @@ public class PegasosNode implements Node {
 	private int exam_per_iter;
         private int iter;
         private int replace;
+        private int dimension;
 	
         /**
 	 * The current index of this node in the node
@@ -181,6 +183,9 @@ public class PegasosNode implements Node {
 	public SPegasosGadget pegasosClassifier = null;
 	Instances trainData = null;
 	Instances testData = null;
+	File[] listOfFiles = null;
+	
+	int numfiles;
 	double wtnorm = 0.0;
 	public long readInitTime = 0;
 	// ================ constructor and initialization =================
@@ -202,6 +207,7 @@ public class PegasosNode implements Node {
 		max_iter = Configuration.getInt(prefix + "." + PAR_MAXITER, 100000);
 		exam_per_iter = Configuration.getInt(prefix + "." + PAR_EXAM_PER_ITER, 1);
 		replace = Configuration.getInt(prefix + "." + PAR_REPLACE, 1);
+		dimension = Configuration.getInt(prefix + "." + PAR_DIM, 0);
 		//iter = Configuration.getInt(prefix + "." + PAR_ITER);
 		System.out.println("model file and train file are saved in: " + resourcepath);
 		CommonState.setNode(this);
@@ -256,7 +262,7 @@ public class PegasosNode implements Node {
 	    options[7] = "1";
 	        try {
 	        	cModel.setOptions(options);
-	        	cModel.dimension = dimension;
+	        	cModel.m_dimension = dimension;
 				cModel.buildClassifier(trainingSet);
 			   
 	        } catch (Exception e) {
@@ -299,15 +305,27 @@ public class PegasosNode implements Node {
 		// currently training file name format is fixed and hardcoded, should be 
 		// changed in future
 		
-		String trainfilename = resourcepath + "/" + "t_" + result.getID() + ".dat";
-		String modelfilename = resourcepath + "/" + "m_" + result.getID() + ".dat";
-		String testfilename = resourcepath + "/" + "tst_" + result.getID() + ".dat";
+		String localTrainFolderpath = resourcepath + "/" + "t_" + result.getID();
+		//String trainfilename = resourcepath + "/" + "t_" + result.getID() + ".dat";
+		//String modelfilename = resourcepath + "/" + "m_" + result.getID() + ".dat";
+		//String testfilename = resourcepath + "/" + "tst_" + result.getID() + ".dat";
 		
-		File f = new File(trainfilename);
-		String dataset_name = f.getParentFile().getName();
 		
-		String global_train_filename = resourcepath + "/" + dataset_name + "-train.dat";
-		String global_test_filename = resourcepath + "/" + dataset_name + "-test.dat";
+		// Get number of files within the train and test directories
+	    File localTrainFolder = new File(localTrainFolderpath);
+	    
+	    System.out.println(localTrainFolderpath);
+	    result.listOfFiles = localTrainFolder.listFiles();
+	    result.numfiles = result.listOfFiles.length;
+	    
+	    //result.numfiles = listOfFiles.length;
+	    
+	    
+		//File f = new File(trainfilename);
+		//String dataset_name = f.getParentFile().getName();
+		
+		//String global_train_filename = resourcepath + "/" + dataset_name + "-train.dat";
+		//String global_test_filename = resourcepath + "/" + dataset_name + "-test.dat";
 		//System.out.println(global_train_filename+ " "+ global_test_filename);
 		
 		// Create a folder for this run if it does not exist
@@ -345,47 +363,43 @@ public class PegasosNode implements Node {
 		Instances trainingSet = null; 
 		Instances testingSet = null;
 		Instances globalTrainingSet = null;
-		int dimension = 0;
+
 		long startTime;
 		
 		try {
 			startTime = System.nanoTime();    
-			
-			DataSource globalTrainSource = new DataSource(global_train_filename);
-			globalTrainingSet = globalTrainSource.getDataSet();
-			dimension = globalTrainingSet.numAttributes();
-			
-			//----------------------------------------------------
-			// Create a list of integers
-		    //List<Integer> range = IntStream.rangeClosed(0, globalTrainingSet.numInstances())
-		   // 	    .boxed().collect(Collectors.toList());
-		    //List<Integer> solution = new ArrayList<>();
-		    //for (int i = 1; i <= 6; i++) {
-		     //   solution.add(i);
-		   // }
-		    //Collections.shuffle(solution);
-		    //----------------------------------------------------
-			
-			trainSource = new DataSource(trainfilename);
-			testSource = new DataSource(testfilename);
-		    trainingSet = trainSource.getDataSet();
-		    testingSet = testSource.getDataSet();
 		    
-		    int clIndex = trainingSet.classIndex();
-		    System.out.println("Training set Class index: " + clIndex);
-		    clIndex = testingSet.classIndex();
-			System.out.println("Testing set Class index: " + clIndex);
-		    
-		    System.out.println(trainingSet.instance(0));
-		    System.out.println("Num attributes: " + trainingSet.numAttributes());
 		 // Initialize the SPegasosGadget classifier here
-			SPegasosGadget cModel = initializePegasosClassifier(trainingSet, result.lambda, dimension);
+		 // Get the first file and convert that to a dataset
+		    System.out.println("Loading first file " + localTrainFolderpath + "/" + "00000000.dat");
+		    String startFilePath = localTrainFolderpath + "/" + "00000000.dat";
+		    DataSource curSource = new DataSource(startFilePath);
+			Instances curDataset = curSource.getDataSet();
+		    
+		    // Build the model
+		    // SPegasos cModel = trainPegasosClassifier(globalTrainingSet, pegasosLambda);
+		    SPegasosGadget cModel = new SPegasosGadget();
+		    // Set options
+		    String[] options  = new String[8];
+		    options[0] = "-L"; 
+		    options[1] = Double.toString(result.lambda);
+		    options[2] = "-N";
+		    options[3] = "true";
+		    options[4] = "-M";
+		    options[5] = "true";
+		    options[6] = "-E";
+		    options[7] = "1";
+		       
+	    	cModel.setOptions(options);
+	    	cModel.m_dimension = dimension;
+	    	System.out.println("Setting dimension to" + dimension);
+			cModel.buildClassifier(curDataset);
+			
 			
 			result.wtvector = cModel.getWeights();
-			System.out.println("Length of wt. vector: " + result.wtvector.length);
+			//System.out.println("Length of wt. vector: " + result.wtvector.length);
 			result.pegasosClassifier = cModel;
-			result.trainData = trainingSet;
-			result.testData = testingSet;
+			result.trainData = curDataset;
 			result.wtnorm = getNorm(result.wtvector);
 			//printWeights(result.wtvector);	
 			//System.out.println("Norm for node " + result.getID() + ": " + result.wtnorm);

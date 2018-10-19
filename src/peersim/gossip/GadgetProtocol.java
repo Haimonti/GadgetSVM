@@ -42,6 +42,7 @@ import java.io.LineNumberReader;
 import peersim.gossip.PegasosNode;
 import weka.classifiers.Classifier;
 import weka.core.Instances;
+import weka.core.converters.ConverterUtils.DataSource;
 import peersim.config.Configuration;
 import peersim.config.FastConfig;
 import peersim.core.*;
@@ -49,6 +50,10 @@ import peersim.cdsim.*;
 
 
 import java.net.MalformedURLException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.text.ParseException;
 import java.io.BufferedReader;
@@ -162,7 +167,49 @@ public class GadgetProtocol implements CDProtocol {
 		return gp;
 	}
 	
-	public double getAccuracy(Classifier cModel, Instances testingSet) throws Exception {
+	public static double getAccuracy(Classifier cModel, String testPath) throws Exception {
+		// Evaluate
+		
+		
+	    // Files.listFiles() apparently does not work on Linux, and is unreliable.
+	    
+		File testFolder = new File(testPath);
+	    File[] listOfFiles = testFolder.listFiles();
+	    //int numtestfiles = listOfFiles.length;
+		
+		// We have to use the nio library to get the number of files in the directory
+		//String[] listOfFiles = new File(testPath).list();
+		
+	    int numtestfiles = listOfFiles.length;
+	    
+	    //System.out.println("Num test files: " + numtestfiles);
+        double[] spegasosPred=new double[numtestfiles];
+		 double[] actual=new double[numtestfiles];
+		 double acc=0; 
+		 
+		 DataSource testSource;
+		 Instances testingSet;
+		 for (int i = 0; i < numtestfiles; i++)
+		 {
+			 String testFilePath = listOfFiles[i].toString();
+			 
+				testSource = new DataSource(testFilePath);
+				testingSet = testSource.getDataSet();
+			 spegasosPred[i]=cModel.classifyInstance(testingSet.instance(0));
+			 actual[i] = testingSet.instance(0).classValue();
+			 if(spegasosPred[i]==actual[i])
+			 {
+				 acc=acc+1;
+			 }
+        //System.out.println("Acc: " + acc);
+        }
+		 double testAccuracy = acc/(double)numtestfiles;
+		 System.out.println("Test Accuracy: " + testAccuracy);
+		 return testAccuracy;
+		
+		
+	}
+	public double getAccuracy2(Classifier cModel, Instances testingSet) throws Exception {
 		// Evaluate
         double[] spegasosPred=new double[testingSet.numInstances()];
 		 double[] actual=new double[testingSet.numInstances()];
@@ -261,8 +308,6 @@ public class GadgetProtocol implements CDProtocol {
 		exam_per_iter = pn.getExamPerIter();
 		
 
-		int num_examples = pn.trainData.numInstances();	
-	
 		// If converged = 0, then algorithm has not converged yet
 		// Start the clock to observe training time
 		long startTime = System.nanoTime();
@@ -274,10 +319,24 @@ public class GadgetProtocol implements CDProtocol {
 				
 				
 				// Randomize the examples 
-				pn.trainData.randomize(new Random(System.currentTimeMillis()));
+				//pn.trainData.randomize(new Random(System.currentTimeMillis()));
+				// Set pn.trainData here
 				
+				Random r = new Random();
+			    
+				int cur_index = r.nextInt((pn.numfiles - 0));
+				// Read the data
+				startTime = System.nanoTime();
+				System.out.println(cur_index);
+				String curFilePath = pn.listOfFiles[cur_index].toString();
+				System.out.println("Loading " + curFilePath);
+				DataSource curSource = new DataSource(curFilePath);
+				Instances curDataset = curSource.getDataSet();
+				pn.readInitTime +=  System.nanoTime() - startTime;
+				pn.trainData = curDataset;
 				// Setting m_t here
 				
+				startTime = System.nanoTime();
 				pn.pegasosClassifier.m_t = iter+2;
 				pn.pegasosClassifier.train(pn.trainData);
 
@@ -325,25 +384,28 @@ public class GadgetProtocol implements CDProtocol {
 			}
 			
 		
-		pushsum1(node, pn, pid);
+		//pushsum1(node, pn, pid);
 		
 		long trainTimePerIter = System.nanoTime() - startTime;
 		pn.trainTime += trainTimePerIter;
 		
 
-		
-		
-		
 		}
 		
 		// Get the accuracy of the test set. We don't include the accuracy calculation within
 				// the training time.
 		//pushsum1(node, pn, pid);
+		
+		
+		if (iter % 5 == 0) {
 		try {
-			pn.accuracy = getAccuracy(pn.pegasosClassifier, pn.testData);
+			pn.accuracy = getAccuracy(pn.pegasosClassifier, pn.getResourcePath() + "/" + "tst_" + pn.getID());
+			System.out.println("Accuracy: " + pn.accuracy);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		}
+		
 		}
 		
 		if(pn.converged == 1) {
