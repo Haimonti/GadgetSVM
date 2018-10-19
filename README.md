@@ -81,7 +81,12 @@ python plot_results.py --data_folder ./data/mnist --xtype train --runs 5 --gadge
 ```
 ### Results
 
-![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+![alt text](data/adult_plot.png)
+![alt text](data/ccat_plot.png)
+![alt text](data/mnist_plot.png)
+![alt text](data/reuters_plot.png)
+![alt text](data/usps_plot.png)
+
 
 ### Built With
 
