@@ -24,6 +24,7 @@ package weka.classifiers.functions;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Random;
 import java.util.Vector;
 
 import weka.classifiers.Classifier;
@@ -107,24 +108,24 @@ public class SPegasos extends Classifier
   protected Normalize m_normalize;
   
   /** The regularization parameter */
-  protected double m_lambda = 0.0001;
+  public double m_lambda = 0.0001;
   
   /** Stores the weights (+ bias in the last element) */
-  protected double[] m_weights;
+  public double[] m_weights;
   
   /** Objective value */
   public double m_obj_value;
   public double m_obj_value_prev;
   public double m_obj_value_diff;
   public int num_converge_iters = 0;
-  public int con_iter_limit = 10;
+  public int con_iter_limit = 15000;
   public double wt_norm = 0.0;
   public double m_loss_value = 0.0;
   public double EPSILON_VAL = 0.001;
-  public int m_dimension;
+  public int m_dimension =0;
    
   /** Holds the current iteration number */
-  public double m_t;
+  public double m_t=1;
   
   /**
    *  The number of epochs to perform (batch learning). Total iterations is
@@ -468,13 +469,16 @@ public class SPegasos extends Classifier
    * @throws Exception if the classifier can't be built successfully.
    */
   public void buildClassifier(Instances data) throws Exception {
-    
+    reset();
     
     // can classifier handle the data?
     getCapabilities().testWithFail(data);
     
     data = new Instances(data);
     data.deleteWithMissingClass();
+    int classIndex = data.numAttributes()-1;
+    data.setClassIndex(classIndex); 
+    data.randomize(new Random(System.currentTimeMillis()));
     
     if (data.numInstances() > 0 && !m_dontReplaceMissing) {
       m_replaceMissing = new ReplaceMissingValues();
@@ -506,7 +510,7 @@ public class SPegasos extends Classifier
       data = Filter.useFilter(data, m_normalize);
     }
     
-    m_weights = new double[m_dimension + 1];
+    m_weights = new double[data.numAttributes()-1];
     m_data = new Instances(data, 0);
     
     //if (data.numInstances() > 0) {
@@ -514,14 +518,17 @@ public class SPegasos extends Classifier
     //
   }
   
-  private void train(Instances data) throws Exception {
-    for (int e = 0; e < m_epochs; e++) {
-      for (int i = 0; i < data.numInstances(); i++) {
+  private void train(Instances data) throws Exception 
+  {
+	//for (int e = 0; e < m_epochs; e++) 
+	//  {
+      //for (int i = 0; i < data.numInstances(); i++) // <<--GD
+	  for (int i = 0; i < 1; i++)  
+      {
         updateClassifier(data.instance(i));
-        
-        
-      }
-    }
+       }
+    //}
+	System.out.println("Number of iterations "+m_t);
   }
   
   protected static double dotProd(Instance inst1, double[] weights, int classIndex) {
@@ -581,72 +588,96 @@ public class SPegasos extends Classifier
    * @exception Exception if the instance could not be incorporated in
    * the model.
    */
-  public void updateClassifier(Instance instance) throws Exception {
-    if (!instance.classIsMissing()) {
-      
-      double learningRate = 1.0 / (m_lambda * m_t);
-      //double scale = 1.0 - learningRate * m_lambda;
-      double scale = 1.0 - 1.0 / m_t;
-      double y = (instance.classValue() == 0) ? -1 : 1;
-      double wx = dotProd(instance, m_weights, instance.classIndex());
-      double z = y * (wx);        
-      
-      for (int j = 0; j < m_weights.length; j++) {
-        if (j != instance.classIndex()) {
-          m_weights[j] *= scale;
-        }
-      }
-      double loss = 0.0;
-      if (m_loss == LOGLOSS || (z < 1)) {
-        loss = dloss(z);
-        int n1 = instance.numValues();
-        for (int p1 = 0; p1 < n1; p1++) {
-          int indS = instance.index(p1);
-          if (indS != instance.classIndex() &&  !instance.isMissingSparse(p1)) {
-            double m = learningRate * loss * (instance.valueSparse(p1) * y);
-            m_weights[indS] += m;
-          }
-        }
-        
-        // update the bias
-        //m_weights[m_weights.length - 1] += learningRate * loss * y;
-      }
-      
-      double norm = 0;
-      for (int k = 0; k < m_weights.length; k++) {
-        if (k != instance.classIndex()) {
-          norm += (m_weights[k] * m_weights[k]);
-        }
-      }
-      m_obj_value = loss + norm*(m_lambda/2);
-      double scale2 = Math.min(1.0, (1.0 / (m_lambda * norm)));
-      if (scale2 < 1.0) {
-        scale2 = Math.sqrt(scale2);
-        for (int j = 0; j < m_weights.length; j++) {
-          if (j != instance.classIndex()) {
-            m_weights[j] *= scale2;
-          }
-        }
-      }
-      
-      m_loss_value = dloss(z);
-      m_obj_value = m_loss_value + norm*(m_lambda/2);
-      m_obj_value_diff = Math.abs(m_obj_value - m_obj_value_prev);
-      m_obj_value_prev = m_obj_value;
-      
-      if(m_obj_value_diff <= EPSILON_VAL) {
-    	  num_converge_iters++;
-      }
-      
-      //reset the convergence counter if the objective value difference slips above EPSILON_VAL
-      if (m_obj_value_diff > EPSILON_VAL) {
-    	  num_converge_iters = 0;
-      }
+  public void updateClassifier(Instance instance) throws Exception 
+  {  
+    if ((!instance.classIsMissing()) && (m_t < con_iter_limit) && !(m_t == con_iter_limit)) 
+    {  
+    	      System.out.println("Iteration no. is "+m_t);	
+    	      double learningRate = 1.0 / (m_lambda * m_t);
+    	      //System.out.println("Lambda "+m_lambda);
+    	      //System.out.println("iteration "+m_t);
+    	      //System.out.println("Learning Rate "+learningRate);
+    	      //double scale = 1.0 - learningRate * m_lambda;
+    	      double scale = 1.0 - 1.0 / m_t;
+    	      double y = (instance.classValue() == 0) ? -1 : 1;
+    	      double wx = dotProd(instance, m_weights, instance.classIndex());
+    	      double z = y * (wx);        
 
-      wt_norm = norm; 
-      
-      
-    }
+    	      for (int j = 0; j < m_weights.length; j++)
+    	      {
+    	        if (j != instance.classIndex())
+    	        {
+    	          m_weights[j] *= scale;
+    	        }
+    	      }
+    	      
+    	      if (m_loss == LOGLOSS || (z < 1)) 
+    	      {
+    	        m_loss_value = dloss(z);
+    	        int n1 = instance.numValues();
+    	        for (int p1 = 0; p1 < n1; p1++)
+    	        {
+    	          int indS = instance.index(p1);
+    	          //System.out.println(indS);
+    	          if (indS != instance.classIndex() &&  !instance.isMissingSparse(p1))
+    	          {
+    	            double m = learningRate * m_loss_value * (instance.valueSparse(p1) * y);
+    	            //System.out.println("Learning Rate "+learningRate);
+    	            //System.out.println("Loss value "+m_loss_value);
+    	            //System.out.println(" Then "+instance.valueSparse(p1) * y);
+    	            m_weights[indS] += m;
+    	          }
+    	        }
+    	        
+    	        // update the bias
+    	       // m_weights[m_weights.length - 1] += learningRate * m_loss_value * y;
+    	      }
+    	      
+    	      double norm = 0;
+    	      for (int k = 0; k < m_weights.length; k++) 
+    	      {
+    	        if (k != instance.classIndex()) 
+    	        {
+    	          norm += (m_weights[k] * m_weights[k]);
+    	        }
+    	      }
+    	      
+    	      m_loss_value = dloss(z);
+    	      m_obj_value = m_loss_value + norm*(m_lambda/2);
+    	      m_obj_value_diff = Math.abs(m_obj_value - m_obj_value_prev);
+    	      m_obj_value_prev = m_obj_value;
+    	      
+    	      if(m_obj_value_diff <= EPSILON_VAL)
+    	      {
+    	    	  num_converge_iters++;
+    	    	  //System.out.println("Iteration is "+m_t);
+    	      }
+    	      
+    	      //reset the convergence counter if the objective value difference slips above EPSILON_VAL
+    	      if (m_obj_value_diff > EPSILON_VAL) 
+    	      {
+    	    	  num_converge_iters = 0;
+    	      }
+    	      
+    	      wt_norm = norm;      
+    	      
+    	      // Apply projection
+    	      double scale2 = Math.min(1.0, (1.0 / (m_lambda * norm)));
+    	      if (scale2 < 1.0)
+    	      {
+    	        scale2 = Math.sqrt(scale2);
+    	        for (int j = 0; j < m_weights.length - 1; j++)
+    	        {
+    	          if (j != instance.classIndex()) 
+    	          {
+    	            m_weights[j] *= scale2;
+    	          }
+    	        }
+    	      }    
+    	      m_t+=1;   	    
+    } // end of if statement
+    
+    
   }
   
   /**
@@ -752,8 +783,15 @@ public class SPegasos extends Classifier
   /**
    * Main method for testing this class.
    */
-  public static void main(String[] args) {
+  public static void main(String[] args) 
+  {
+	long startTime, readInitTime;  
+	//startTime = System.nanoTime();
+	startTime=System.currentTimeMillis();
     runClassifier(new SPegasos(), args);
+    //readInitTime = System.nanoTime() - startTime;
+    readInitTime = System.currentTimeMillis()-startTime;
+    System.out.println("Time taken to build centralized classifier "+readInitTime);
   }
 }
 

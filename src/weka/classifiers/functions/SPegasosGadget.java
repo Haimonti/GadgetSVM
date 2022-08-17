@@ -111,20 +111,26 @@ public class SPegasosGadget extends Classifier
   /** The regularization parameter */
   protected double m_lambda = 0.0001;
   
+  /** The beta for momentum accelerated gradient */
+  protected double m_beta =0.9;
+  
   /** Stores the weights (+ bias in the last element) */
   protected double[] m_weights;
+  
+  protected double[] m_prev_wts;
   
   /** Holds the current iteration number */
   public double m_t;
   public double m_obj_value = 0.0;
   public double m_obj_value_prev = 0.0;
   public double m_obj_value_diff = (double)Integer.MAX_VALUE;
+  public int m_miniBatchSz = 1;
   
   public int con_iter_limit = 10;
   public double wt_norm = 0.0;
   public double m_loss_value = 0.0;
   public int m_dimension = 0;
-  public double EPSILON_VAL = 0.001;
+  public double EPSILON_VAL = 0.01;
   public int num_converge_iters = 0;
   
   
@@ -187,6 +193,14 @@ public class SPegasosGadget extends Classifier
   
   public double[] getWeights() {
 	  return m_weights;
+  }
+  
+  public void setWeights(double value)
+  {
+	  for(int k=0;k<m_weights.length;k++)
+	  {
+		m_weights[k]=value;  
+	  }
   }
   /**
    * Set the value of lambda to use
@@ -464,6 +478,7 @@ public class SPegasosGadget extends Classifier
   public void reset() {
     m_t = 2;
     m_weights = null;
+    m_prev_wts =null;
   }
 
   /**
@@ -509,10 +524,10 @@ public class SPegasosGadget extends Classifier
       m_normalize = new Normalize();
       m_normalize.setInputFormat(data);
       data = Filter.useFilter(data, m_normalize);
-    }
-    
- 
+    } 
     m_weights = new double[m_dimension];
+    m_prev_wts = new double[m_dimension];
+    
     m_data = new Instances(data, 0);
     
    // if (data.numInstances() > 0) {
@@ -520,11 +535,19 @@ public class SPegasosGadget extends Classifier
     //}
   }
   
-  public void train(Instances data) throws Exception {
-	  
-      for (int i = 0; i < 1; i++) {
+  public void train(Instances data) throws Exception 
+  {
+     for (int i = 0; i < m_miniBatchSz; i++) 
+	 //for (int i = 0; i < data.numInstances(); i++) 
+     {
         updateClassifier(data.instance(i));
       }
+     //For mini-batches, normalize weights by mini-batch size
+     for(int k=0;k<m_weights.length;k++)
+     {
+    	 m_weights[k] = m_weights[k]/m_miniBatchSz;
+    	 //m_weights[k] = m_weights[k]/data.numInstances();
+     }
       
       // Check if the obj value difference is below EPSILON_VAL
       // Increment counter if it is
@@ -537,10 +560,64 @@ public class SPegasosGadget extends Classifier
     	  num_converge_iters = 0;
       }
       // Once it reaches 10, it should stop training. Handled by GadgetProtocol code.
+    }
+  
+  public void trainMom(Instances data) throws Exception 
+  {
+     //for (int i = 0; i < m_miniBatchSz; i++) 
+	 for (int i = 0; i < data.numInstances(); i++) 
+     {
+        updateMomClassifier(data.instance(i));
+     }
+	 //System.out.println("Exited updateMomClassifier");
+     //For mini-batches, normalize weights by mini-batch size
+     for(int k=0;k<m_weights.length;k++)
+     {
+    	 m_weights[k] = m_weights[k]/m_miniBatchSz;
+    	 //m_weights[k] = m_weights[k]/data.numInstances();
+     }
       
-     
-	      
-  }
+      // Check if the obj value difference is below EPSILON_VAL
+      // Increment counter if it is
+      if (m_obj_value_diff <= EPSILON_VAL) {
+    	  num_converge_iters++;
+      }
+      
+      //reset the convergence counter if the objective value difference slips above EPSILON_VAL
+      if (m_obj_value_diff > EPSILON_VAL) {
+    	  num_converge_iters = 0;
+      }
+      // Once it reaches 10, it should stop training. Handled by GadgetProtocol code.
+    }
+  
+  //Implementation for Nesterov Accelerated Gradient (NAG)
+  	public void trainNAG(Instances data) throws Exception 
+   {
+     //for (int i = 0; i < m_miniBatchSz; i++) 
+	 for (int i = 0; i < data.numInstances(); i++) 
+     {
+        updateNAGClassifier(data.instance(i));
+     }
+     //For mini-batches, normalize weights by mini-batch size
+     for(int k=0;k<m_weights.length;k++)
+     {
+    	 m_weights[k] = m_weights[k]/m_miniBatchSz;
+    	 //m_weights[k] = m_weights[k]/data.numInstances();
+     }
+      
+      // Check if the obj value difference is below EPSILON_VAL
+      // Increment counter if it is
+      if (m_obj_value_diff <= EPSILON_VAL) {
+    	  num_converge_iters++;
+      }
+      
+      //reset the convergence counter if the objective value difference slips above EPSILON_VAL
+      if (m_obj_value_diff > EPSILON_VAL) {
+    	  num_converge_iters = 0;
+      }
+      // Once it reaches 10, it should stop training. Handled by GadgetProtocol code.
+    }
+    
   
   protected static double dotProd(Instance inst1, double[] weights, int classIndex) {
     double result = 0;
@@ -601,8 +678,8 @@ public class SPegasosGadget extends Classifier
    * the model.
    */
   public void updateClassifier(Instance instance) throws Exception {
-    if (!instance.classIsMissing()) {
-      
+    if (!instance.classIsMissing()) 
+    {  
       double learningRate = 1.0 / (m_lambda * m_t);
       //double scale = 1.0 - learningRate * m_lambda;
       double scale = 1.0 - 1.0 / m_t;
@@ -654,8 +731,7 @@ public class SPegasosGadget extends Classifier
       }
       
       */
-      wt_norm = norm;
-      
+      wt_norm = norm;      
       
       // Apply projection
       double scale2 = Math.min(1.0, (1.0 / (m_lambda * norm)));
@@ -666,11 +742,179 @@ public class SPegasosGadget extends Classifier
             m_weights[j] *= scale2;
           }
         }
-      }
-      
-      
+      }            
     }
   }
+  
+  /**
+   * Updates the classifier with the given instance using momentum accelerated
+   * stochastic gradient descent.
+   *
+   * @param instance the new training instance to include in the model 
+   * @exception Exception if the instance could not be incorporated in
+   * the model.
+   */
+  /**
+ * @param instance
+ * @throws Exception
+ */
+public void updateMomClassifier(Instance instance) throws Exception 
+  {
+	  //System.out.println("Enters updateMomClassifier");
+    //if (!instance.classIsMissing()) 
+    //{  
+      double learningRate = 1.0 / (m_lambda * m_t);
+      //double scale = 1.0 - learningRate * m_lambda;
+      double scale = 1.0 - 1.0 / m_t;
+      //double momDiff = 0;
+      double y = (instance.classValue() == 0) ? -1 : 1;
+      double wx = dotProd(instance, m_weights, instance.classIndex());
+      double z = y * (wx);  
+      //System.out.println("Enter 1");
+      //System.out.println("y is "+y);
+      //System.out.println("wx is "+wx);
+      //System.out.println("z is "+z);
+      m_loss_value = dloss(z); 
+      //System.out.println("Size of m_weights "+m_weights.length);
+      for (int j = 0; j < m_weights.length; j++) 
+      {	
+    	  //System.out.println("Enters momentum estimation loop");
+          m_weights[j] *= scale;
+          double m = learningRate * m_loss_value * (instance.valueSparse(j) * y) + m_beta * (m_weights[j]-m_prev_wts[j]);
+          //System.out.println(m);
+          m_weights[j] +=m;
+      }
+ //     }
+      //System.out.println("Enter 2");
+      m_prev_wts=m_weights;
+      
+      double norm = 0;
+      for (int k = 0; k < m_weights.length; k++) 
+      {
+        if (k != instance.classIndex()) 
+        {
+          norm += (m_weights[k] * m_weights[k]);
+        }
+      }
+      
+      m_loss_value = dloss(z);
+      m_obj_value = m_loss_value + norm*(m_lambda/2);
+      m_obj_value_diff = Math.abs(m_obj_value - m_obj_value_prev);
+      m_obj_value_prev = m_obj_value;
+      
+      /*
+      if(m_obj_value_diff <= EPSILON_VAL) {
+    	  num_converge_iters++;
+      }
+      
+      //reset the convergence counter if the objective value difference slips above EPSILON_VAL
+      if (m_obj_value_diff > EPSILON_VAL) {
+    	  num_converge_iters = 0;
+      }
+      
+      */
+      wt_norm = norm;      
+      
+      // Apply projection
+      double scale2 = Math.min(1.0, (1.0 / (m_lambda * norm)));
+      if (scale2 < 1.0)
+      {
+        scale2 = Math.sqrt(scale2);
+        for (int j = 0; j < m_weights.length - 1; j++) 
+        {
+          if (j != instance.classIndex()) 
+          {
+            m_weights[j] *= scale2;
+          }
+        }
+      } // end of projection           
+    //}
+  }
+  
+  
+  /**
+   * Updates the classifier with the given instance using momentum accelerated
+   * stochastic gradient descent.
+   *
+   * @param instance the new training instance to include in the model 
+   * @exception Exception if the instance could not be incorporated in
+   * the model.
+   */
+  public void updateNAGClassifier(Instance instance) throws Exception 
+  {
+      double learningRate = 1.0 / (m_lambda * m_t);
+      //double scale = 1.0 - learningRate * m_lambda;
+      double scale = 1.0 - 1.0 / m_t;
+      //double momDiff = 0;
+      double[] yx=new double[m_dimension];
+      double y = (instance.classValue() == 0) ? -1 : 1;
+        
+      //System.out.println("Enter 1");
+      //Generate the new data point for Nesterov Gradient estimation
+      for (int s=0;s<m_weights.length;s++)
+      {
+    	 yx[s] =  m_weights[s] + m_beta * (m_weights[s]-m_prev_wts[s]);
+    	 //System.out.println("yx "+yx[s]);
+      }
+      m_weights=yx;
+      double wx = dotProd(instance, m_weights, instance.classIndex());
+      double z = y * (wx); 
+      //System.out.println("Enter 2");
+      m_loss_value = dloss(z);
+      for(int p1=0;p1<m_weights.length;p1++)
+      {
+        m_weights[p1] *= scale;
+        // Estimate the gradient at the new data point and update weights accordingly  
+        double m = learningRate * m_loss_value * ( instance.valueSparse(p1) * y);
+        //System.out.println("m is "+m);
+        m_weights[p1] += m;
+      }
+      //System.out.println("Enter 3");
+      m_prev_wts=m_weights;
+      
+      double norm = 0;
+      for (int k = 0; k < m_weights.length; k++) 
+      {
+        if (k != instance.classIndex()) 
+        {
+          norm += (m_weights[k] * m_weights[k]);
+        }
+      }
+      
+      m_loss_value = dloss(z);
+      m_obj_value = m_loss_value + norm*(m_lambda/2);
+      m_obj_value_diff = Math.abs(m_obj_value - m_obj_value_prev);
+      m_obj_value_prev = m_obj_value;
+      
+      /*
+      if(m_obj_value_diff <= EPSILON_VAL) {
+    	  num_converge_iters++;
+      }
+      
+      //reset the convergence counter if the objective value difference slips above EPSILON_VAL
+      if (m_obj_value_diff > EPSILON_VAL) {
+    	  num_converge_iters = 0;
+      }
+      
+      */
+      wt_norm = norm;      
+      
+      // Apply projection
+      double scale2 = Math.min(1.0, (1.0 / (m_lambda * norm)));
+      if (scale2 < 1.0) 
+      {
+        scale2 = Math.sqrt(scale2);
+        for (int j = 0; j < m_weights.length - 1; j++) 
+        {
+          if (j != instance.classIndex()) 
+          {
+            m_weights[j] *= scale2;
+          }
+        }
+      }
+      
+  }
+  
   
   /**
    * Computes the distribution for a given instance

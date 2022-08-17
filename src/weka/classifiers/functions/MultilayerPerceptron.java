@@ -53,7 +53,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.Vector;
@@ -378,8 +380,10 @@ public class MultilayerPerceptron
      * Call this to have the connection save the current
      * weights.
      */
-    public void saveWeights() {
-      for (int i = 0; i < m_numInputs; i++) {
+    public void saveWeights() 
+    {
+      for (int i = 0; i < m_numInputs; i++) 
+      {
         m_inputList[i].saveWeights();
       }
     }
@@ -1809,11 +1813,8 @@ public class MultilayerPerceptron
     }
     m_numAttributes = m_instances.numAttributes() - 1;
     m_numClasses = m_instances.numClasses();
- 
     
     setClassType(m_instances);
-    
-
    
     //this sets up the validation set.
     Instances valSet = null;
@@ -1924,9 +1925,11 @@ public class MultilayerPerceptron
     if (numInVal < 0) {
       numInVal = 0;
     }
-    for (int noa = numInVal; noa < m_instances.numInstances(); noa++) {
-      if (!m_instances.instance(noa).classIsMissing()) {
-	totalWeight += m_instances.instance(noa).weight();
+    for (int noa = numInVal; noa < m_instances.numInstances(); noa++) 
+    {
+      if (!m_instances.instance(noa).classIsMissing()) 
+      {
+    	  totalWeight += m_instances.instance(noa).weight();
       }
     }
     if (m_valSize != 0) {
@@ -1939,57 +1942,67 @@ public class MultilayerPerceptron
     m_stopped = false;
      
 
-    for (int noa = 1; noa < m_numEpochs + 1; noa++) {
+    for (int noa = 1; noa < m_numEpochs + 1; noa++) 
+    {
       right = 0;
-      for (int nob = numInVal; nob < m_instances.numInstances(); nob++) {
-	m_currentInstance = m_instances.instance(nob);
-	
-	if (!m_currentInstance.classIsMissing()) {
-	   
-	  //this is where the network updating (and training occurs, for the
-	  //training set
-	  resetNetwork();
-	  calculateOutputs();
-	  tempRate = m_learningRate * m_currentInstance.weight();  
-	  if (m_decay) {
-	    tempRate /= noa;
-	  }
-
-	  right += (calculateErrors() / m_instances.numClasses()) *
-	    m_currentInstance.weight();
-	  updateNetworkWeights(tempRate, m_momentum);
-	  
-	}
-	
-      }
+      for (int nob = numInVal; nob < m_instances.numInstances(); nob++)
+      {
+	    m_currentInstance = m_instances.instance(nob);
+	    if (!m_currentInstance.classIsMissing()) 
+	   {
+	    	//this is where the network updating (and training occurs, for the
+	    	//training set
+	    	resetNetwork();
+	    	calculateOutputs();
+	    	tempRate = m_learningRate * m_currentInstance.weight();  
+	    	if (m_decay)
+	    	{
+	    		tempRate /= noa;
+	    	}
+	    	right += (calculateErrors() / m_instances.numClasses()) *
+	    			m_currentInstance.weight();
+	    	updateNetworkWeights(tempRate, m_momentum);
+	   } 
+      } // end loop for train set
       right /= totalWeight;
-      if (Double.isInfinite(right) || Double.isNaN(right)) {
-	if (!m_reset) {
-	  m_instances = null;
-	  throw new Exception("Network cannot train. Try restarting with a" +
+      if (Double.isInfinite(right) || Double.isNaN(right)) 
+      {
+    	  if (!m_reset)
+    	  {
+    		  m_instances = null;
+    		  throw new Exception("Network cannot train. Try restarting with a" +
 			      " smaller learning rate.");
-	}
-	else {
-	  //reset the network if possible
-	  if (m_learningRate <= Utils.SMALL)
-	    throw new IllegalStateException(
-		"Learning rate got too small (" + m_learningRate 
-		+ " <= " + Utils.SMALL + ")!");
-	  m_learningRate /= 2;
-	  buildClassifier(i);
-	  m_learningRate = origRate;
-	  m_instances = new Instances(m_instances, 0);
-	  m_currentInstance = null;
-	  return;
-	}
+    	  }
+			else 
+			{
+			  //reset the network if possible
+			  if (m_learningRate <= Utils.SMALL)
+			    throw new IllegalStateException(
+				"Learning rate got too small (" + m_learningRate 
+				+ " <= " + Utils.SMALL + ")!");
+			  m_learningRate /= 2;
+			  buildClassifier(i);
+			  m_learningRate = origRate;
+			  m_instances = new Instances(m_instances, 0);
+			  m_currentInstance = null;
+			  return;
+			}
       }
+      
+      /////// Obtain Weights -- if validation set is not there
+	  for (int nod = 0; nod < m_numClasses; nod++)
+	  {
+	     m_outputs[nod].saveWeights();
+	  }
 
       ////////////////////////do validation testing if applicable
       if (m_valSize != 0) {
 	right = 0;
-	for (int nob = 0; nob < valSet.numInstances(); nob++) {
+	for (int nob = 0; nob < valSet.numInstances(); nob++)
+	{
 	  m_currentInstance = valSet.instance(nob);
-	  if (!m_currentInstance.classIsMissing()) {
+	  if (!m_currentInstance.classIsMissing())
+	  {
 	    //this is where the network updating occurs, for the validation set
 	    resetNetwork();
 	    calculateOutputs();
@@ -1998,29 +2011,33 @@ public class MultilayerPerceptron
 	    //note 'right' could be calculated here just using
 	    //the calculate output values. This would be faster.
 	    //be less modular
-	  }
-	  
+	  }	  
 	}
 	
-	if (right < lastRight) {
-	  
-	  if (right < bestError) {
+	if (right < lastRight)
+	{	  
+	  if (right < bestError)
+	  {
 	    bestError = right;
 	    // save the network weights at this point
-	    for (int noc = 0; noc < m_numClasses; noc++) {
+	    for (int noc = 0; noc < m_numClasses; noc++)
+	    {
 	      m_outputs[noc].saveWeights();
 	    }
 	    driftOff = 0;
 	  }
 	}
-	else {
+	else 
+	{
 	  driftOff++;
 	}
 	lastRight = right;
-	if (driftOff > m_driftThreshold || noa + 1 >= m_numEpochs) {
-	  for (int noc = 0; noc < m_numClasses; noc++) {
+	if (driftOff > m_driftThreshold || noa + 1 >= m_numEpochs)
+	{
+	  for (int noc = 0; noc < m_numClasses; noc++)
+	  {
             m_outputs[noc].restoreWeights();
-          }
+      }
 	  m_accepted = true;
 	}
 	right /= totalValWeight;
@@ -2075,7 +2092,9 @@ public class MultilayerPerceptron
 	return;
       }
     }
-    if (m_gui) {
+    
+    if (m_gui)
+    {
       m_win.dispose();
       m_controlPanel = null;
       m_nodePanel = null;
@@ -2429,6 +2448,64 @@ public class MultilayerPerceptron
     return options;
   }
   
+  	public double[] returnOutputWts()
+  	{
+	  	NeuralNode con;
+	    double[] weights=null;
+	    NeuralConnection[] inputs;
+	    //First try and print the weights of the output node
+	    //This is assumed to be a linear unit from hidden neurons
+	    //Also includes a bias term
+	    for (int noa = 0; noa < m_neuralNodes.length; noa++) 
+ 	    {
+	    	con = (NeuralNode) m_neuralNodes[noa]; 
+	    	if (con.getMethod() instanceof LinearUnit) 
+	    	{
+			    weights = con.getWeights();
+			    inputs = con.getInputs();
+			    System.out.println("Number of neurons connecting to output linear unit " +inputs.length);
+			    System.out.println("Size of the weight matrix at output "+weights.length);
+			    System.out.println("Printing weights at output node .....");
+			    for(int nno=0;nno<weights.length;nno++)
+			    {
+			     System.out.println("Weight "+nno + " " + Double.toString(weights[nno]));
+			    }
+	    	}
+ 	    }
+	    return weights;	  
+    }
+  	
+  	public void returnHiddenNeuronWts()
+  	{
+  		NeuralNode con;
+ 	    double[] weights;
+ 	    ArrayList hidNeuronWts = new ArrayList(m_neuralNodes.length);
+ 	    NeuralConnection[] inputs;
+ 	    System.out.println("Number of hidden neurons in the model "+(m_neuralNodes.length));
+ 	    //Just get the weights of the hidden layers
+ 	    for (int noa = 0; noa < m_neuralNodes.length; noa++) 
+ 	    {
+ 	      con = (NeuralNode) m_neuralNodes[noa]; 
+ 	      HashMap<String,Double> hm = new HashMap<String,Double>();
+ 	      if (con.getMethod() instanceof SigmoidUnit) 
+ 	      {	  
+ 	       weights = con.getWeights();
+ 	       inputs = con.getInputs();
+ 	       System.out.println("Printing weights at hidden neuron "+Integer.toString(noa));
+ 	       for (int nob = 0; nob <= con.getNumInputs(); nob++) 
+ 	       {
+ 		    //hidNeuronWts[noa][nob]=weights[nob];
+ 		    //System.out.println("Weight " +nob + " " + weights[nob]);
+ 	    	hm.put(String.valueOf(noa), weights[nob]);   
+ 	       }
+ 	      }
+ 	      hidNeuronWts.add(hm);
+ 	    }
+ 	    System.out.println("Size of ArrayList of weights "+hidNeuronWts.size());
+  	}
+  	
+  
+  
   /**
    * @return string describing the model.
    */
@@ -2462,7 +2539,7 @@ public class MultilayerPerceptron
       model.append("Node " + con.getId() + "\n    Inputs    Weights\n");
       model.append("    Threshold    " + weights[0] + "\n");
       for (int nob = 1; nob < con.getNumInputs() + 1; nob++) {
-	if ((inputs[nob - 1].getType() & NeuralConnection.PURE_INPUT) 
+	  if ((inputs[nob - 1].getType() & NeuralConnection.PURE_INPUT) 
 	    == NeuralConnection.PURE_INPUT) {
 	  model.append("    Attrib " + 
 		       m_instances.attribute(((NeuralEnd)inputs[nob-1]).

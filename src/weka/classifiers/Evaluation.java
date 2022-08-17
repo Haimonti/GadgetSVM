@@ -977,7 +977,10 @@ public class Evaluation implements Summarizable, RevisionHandler {
           int trainSize =
             (int) Math.round(tmpInst.numInstances() * splitPercentage / 100);
           int testSize = tmpInst.numInstances() - trainSize;
+          tmpInst.randomize(new Random(System.currentTimeMillis()));
           Instances trainInst = new Instances(tmpInst, 0, trainSize);
+          //Use this when building an online classifier like Pegasos
+          //Instances trainInst = new Instances(tmpInst, 0, 10);
           Instances testInst = new Instances(tmpInst, trainSize, testSize);
           trainSource = new DataSource(trainInst);
           testSource = new DataSource(testInst);

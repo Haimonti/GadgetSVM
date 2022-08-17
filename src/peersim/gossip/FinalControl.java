@@ -81,13 +81,14 @@ public FinalControl(String name) {
 public boolean execute() {
 	System.out.println("Running final control");
 
-	final int len = Network.size();
-	for (int i = 0; i <  len; i++) {
-		PegasosNode node = (PegasosNode) Network.get(i);
-		node.writeGlobalWeights();
-		System.out.println("Global weights have been written to "+node.getResourcePath()+"\\global_" + i + ".dat");
-	}
-	
+//	final int len = Network.size();
+//	for (int i = 0; i <  len; i++) 
+//	{
+//		LibLinearNode node = (LibLinearNode) Network.get(i);
+//		node.writeGlobalWeights();
+//		System.out.println("Global weights have been written to "+node.getResourcePath()+"\\global_" + i + ".dat");
+//	}
+//	
 	return false;
 }
 

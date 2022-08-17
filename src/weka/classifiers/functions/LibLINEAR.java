@@ -720,6 +720,11 @@ public class LibLINEAR
 
     return result;
   }
+  
+  public double[] getWts() 
+  {
+	  return m_Weight;
+  }
 
   /**
    * Returns the tip text for this property
@@ -983,7 +988,8 @@ public class LibLINEAR
     // fill array
     result = Array.newInstance(Class.forName(CLASS_FEATURENODE), count);
     index  = 0;
-    for (i = 0; i < instance.numValues(); i++) {
+    for (i = 0; i < instance.numValues(); i++) 
+    {
 
       int idx = instance.index(i);
       double val = instance.valueSparse(i);

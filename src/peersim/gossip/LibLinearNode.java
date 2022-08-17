@@ -1,25 +1,3 @@
-/*
- * Peersim-Gadget : A Gadget protocol implementation in peersim based on the paper
- * Chase Henzel, Haimonti Dutta
- * GADGET SVM: A Gossip-bAseD sub-GradiEnT SVM Solver   
- * 
- * Copyright (C) 2012
- * Deepak Nayak 
- * Columbia University, Computer Science MS'13
- * 
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by the Free Software
- * Foundation.
- * 
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
- * details.
- * 
- * You should have received a copy of the GNU General Public License along with
- * this program; if not, write to the Free Software Foundation, Inc., 51
- * Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
- */
 package peersim.gossip;
 
 import java.io.BufferedReader;
@@ -29,22 +7,22 @@ import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.LineNumberReader;
+import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.util.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.Vector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import de.bwaldvogel.liblinear.Model;
+import de.bwaldvogel.liblinear.Linear;
+import de.bwaldvogel.liblinear.Parameter;
+import de.bwaldvogel.liblinear.Problem;
+import de.bwaldvogel.liblinear.SolverType;
 import peersim.config.*;
 import peersim.core.*;
 import weka.classifiers.Evaluation;
+import weka.classifiers.functions.LibSVM;
 import weka.classifiers.functions.SPegasos;
 import weka.classifiers.functions.SPegasosGadget;
 import weka.classifiers.functions.LibLINEAR;
@@ -77,7 +55,7 @@ import weka.filters.unsupervised.attribute.NumericToNominal;
 //import jnisvmlight.SVMLightInterface;
 
 /**
- * Class PegasosNode
+ * Class LibLinearNode
  * An implementation of {@link Node} which can handle external resources. 
  * It is based on {@link GeneralNode} and extended it to be used with pegasos solver.
  * At the start of node, each node has some associated data file, on which it calls
@@ -86,8 +64,10 @@ import weka.filters.unsupervised.attribute.NumericToNominal;
  * This is another implementation of {@link Node} class that is used to compose the
  * p2p {@link Network}, where each node can handle an external resource.
  * @author Deepak Nayak
+ * @param <svm_model>
  */
-public class PegasosNode implements Node {
+public class LibLinearNode<svm_model> implements Node 
+{
 
 	// ================= fields ========================================
 	// =================================================================
@@ -129,11 +109,11 @@ public class PegasosNode implements Node {
  	 * learning parameters of pegasos
  	 */
 		private double lambda;
-		private int max_iter;
-		private int exam_per_iter;
-        private int iter;
-        private int replace;
-        private int dimension;
+//		private int max_iter;
+//		private int exam_per_iter;
+//        private int iter;
+//        private int replace;
+//        private int dimension;
 	
         /**
 	 * The current index of this node in the node
@@ -173,6 +153,10 @@ public class PegasosNode implements Node {
 	public double weight;
 	// The features at the node
 	public double[] features;
+	// The predictions for train instances at the node
+	public double[] pred=null;
+	// The predictions for test instances at the node
+	public double[] predTest=null;
 	/** Misclassification count for debugging*/
 	public int misclassified;
 	public double obj_value;
@@ -182,14 +166,14 @@ public class PegasosNode implements Node {
 	public int converged = 0;
 	public double accuracy = 0.0;
 	public double trainTime = 0.0;
-	public double asgTrainTime=0.0;
-	public SPegasosGadget pegasosClassifier = null;
-	public SPegasosGadget asgSVM = null;
+	//public SPegasosGadget pegasosClassifier = null;
+	//public SPegasosGadget asgSVM = null;
+	public LibSVM libSVMClassifier=null;
 	Instances trainData = null;
 	Instances testData = null;
 	Instances supportVecs=null;
-	Instances selectedSetXY=null;
-	Instances updatedTrainData=null;
+	//Instances selectedSetXY=null;
+	//Instances updatedTrainData=null;
 	File[] listOfFiles = null;
 	public int numFeat;
 	
@@ -207,16 +191,16 @@ public class PegasosNode implements Node {
 	 */
 
 	
-	public PegasosNode(String prefix) 
+	public LibLinearNode(String prefix) 
 	{
 		System.out.println(prefix);
 		String[] names = Configuration.getNames(PAR_PROT);
 		resourcepath = (String)Configuration.getString(prefix + "." + PAR_PATH);
 		lambda = Configuration.getDouble(prefix + "." + PAR_LAMBDA, 0.001);
-		max_iter = Configuration.getInt(prefix + "." + PAR_MAXITER, 100000);
-		exam_per_iter = Configuration.getInt(prefix + "." + PAR_EXAM_PER_ITER, 1);
-		replace = Configuration.getInt(prefix + "." + PAR_REPLACE, 1);
-		dimension = Configuration.getInt(prefix + "." + PAR_DIM, 0);
+//		max_iter = Configuration.getInt(prefix + "." + PAR_MAXITER, 100000);
+//		exam_per_iter = Configuration.getInt(prefix + "." + PAR_EXAM_PER_ITER, 1);
+//		replace = Configuration.getInt(prefix + "." + PAR_REPLACE, 1);
+//		dimension = Configuration.getInt(prefix + "." + PAR_DIM, 0);
 		//iter = Configuration.getInt(prefix + "." + PAR_ITER);
 		System.out.println("model file and train file are saved in: " + resourcepath);
 		CommonState.setNode(this);
@@ -250,40 +234,14 @@ public class PegasosNode implements Node {
 		
 	}
 	
-	public SPegasosGadget initializePegasosClassifier(Instances trainingSet, 
-			double lambda, int dimension) {
-	    
-
-	    SPegasosGadget cModel = new SPegasosGadget();
-	    // Set options
-	    String[] options  = new String[8];
-	    options[0] = "-L"; 
-	    options[1] = Double.toString(lambda);
-	    options[2] = "-N";
-	    options[3] = "true";
-	    options[4] = "-M";
-	    options[5] = "true";
-	    options[6] = "-E";
-	    options[7] = "1";
-	        try {
-	        	cModel.setOptions(options);
-	        	cModel.m_dimension = dimension;
-				cModel.buildClassifier(trainingSet);
-			   
-	        } catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    return cModel;
-	}
-	
 	// Function to get the norm of the weight vector
-	public static double getNorm(double[] weights) {
+	public static double getNorm(double[] weights) 
+	{
 		 double norm = 0;
-	      for (int k = 0; k < weights.length; k++) {
+	      for (int k = 0; k < weights.length; k++) 
+	      {
 	        
 	          norm += (weights[k] * weights[k]);
-	        
 	      }
 		return norm;
 	}
@@ -291,10 +249,10 @@ public class PegasosNode implements Node {
 	
 	public Object clone() 
 	{
-		PegasosNode result = null;
+		LibLinearNode result = null;
 		try
 		{ 
-			result=(PegasosNode)super.clone(); 
+			result=(LibLinearNode)super.clone(); 
 		}
 		catch( CloneNotSupportedException e ) 
 		{
@@ -315,6 +273,7 @@ public class PegasosNode implements Node {
 		// changed in future
 		
 		String localTrainFolderpath = resourcepath + "/" + "t_" + result.getID();
+		String localTestFolderpath = resourcepath + "/" + "tst_" + result.getID();
 		//String trainfilename = resourcepath + "/" + "t_" + result.getID() + ".dat";
 		//String modelfilename = resourcepath + "/" + "m_" + result.getID() + ".dat";
 		//String testfilename = resourcepath + "/" + "tst_" + result.getID() + ".dat";
@@ -335,33 +294,23 @@ public class PegasosNode implements Node {
 	 
 	    // Create headers to store the results
 //		String csv_filename = resourcepath + "/run" + result.numRun + "/node_" + result.getID() + ".csv";
-	    String csv_filename_ASG = resourcepath + "/run" + result.numRun + "/node_asg_" + result.getID() + ".csv";
-		String opString = "node,iter,obj_value,loss_value,wt_norm,obj_value_difference,converged,";
-		opString += "num_converge_iters,accuracy,zero_one_error,train_time,read_init_time\n";
+	    String csv_filename_Neuro = resourcepath + "/run" + result.numRun + "/node_" + result.getID() + ".csv";
+		String opString = "node,iter,";
+		opString += "accuracy,zero_one_error,train_time\n";
 		
 		// Write to file
 		try {
 		//BufferedWriter bw = new BufferedWriter(new FileWriter(csv_filename));
-		BufferedWriter bwASG = new BufferedWriter(new FileWriter(csv_filename_ASG));
+		BufferedWriter bwNeuro = new BufferedWriter(new FileWriter(csv_filename_Neuro));
 		//bw.write(opString);
-		bwASG.write(opString);
+		bwNeuro.write(opString);
 		//bw.close();
-		bwASG.close();
+		bwNeuro.close();
 		}
 		catch(Exception e) 
 		{
 		 e.printStackTrace();	
 		}
-		
-		//Get train and test data
-//		DataSource trainSource;
-//		DataSource testSource;
-//		Instances trainingSet = null; 
-//		Instances testingSet = null;
-//		Instances globalTrainingSet = null;
-		//Need the train set separated into two classes
-		Instances lblOneInst =null;
-		Instances lblOtherInst=null;
 		
 		long startTime;
 		
@@ -369,123 +318,75 @@ public class PegasosNode implements Node {
 			//startTime = System.nanoTime(); 
 			startTime=System.currentTimeMillis();
 		    
-			// Initialize the SPegasosGadget classifier here
-			// Get the first file and convert that to a dataset
-//		    System.out.println("Loading first file " + localTrainFolderpath + "/" + "00000000.dat");
-//		    //String startFilePath = localTrainFolderpath + "/" + "00000000.dat";
-//		    String startFilePath = localTrainFolderpath + "/" + "t_"+ result.getID() + ".csv";
-//		    DataSource curSource = new DataSource(startFilePath);
-//			Instances curDataset = curSource.getDataSet();
-			
 			//Read in the train file
 			String trainFilename = localTrainFolderpath + "/" + "t_" + result.getID() + ".arff";
+			//Read the test file
+			String testFilename = localTestFolderpath + "/" + "tst_" + result.getID() + ".arff";
 			// set up the data
-		    FileReader reader = new FileReader(trainFilename);
+		    FileReader reader = new FileReader(trainFilename);		    
 		    Instances data = new Instances (reader);
 			// Make the last attribute be the class
 		    int classIndex = data.numAttributes()-1; 
 		    data.setClassIndex(classIndex); 
+		    // set up the test data
+		    FileReader readerTest = new FileReader(testFilename);		    
+		    Instances dataTest = new Instances (readerTest);
+			// Make the last attribute be the class
+		    int classIndexTest = dataTest.numAttributes()-1; 
+		    dataTest.setClassIndex(classIndexTest); 
 		      
 		     // Get the number of features
 		     numFeat = data.numAttributes()-1;
 		     System.out.println("Number of features at node "+result.getID()+" "+numFeat);
 		     
 		     result.trainData=data;
-		     result.updatedTrainData=data;
+		     result.testData=dataTest;
+		     //result.updatedTrainData=data;
 		     
-		     // Build the model
-		     // SPegasos cModel = trainPegasosClassifier(globalTrainingSet, pegasosLambda);
-		     SPegasosGadget cModel = new SPegasosGadget();
-		    // Set options
-		    String[] options  = new String[8];
-		    options[0] = "-L"; 
-		    options[1] = Double.toString(result.lambda);
-		    options[2] = "-N";
-		    options[3] = "true";
-		    options[4] = "-M";
-		    options[5] = "true";
-		    options[6] = "-E";
-		    options[7] = "1";
-		       
-	    	cModel.setOptions(options);
-	    	cModel.m_dimension = dimension;
-	    	System.out.println("Setting dimension to" + dimension);
-	    	//cModel.getCapabilities();
-			cModel.buildClassifier(data);
+//		     // Build the model
+//		    
+//		     // create Model
+//			LibSVM libsvmModel = new LibSVM();
+//			libsvmModel.setKernelType(new SelectedTag(LibSVM.KERNELTYPE_LINEAR, LibSVM.TAGS_KERNELTYPE));
+//
+//			// train classifier
+//			libsvmModel.buildClassifier(data);
+//			result.libSVMClassifier = libsvmModel;
+//			//Store the local predictions on the train set
+//			for(int h=0;h<data.numInstances();h++)
+//			{
+//			 //libSVMPred[h]=libsvmModel.classifyInstance(data.instance(h));
+//			 result.pred[h]=libsvmModel.classifyInstance(data.instance(h));	
+//			}
+//			System.out.println("Done predicting local train set.");
+//			
+//			//Store the local predictions on the test set
+//			for(int hTest=0;hTest<dataTest.numInstances();hTest++)
+//			{
+//			 //libSVMPred[h]=libsvmModel.classifyInstance(data.instance(h));
+//			 result.predTest[hTest]=libsvmModel.classifyInstance(dataTest.instance(hTest));	
+//			}
+//			System.out.println("Done predicting local test set.");
 			
-			result.wtvector = cModel.getWeights();
-			//System.out.println("Length of wt. vector: " + result.wtvector.length);
-			result.pegasosClassifier = cModel;
-			result.asgSVM=cModel;
-			
-			result.wtnorm = getNorm(result.wtvector);
-			//printWeights(result.wtvector);	
-			//System.out.println("Norm for node " + result.getID() + ": " + result.wtnorm);
-			//readInitTime = System.nanoTime() - startTime;
-			readInitTime = System.currentTimeMillis()-startTime;
-			
-			//Build the Local LibLinear Model
-			//LibLINEAR cModelLibLinear = new LibLINEAR();
-			// Set options
-		    //String[] optionsLibLinear  = new String[8];
-		    //optionsLibLinear[0]="-S";
-		    //optionsLibLinear[0]="3";
-			
-			//Implement the Adaptive Selective Gossip (ASG) SVM Algorithm
-			//Count the number of instances with label +1
-			int lblOne=0; 
-			int lblOther=0;
-			lblOneInst = new Instances(data,data.numInstances());
-			lblOtherInst=new Instances(data,data.numInstances());
-			selectedSetXY = new Instances(data,data.numInstances());
-			for(int y=0;y<data.numInstances();y++)
-			{
-				if(data.instance(y).classValue()==1)
-				{
-					lblOne=lblOne+1;
-					lblOneInst.add(data.instance(y));
-				}
-				else
-				{
-					lblOther=lblOther+1;
-					lblOtherInst.add(data.instance(y));
-				}
-				
-			}
-			System.out.println("Number of instances with label +1 "+lblOneInst.numInstances());
-			System.out.println("Number of instances with label -1 " +lblOtherInst.numInstances());
-			
-			Double[] Fx = new Double[lblOne];
-			for(int h=0;h<lblOne; h++)
-			{
-				Fx[h] = 2 * result.dotProduct(lblOneInst.instance(h),result.wtvector,classIndex);
-			}
-			Double[] Fy = new Double[lblOther];
-			// Get the class label
-			for(int g=0;g<lblOther;g++)
-			{
-				Fy[g]= 2 * result.scalarProduct(lblOtherInst.instance(g).classValue(), result.wtvector);
-			}
-			//Sort Fx and Fy and obtain 0.1% of the examples as the Selection Set.
-		    int numEx=(int) Math.round(Fx.length*0.001); 
-		    int numEy=(int) Math.round(Fy.length*0.001);
-		    ArrayIndexComparator compFx = new ArrayIndexComparator(Fx);
-		    Integer[] indexFx = compFx.createIndexArray();
-		    Arrays.sort(indexFx, compFx);
-		    ArrayIndexComparator compFy = new ArrayIndexComparator(Fy);
-		    Integer[] indexFy = compFy.createIndexArray();
-		    Arrays.sort(indexFy, compFy);
-		    // Now the indexes are in appropriate order.
-		    //Pick the support vectors and form the selected set
-		    for(int r=0;r<numEx;r++)
-		    {
-		    	selectedSetXY.add(lblOneInst.instance(indexFx[r]));
-		    }
-		    for(int r=0;r<numEy;r++)
-		    {
-		    	selectedSetXY.add(lblOtherInst.instance(indexFy[r]));
-		    }
-		    result.supportVecs=selectedSetXY;		    		    
+			// extract trained model via reflection, type is libsvm.svm_model
+			// see https://github.com/cjlin1/libsvm/blob/master/java/libsvm/svm_model.java
+			//svm_model model = getModel(libsvmModel);
+
+			// get the indices of the support vectors in the training data
+			// Note: this indices start count at 1 insteadof 0
+			//java.lang.reflect.Field ind = model.getClass().getDeclaredField("sv_indices");
+			//int len = Array.getLength(ind.get(model));
+			//System.out.println("Number of support vectors is "+len);
+			//int[] indices = new int[len];
+			//System.out.println("Here are the support vectors ...");
+			//for (int k = 0; k < len; k++) 
+			//{
+		    //    indices[k] = (int) Array.get(ind.get(model), k);
+		    //    System.out.println(indices[k]);
+			//}		
+
+			readInitTime = System.currentTimeMillis()-startTime;			
+			//Build the local neuro computing algorithm					    		    
 		} 
 		catch (Exception e) 
 			{
@@ -496,6 +397,14 @@ public class PegasosNode implements Node {
 				return result;
 		
 
+	}
+	
+	public static <svm_model> svm_model getModel(LibSVM svm) throws IllegalAccessException, NoSuchFieldException 
+	{
+		java.lang.reflect.Field modelField = svm.getClass().getDeclaredField("m_Model");
+		modelField.setAccessible(true);
+		//modelField.get(svm).getClass().getDeclaredField("sv_indices");
+		return (svm_model) modelField.get(svm);
 	}
 	
 	/*
@@ -578,9 +487,9 @@ public class PegasosNode implements Node {
         
         public String getResourcePath(){return resourcepath;}
         public double getPegasosLambda(){return lambda;}
-        public int getMaxIter(){return max_iter;}
-        public int getExamPerIter(){ return exam_per_iter;}
-        public int getReplace(){ return replace;}
+//        public int getMaxIter(){return max_iter;}
+//        public int getExamPerIter(){ return exam_per_iter;}
+//        public int getReplace(){ return replace;}
         public int getNumNodes(){ return numNodes;}
 	/**
 	 * Returns the ID of this node. The IDs are generated using a counter
