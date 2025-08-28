@@ -1,0 +1,7 @@
+num_nodes: 10
+model: MLP
+dataset: MNIST
+graph: full
+partition_alpha: 0.5
+rounds: 1 
+epochs: 1
