@@ -1,0 +1,86 @@
+[ 2025-09-19 13:52:43 | ActorPool | WARNING ] No GPUs available. Actors will run on CPU only.
+[ 2025-09-19 13:52:43 | ActorPool | INFO ] Initialized with 1 actors, 0 GPU per actor
+[ 2025-09-19 13:52:44 | 127.0.0.1:53023 | INFO ] 🏁 Starting gossiper...
+[ 2025-09-19 13:52:44 | 127.0.0.1:53029 | INFO ] 🏁 Starting gossiper...
+[ 2025-09-19 13:52:44 | 127.0.0.1:53023 | INFO ] 🚀 Broadcasting start learning...
+[ 2025-09-19 13:52:44 | 127.0.0.1:53029 | INFO ] ⏳ Waiting initialization.
+[ 2025-09-19 13:52:44 | 127.0.0.1:53023 | INFO ] ⏳ Waiting initialization.
+[ 2025-09-19 13:52:44 | 127.0.0.1:53023 | INFO ] 🗣️ Gossiping model initialization.
+[ 2025-09-19 13:52:45 | 127.0.0.1:53029 | INFO ] 🤖 Model Weights Initialized
+[ 2025-09-19 13:52:45 | 127.0.0.1:53029 | INFO ] 🗣️ Gossiping model initialization.
+[ 2025-09-19 13:52:46 | 127.0.0.1:53029 | INFO ] 🤫 Gossip finished.
+[ 2025-09-19 13:52:46 | 127.0.0.1:53029 | INFO ] 🗳️ Sending train set vote.
+[ 2025-09-19 13:52:47 | 127.0.0.1:53023 | INFO ] 🤫 Gossip finished.
+[ 2025-09-19 13:52:47 | 127.0.0.1:53023 | INFO ] 🗳️ Sending train set vote.
+[ 2025-09-19 13:52:47 | 127.0.0.1:53029 | INFO ] 🔢 Computed 2 votes.
+[ 2025-09-19 13:52:47 | 127.0.0.1:53029 | INFO ] 🚂 Train set of 2 nodes: ['127.0.0.1:53029', '127.0.0.1:53023']
+[ 2025-09-19 13:52:47 | 127.0.0.1:53023 | INFO ] 🔢 Computed 2 votes.
+[ 2025-09-19 13:52:47 | 127.0.0.1:53023 | INFO ] 🚂 Train set of 2 nodes: ['127.0.0.1:53029', '127.0.0.1:53023']
+[ 2025-09-19 13:52:47 | 127.0.0.1:53029 | INFO ] 🔬 Evaluating...
+[ 2025-09-19 13:52:47 | 127.0.0.1:53023 | INFO ] 🔬 Evaluating...
+[ 2025-09-19 13:53:09 | 127.0.0.1:53029 | INFO ] 📈 Evaluated. Results: {'test_acc': 0.149399995803833}
+[ 2025-09-19 13:53:09 | 127.0.0.1:53029 | INFO ] 📢 Broadcasting metrics.
+[ 2025-09-19 13:53:09 | 127.0.0.1:53029 | INFO ] 🏋️‍♀️ Training...
+[ 2025-09-19 13:53:10 | 127.0.0.1:53023 | INFO ] 📈 Evaluated. Results: {'test_acc': 0.15060000121593475}
+[ 2025-09-19 13:53:10 | 127.0.0.1:53023 | INFO ] 📢 Broadcasting metrics.
+[ 2025-09-19 13:53:10 | 127.0.0.1:53023 | INFO ] 🏋️‍♀️ Training...
+[ 2025-09-19 13:53:18 | 127.0.0.1:53029 | INFO ] 🎓 Training done.
+[ 2025-09-19 13:53:18 | 127.0.0.1:53029 | INFO ] 🧩 Model added (1/2) from ['127.0.0.1:53029']
+[ 2025-09-19 13:53:18 | 127.0.0.1:53023 | INFO ] 🧩 Model added (1/2) from ['127.0.0.1:53029']
+[ 2025-09-19 13:53:25 | 127.0.0.1:53023 | INFO ] 🎓 Training done.
+[ 2025-09-19 13:53:25 | 127.0.0.1:53023 | INFO ] 🧩 Model added (2/2) from ['127.0.0.1:53023']
+[ 2025-09-19 13:53:25 | 127.0.0.1:53029 | INFO ] 🧩 Model added (2/2) from ['127.0.0.1:53023']
+[ 2025-09-19 13:53:26 | 127.0.0.1:53029 | INFO ] 🤫 Gossip finished.
+[ 2025-09-19 13:53:26 | 127.0.0.1:53029 | INFO ] 🧠 Aggregating models.
+[ 2025-09-19 13:53:26 | 127.0.0.1:53029 | INFO ] 🗣️ Gossiping aggregated model.
+[ 2025-09-19 13:53:26 | 127.0.0.1:53029 | INFO ] Avoiding concurrent model sending to 127.0.0.1:53023. Msg: add_model | Hash: ['0']
+[ 2025-09-19 13:53:27 | 127.0.0.1:53023 | INFO ] 🤫 Gossip finished.
+[ 2025-09-19 13:53:27 | 127.0.0.1:53023 | INFO ] 🧠 Aggregating models.
+[ 2025-09-19 13:53:27 | 127.0.0.1:53023 | INFO ] 🗣️ Gossiping aggregated model.
+[ 2025-09-19 13:53:27 | 127.0.0.1:53023 | INFO ] 🤫 Gossip finished.
+[ 2025-09-19 13:53:27 | 127.0.0.1:53023 | INFO ] 🎉 Round 1 of 2 finished.
+[ 2025-09-19 13:53:28 | 127.0.0.1:53023 | INFO ] 🗳️ Sending train set vote.
+[ 2025-09-19 13:53:28 | 127.0.0.1:53029 | INFO ] 🤫 Gossip finished.
+[ 2025-09-19 13:53:28 | 127.0.0.1:53029 | INFO ] 🎉 Round 1 of 2 finished.
+[ 2025-09-19 13:53:28 | 127.0.0.1:53029 | INFO ] 🗳️ Sending train set vote.
+[ 2025-09-19 13:53:28 | 127.0.0.1:53023 | INFO ] 🔢 Computed 2 votes.
+[ 2025-09-19 13:53:28 | 127.0.0.1:53023 | INFO ] 🚂 Train set of 2 nodes: ['127.0.0.1:53023', '127.0.0.1:53029']
+[ 2025-09-19 13:53:28 | 127.0.0.1:53029 | INFO ] 🔢 Computed 2 votes.
+[ 2025-09-19 13:53:28 | 127.0.0.1:53023 | INFO ] 🔬 Evaluating...
+[ 2025-09-19 13:53:28 | 127.0.0.1:53029 | INFO ] 🚂 Train set of 2 nodes: ['127.0.0.1:53023', '127.0.0.1:53029']
+[ 2025-09-19 13:53:28 | 127.0.0.1:53029 | INFO ] 🔬 Evaluating...
+[ 2025-09-19 13:53:30 | 127.0.0.1:53023 | INFO ] 📈 Evaluated. Results: {'test_acc': 0.8295999765396118}
+[ 2025-09-19 13:53:30 | 127.0.0.1:53023 | INFO ] 📢 Broadcasting metrics.
+[ 2025-09-19 13:53:30 | 127.0.0.1:53023 | INFO ] 🏋️‍♀️ Training...
+[ 2025-09-19 13:53:31 | 127.0.0.1:53029 | INFO ] 📈 Evaluated. Results: {'test_acc': 0.8338000178337097}
+[ 2025-09-19 13:53:31 | 127.0.0.1:53029 | INFO ] 📢 Broadcasting metrics.
+[ 2025-09-19 13:53:31 | 127.0.0.1:53029 | INFO ] 🏋️‍♀️ Training...
+[ 2025-09-19 13:53:38 | 127.0.0.1:53023 | INFO ] 🎓 Training done.
+[ 2025-09-19 13:53:38 | 127.0.0.1:53023 | INFO ] 🧩 Model added (1/2) from ['127.0.0.1:53023']
+[ 2025-09-19 13:53:38 | 127.0.0.1:53029 | INFO ] 🧩 Model added (1/2) from ['127.0.0.1:53023']
+[ 2025-09-19 13:53:45 | 127.0.0.1:53029 | INFO ] 🎓 Training done.
+[ 2025-09-19 13:53:45 | 127.0.0.1:53029 | INFO ] 🧩 Model added (2/2) from ['127.0.0.1:53029']
+[ 2025-09-19 13:53:46 | 127.0.0.1:53023 | INFO ] 🧩 Model added (2/2) from ['127.0.0.1:53029']
+[ 2025-09-19 13:53:47 | 127.0.0.1:53023 | INFO ] 🤫 Gossip finished.
+[ 2025-09-19 13:53:47 | 127.0.0.1:53023 | INFO ] 🧠 Aggregating models.
+[ 2025-09-19 13:53:47 | 127.0.0.1:53023 | INFO ] 🗣️ Gossiping aggregated model.
+[ 2025-09-19 13:53:47 | 127.0.0.1:53023 | INFO ] Avoiding concurrent model sending to 127.0.0.1:53029. Msg: add_model | Hash: ['1']
+[ 2025-09-19 13:53:48 | 127.0.0.1:53029 | INFO ] 🤫 Gossip finished.
+[ 2025-09-19 13:53:48 | 127.0.0.1:53029 | INFO ] 🧠 Aggregating models.
+[ 2025-09-19 13:53:48 | 127.0.0.1:53029 | INFO ] 🗣️ Gossiping aggregated model.
+[ 2025-09-19 13:53:48 | 127.0.0.1:53029 | INFO ] 🤫 Gossip finished.
+[ 2025-09-19 13:53:48 | 127.0.0.1:53029 | INFO ] 🎉 Round 2 of 2 finished.
+[ 2025-09-19 13:53:48 | 127.0.0.1:53029 | INFO ] 🔬 Evaluating...
+[ 2025-09-19 13:53:49 | 127.0.0.1:53023 | INFO ] 🤫 Gossip finished.
+[ 2025-09-19 13:53:49 | 127.0.0.1:53023 | INFO ] 🎉 Round 2 of 2 finished.
+[ 2025-09-19 13:53:49 | 127.0.0.1:53023 | INFO ] 🔬 Evaluating...
+[ 2025-09-19 13:53:49 | 127.0.0.1:53029 | INFO ] 📈 Evaluated. Results: {'test_acc': 0.8285999894142151}
+[ 2025-09-19 13:53:49 | 127.0.0.1:53029 | INFO ] 📢 Broadcasting metrics.
+[ 2025-09-19 13:53:49 | 127.0.0.1:53029 | INFO ] 😋 Training finished!!
+[ 2025-09-19 13:53:50 | 127.0.0.1:53023 | INFO ] 📈 Evaluated. Results: {'test_acc': 0.8176000118255615}
+[ 2025-09-19 13:53:50 | 127.0.0.1:53023 | INFO ] 📢 Broadcasting metrics.
+[ 2025-09-19 13:53:50 | 127.0.0.1:53023 | INFO ] 😋 Training finished!!
+[ 2025-09-19 13:54:31 | 127.0.0.1:53023 | INFO ] Stopping node...
+[ 2025-09-19 13:54:31 | 127.0.0.1:53023 | INFO ] 🛑 Stopping gossiper...
+[ 2025-09-19 13:54:31 | 127.0.0.1:53029 | INFO ] Stopping node...
+[ 2025-09-19 13:54:31 | 127.0.0.1:53029 | INFO ] 🛑 Stopping gossiper...
