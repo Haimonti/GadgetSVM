@@ -1,0 +1,6 @@
+[ 2025-09-17 14:38:41 | ActorPool | WARNING ] No GPUs available. Actors will run on CPU only.
+[ 2025-09-17 14:38:41 | ActorPool | INFO ] Initialized with 1 actors, 0 GPU per actor
+[ 2025-09-17 14:39:50 | 127.0.0.1:55659 | INFO ] Avoiding concurrent model sending to 127.0.0.1:55656. Msg: add_model | Hash: ['0']
+[ 2025-09-17 14:40:31 | 127.0.0.1:55656 | INFO ] Avoiding concurrent model sending to 127.0.0.1:55659. Msg: add_model | Hash: ['1']
+[ 2025-09-17 14:42:06 | 127.0.0.1:55656 | INFO ] Stopping node...
+[ 2025-09-17 14:42:07 | 127.0.0.1:55659 | INFO ] Stopping node...

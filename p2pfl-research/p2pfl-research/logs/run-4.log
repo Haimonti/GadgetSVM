@@ -1,0 +1,344 @@
+[ 2025-09-21 16:19:36 | ActorPool | WARNING ] No GPUs available. Actors will run on CPU only.
+[ 2025-09-21 16:19:36 | ActorPool | INFO ] Initialized with 1 actors, 0 GPU per actor
+[ 2025-09-21 16:19:36 | 127.0.0.1:62000 | INFO ] 🏁 Starting gossiper...
+[ 2025-09-21 16:19:36 | 127.0.0.1:61861 | INFO ] 🏁 Starting gossiper...
+[ 2025-09-21 16:19:36 | 127.0.0.1:62000 | INFO ] 🚀 Broadcasting start learning...
+[ 2025-09-21 16:19:36 | 127.0.0.1:61861 | INFO ] ⏳ Waiting initialization.
+[ 2025-09-21 16:19:36 | 127.0.0.1:62000 | INFO ] ⏳ Waiting initialization.
+[ 2025-09-21 16:19:37 | 127.0.0.1:62000 | INFO ] 🗣️ Gossiping model initialization.
+[ 2025-09-21 16:19:38 | 127.0.0.1:61861 | INFO ] 🤖 Model Weights Initialized
+[ 2025-09-21 16:19:38 | 127.0.0.1:61861 | INFO ] 🗣️ Gossiping model initialization.
+[ 2025-09-21 16:19:39 | 127.0.0.1:61861 | INFO ] 🤫 Gossip finished.
+[ 2025-09-21 16:19:39 | 127.0.0.1:61861 | INFO ] 🗳️ Sending train set vote.
+[ 2025-09-21 16:19:40 | 127.0.0.1:62000 | INFO ] 🤫 Gossip finished.
+[ 2025-09-21 16:19:40 | 127.0.0.1:62000 | INFO ] 🗳️ Sending train set vote.
+[ 2025-09-21 16:19:40 | 127.0.0.1:61861 | INFO ] 🔢 Computed 2 votes.
+[ 2025-09-21 16:19:40 | 127.0.0.1:61861 | INFO ] 🚂 Train set of 2 nodes: ['127.0.0.1:62000', '127.0.0.1:61861']
+[ 2025-09-21 16:19:40 | 127.0.0.1:62000 | INFO ] 🔢 Computed 2 votes.
+[ 2025-09-21 16:19:40 | 127.0.0.1:62000 | INFO ] 🚂 Train set of 2 nodes: ['127.0.0.1:62000', '127.0.0.1:61861']
+[ 2025-09-21 16:19:40 | 127.0.0.1:61861 | INFO ] 🔬 Evaluating...
+[ 2025-09-21 16:19:40 | 127.0.0.1:62000 | INFO ] 🔬 Evaluating...
+[ 2025-09-21 16:20:21 | 127.0.0.1:61861 | INFO ] 📈 Evaluated. Results: {'test_acc': 0.10300000011920929}
+[ 2025-09-21 16:20:21 | 127.0.0.1:61861 | INFO ] 📢 Broadcasting metrics.
+[ 2025-09-21 16:20:21 | 127.0.0.1:61861 | INFO ] 🏋️‍♀️ Training...
+[ 2025-09-21 16:20:22 | 127.0.0.1:62000 | INFO ] 📈 Evaluated. Results: {'test_acc': 0.09780000150203705}
+[ 2025-09-21 16:20:23 | 127.0.0.1:62000 | INFO ] 📢 Broadcasting metrics.
+[ 2025-09-21 16:20:23 | 127.0.0.1:62000 | INFO ] 🏋️‍♀️ Training...
+[ 2025-09-21 16:20:34 | 127.0.0.1:61861 | INFO ] 🎓 Training done.
+[ 2025-09-21 16:20:34 | 127.0.0.1:61861 | INFO ] 🧩 Model added (1/2) from ['127.0.0.1:61861']
+[ 2025-09-21 16:20:34 | 127.0.0.1:62000 | INFO ] 🧩 Model added (1/2) from ['127.0.0.1:61861']
+[ 2025-09-21 16:20:42 | 127.0.0.1:62000 | INFO ] 🎓 Training done.
+[ 2025-09-21 16:20:42 | 127.0.0.1:62000 | INFO ] 🧩 Model added (2/2) from ['127.0.0.1:62000']
+[ 2025-09-21 16:20:42 | 127.0.0.1:61861 | INFO ] 🧩 Model added (2/2) from ['127.0.0.1:62000']
+[ 2025-09-21 16:20:42 | 127.0.0.1:61861 | INFO ] 🤫 Gossip finished.
+[ 2025-09-21 16:20:42 | 127.0.0.1:61861 | INFO ] 🧠 Aggregating models.
+[ 2025-09-21 16:20:42 | 127.0.0.1:61861 | INFO ] 🗣️ Gossiping aggregated model.
+[ 2025-09-21 16:20:42 | 127.0.0.1:61861 | INFO ] Avoiding concurrent model sending to 127.0.0.1:62000. Msg: add_model | Hash: ['0']
+[ 2025-09-21 16:20:44 | 127.0.0.1:62000 | INFO ] 🤫 Gossip finished.
+[ 2025-09-21 16:20:44 | 127.0.0.1:62000 | INFO ] 🧠 Aggregating models.
+[ 2025-09-21 16:20:44 | 127.0.0.1:62000 | INFO ] 🗣️ Gossiping aggregated model.
+[ 2025-09-21 16:20:44 | 127.0.0.1:62000 | INFO ] 🤫 Gossip finished.
+[ 2025-09-21 16:20:44 | 127.0.0.1:62000 | INFO ] 🎉 Round 1 of 2 finished.
+[ 2025-09-21 16:20:44 | 127.0.0.1:62000 | INFO ] 🗳️ Sending train set vote.
+[ 2025-09-21 16:20:44 | 127.0.0.1:61861 | INFO ] 🤫 Gossip finished.
+[ 2025-09-21 16:20:44 | 127.0.0.1:61861 | INFO ] 🎉 Round 1 of 2 finished.
+[ 2025-09-21 16:20:44 | 127.0.0.1:61861 | INFO ] 🗳️ Sending train set vote.
+[ 2025-09-21 16:20:44 | 127.0.0.1:62000 | INFO ] 🔢 Computed 2 votes.
+[ 2025-09-21 16:20:44 | 127.0.0.1:62000 | INFO ] 🚂 Train set of 2 nodes: ['127.0.0.1:61861', '127.0.0.1:62000']
+[ 2025-09-21 16:20:44 | 127.0.0.1:61861 | INFO ] 🔢 Computed 2 votes.
+[ 2025-09-21 16:20:44 | 127.0.0.1:62000 | INFO ] 🔬 Evaluating...
+[ 2025-09-21 16:20:44 | 127.0.0.1:61861 | INFO ] 🚂 Train set of 2 nodes: ['127.0.0.1:61861', '127.0.0.1:62000']
+[ 2025-09-21 16:20:44 | 127.0.0.1:61861 | INFO ] 🔬 Evaluating...
+[ 2025-09-21 16:20:46 | 127.0.0.1:62000 | INFO ] 📈 Evaluated. Results: {'test_acc': 0.7986000180244446}
+[ 2025-09-21 16:20:46 | 127.0.0.1:62000 | INFO ] 📢 Broadcasting metrics.
+[ 2025-09-21 16:20:46 | 127.0.0.1:62000 | INFO ] 🏋️‍♀️ Training...
+[ 2025-09-21 16:20:48 | 127.0.0.1:61861 | INFO ] 📈 Evaluated. Results: {'test_acc': 0.8202000260353088}
+[ 2025-09-21 16:20:48 | 127.0.0.1:61861 | INFO ] 📢 Broadcasting metrics.
+[ 2025-09-21 16:20:48 | 127.0.0.1:61861 | INFO ] 🏋️‍♀️ Training...
+[ 2025-09-21 16:20:49 | 127.0.0.1:61861 | ERROR ] Error RaySystemError: System error: Unable to allocate internal buffer.
+traceback: Traceback (most recent call last):
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\serialization.py", line 526, in deserialize_objects
+    obj = self._deserialize_object(
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\serialization.py", line 363, in _deserialize_object
+    return self._deserialize_msgpack_data(
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\serialization.py", line 307, in _deserialize_msgpack_data
+    msgpack_data, pickle5_data = split_buffer(data)
+  File "python\\ray\\includes/serialization.pxi", line 205, in ray._raylet.split_buffer
+  File "msgpack/_unpacker.pyx", line 372, in msgpack._cmsgpack.Unpacker.__init__
+MemoryError: Unable to allocate internal buffer.
+
+Traceback (most recent call last):
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\node.py", line 404, in __start_learning
+    self.learning_workflow.run(
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\stages\workflows.py", line 46, in run
+    next_stage = self.current_stage.execute(**kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\stages\base_node\train_stage.py", line 69, in execute
+    logger.info(state.addr, "🏋️‍♀️ Training...")
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\management\logger\decorators\ray_logger.py", line 142, in info
+    ray.get(self.ray_actor.info.remote(node, message))
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\auto_init_hook.py", line 22, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\client_mode_hook.py", line 104, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\worker.py", line 2882, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\worker.py", line 970, in get_objects
+    raise value
+ray.exceptions.RaySystemError: System error: Unable to allocate internal buffer.
+traceback: Traceback (most recent call last):
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\serialization.py", line 526, in deserialize_objects
+    obj = self._deserialize_object(
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\serialization.py", line 363, in _deserialize_object
+    return self._deserialize_msgpack_data(
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\serialization.py", line 307, in _deserialize_msgpack_data
+    msgpack_data, pickle5_data = split_buffer(data)
+  File "python\\ray\\includes/serialization.pxi", line 205, in ray._raylet.split_buffer
+  File "msgpack/_unpacker.pyx", line 372, in msgpack._cmsgpack.Unpacker.__init__
+MemoryError: Unable to allocate internal buffer.
+
+
+[ 2025-09-21 16:20:49 | 127.0.0.1:61861 | INFO ] Stopping node...
+[ 2025-09-21 16:20:49 | 127.0.0.1:61861 | INFO ] 🛑 Stopping gossiper...
+[ 2025-09-21 16:20:58 | 127.0.0.1:62000 | ERROR ] Fit error. Something went wrong with pytorch lightning. [36mray::RayP2PFLoggerActor.log_metric()[39m (pid=92000, ip=127.0.0.1, actor_id=473c5cd7bdd719a413a1a31201000000, repr=<p2pfl.management.logger.decorators.ray_logger.RayP2PFLoggerActor object at 0x000002A928E99FC0>)
+  File "python\\ray\\_raylet.pyx", line 1882, in ray._raylet.execute_task
+  File "python\\ray\\_raylet.pyx", line 1916, in ray._raylet.execute_task
+  File "python\\ray\\_raylet.pyx", line 1014, in ray._raylet.raise_if_dependency_failed
+ray.exceptions.RaySystemError: System error: Unable to allocate internal buffer.
+traceback: Traceback (most recent call last):
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\serialization.py", line 526, in deserialize_objects
+    obj = self._deserialize_object(
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\serialization.py", line 363, in _deserialize_object
+    return self._deserialize_msgpack_data(
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\serialization.py", line 307, in _deserialize_msgpack_data
+    msgpack_data, pickle5_data = split_buffer(data)
+  File "python\\ray\\includes/serialization.pxi", line 205, in ray._raylet.split_buffer
+  File "msgpack/_unpacker.pyx", line 372, in msgpack._cmsgpack.Unpacker.__init__
+MemoryError: Unable to allocate internal buffer.
+[ 2025-09-21 16:20:58 | 127.0.0.1:62000 | ERROR ] An error occurred during remote fit: [36mray::VirtualLearnerActor.fit()[39m (pid=101548, ip=127.0.0.1, actor_id=42320bd89c21045ee616517101000000, repr=<p2pfl.learning.frameworks.simulation.actor_pool.VirtualLearnerActor object at 0x00000221566AA650>)
+  File "python\\ray\\_raylet.pyx", line 1936, in ray._raylet.execute_task
+  File "python\\ray\\_raylet.pyx", line 1876, in ray._raylet.execute_task.function_executor
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\function_manager.py", line 689, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\util\tracing\tracing_helper.py", line 461, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\learning\frameworks\simulation\actor_pool.py", line 54, in fit
+    raise ex
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\learning\frameworks\simulation\actor_pool.py", line 51, in fit
+    model = learner.fit()
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\utils\node_component.py", line 33, in wrapper
+    return method(self, *args, **kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\learning\frameworks\pytorch\lightning_learner.py", line 118, in fit
+    raise e
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\learning\frameworks\pytorch\lightning_learner.py", line 101, in fit
+    self.__trainer.fit(pt_model, pt_data)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\trainer.py", line 560, in fit
+    call._call_and_handle_interrupt(
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\call.py", line 49, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\trainer.py", line 598, in _fit_impl
+    self._run(model, ckpt_path=ckpt_path)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\trainer.py", line 1011, in _run
+    results = self._run_stage()
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\trainer.py", line 1055, in _run_stage
+    self.fit_loop.run()
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\loops\fit_loop.py", line 216, in run
+    self.advance()
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\loops\fit_loop.py", line 458, in advance
+    self.epoch_loop.run(self._data_fetcher)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\loops\training_epoch_loop.py", line 152, in run
+    self.advance(data_fetcher)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\loops\training_epoch_loop.py", line 376, in advance
+    trainer._logger_connector.update_train_step_metrics()
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\connectors\logger_connector\logger_connector.py", line 166, in update_train_step_metrics
+    self.log_metrics(self.metrics["log"])
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\connectors\logger_connector\logger_connector.py", line 120, in log_metrics
+    logger.log_metrics(metrics=scalar_metrics, step=step)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\learning\frameworks\pytorch\lightning_logger.py", line 59, in log_metrics
+    P2PLogger.log_metric(self.__addr, k, v, step=step)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\management\logger\decorators\ray_logger.py", line 200, in log_metric
+    ray.get(self.ray_actor.log_metric.remote(addr=addr, metric=metric, value=value, step=step, round=round))
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\auto_init_hook.py", line 22, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\client_mode_hook.py", line 104, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\worker.py", line 2882, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\worker.py", line 968, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(RaySystemError): [36mray::RayP2PFLoggerActor.log_metric()[39m (pid=92000, ip=127.0.0.1, actor_id=473c5cd7bdd719a413a1a31201000000, repr=<p2pfl.management.logger.decorators.ray_logger.RayP2PFLoggerActor object at 0x000002A928E99FC0>)
+  File "python\\ray\\_raylet.pyx", line 1882, in ray._raylet.execute_task
+  File "python\\ray\\_raylet.pyx", line 1916, in ray._raylet.execute_task
+  File "python\\ray\\_raylet.pyx", line 1014, in ray._raylet.raise_if_dependency_failed
+ray.exceptions.RaySystemError: System error: Unable to allocate internal buffer.
+traceback: Traceback (most recent call last):
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\serialization.py", line 526, in deserialize_objects
+    obj = self._deserialize_object(
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\serialization.py", line 363, in _deserialize_object
+    return self._deserialize_msgpack_data(
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\serialization.py", line 307, in _deserialize_msgpack_data
+    msgpack_data, pickle5_data = split_buffer(data)
+  File "python\\ray\\includes/serialization.pxi", line 205, in ray._raylet.split_buffer
+  File "msgpack/_unpacker.pyx", line 372, in msgpack._cmsgpack.Unpacker.__init__
+MemoryError: Unable to allocate internal buffer.
+[ 2025-09-21 16:20:58 | 127.0.0.1:62000 | ERROR ] Error RayTaskError(RaySystemError): [36mray::VirtualLearnerActor.fit()[39m (pid=101548, ip=127.0.0.1, actor_id=42320bd89c21045ee616517101000000, repr=<p2pfl.learning.frameworks.simulation.actor_pool.VirtualLearnerActor object at 0x00000221566AA650>)
+  File "python\\ray\\_raylet.pyx", line 1936, in ray._raylet.execute_task
+  File "python\\ray\\_raylet.pyx", line 1876, in ray._raylet.execute_task.function_executor
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\function_manager.py", line 689, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\util\tracing\tracing_helper.py", line 461, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\learning\frameworks\simulation\actor_pool.py", line 54, in fit
+    raise ex
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\learning\frameworks\simulation\actor_pool.py", line 51, in fit
+    model = learner.fit()
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\utils\node_component.py", line 33, in wrapper
+    return method(self, *args, **kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\learning\frameworks\pytorch\lightning_learner.py", line 118, in fit
+    raise e
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\learning\frameworks\pytorch\lightning_learner.py", line 101, in fit
+    self.__trainer.fit(pt_model, pt_data)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\trainer.py", line 560, in fit
+    call._call_and_handle_interrupt(
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\call.py", line 49, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\trainer.py", line 598, in _fit_impl
+    self._run(model, ckpt_path=ckpt_path)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\trainer.py", line 1011, in _run
+    results = self._run_stage()
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\trainer.py", line 1055, in _run_stage
+    self.fit_loop.run()
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\loops\fit_loop.py", line 216, in run
+    self.advance()
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\loops\fit_loop.py", line 458, in advance
+    self.epoch_loop.run(self._data_fetcher)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\loops\training_epoch_loop.py", line 152, in run
+    self.advance(data_fetcher)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\loops\training_epoch_loop.py", line 376, in advance
+    trainer._logger_connector.update_train_step_metrics()
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\connectors\logger_connector\logger_connector.py", line 166, in update_train_step_metrics
+    self.log_metrics(self.metrics["log"])
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\connectors\logger_connector\logger_connector.py", line 120, in log_metrics
+    logger.log_metrics(metrics=scalar_metrics, step=step)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\learning\frameworks\pytorch\lightning_logger.py", line 59, in log_metrics
+    P2PLogger.log_metric(self.__addr, k, v, step=step)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\management\logger\decorators\ray_logger.py", line 200, in log_metric
+    ray.get(self.ray_actor.log_metric.remote(addr=addr, metric=metric, value=value, step=step, round=round))
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\auto_init_hook.py", line 22, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\client_mode_hook.py", line 104, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\worker.py", line 2882, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\worker.py", line 968, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(RaySystemError): [36mray::RayP2PFLoggerActor.log_metric()[39m (pid=92000, ip=127.0.0.1, actor_id=473c5cd7bdd719a413a1a31201000000, repr=<p2pfl.management.logger.decorators.ray_logger.RayP2PFLoggerActor object at 0x000002A928E99FC0>)
+  File "python\\ray\\_raylet.pyx", line 1882, in ray._raylet.execute_task
+  File "python\\ray\\_raylet.pyx", line 1916, in ray._raylet.execute_task
+  File "python\\ray\\_raylet.pyx", line 1014, in ray._raylet.raise_if_dependency_failed
+ray.exceptions.RaySystemError: System error: Unable to allocate internal buffer.
+traceback: Traceback (most recent call last):
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\serialization.py", line 526, in deserialize_objects
+    obj = self._deserialize_object(
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\serialization.py", line 363, in _deserialize_object
+    return self._deserialize_msgpack_data(
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\serialization.py", line 307, in _deserialize_msgpack_data
+    msgpack_data, pickle5_data = split_buffer(data)
+  File "python\\ray\\includes/serialization.pxi", line 205, in ray._raylet.split_buffer
+  File "msgpack/_unpacker.pyx", line 372, in msgpack._cmsgpack.Unpacker.__init__
+MemoryError: Unable to allocate internal buffer.
+Traceback (most recent call last):
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\node.py", line 404, in __start_learning
+    self.learning_workflow.run(
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\stages\workflows.py", line 46, in run
+    next_stage = self.current_stage.execute(**kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\stages\base_node\train_stage.py", line 70, in execute
+    learner.fit()
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\utils\node_component.py", line 33, in wrapper
+    return method(self, *args, **kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\learning\frameworks\simulation\virtual_learner.py", line 125, in fit
+    raise ex
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\learning\frameworks\simulation\virtual_learner.py", line 120, in fit
+    model: P2PFLModel = self.actor_pool.get_learner_result(str(self.addr), None)[1]
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\learning\frameworks\simulation\actor_pool.py", line 368, in get_learner_result
+    return self._fetch_future_result(addr)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\learning\frameworks\simulation\actor_pool.py", line 283, in _fetch_future_result
+    res_addr, result = ray.get(future)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\auto_init_hook.py", line 22, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\client_mode_hook.py", line 104, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\worker.py", line 2882, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\worker.py", line 968, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(RaySystemError): [36mray::VirtualLearnerActor.fit()[39m (pid=101548, ip=127.0.0.1, actor_id=42320bd89c21045ee616517101000000, repr=<p2pfl.learning.frameworks.simulation.actor_pool.VirtualLearnerActor object at 0x00000221566AA650>)
+  File "python\\ray\\_raylet.pyx", line 1936, in ray._raylet.execute_task
+  File "python\\ray\\_raylet.pyx", line 1876, in ray._raylet.execute_task.function_executor
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\function_manager.py", line 689, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\util\tracing\tracing_helper.py", line 461, in _resume_span
+    return method(self, *_args, **_kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\learning\frameworks\simulation\actor_pool.py", line 54, in fit
+    raise ex
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\learning\frameworks\simulation\actor_pool.py", line 51, in fit
+    model = learner.fit()
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\utils\node_component.py", line 33, in wrapper
+    return method(self, *args, **kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\learning\frameworks\pytorch\lightning_learner.py", line 118, in fit
+    raise e
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\learning\frameworks\pytorch\lightning_learner.py", line 101, in fit
+    self.__trainer.fit(pt_model, pt_data)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\trainer.py", line 560, in fit
+    call._call_and_handle_interrupt(
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\call.py", line 49, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\trainer.py", line 598, in _fit_impl
+    self._run(model, ckpt_path=ckpt_path)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\trainer.py", line 1011, in _run
+    results = self._run_stage()
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\trainer.py", line 1055, in _run_stage
+    self.fit_loop.run()
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\loops\fit_loop.py", line 216, in run
+    self.advance()
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\loops\fit_loop.py", line 458, in advance
+    self.epoch_loop.run(self._data_fetcher)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\loops\training_epoch_loop.py", line 152, in run
+    self.advance(data_fetcher)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\loops\training_epoch_loop.py", line 376, in advance
+    trainer._logger_connector.update_train_step_metrics()
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\connectors\logger_connector\logger_connector.py", line 166, in update_train_step_metrics
+    self.log_metrics(self.metrics["log"])
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\lightning\pytorch\trainer\connectors\logger_connector\logger_connector.py", line 120, in log_metrics
+    logger.log_metrics(metrics=scalar_metrics, step=step)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\learning\frameworks\pytorch\lightning_logger.py", line 59, in log_metrics
+    P2PLogger.log_metric(self.__addr, k, v, step=step)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\p2pfl\management\logger\decorators\ray_logger.py", line 200, in log_metric
+    ray.get(self.ray_actor.log_metric.remote(addr=addr, metric=metric, value=value, step=step, round=round))
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\auto_init_hook.py", line 22, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\client_mode_hook.py", line 104, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\worker.py", line 2882, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\worker.py", line 968, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(RaySystemError): [36mray::RayP2PFLoggerActor.log_metric()[39m (pid=92000, ip=127.0.0.1, actor_id=473c5cd7bdd719a413a1a31201000000, repr=<p2pfl.management.logger.decorators.ray_logger.RayP2PFLoggerActor object at 0x000002A928E99FC0>)
+  File "python\\ray\\_raylet.pyx", line 1882, in ray._raylet.execute_task
+  File "python\\ray\\_raylet.pyx", line 1916, in ray._raylet.execute_task
+  File "python\\ray\\_raylet.pyx", line 1014, in ray._raylet.raise_if_dependency_failed
+ray.exceptions.RaySystemError: System error: Unable to allocate internal buffer.
+traceback: Traceback (most recent call last):
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\serialization.py", line 526, in deserialize_objects
+    obj = self._deserialize_object(
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\serialization.py", line 363, in _deserialize_object
+    return self._deserialize_msgpack_data(
+  File "C:\Users\rukdi\miniconda3\envs\p2pfl\lib\site-packages\ray\_private\serialization.py", line 307, in _deserialize_msgpack_data
+    msgpack_data, pickle5_data = split_buffer(data)
+  File "python\\ray\\includes/serialization.pxi", line 205, in ray._raylet.split_buffer
+  File "msgpack/_unpacker.pyx", line 372, in msgpack._cmsgpack.Unpacker.__init__
+MemoryError: Unable to allocate internal buffer.
+
+[ 2025-09-21 16:20:58 | 127.0.0.1:62000 | INFO ] Stopping node...
+[ 2025-09-21 16:20:58 | 127.0.0.1:62000 | INFO ] 🛑 Stopping gossiper...
+[ 2025-09-21 16:21:35 | 127.0.0.1:62000 | INFO ] Stopping node...
+[ 2025-09-21 16:21:35 | 127.0.0.1:61861 | INFO ] Stopping node...
