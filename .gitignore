@@ -10,3 +10,9 @@ CLAUDE.md
 *.txt
 *_val.csv
 results_fast*.csv
+
+CLAUDE.md
+.claude/
+__pycache__/
+*.txt
+results_fast*.csv

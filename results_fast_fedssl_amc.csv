@@ -1,6 +1,0 @@
-dataset,scheme,num_clients,method,test_acc,elapsed_s,seed
-rcv1,iid,10,fedssl_amc,0.897,5.21,42
-rcv1,dirichlet_a1.0,10,fedssl_amc,0.815,5.11,42
-rcv1,dirichlet_a0.3,10,fedssl_amc,0.864,4.75,42
-rcv1,dirichlet_a0.1,10,fedssl_amc,0.916,3.73,42
-rcv1,label_skew,10,fedssl_amc,0.5165,5.04,42

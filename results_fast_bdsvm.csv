@@ -1,6 +1,0 @@
-dataset,scheme,num_clients,method,test_acc,elapsed_s,seed
-rcv1,iid,10,bdsvm,0.6255,0.32,42
-rcv1,dirichlet_a1.0,10,bdsvm,0.6255,0.3,42
-rcv1,dirichlet_a0.3,10,bdsvm,0.6255,0.32,42
-rcv1,dirichlet_a0.1,10,bdsvm,0.6255,0.31,42
-rcv1,label_skew,10,bdsvm,0.6255,0.31,42
