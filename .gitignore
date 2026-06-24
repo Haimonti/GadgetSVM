@@ -4,3 +4,9 @@ data/
 __pycache__/
 *.pyc
 .claude/
+
+CLAUDE.md
+
+*.txt
+*_val.csv
+results_fast*.csv
