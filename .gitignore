@@ -1,0 +1,6 @@
+data/
+*.bz2
+*.json
+__pycache__/
+*.pyc
+.claude/
