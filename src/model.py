@@ -7,6 +7,8 @@ import lightning as pl
 from p2pfl.management.logger import logger
 
 
+
+
 class _Shared:
     """Wrapper that survives deepcopy by returning the same object.
 
@@ -14,19 +16,19 @@ class _Shared:
     SDCA state (alpha, averages, metrics) must persist across those copies,
     so we hold all mutable state here; __deepcopy__ always returns self.
     """
-    __slots__ = ("alpha", "w_avg", "avg_cnt", "step", "metrics", "start")
+    __slots__ = ("alpha", "w_avg", "avg_cnt", "step", "metrics", "start", "comm_bytes")
 
     def __init__(self, n, d):
-        self.alpha   = torch.zeros(n, dtype=torch.float32)
-        self.w_avg   = torch.zeros(d, dtype=torch.float32)
-        self.avg_cnt = 0
-        self.step    = 0
+        self.alpha      = torch.zeros(n, dtype=torch.float32)
+        self.w_avg      = torch.zeros(d, dtype=torch.float32)
+        self.avg_cnt    = 0
+        self.step       = 0
         self.metrics: list = []
-        self.start   = time.time()
+        self.start      = time.time()
+        self.comm_bytes = 0
 
     def __deepcopy__(self, memo):
         return self  # intentionally shared — all copies see the same state
-
 
 class LinearSVM(nn.Module):
     def __init__(self, n_features: int):
@@ -98,8 +100,6 @@ class SVMSDCALightning(pl.LightningModule):
 
         self.model.weight.data.copy_(w)
         avg_loss  = loss_sum / max(1, len(idxs))
-        iter_time = time.time() - t_start
-        logger.info("SDCA", f"batch_idx={batch_idx}  loss={avg_loss:.6f}  iter_time={iter_time:.3f}s")
         self.log("train_loss", avg_loss, prog_bar=True, on_step=False, on_epoch=True)
         return torch.tensor(avg_loss).detach()
 
@@ -113,7 +113,6 @@ class SVMSDCALightning(pl.LightningModule):
         X_batch = self._X_csr[idxs].toarray().astype(np.float32)
         scores  = X_batch @ w_np
         hinge   = float(np.mean(np.maximum(0.0, 1.0 - ys * scores)))
-        logger.info("SDCA", f"test  hinge={hinge:.6f}")
         self.log("test_hinge_loss", hinge, on_step=False, on_epoch=True)
         return torch.tensor(hinge).detach()
 
@@ -141,11 +140,14 @@ class SVMSDCALightning(pl.LightningModule):
         wall      = time.time() - s.start
         rnd       = len(s.metrics) + 1
 
+        # cumulative bytes: one weight vector (float32) sent per round
+        s.comm_bytes += self.d * 4
+
         logger.info(
             "SDCA",
             f"round={rnd}  gap={gap:.6f}  primal={primal:.6f}  "
             f"dual={dual:.6f}  hinge={hinge:.4f}  weight_norm={float(np.linalg.norm(w_np)):.4f}  "
-            f"t={wall:.1f}s"
+            f"comm_bytes={s.comm_bytes}  t={wall:.1f}s"
         )
 
         for name, val in [("primal", primal), ("dual", dual),
@@ -159,4 +161,5 @@ class SVMSDCALightning(pl.LightningModule):
             "duality_gap": gap,
             "hinge_loss":  hinge,
             "wall_time":   wall,
+            "comm_bytes":  s.comm_bytes,
         })

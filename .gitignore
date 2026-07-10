@@ -1,0 +1,21 @@
+# Data — never commit raw or processed datasets
+data/raw/
+data/processed/
+
+# Generated outputs
+results/
+lightning_logs/
+logs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+*.zip
+
+# Notebooks (optional — remove this line if you want to track them)
+*.ipynb
+
+# Notes / PDFs
+notes/

@@ -1,0 +1,13 @@
+# p2pfl libs
+p2pfl[torch]
+p2pfl[tensorflow]
+p2pfl[ray]
+
+numpy
+opendp
+datasets>=4.0.0
+scikit-learn
+
+ipykernel
+wandb
+psutil
