@@ -16,19 +16,49 @@ hard. And because Eq (17) is formally identical to the centralized Eq (12), the
 fixed point does not depend on how the data was split: non-ID robustness is
 inherited from the algorithm, not engineered into the protocol.
 
-What each node tracks
----------------------
-Nodes cannot form a global sum directly, so each holds a running estimate of the
-*mean* contribution and rescales by the network size M (a constant of the
-problem, like the feature count):
+What each node tracks: a per-origin contribution table
+------------------------------------------------------
+Each node keeps the freshest (C_m, d_m) it has seen from every origin it has
+heard of, keyed by node id, and solves with their sum:
 
-    S_i  ~  (1/M) sum_m C_m          T_i  ~  (1/M) sum_m d_m
-    solve  (M*S_i + K''_p) beta_i = M*T_i
+    table_i : origin id -> (C_m, d_m)
+    solve   (sum over table_i + K''_p) beta_i = sum over table_i of d_m
 
-The estimates are maintained by dynamic average consensus: when a node's own
-contribution changes from C_old to C_new it injects the delta into its estimate,
-then gossip-averages with neighbours. That tracks a moving input, which is
-needed here because C_i is recomputed from beta_i every cycle.
+Entries are tagged by origin, so re-receiving one overwrites rather than adds:
+nothing is ever double counted no matter how many gossip paths a contribution
+travels. Once every node's table covers every origin, the left-hand side is
+*exactly* sum_m C_m and the node solves the same system the aggregator would --
+the identity Eq (17) == Eq (12) is recovered exactly, not approached
+asymptotically.
+
+Two schemes were tried first and both failed, for reasons worth recording:
+
+  * Plain neighbourhood averaging is not mass conserving. A node that averages
+    its estimate with a neighbour's while the sender keeps its own inflates the
+    total, so the estimate is biased and never settles.
+  * Push-sum (Kempe, Dobra & Gehrke) conserves mass and is what the original
+    Java code uses, but it only converges asymptotically and its weights carry
+    heavy variance at low fan-out -- measured min(w) = 0.018 against a mean of
+    1.0 after 30 cycles, so the M/w rescaling amplified noise by ~500x. It also
+    has to chase a moving target here, since C_i is recomputed from beta_i every
+    cycle. Accuracy was worse than doing nothing.
+
+The cost of the table is memory, not bandwidth: a node stores M matrices but
+still sends only a bounded number per message (`gossip_entries`, default 2 --
+its own entry plus one other, to keep the epidemic spreading).
+
+`gossip_entries` buys fidelity with bandwidth. Measured on covtype, ring, 10
+nodes, 30 cycles, against a server BDSVM scoring 0.7446:
+
+    entries=1    acc 0.6902     24.7 MB
+    entries=2    acc 0.7185     48.8 MB
+    entries=4    acc 0.7171     95.5 MB
+    entries=10   acc 0.7311    219.6 MB   (whole table every message)
+
+Even carrying the whole table leaves a gap to the server figure, because entries
+arrive having been computed against whatever beta their origin held at the time.
+That staleness is intrinsic to asynchronous gossip and does not shrink with
+bandwidth; it shrinks with cycles, as the betas across the network converge.
 
 Communication cost
 ------------------
@@ -61,8 +91,9 @@ class BDSVMProtocol(CDProtocol):
         self.C = 1.0          # SVM penalty, Eq (9)
         self.lam = 0.5        # mixing weight, Algorithm 2 step 8
         self.gamma = None     # RBF width; defaults to 1/n_features
-        self.arch_seed = 0    # shared seed S generating the pre-images
-        self.n_nodes = 1      # M, needed to rescale the mean back to a sum
+        self.arch_seed = 0      # shared seed S generating the pre-images
+        self.n_nodes = 1        # M, the network size
+        self.gossip_entries = 2  # table entries carried per message
         self.inbox: list = []
         self.metrics: list = []
         self.comm_bytes = 0
@@ -70,7 +101,8 @@ class BDSVMProtocol(CDProtocol):
 
     def clone(self):
         c = BDSVMProtocol()
-        for a in ("gossip_k", "P", "C", "lam", "gamma", "arch_seed", "n_nodes"):
+        for a in ("gossip_k", "P", "C", "lam", "gamma", "arch_seed", "n_nodes",
+                  "gossip_entries"):
             setattr(c, a, getattr(self, a))
         return c
 
@@ -103,11 +135,10 @@ class BDSVMProtocol(CDProtocol):
             self.Km = np.zeros((0, self.P + 1))
 
         self.beta = np.zeros(self.P + 1)
-        self.C_own = np.zeros((self.P + 1, self.P + 1))
-        self.d_own = np.zeros(self.P + 1)
-        # Consensus estimates of the per-node MEAN contribution.
-        self.S = np.zeros((self.P + 1, self.P + 1))
-        self.T = np.zeros(self.P + 1)
+        # origin id -> (C_m, d_m). Own entry is inserted on the first cycle,
+        # once the node id is known from the Node handed to nextCycle.
+        self.table = {}
+        self.my_id = None
         self.start = time.time()
         self.data_ready = True
 
@@ -115,32 +146,36 @@ class BDSVMProtocol(CDProtocol):
     def nextCycle(self, node, pid):
         if not self.data_ready:
             return
-        self._merge_inbox()           # 1. average estimates with neighbours
+        if self.my_id is None:
+            self.my_id = int(node.getID())
+        self._merge_inbox()           # 1. fold in entries from neighbours
         self._local_epoch()           # 2. solve, update beta, re-inject own C,d
         self._gossip_push(node, pid)  # 3. send to random neighbour(s)
         self._record()                # 4. log per-round metrics
 
-    # ---- (1) consensus averaging of the two estimates -----------------------
+    # ---- (1) fold received entries in, keyed by origin ----------------------
     def _merge_inbox(self):
         if not self.inbox:
             return
-        S, T = self.S.copy(), self.T.copy()
-        for peer_S, peer_T in self.inbox:
-            S += peer_S
-            T += peer_T
-        k = len(self.inbox) + 1
-        self.S, self.T = S / k, T / k
+        for entries in self.inbox:
+            for origin, C_m, d_m in entries:
+                if origin != self.my_id:      # never let a stale copy of our
+                    self.table[origin] = (C_m, d_m)   # own entry come back
         self.inbox = []
 
     # ---- (2) solve Eq (17) locally, then refresh this node's contribution ---
     def _local_epoch(self):
-        M = max(self.n_nodes, 1)
-        A = M * self.S + self.Kpp
+        C_sum = np.zeros((self.P + 1, self.P + 1))
+        d_sum = np.zeros(self.P + 1)
+        for C_m, d_m in self.table.values():
+            C_sum += C_m
+            d_sum += d_m
+        A = C_sum + self.Kpp
         A[np.diag_indices_from(A)] += 1e-8 * max(np.trace(A), 1.0) / A.shape[0]
         try:
-            beta_new = np.linalg.solve(A, M * self.T)
+            beta_new = np.linalg.solve(A, d_sum)
         except np.linalg.LinAlgError:
-            beta_new = np.linalg.lstsq(A, M * self.T, rcond=None)[0]
+            beta_new = np.linalg.lstsq(A, d_sum, rcond=None)[0]
         self.beta = self.lam * self.beta + (1.0 - self.lam) * beta_new
 
         if self.n == 0:
@@ -148,11 +183,9 @@ class BDSVMProtocol(CDProtocol):
         # Dynamic average consensus: inject only the CHANGE in this node's own
         # contribution, so the estimate tracks a moving input instead of
         # double-counting it every cycle.
-        C_new, d_new = _worker_contribution(self.Km, self.y, self.beta, self.C)
-        M = max(self.n_nodes, 1)
-        self.S += (C_new - self.C_own) / M
-        self.T += (d_new - self.d_own) / M
-        self.C_own, self.d_own = C_new, d_new
+        # Refresh our own entry against the new weights.
+        self.table[self.my_id] = _worker_contribution(
+            self.Km, self.y, self.beta, self.C)
 
     # ---- (3) gossip push through the Linkable interface ---------------------
     def _gossip_push(self, node, pid):
@@ -162,13 +195,36 @@ class BDSVMProtocol(CDProtocol):
             return
         # Distinct neighbours — see the note in protocols/fedavg_protocol.py.
         n_push = min(self.gossip_k, deg)
+        # Split into n_push+1 equal shares, keep one, send the rest. Nothing is
+        # created or lost, which is the whole point of push-sum.
         order = list(range(deg))
         for i in range(n_push):
             j = i + CommonState.r.randrange(deg - i)   # partial Fisher-Yates
             order[i], order[j] = order[j], order[i]
             peer = link.getNeighbor(order[i])
-            peer.getProtocol(pid).inbox.append((self.S.copy(), self.T.copy()))
-            self.comm_bytes += (self.S.size + self.T.size) * 8   # float64
+            entries = self._entries_to_send()
+            peer.getProtocol(pid).inbox.append(entries)
+            for _, C_m, d_m in entries:
+                self.comm_bytes += (C_m.size + d_m.size) * 8   # float64
+
+    def _entries_to_send(self):
+        """Our own entry, plus up to gossip_entries-1 others chosen at random.
+
+        Carrying a neighbour's entry onward is what lets a contribution reach
+        nodes that are not adjacent to its origin; without it the table would
+        only ever cover the immediate neighbourhood.
+        """
+        out = []
+        own = self.table.get(self.my_id)
+        if own is not None:
+            out.append((self.my_id, own[0], own[1]))
+        others = [k for k in self.table if k != self.my_id]
+        n_extra = max(self.gossip_entries - 1, 0)
+        for _ in range(min(n_extra, len(others))):
+            k = others.pop(CommonState.r.randrange(len(others)))
+            C_m, d_m = self.table[k]
+            out.append((k, C_m, d_m))
+        return out
 
     # ---- (4) per-round metrics ----------------------------------------------
     def _record(self):

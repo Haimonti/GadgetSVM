@@ -106,6 +106,8 @@ def main():
                          "restarting t each round as methods/fedavg_svm.py does")
     ap.add_argument("--test-fraction", type=float, default=0.2)
     ap.add_argument("--max-samples", type=int, default=50_000)
+    ap.add_argument("--gossip-entries", type=int, default=2,
+                    help="bdsvm only: table entries carried per message")
     ap.add_argument("--budget", type=int, default=200,
                     help="bdsvm only: samples kept per cycle")
     ap.add_argument("--seed", type=int, default=42)
@@ -121,6 +123,8 @@ def main():
     prototype_algo = PROTOCOLS[args.method]()
     if hasattr(prototype_algo, "n_local_steps"):
         prototype_algo.n_local_steps = args.local_steps
+    if hasattr(prototype_algo, "gossip_entries"):
+        prototype_algo.gossip_entries = args.gossip_entries
     if hasattr(prototype_algo, "n_nodes"):
         prototype_algo.n_nodes = args.nodes
     if hasattr(prototype_algo, "budget"):
