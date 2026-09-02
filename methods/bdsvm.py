@@ -69,12 +69,22 @@ test accuracy at the converged point rather than the early peak:
     0.0607       0.5175  0.6140  0.6872  0.6912  0.7562   <- median heuristic
     0.2427       0.5175  0.5175  0.5175  0.6537  0.6785
 
-C=10 reaches 0.7562 against a centralized upper bound of 0.7577. gamma barely
-matters below ~0.12, which is where the median heuristic lands anyway. lambda
-does not help at all: every value in {0, 0.25, ..., 0.99} peaked at 0.7512 on
-epoch 1 and settled at 0.68-0.72, and a per-epoch validation line search (what
-the paper suggests) reached only 0.6975 — lambda sets how fast the iterate
-moves, not where it converges.
+Extending the grid to C=300 and selecting on validation AUC (the criterion the
+predecessor paper uses) shows C=1 is the only bad point — everything from 10 up
+sits on a plateau:
+
+    C            1      10      30     100     300
+    val AUC   0.7979  0.8206  0.8218  0.8183  0.8212
+    test acc  0.6912  0.7562  0.7600  0.7560  0.7580
+
+C=30 is the plateau's peak on validation AUC and is what ships. The best cell
+overall was gamma=2x median with C=300 (test 0.7602), but it is inside the same
+plateau and costs a second tuned parameter, so the median heuristic stays.
+
+lambda does not help at all: every value in {0, 0.25, ..., 0.99} peaked at 0.7512
+on epoch 1 and settled at 0.68-0.72, and a per-epoch validation line search (what
+Algorithm 1 line 10 suggests) reached only 0.6975 — lambda sets how fast the
+iterate moves, not where it converges.
 
 `run_benchmark.py`'s existing METHOD_KWARGS entry for "bdsvm" —
 {"P": 100, "C": 1.0, "lam": 0.5, "eta": 5e-3} — maps onto this algorithm's
@@ -199,7 +209,7 @@ def _worker_contribution(K_m, y_m, beta, C):
 # ---------------------------------------------------------------------------
 
 def run(X_train, y_train, X_test, y_test, client_idx,
-        n_rounds=50, P=100, C=10.0, lam=0.5, eta=5e-3,
+        n_rounds=50, P=100, C=30.0, lam=0.5, eta=5e-3,
         gamma=None, preimage="uniform", seed=0):
     """Train BDSVM federated over `client_idx` and return metrics.
 
