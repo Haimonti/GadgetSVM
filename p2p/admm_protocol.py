@@ -133,17 +133,35 @@ class ConsensusADMMProtocol(CDProtocol):
 
     # ---- (3) gossip push through the Linkable interface ---------------------
     def _gossip_push(self, node, pid):
-        link = node.getProtocol(self.LINKABLE_PID)
-        deg = link.degree()
-        if deg == 0:
-            return
+        """Deliver to EVERY neighbour exactly once — not a random sample.
 
-        # Sample with replacement, matching SDCAProtocol exactly: a peer can
-        # be drawn twice in one cycle and receive the same message twice. Kept
-        # identical to Sreekar's layer so every protocol in the study gossips
-        # the same way.
-        for _ in range(min(self.gossip_k, deg)):
-            peer = link.getNeighbor(CommonState.r.randint(0, deg - 1))
+        The other protocols sample peers with replacement, matching
+        SDCAProtocol. ADMM cannot: its z-update has to be a genuine weighted
+        mean over the neighbourhood, because that is what makes the dual update
+        stabilising. In the server version
+
+            z = sum_k (n_k/n)(w_k + u_k)   =>   sum_k n_k (w_k - z) = -sum_k n_k u_k
+
+        so the weighted sum of duals is driven to zero every round. A z_i built
+        from a random multiset of neighbours — some drawn twice, some missed —
+        does not give that cancellation even locally, and u integrates a
+        persistent bias instead.
+
+        Measured on covtype, 10 nodes, 60 cycles, against FDR-SVM's own server
+        baseline (accuracy, gap to server):
+
+            label_skew    full   sampled 0.5618 (-0.131)   all 0.6535 (-0.039)
+            dirichlet 0.1 full   sampled 0.5504 (-0.138)   all 0.6076 (-0.080)
+            iid           ring   sampled 0.6747 (-0.009)   all 0.6768 (-0.007)
+
+        Cost is deg messages per cycle instead of gossip_k, so gossip_k no
+        longer applies to this protocol. Note this does not fully fix the dual:
+        ||u|| still grows under skew (20.8 at cycle 60), so the gap closes
+        rather than vanishing — see the FDR-SVM note in the results report.
+        """
+        link = node.getProtocol(self.LINKABLE_PID)
+        for j in range(link.degree()):
+            peer = link.getNeighbor(j)
             peer.getProtocol(pid).inbox.append(
                 ((self.w + self.u).astype(np.float32), self.n))
             self.comm_bytes += self.d * 4  # one float32 vector sent
