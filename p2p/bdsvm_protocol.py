@@ -76,7 +76,8 @@ import numpy as np
 from src.network_layer.peersim_python.cdsim import CDProtocol
 from src.network_layer.peersim_python.core import CommonState
 
-from methods.bdsvm import _rbf, _make_preimages, _worker_contribution
+from methods.bdsvm import (_rbf, _make_preimages, _median_gamma,
+                           _worker_contribution)
 
 
 class BDSVMProtocol(CDProtocol):
@@ -117,14 +118,19 @@ class BDSVMProtocol(CDProtocol):
         self.X_test = X_test.tocsr()
         self.y_test = np.asarray(y_test, dtype=np.float64)
         self.n, self.d = self.X.shape
-        if self.gamma is None:
-            self.gamma = 1.0 / self.d
+
 
         # Architecture: every node regenerates the SAME P pre-images from the
         # shared seed, so the model architecture is common without any node
         # sending it (Algorithm 3, step 2).
         p = _make_preimages(self.P, self.d, self.arch_seed,
                             kind=self.preimage)
+        if self.gamma is None:
+            # Median heuristic on the local shard. Nodes see slightly different
+            # values, which is a real divergence from the server version where
+            # one gamma is fixed globally -- pass --gamma explicitly for a run
+            # that has to match the baseline exactly.
+            self.gamma = _median_gamma(self.X, p) if self.n > 0 else 1.0
         self.p = p
         self.Kpp = np.zeros((self.P + 1, self.P + 1))
         self.Kpp[:self.P, :self.P] = _rbf(p, p, self.gamma)

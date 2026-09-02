@@ -16,3 +16,5 @@ CLAUDE.md
 __pycache__/
 *.txt
 results_fast*.csv
+
+!results/*.csv

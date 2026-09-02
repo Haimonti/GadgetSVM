@@ -85,7 +85,7 @@ def _rbf(A, B, gamma):
     return np.exp(-gamma * d2)
 
 
-def _make_preimages(P, n_features, seed, scale=1.0, kind="uniform"):
+def _make_preimages(P, n_features, seed, scale=1.0, kind="uniform", nnz=64):
     """The P randomly generated pre-image vectors p_j (Algorithm 2, step 2).
 
     Generated from a seed rather than drawn from the data, so every worker can
@@ -96,18 +96,62 @@ def _make_preimages(P, n_features, seed, scale=1.0, kind="uniform"):
 
       "uniform"  Uniform on [0, scale]^N. Suits the LIBSVM `.scale` datasets
                  whose features already live in that range (covtype, N=54).
-      "unit"     Gaussian, then normalised to unit length. Needed for sparse
-                 high-dimensional data such as rcv1 (N=47k, unit-norm rows):
-                 a dense uniform pre-image there has norm ~125 against data of
-                 norm 1, so every ||x - p||^2 collapses to ~||p||^2 and the
-                 Gaussian kernel returns near-identical values for every pair —
-                 the architecture degenerates and carries no information.
+      "unit"     Dense Gaussian, normalised to unit length.
+      "sparse"   Sparse: `nnz` randomly placed Gaussian entries, normalised to
+                 unit length. This is the one that works on sparse
+                 high-dimensional data.
+
+    Why the choice matters, measured on rcv1 (N=47236, unit-norm rows, ~73
+    nonzeros each), reporting the spread of the resulting kernel values:
+
+        uniform, dense   ||p|| ~ 125   every ||x-p||^2 collapses to ~||p||^2
+        unit,    dense   ||p|| = 1     ||x-p||^2 in [1.957, 2.039] -- all data
+                                       points are nearly equidistant from a
+                                       dense random direction, which is just
+                                       concentration of measure in 47k
+                                       dimensions. Kernel std 1.7e-03 at best.
+        sparse           ||p|| = 1     distances actually vary, because a sparse
+                                       pre-image overlaps different documents
+                                       differently.
+
+    A dense pre-image in a sparse high-dimensional space is nearly orthogonal to
+    every data point, so it cannot discriminate between them however gamma is
+    set. Use "sparse" whenever the data is sparse.
     """
     rng = np.random.default_rng(seed)
     if kind == "unit":
         p = rng.standard_normal((P, n_features))
         return p / np.maximum(np.linalg.norm(p, axis=1, keepdims=True), 1e-12)
+    if kind == "sparse":
+        p = np.zeros((P, n_features))
+        for i in range(P):
+            cols = rng.choice(n_features, size=min(nnz, n_features), replace=False)
+            p[i, cols] = rng.standard_normal(len(cols))
+        return p / np.maximum(np.linalg.norm(p, axis=1, keepdims=True), 1e-12)
     return rng.uniform(0.0, scale, size=(P, n_features))
+
+
+def _median_gamma(X, p, sample=2000, seed=0):
+    """gamma = 1 / median(||x - p||^2), estimated from a subsample.
+
+    The obvious default, 1/n_features, silently destroys the model on
+    high-dimensional data. On rcv1 (N=47236, unit-norm rows) the squared
+    distances sit around 2.0, so 1/N = 2.1e-05 puts every kernel value at
+    exp(-4e-05) ~ 1: the kernel matrix becomes constant to within 2e-07 and the
+    architecture carries no information at all. The whole grid's rcv1 BDSVM
+    column was chance-level for exactly this reason. The median heuristic puts
+    the exponent at O(1) by construction and does not care about N.
+    """
+    rng = np.random.default_rng(seed)
+    n = X.shape[0]
+    idx = rng.choice(n, size=min(sample, n), replace=False)
+    Xs = X[idx]
+    a = (np.asarray(Xs.multiply(Xs).sum(axis=1)).ravel()
+         if hasattr(Xs, "multiply") else np.einsum("ij,ij->i", Xs, Xs))
+    b = np.einsum("ij,ij->i", p, p)
+    d2 = a[:, None] + b[None, :] - 2.0 * np.asarray(Xs.dot(p.T))
+    med = float(np.median(np.maximum(d2, 0.0)))
+    return 1.0 / med if med > 1e-12 else 1.0
 
 
 # ---------------------------------------------------------------------------
@@ -142,14 +186,16 @@ def run(X_train, y_train, X_test, y_test, client_idx,
         C:          SVM penalty, used in the weighting rule (9)
         lam:        mixing weight in beta <- lam*beta_old + (1-lam)*beta_new
         eta:        stopping threshold on the relative change of beta
-        gamma:      RBF width; defaults to 1/n_features
-        preimage:   "uniform" or "unit" — see _make_preimages
+        gamma:      RBF width; defaults to the median heuristic — see
+                    _median_gamma, and do not substitute 1/n_features
+        preimage:   "uniform", "unit" or "sparse" — see _make_preimages
     """
     n_features = X_train.shape[1]
-    gamma = (1.0 / n_features) if gamma is None else gamma
 
     # --- architecture, shared by construction (Algorithm 2, steps 2-3) ------
     p = _make_preimages(P, n_features, seed, kind=preimage)
+    if gamma is None:
+        gamma = _median_gamma(X_train, p)
     K_p = _rbf(p, p, gamma)
     Kpp = np.zeros((P + 1, P + 1))
     Kpp[:P, :P] = K_p                                      # K''_p
