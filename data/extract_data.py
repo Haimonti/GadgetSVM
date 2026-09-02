@@ -5,7 +5,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from config import RAW_DIR, DATA_DIR
+from src.config import RAW_DIR, DATA_DIR
+
 
 
 def extract_bz2(src: Path, dest_dir: Path) -> Path:

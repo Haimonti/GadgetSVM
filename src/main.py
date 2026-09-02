@@ -1,29 +1,56 @@
 import os
+import sys
 import time
-import matplotlib.pyplot as plt
 from pathlib import Path
 from datetime import datetime
+
+# Ensure the repo root is importable so `src.*` and root-level `data.*` resolve
+# whether this is run as `python src/main.py` or `python -m src.main`.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from p2pfl.settings import Settings
 Settings.general.DISABLE_RAY = True
 
 from p2pfl.management.logger import logger
 
-from config import CONFIG, CODE_DIR, DATA_DIR
-from data_loader import load_data, split_workers
-from network_topology import connect_topology, setup_nodes
+from data.data_loader import load_rcv1_partitions, load_covtype_partitions
+from src.config import CONFIG, CODE_DIR, DATA_DIR
+from src.evaluation.metrics import print_summary, compute_node_accuracy
+from src.evaluation.visualizer import plot_loss_vs_time, plot_gap_vs_time, plot_comm_cost_vs_time
+from src.own_network.network_topology import connect_topology, setup_nodes
 
 
-def run_training(nodes: list) -> None:
-    """Wire topology, trigger learning from node 0, and wait for completion."""
+def run() -> None:
+    os.chdir(CODE_DIR)
+
+    results_dir = _next_run_dir()
+    (results_dir / "logs").mkdir(parents=True, exist_ok=True)
+    (results_dir / "metrics").mkdir(parents=True, exist_ok=True)
+    (results_dir / "plots").mkdir(parents=True, exist_ok=True)
+    logger.info("main", f"Run started — results → {results_dir}")
+
+    # Data — partition train across workers, split test equally (dataset via CONFIG["DATASET"])
+    if CONFIG["DATASET"] == "covtype":
+        worker_data = load_covtype_partitions(
+            CONFIG["COVTYPE_PATH"], CONFIG["NUM_WORKERS"], CONFIG["SEED"], CONFIG["TEST_FRACTION"]
+        )
+    else:
+        worker_data = load_rcv1_partitions(
+            CONFIG["TRAIN_PATH"], CONFIG["TEST_PATH"], CONFIG["NUM_WORKERS"], CONFIG["SEED"]
+        )
+
+    # Nodes
+    lightning_modules, nodes = setup_nodes(worker_data)
+
+    # Topology + training
     connect_topology(nodes, CONFIG["TOPOLOGY"], CONFIG["BASE_PORT"])
     time.sleep(4)
 
-    nodes[0].set_start_learning(
-        rounds = CONFIG["ROUNDS"],
-        epochs = CONFIG["EPOCHS"],
+    nodes[0].set_start_learning(rounds=CONFIG["ROUNDS"], epochs=CONFIG["EPOCHS"])
+    logger.info(
+        "main",
+        f"Training started — {CONFIG['ROUNDS']} rounds, topology={CONFIG['TOPOLOGY']}, k={CONFIG['GOSSIP_K']}"
     )
-    logger.info("main", f"Training started — {CONFIG['ROUNDS']} rounds, topology={CONFIG['TOPOLOGY']}")
 
     while True:
         time.sleep(1)
@@ -32,94 +59,49 @@ def run_training(nodes: list) -> None:
 
     logger.info("main", "Training complete")
 
-
-def save_plots(lightning_modules: list, results_dir: Path) -> None:
-    """Plot per-worker convergence metrics and save to results_dir/plots/."""
-    plots_dir = results_dir / "plots"
-    plots_dir.mkdir(parents=True, exist_ok=True)
-
-    fig, axes = plt.subplots(1, 3, figsize=(16, 4))
-    fig.suptitle(
-        f"P2P-SDCA  |  topology={CONFIG['TOPOLOGY']}  "
-        f"workers={CONFIG['NUM_WORKERS']}  λ={CONFIG['LAMBDA']}  "
-        f"rounds={CONFIG['ROUNDS']}"
-    )
-
-    for i, lm in enumerate(lightning_modules):
-        m = lm._metrics
-        if not m:
-            continue
-        rounds = [r["round"]       for r in m]
-        gaps   = [r["duality_gap"] for r in m]
-        hinges = [r["hinge_loss"]  for r in m]
-        walls  = [r["wall_time"]   for r in m]
-
-        axes[0].plot(rounds, gaps,   marker="o", label=f"Worker {i}")
-        axes[1].plot(rounds, hinges, marker="s", label=f"Worker {i}")
-        axes[2].plot(walls,  gaps,   marker="^", label=f"Worker {i}")
-
-    axes[0].set(title="Duality Gap  P(w) − D(α)", xlabel="Gossip round", ylabel="Gap")
-    axes[1].set(title="Hinge Loss",               xlabel="Gossip round", ylabel="Loss")
-    axes[2].set(title="Duality Gap vs Wall Time",  xlabel="Wall time (s)", ylabel="Gap")
-
-    for ax in axes:
-        ax.legend(fontsize=7)
-        ax.grid(True, alpha=0.3)
-        ax.set_yscale("log")
-
-    plt.tight_layout()
-    plot_path = plots_dir / "convergence.png"
-    plt.savefig(plot_path, dpi=150, bbox_inches="tight")
-    plt.close()
-    logger.info("main", f"Convergence plot saved → {plot_path}")
-
-
-def print_summary(lightning_modules: list) -> None:
-    """Print final per-worker convergence table."""
-    print(f"\n{'Worker':>6}  {'Final Gap':>12}  {'Final Hinge':>12}  "
-          f"{'Primal':>10}  {'Dual':>10}  {'Time (s)':>10}")
-    print("─" * 66)
-    for i, lm in enumerate(lightning_modules):
-        if lm._metrics:
-            r = lm._metrics[-1]
-            logger.info(
-                "main",
-                f"Worker {i}  gap={r['duality_gap']:.6f}  hinge={r['hinge_loss']:.6f}  "
-                f"primal={r['primal']:.6f}  dual={r['dual']:.6f}  t={r['wall_time']:.1f}s"
-            )
-            print(f"{i:>6}  {r['duality_gap']:>12.6f}  {r['hinge_loss']:>12.6f}  "
-                  f"{r['primal']:>10.6f}  {r['dual']:>10.6f}  {r['wall_time']:>10.1f}")
-
-
-def main():
-    os.chdir(CODE_DIR)
-
-    timestamp   = datetime.now().strftime("%Y%m%d_%H%M%S")
-    results_dir = CODE_DIR / "results" / f"run_{timestamp}"
-    results_dir.mkdir(parents=True, exist_ok=True)
-    logger.info("main", f"Run started — results → {results_dir}")
-
-    # Data
-    _data_train = DATA_DIR / "train" / "rcv1_train.binary"
-    X_csr, y    = load_data(_data_train, CONFIG["SEED"])
-    worker_data = split_workers(X_csr, y, CONFIG["NUM_WORKERS"])
-
-    # Nodes
-    lightning_modules, nodes = setup_nodes(worker_data)
-
-    # Training
-    run_training(nodes)
-
     # Teardown
     for node in nodes:
         node.stop()
     logger.info("main", "All nodes stopped")
 
-    # Results
-    save_plots(lightning_modules, results_dir)
-    print_summary(lightning_modules)
+    # Test accuracy — W_tilde = averaged SDCA weight on each node's held-out shard
+    accuracies = []
+    for i, (lm, wd) in enumerate(zip(lightning_modules, worker_data)):
+        s = lm._s
+        if s.avg_cnt > 0:
+            w_np = (s.w_avg / s.avg_cnt).cpu().numpy()
+        else:
+            w_np = lm.model.weight.data.cpu().numpy()
+        acc = compute_node_accuracy(w_np, wd["X_test"], wd["y_test"])
+        accuracies.append(acc)
+        logger.info("main", f"Node {i} test accuracy = {acc:.4f}")
+    avg_acc = sum(accuracies) / len(accuracies)
+    logger.info("main", f"Average test accuracy across nodes = {avg_acc:.4f}")
+
+    # Plots — one graph each, all workers overlaid
+    all_metrics = [lm._metrics for lm in lightning_modules]
+    plot_loss_vs_time(all_metrics,      results_dir / "plots" / "loss_vs_time.png")
+    plot_gap_vs_time(all_metrics,       results_dir / "plots" / "duality_gap_vs_time.png")
+    plot_comm_cost_vs_time(all_metrics, results_dir / "plots" / "comm_cost_vs_time.png")
+    logger.info("main", f"Plots saved → {results_dir / 'plots'}")
+
+    print_summary(lightning_modules, logger=logger)
+    logger.info("main", f"Average accuracy: {avg_acc:.4f}")
     logger.info("main", "Done.")
 
 
 if __name__ == "__main__":
-    main()
+    run()
+
+def _next_run_dir() -> "Path":
+    """Return results/run<N>_<mm-dd-yyyy>, with N auto-incremented per run."""
+    from pathlib import Path
+    import re
+    results_root = CODE_DIR / "results"
+    results_root.mkdir(parents=True, exist_ok=True)
+    existing = [p.name for p in results_root.iterdir() if p.is_dir()]
+    nums = [int(m.group(1)) for name in existing
+            if (m := re.match(r"run(\d+)_", name))]
+    next_n = max(nums, default=0) + 1
+    date_str = datetime.now().strftime("%m-%d-%Y")
+    return results_root / f"run{next_n}_{date_str}"
