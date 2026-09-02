@@ -89,7 +89,7 @@ class BDSVMProtocol(CDProtocol):
         self.data_ready = False
         self.gossip_k = 1
         self.P = 100          # budget: number of pre-image vectors
-        self.C = 1.0          # SVM penalty, Eq (9)
+        self.C = 10.0         # SVM penalty, Eq (9); see methods/bdsvm.py
         self.lam = 0.5        # mixing weight, Algorithm 2 step 8
         self.gamma = None     # RBF width; defaults to 1/n_features
         self.arch_seed = 0      # shared seed S generating the pre-images

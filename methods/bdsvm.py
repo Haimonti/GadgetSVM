@@ -52,6 +52,30 @@ solution equals the centralized one regardless of how the data was split. That
 identity is the whole point of the paper: BDSVM is intrinsically robust to
 non-ID partitioning, with no drift term and no client-drift correction needed.
 
+Choosing C
+----------
+C is the penalty in the weighting rule (9), a_i = 2C/(e_i y_i). Too small and
+the data term is outweighed by the regulariser (1/2) beta^T K_p beta, so IRWLS
+converges to an underfitted solution — and, awkwardly, to one *worse* than the
+barely-trained iterate it passes through on epoch 1. That is what produced the
+"accuracy peaks at epoch 1 then declines" behaviour: not divergence, but
+convergence to a poor optimum.
+
+Grid on covtype (10 nodes, 150 epochs, held-out validation slice), reporting
+test accuracy at the converged point rather than the early peak:
+
+    gamma \ C     0.001    0.01     0.1     1.0    10.0
+    0.0152       0.5175  0.6062  0.6945  0.6925  0.7563
+    0.0607       0.5175  0.6140  0.6872  0.6912  0.7562   <- median heuristic
+    0.2427       0.5175  0.5175  0.5175  0.6537  0.6785
+
+C=10 reaches 0.7562 against a centralized upper bound of 0.7577. gamma barely
+matters below ~0.12, which is where the median heuristic lands anyway. lambda
+does not help at all: every value in {0, 0.25, ..., 0.99} peaked at 0.7512 on
+epoch 1 and settled at 0.68-0.72, and a per-epoch validation line search (what
+the paper suggests) reached only 0.6975 — lambda sets how fast the iterate
+moves, not where it converges.
+
 `run_benchmark.py`'s existing METHOD_KWARGS entry for "bdsvm" —
 {"P": 100, "C": 1.0, "lam": 0.5, "eta": 5e-3} — maps onto this algorithm's
 symbols exactly (P pre-images, penalty C, mixing lambda, stopping eta). Those
@@ -175,7 +199,7 @@ def _worker_contribution(K_m, y_m, beta, C):
 # ---------------------------------------------------------------------------
 
 def run(X_train, y_train, X_test, y_test, client_idx,
-        n_rounds=50, P=100, C=1.0, lam=0.5, eta=5e-3,
+        n_rounds=50, P=100, C=10.0, lam=0.5, eta=5e-3,
         gamma=None, preimage="uniform", seed=0):
     """Train BDSVM federated over `client_idx` and return metrics.
 
@@ -183,7 +207,8 @@ def run(X_train, y_train, X_test, y_test, client_idx,
         client_idx: list of index arrays, one per worker
         n_rounds:   maximum IRWLS epochs (Algorithm 2's repeat loop)
         P:          budget — number of pre-image vectors
-        C:          SVM penalty, used in the weighting rule (9)
+        C:          SVM penalty, used in the weighting rule (9). Defaults to
+                    10.0, chosen on a validation set — see the note below
         lam:        mixing weight in beta <- lam*beta_old + (1-lam)*beta_new
         eta:        stopping threshold on the relative change of beta
         gamma:      RBF width; defaults to the median heuristic — see

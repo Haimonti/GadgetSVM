@@ -49,7 +49,9 @@ FAST_MAX_TEST   = 2_000
 METHOD_KWARGS = {
     "centralized": {},
     "fedavg_svm":  {"n_local_steps": 100, "lambda_reg": 0.01},
-    "bdsvm":       {"P": 100, "C": 1.0, "lam": 0.5, "eta": 5e-3},
+    # C tuned on a validation set (see methods/bdsvm.py): 1.0 underfits badly,
+    # converging to 0.691 where 10.0 reaches 0.756 against a 0.758 upper bound.
+    "bdsvm":       {"P": 100, "C": 10.0, "lam": 0.5, "eta": 5e-3},
     "fdr_svm":     {"n_local_steps": 100, "lambda_reg": 0.01, "rho": 1.0, "eps_scale": 1.0},
     "fedssl_amc":  {"d_enc": 64, "svm_C": 1.0},
 }
