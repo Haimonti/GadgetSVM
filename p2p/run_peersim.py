@@ -60,6 +60,38 @@ def to_pm1(y):
     return np.sign(y).astype(np.float32)
 
 
+def overlay_components(n_nodes):
+    """Number of connected components in the wired overlay.
+
+    Worth recording: WireKOut with k=1 gives each node a single out-edge, and
+    an undirected random 1-out graph is very often disconnected — at n=10,
+    seed 42 it splits 7+3. Contributions cannot cross a component boundary, so
+    any protocol whose aggregation needs to see every node is capped by this
+    no matter how many cycles or how much bandwidth it is given.
+    """
+    adj = {i: set() for i in range(n_nodes)}
+    for i in range(n_nodes):
+        lk = Network.get(i).getProtocol(LINKABLE_PID)
+        for j in range(lk.degree()):
+            t = lk.getNeighbor(j).getIndex()
+            adj[i].add(t)
+            adj[t].add(i)
+    seen, comps = set(), 0
+    for s0 in range(n_nodes):
+        if s0 in seen:
+            continue
+        comps += 1
+        stack, comp = [s0], set()
+        while stack:
+            u = stack.pop()
+            if u in comp:
+                continue
+            comp.add(u)
+            stack += [v for v in adj[u] if v not in comp]
+        seen |= comp
+    return comps
+
+
 def parse_scheme(label):
     """'dirichlet_0.1' -> ('dirichlet', {'alpha': 0.1});  'iid' -> ('iid', {})."""
     if label.startswith("dirichlet"):
@@ -122,6 +154,10 @@ def main():
                     help="iid | dirichlet_<alpha> | label_skew")
     ap.add_argument("--test-fraction", type=float, default=0.2)
     ap.add_argument("--max-samples", type=int, default=50_000)
+    ap.add_argument("--P", type=int, default=None,
+                    help="bdsvm only: budget — number of pre-image vectors")
+    ap.add_argument("--gamma", type=float, default=None,
+                    help="bdsvm only: RBF width (default: median heuristic)")
     ap.add_argument("--preimage", default="uniform",
                     help="bdsvm only: uniform | unit (unit-norm, for sparse "
                          "high-dimensional data such as rcv1)")
@@ -146,6 +182,10 @@ def main():
     prototype_algo = PROTOCOLS[args.method]()
     if hasattr(prototype_algo, "n_local_steps"):
         prototype_algo.n_local_steps = args.local_steps
+    if args.P is not None and hasattr(prototype_algo, "P"):
+        prototype_algo.P = args.P
+    if args.gamma is not None and hasattr(prototype_algo, "gamma"):
+        prototype_algo.gamma = args.gamma
     if hasattr(prototype_algo, "preimage"):
         prototype_algo.preimage = args.preimage
     if hasattr(prototype_algo, "gossip_entries"):
@@ -178,7 +218,11 @@ def main():
     logger.info("main", f"method={args.method}, topology={args.topology}, k={args.gossip_k}, "
                         f"cycles={args.cycles}, lambda={args.lambda_reg}, "
                         f"local_steps={args.local_steps}, t_global={args.t_global}")
+    # Must be read AFTER nextExperiment: the Wire* control is an initializer
+    # and only runs inside it, so the overlay does not exist before that.
     sim.nextExperiment()
+    n_comp = overlay_components(args.nodes)
+    logger.info("network", f"overlay has {n_comp} connected component(s)")
 
     protos = [Network.get(i).getProtocol(ALGO_PID) for i in range(args.nodes)]
     accs = np.array([p.accuracy() for p in protos])
@@ -201,6 +245,7 @@ def main():
     print("-" * 48)
     print(f"mean accuracy      {np.mean(accs):.4f} +/- {np.std(accs):.4f}")
     print(f"consensus error    {consensus:.6f}   (mean ||w_i - mean(w)||)")
+    print(f"overlay components {n_comp}" + ("   <-- DISCONNECTED" if n_comp > 1 else ""))
     print(f"total sent         {total_mb:.2f} MB over {args.cycles} cycles")
 
     if args.csv:
@@ -212,7 +257,7 @@ def main():
                 "tag", "method", "topology", "scheme", "nodes", "cycles",
                 "gossip_k", "lambda_reg", "seed", "node", "n_local",
                 "test_acc", "hinge_loss", "duality_gap", "consensus_err",
-                "comm_bytes",
+                "comm_bytes", "components",
             ])
             if new:
                 w.writeheader()
@@ -226,6 +271,7 @@ def main():
                     hinge_loss=m.get("hinge_loss", float("nan")),
                     duality_gap=m.get("duality_gap", float("nan")),
                     consensus_err=consensus, comm_bytes=p_.comm_bytes,
+                    components=n_comp,
                 ))
         print(f"appended to        {path}")
 
