@@ -1,6 +1,6 @@
 """Run Gossip-FedAvg-SVM on the PeerSim engine.
 
-Proof-of-pipeline driver for `protocols/fedavg_protocol.py`. Deliberately small:
+Proof-of-pipeline driver for `p2p/fedavg_protocol.py`. Deliberately small:
 it wires one topology, hands out shards, runs the cycle-driven simulation, and
 reports per-node accuracy plus the consensus error between nodes.
 
@@ -15,10 +15,13 @@ Once the remaining five protocols land, this grows into the full grid runner;
 for now it exists to show the pipeline end to end on real data.
 """
 import argparse
+import csv
 from pathlib import Path
 
 import numpy as np
 from sklearn.datasets import load_svmlight_file
+
+import benchmark as data_lib
 
 from src.network_layer.peersim_python.core import Network, GeneralNode, CommonState
 from src.network_layer.peersim_python.idle_protocol import IdleProtocol
@@ -29,7 +32,7 @@ from src.network_layer.peersim_python.dynamics import (
 from src.network_layer.peersim_python.observers import DataInitializer
 from src.network_layer.peersim_python.logger import logger
 
-from protocols import PROTOCOLS
+from p2p import PROTOCOLS
 
 LINKABLE_PID = 0
 ALGO_PID = 1
@@ -57,7 +60,14 @@ def to_pm1(y):
     return np.sign(y).astype(np.float32)
 
 
-def load_shards(path, n_nodes, seed, test_fraction, max_samples):
+def parse_scheme(label):
+    """'dirichlet_0.1' -> ('dirichlet', {'alpha': 0.1});  'iid' -> ('iid', {})."""
+    if label.startswith("dirichlet"):
+        return "dirichlet", {"alpha": float(label.split("_")[1])}
+    return label, {}
+
+
+def load_shards(path, n_nodes, seed, test_fraction, max_samples, scheme="iid"):
     """Load a LIBSVM file, hold out a test split, and shard the rest per node.
 
     Every node is evaluated on the *same* held-out test set, so per-node accuracy
@@ -80,7 +90,11 @@ def load_shards(path, n_nodes, seed, test_fraction, max_samples):
     logger.info("data", f"{X.shape[0]} samples, {X.shape[1]} features -> "
                         f"{X_tr.shape[0]} train / {n_test} test")
 
-    parts = np.array_split(np.arange(X_tr.shape[0]), n_nodes)
+    # Same partitioner as run_benchmark.py, so a P2P run and its server
+    # baseline see identical shards for a given (dataset, scheme, K, seed).
+    sch, kw = parse_scheme(scheme)
+    parts = data_lib.partition(y_tr, n_nodes, sch, seed=seed, **kw)
+    logger.info("data", f"scheme={scheme} shard sizes={[len(q) for q in parts]}")
     return [{
         "X_csr":   X_tr[p].tocsr(),
         "y":       y_tr[p],
@@ -104,12 +118,21 @@ def main():
     ap.add_argument("--t-global", action="store_true",
                     help="textbook Pegasos (t runs across the whole run) instead of "
                          "restarting t each round as methods/fedavg_svm.py does")
+    ap.add_argument("--scheme", default="iid",
+                    help="iid | dirichlet_<alpha> | label_skew")
     ap.add_argument("--test-fraction", type=float, default=0.2)
     ap.add_argument("--max-samples", type=int, default=50_000)
+    ap.add_argument("--preimage", default="uniform",
+                    help="bdsvm only: uniform | unit (unit-norm, for sparse "
+                         "high-dimensional data such as rcv1)")
     ap.add_argument("--gossip-entries", type=int, default=2,
                     help="bdsvm only: table entries carried per message")
     ap.add_argument("--budget", type=int, default=200,
                     help="bdsvm only: samples kept per cycle")
+    ap.add_argument("--csv", default=None,
+                    help="append one row per node to this CSV")
+    ap.add_argument("--tag", default="",
+                    help="free-form label recorded in the CSV (e.g. dataset)")
     ap.add_argument("--seed", type=int, default=42)
     args = ap.parse_args()
 
@@ -118,11 +141,13 @@ def main():
 
     CommonState.initializeRandom(args.seed)
     shards = load_shards(args.data, args.nodes, args.seed,
-                         args.test_fraction, args.max_samples)
+                         args.test_fraction, args.max_samples, args.scheme)
 
     prototype_algo = PROTOCOLS[args.method]()
     if hasattr(prototype_algo, "n_local_steps"):
         prototype_algo.n_local_steps = args.local_steps
+    if hasattr(prototype_algo, "preimage"):
+        prototype_algo.preimage = args.preimage
     if hasattr(prototype_algo, "gossip_entries"):
         prototype_algo.gossip_entries = args.gossip_entries
     if hasattr(prototype_algo, "n_nodes"):
@@ -135,7 +160,7 @@ def main():
         prototype_algo.t_global = args.t_global
     if hasattr(prototype_algo, "n_global"):
         # CoCoA's increments only share a scale if every node divides by the
-        # same global sample count (see protocols/cocoa_protocol.py).
+        # same global sample count (see p2p/cocoa_protocol.py).
         prototype_algo.n_global = sum(s["n_local"] for s in shards)
     Network.reset(args.nodes, GeneralNode([IdleProtocol(), prototype_algo]))
     logger.info("network", f"{args.nodes} nodes (protocol 0=Linkable, 1={args.method})")
@@ -177,6 +202,32 @@ def main():
     print(f"mean accuracy      {np.mean(accs):.4f} +/- {np.std(accs):.4f}")
     print(f"consensus error    {consensus:.6f}   (mean ||w_i - mean(w)||)")
     print(f"total sent         {total_mb:.2f} MB over {args.cycles} cycles")
+
+    if args.csv:
+        path = Path(args.csv)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        new = not path.exists()
+        with open(path, "a", newline="") as fh:
+            w = csv.DictWriter(fh, fieldnames=[
+                "tag", "method", "topology", "scheme", "nodes", "cycles",
+                "gossip_k", "lambda_reg", "seed", "node", "n_local",
+                "test_acc", "hinge_loss", "duality_gap", "consensus_err",
+                "comm_bytes",
+            ])
+            if new:
+                w.writeheader()
+            for i, p_ in enumerate(protos):
+                m = p_.metrics[-1] if p_.metrics else {}
+                w.writerow(dict(
+                    tag=args.tag, method=args.method, topology=args.topology,
+                    scheme=args.scheme, nodes=args.nodes, cycles=args.cycles,
+                    gossip_k=args.gossip_k, lambda_reg=args.lambda_reg,
+                    seed=args.seed, node=i, n_local=p_.n, test_acc=accs[i],
+                    hinge_loss=m.get("hinge_loss", float("nan")),
+                    duality_gap=m.get("duality_gap", float("nan")),
+                    consensus_err=consensus, comm_bytes=p_.comm_bytes,
+                ))
+        print(f"appended to        {path}")
 
 
 if __name__ == "__main__":

@@ -40,7 +40,7 @@ import numpy as np
 from src.network_layer.peersim_python.cdsim import CDProtocol
 from src.network_layer.peersim_python.core import CommonState
 
-from protocols._prox import prox_pegasos
+from p2p._prox import prox_pegasos
 
 
 class ConsensusADMMProtocol(CDProtocol):

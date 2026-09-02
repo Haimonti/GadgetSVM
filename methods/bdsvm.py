@@ -85,15 +85,28 @@ def _rbf(A, B, gamma):
     return np.exp(-gamma * d2)
 
 
-def _make_preimages(P, n_features, seed, scale=1.0):
+def _make_preimages(P, n_features, seed, scale=1.0, kind="uniform"):
     """The P randomly generated pre-image vectors p_j (Algorithm 2, step 2).
 
     Generated from a seed rather than drawn from the data, so every worker can
-    reproduce them locally and only the seed needs to be transmitted. Uniform on
-    [0, scale]^N suits the LIBSVM `.scale` datasets used here, whose features are
-    already normalised to that range.
+    reproduce them locally and only the seed needs to be transmitted.
+
+    The paper does not pin down the distribution, and the choice matters once
+    the input space is high-dimensional:
+
+      "uniform"  Uniform on [0, scale]^N. Suits the LIBSVM `.scale` datasets
+                 whose features already live in that range (covtype, N=54).
+      "unit"     Gaussian, then normalised to unit length. Needed for sparse
+                 high-dimensional data such as rcv1 (N=47k, unit-norm rows):
+                 a dense uniform pre-image there has norm ~125 against data of
+                 norm 1, so every ||x - p||^2 collapses to ~||p||^2 and the
+                 Gaussian kernel returns near-identical values for every pair —
+                 the architecture degenerates and carries no information.
     """
     rng = np.random.default_rng(seed)
+    if kind == "unit":
+        p = rng.standard_normal((P, n_features))
+        return p / np.maximum(np.linalg.norm(p, axis=1, keepdims=True), 1e-12)
     return rng.uniform(0.0, scale, size=(P, n_features))
 
 
@@ -119,7 +132,7 @@ def _worker_contribution(K_m, y_m, beta, C):
 
 def run(X_train, y_train, X_test, y_test, client_idx,
         n_rounds=50, P=100, C=1.0, lam=0.5, eta=5e-3,
-        gamma=None, seed=0):
+        gamma=None, preimage="uniform", seed=0):
     """Train BDSVM federated over `client_idx` and return metrics.
 
     Args:
@@ -130,12 +143,13 @@ def run(X_train, y_train, X_test, y_test, client_idx,
         lam:        mixing weight in beta <- lam*beta_old + (1-lam)*beta_new
         eta:        stopping threshold on the relative change of beta
         gamma:      RBF width; defaults to 1/n_features
+        preimage:   "uniform" or "unit" — see _make_preimages
     """
     n_features = X_train.shape[1]
     gamma = (1.0 / n_features) if gamma is None else gamma
 
     # --- architecture, shared by construction (Algorithm 2, steps 2-3) ------
-    p = _make_preimages(P, n_features, seed)
+    p = _make_preimages(P, n_features, seed, kind=preimage)
     K_p = _rbf(p, p, gamma)
     Kpp = np.zeros((P + 1, P + 1))
     Kpp[:P, :P] = K_p                                      # K''_p

@@ -94,6 +94,7 @@ class BDSVMProtocol(CDProtocol):
         self.arch_seed = 0      # shared seed S generating the pre-images
         self.n_nodes = 1        # M, the network size
         self.gossip_entries = 2  # table entries carried per message
+        self.preimage = "uniform"  # see methods/bdsvm.py::_make_preimages
         self.inbox: list = []
         self.metrics: list = []
         self.comm_bytes = 0
@@ -102,7 +103,7 @@ class BDSVMProtocol(CDProtocol):
     def clone(self):
         c = BDSVMProtocol()
         for a in ("gossip_k", "P", "C", "lam", "gamma", "arch_seed", "n_nodes",
-                  "gossip_entries"):
+                  "gossip_entries", "preimage"):
             setattr(c, a, getattr(self, a))
         return c
 
@@ -122,7 +123,8 @@ class BDSVMProtocol(CDProtocol):
         # Architecture: every node regenerates the SAME P pre-images from the
         # shared seed, so the model architecture is common without any node
         # sending it (Algorithm 3, step 2).
-        p = _make_preimages(self.P, self.d, self.arch_seed)
+        p = _make_preimages(self.P, self.d, self.arch_seed,
+                            kind=self.preimage)
         self.p = p
         self.Kpp = np.zeros((self.P + 1, self.P + 1))
         self.Kpp[:self.P, :self.P] = _rbf(p, p, self.gamma)

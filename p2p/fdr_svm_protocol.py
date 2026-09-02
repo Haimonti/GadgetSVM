@@ -9,12 +9,12 @@ This method decentralises more cleanly than it federates. In the server version
 eps_k = eps_scale / sqrt(n_k) is derived from client sizes the server collects;
 here every node already knows its own n_i, so eps_i is computed locally at
 set-up and never communicated at all. The consensus machinery is inherited whole
-from protocols/admm_protocol.py — structurally identical to BDSVM, which is why
+from p2p/admm_protocol.py — structurally identical to BDSVM, which is why
 the two server implementations share a shape too.
 """
 import numpy as np
 
-from protocols.admm_protocol import ConsensusADMMProtocol
+from p2p.admm_protocol import ConsensusADMMProtocol
 
 
 class FDRSVMProtocol(ConsensusADMMProtocol):
