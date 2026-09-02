@@ -25,11 +25,12 @@ import benchmark as data_lib
 
 from src.network_layer.peersim_python.core import Network, GeneralNode, CommonState
 from src.network_layer.peersim_python.idle_protocol import IdleProtocol
-from src.network_layer.peersim_python.cdsim import CDSimulator
+from src.network_layer.peersim_python.cdsim import CDSimulator, CDState
 from src.network_layer.peersim_python.dynamics import (
     WireKOut, WireRing, WireFull, WireStar, WireMesh,
 )
 from src.network_layer.peersim_python.observers import DataInitializer
+from src.network_layer.peersim_python.core import Control
 from src.network_layer.peersim_python.logger import logger
 
 from p2p import PROTOCOLS
@@ -58,6 +59,30 @@ def to_pm1(y):
     if len(vals) == 2:
         return np.where(y == vals.max(), 1.0, -1.0).astype(np.float32)
     return np.sign(y).astype(np.float32)
+
+
+class AccuracyObserver(Control):
+    """control.* — evaluate every node every `every` cycles.
+
+    Accuracy is otherwise only known at the end of a run, which is enough for a
+    results table but not for a convergence curve. Evaluating costs a full pass
+    over the test set per node, so `every` trades curve resolution against run
+    time; the value is written into each node's latest metrics row, and left
+    absent on cycles that were skipped.
+    """
+
+    def __init__(self, pid, every=1):
+        self.pid = pid
+        self.every = max(int(every), 1)
+
+    def execute(self):
+        if CDState.getCycle() % self.every:
+            return False
+        for i in range(Network.size()):
+            p = Network.get(i).getProtocol(self.pid)
+            if getattr(p, "data_ready", False) and p.metrics:
+                p.metrics[-1]["test_acc"] = p.accuracy()
+        return False
 
 
 def overlay_components(n_nodes):
@@ -165,6 +190,10 @@ def main():
                     help="bdsvm only: table entries carried per message")
     ap.add_argument("--budget", type=int, default=200,
                     help="bdsvm only: samples kept per cycle")
+    ap.add_argument("--history", default=None,
+                    help="write the full per-node per-cycle metrics to this CSV")
+    ap.add_argument("--eval-every", type=int, default=1,
+                    help="cycles between accuracy evaluations (1 = every cycle)")
     ap.add_argument("--csv", default=None,
                     help="append one row per node to this CSV")
     ap.add_argument("--tag", default="",
@@ -212,7 +241,7 @@ def main():
             # t0_fraction is part of SDCAProtocol's signature; FedAvg ignores it.
             DataInitializer(ALGO_PID, shards, args.lambda_reg, 0.5, args.gossip_k),
         ],
-        controls=[],
+        controls=[AccuracyObserver(ALGO_PID, args.eval_every)],
         activation="shuffle",
     )
     logger.info("main", f"method={args.method}, topology={args.topology}, k={args.gossip_k}, "
@@ -247,6 +276,32 @@ def main():
     print(f"consensus error    {consensus:.6f}   (mean ||w_i - mean(w)||)")
     print(f"overlay components {n_comp}" + ("   <-- DISCONNECTED" if n_comp > 1 else ""))
     print(f"total sent         {total_mb:.2f} MB over {args.cycles} cycles")
+
+    if args.history:
+        hpath = Path(args.history)
+        hpath.parent.mkdir(parents=True, exist_ok=True)
+        with open(hpath, "w", newline="") as fh:
+            w = csv.DictWriter(fh, fieldnames=[
+                "tag", "method", "topology", "scheme", "nodes", "gossip_k",
+                "components", "node", "round", "test_acc", "hinge_loss",
+                "primal", "duality_gap", "comm_bytes", "wall_time",
+            ])
+            w.writeheader()
+            for i, p_ in enumerate(protos):
+                for m in p_.metrics:
+                    w.writerow(dict(
+                        tag=args.tag, method=args.method, topology=args.topology,
+                        scheme=args.scheme, nodes=args.nodes,
+                        gossip_k=args.gossip_k, components=n_comp, node=i,
+                        round=m.get("round"),
+                        test_acc=m.get("test_acc", float("nan")),
+                        hinge_loss=m.get("hinge_loss", float("nan")),
+                        primal=m.get("primal", float("nan")),
+                        duality_gap=m.get("duality_gap", float("nan")),
+                        comm_bytes=m.get("comm_bytes"),
+                        wall_time=round(m.get("wall_time", 0.0), 3),
+                    ))
+        print(f"history written to  {hpath}")
 
     if args.csv:
         path = Path(args.csv)
