@@ -193,15 +193,13 @@ class BDSVMProtocol(CDProtocol):
         deg = link.degree()
         if deg == 0:
             return
-        # Distinct neighbours — see the note in protocols/fedavg_protocol.py.
-        n_push = min(self.gossip_k, deg)
-        # Split into n_push+1 equal shares, keep one, send the rest. Nothing is
-        # created or lost, which is the whole point of push-sum.
-        order = list(range(deg))
-        for i in range(n_push):
-            j = i + CommonState.r.randrange(deg - i)   # partial Fisher-Yates
-            order[i], order[j] = order[j], order[i]
-            peer = link.getNeighbor(order[i])
+
+        # Sample with replacement, matching SDCAProtocol exactly: a peer can
+        # be drawn twice in one cycle and receive the same message twice. Kept
+        # identical to Sreekar's layer so every protocol in the study gossips
+        # the same way.
+        for _ in range(min(self.gossip_k, deg)):
+            peer = link.getNeighbor(CommonState.r.randint(0, deg - 1))
             entries = self._entries_to_send()
             peer.getProtocol(pid).inbox.append(entries)
             for _, C_m, d_m in entries:

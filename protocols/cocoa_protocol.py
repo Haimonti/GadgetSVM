@@ -207,19 +207,13 @@ class CoCoAProtocol(CDProtocol):
         deg = link.degree()
         if deg == 0:
             return
-        # Distinct neighbours, i.e. sampling WITHOUT replacement. SDCAProtocol
-        # draws with replacement, so the same peer can receive the identical
-        # message twice in one cycle -- wasted bandwidth under any aggregation
-        # rule, and a double-counted increment under an additive one. Measured:
-        # this does NOT by itself fix CoCoA+ on sparse graphs (see the gamma
-        # note in CoCoAPlusProtocol); it is simply the correct thing to send.
-        # It does differ from SDCAProtocol, so Sreekar should be told.
-        n_push = min(self.gossip_k, deg)
-        order = list(range(deg))
-        for i in range(n_push):
-            j = i + CommonState.r.randrange(deg - i)   # partial Fisher-Yates
-            order[i], order[j] = order[j], order[i]
-            peer = link.getNeighbor(order[i])
+
+        # Sample with replacement, matching SDCAProtocol exactly: a peer can
+        # be drawn twice in one cycle and receive the same message twice. Kept
+        # identical to Sreekar's layer so every protocol in the study gossips
+        # the same way.
+        for _ in range(min(self.gossip_k, deg)):
+            peer = link.getNeighbor(CommonState.r.randint(0, deg - 1))
             peer.getProtocol(pid).inbox.append(self.delta_w.copy())
             self.comm_bytes += self.d * 4  # one float32 increment sent
 
