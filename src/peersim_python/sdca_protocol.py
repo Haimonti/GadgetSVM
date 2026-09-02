@@ -1,38 +1,38 @@
-"""Gossip-SDCA as a PeerSim CDProtocol.
+"""Gossip-SDCA as a tenant of the generic GossipProtocol.
 
-Each node owns a data shard and runs, per cycle:
-  1. drain its inbox and merge received models (age-weighted, per-node,
-     order-independent → asynchronous aggregation),
-  2. one local SDCA training epoch over its shard (closed-form dual coordinate
-     ascent — identical math to `src/model.py`),
-  3. push its current primal weight to a random neighbour's inbox (gossip).
-
-Weights (the primal vector w) are what travels between nodes; the dual variables
-alpha stay local. This mirrors `own_network/` (SDCA model + GossipAggregator)
-but as a pure-Python PeerSim protocol with no p2pfl/Lightning dependency.
+The SDCA learner supplies only what is SDCA-specific — its state (the primal
+weight w), its local training step (one closed-form dual coordinate-ascent
+epoch), and its metrics — while the inbox, the send, and the aggregation are
+inherited from `GossipProtocol`. It uses CoCoA-style communication: it gossips
+the per-round INCREMENT delta-w (not the absolute weight) and the
+`IncrementAggregator` ADDS neighbours' increments onto w. Because increments
+shrink to zero at convergence, this preserves SDCA's primal-dual invariant
+(unlike averaging absolute weights, which diverges). The dual variables alpha
+stay local; only delta-w travels between nodes.
 """
 
 import time
 
 import numpy as np
-from src.peersim_python.cdsim import CDProtocol
-from src.peersim_python.core import CommonState
+
+from src.peersim_python.gossip_protocol import GossipProtocol
+from src.peersim_python.aggregator import IncrementAggregator
 
 
-
-class SDCAProtocol(CDProtocol):
-    LINKABLE_PID = 0  # protocol id of the IdleProtocol holding neighbours
+class SDCAProtocol(GossipProtocol):
+    """Gossip-SDCA SVM learner — a GossipProtocol tenant (payload = weight w)."""
 
     def __init__(self):
         # State is empty on the prototype; a DataInitializer fills each node's
         # shard after the network is cloned (PeerSim NodeInitializer pattern).
+        # CoCoA-style: gossip the per-round increment delta-w and ADD neighbours'
+        # increments (IncrementAggregator) instead of averaging absolute weights.
+        super().__init__(gossip_k=1, aggregator=IncrementAggregator())
         self.data_ready = False
-        self.gossip_k = 1
-        self.inbox: list = []       # received (w, age) pairs — the async mailbox
         self.metrics: list = []
-        self.comm_bytes = 0
         self.start = None
         self.sgd_init_done = False  # Stage-1 SGD warm start run yet?
+        self.last_delta = None      # this node's weight change from its last epoch
 
     def clone(self):
         # Fresh, empty protocol per node — never deep-copy the (large) shard.
@@ -55,35 +55,40 @@ class SDCAProtocol(CDProtocol):
         self.w_avg = np.zeros(self.d, dtype=np.float32)
         self.avg_cnt = 0
         self.step = 0
-        self.age = self.n          # model age t starts at local sample count
         self.start = time.time()
         self.data_ready = True
 
-    # ---- one cycle ----------------------------------------------------------
-    def nextCycle(self, node, pid):
-        if not self.data_ready:
-            return
-        self._merge_inbox()        # 1. asynchronous receive + aggregate
-        self._local_epoch()        # 2. local SDCA training
-        self._gossip_push(node, pid)  # 3. send to random neighbour(s)
-        self._record()             # 4. log per-round metrics
+    # ---- GossipProtocol hooks (the only SDCA-specific communication glue) ---
+    def ready(self):
+        return self.data_ready
 
-    # ---- (1) age-weighted merge — GossipAggregator Algorithm 2 --------------
-    def _merge_inbox(self):
-        if not self.inbox:
-            return
-        # Plain (equal-weight) averaging: the node's own weight plus each peer's
-        # weight, all counted equally. Age is ignored, so it no longer grows
-        # unboundedly (which previously overflowed to inf -> NaN).
-        accum = self.w.astype(np.float64)
-        count = 1
-        for peer_w, _peer_age in self.inbox:
-            accum += peer_w.astype(np.float64)
-            count += 1
-        self.w = (accum / count).astype(np.float32)
-        self.inbox = []
+    def current_state(self):
+        return self.w                       # the aggregator folds increments into w
 
-    # ---- (2) local SDCA epoch (sparse, closed-form) -------------------------
+    def outgoing_payload(self):
+        # Gossip the per-round INCREMENT delta-w (what this node's local epoch
+        # changed), not the absolute weight. Zero before the first epoch.
+        if self.last_delta is None:
+            return np.zeros(self.d, dtype=np.float32)
+        return self.last_delta
+
+    def set_state(self, merged):
+        self.w = merged                     # adopt weight after folding in neighbours
+
+    def local_update(self):
+        # Track the weight change from this node's own local SDCA epoch — that
+        # increment (delta-w) is what gets gossiped and additively aggregated.
+        w_before = self.w.copy()
+        self._local_epoch()
+        self.last_delta = self.w - w_before
+
+    def record(self):
+        self._record()
+
+    def payload_nbytes(self):
+        return self.d * 4                   # one float32 weight vector
+
+    # ---- local SDCA epoch (sparse, closed-form) -----------------------------
     def _local_epoch(self):
         X, y, w, alpha = self.X, self.y, self.w, self.alpha
         indptr, indices, data = X.indptr, X.indices, X.data
@@ -107,18 +112,7 @@ class SDCAProtocol(CDProtocol):
                 self.w_avg += w
                 self.avg_cnt += 1
 
-    # ---- (3) gossip push through the Linkable interface ---------------------
-    def _gossip_push(self, node, pid):
-        link = node.getProtocol(self.LINKABLE_PID)
-        deg = link.degree()
-        if deg == 0:
-            return
-        for _ in range(min(self.gossip_k, deg)):
-            peer = link.getNeighbor(CommonState.r.randint(0, deg - 1))
-            peer.getProtocol(pid).inbox.append((self.w.copy(), self.age))
-            self.comm_bytes += self.d * 4  # one float32 weight vector sent
-
-    # ---- (4) per-round metrics (primal/dual/gap on the local shard) ---------
+    # ---- per-round metrics (primal/dual/gap on the local shard) -------------
     def _record(self):
         w_np = (self.w_avg / self.avg_cnt) if self.avg_cnt > 0 else self.w
         scores = self.X.dot(w_np)

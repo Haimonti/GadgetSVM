@@ -25,6 +25,6 @@ CONFIG = {
     "TEST_FRACTION": 0.2,
     "NUM_WORKERS": 10,
     "SGD_INIT": True,
-    "GOSSIP_K": 4,
+    "GOSSIP_K": 3,
     "ROUNDS": 5000,
 }
