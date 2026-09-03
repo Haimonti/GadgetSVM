@@ -19,7 +19,7 @@ from src.peersim_python.sdca_protocol import SDCAProtocol
 from src.peersim_python.dynamics import (
     WireKOut, WireRing, WireFull, WireStar, WireMesh,
 )
-from src.peersim_python.observers import DataInitializer, ConvergenceObserver
+from src.peersim_python.observers import DataInitializer, GlobalEvaluator
 from src.peersim_python.cdsim import CDSimulator
 from src.peersim_python.logger import logger
 
@@ -68,12 +68,18 @@ class Simulation:
         initializers = [
             self._topology(cfg["TOPOLOGY"]),
             DataInitializer(
-                self.SDCA_PID, self.worker_data, cfg["LAMBDA"], cfg["T0_FRACTION"],
-                cfg["GOSSIP_K"], sgd_init=cfg.get("SGD_INIT", False),
+                self.SDCA_PID, self.worker_data, cfg["LAMBDA"], cfg["GOSSIP_K"],
+                warm_start=cfg.get("WARM_START", False),
+                local_steps=cfg.get("SDCA_LOCAL_STEPS"),
+                step_scale=cfg.get("SDCA_STEP_SCALE"),
             ),
         ]
-        # control.* — convergence-threshold stop
-        controls = [ConvergenceObserver(self.SDCA_PID, cfg["GAP_THRESHOLD"])]
+        # control.* — global measurement (stopping early is opt-in)
+        controls = [GlobalEvaluator(
+            self.SDCA_PID, cfg["GAP_THRESHOLD"],
+            eval_every=cfg.get("EVAL_EVERY", 1),
+            stop_on_threshold=cfg.get("STOP_ON_THRESHOLD", False),
+        )]
 
         self.sim = CDSimulator(
             cycles=0,  # set in run()
@@ -90,6 +96,9 @@ class Simulation:
         if self.sim is None:
             self.build()
         self.sim.cycles = cycles
+        for control in self.sim.controls:
+            if isinstance(control, GlobalEvaluator):
+                control.total_cycles = cycles
         logger.info(
             "main",
             f"Training — topology={cfg['TOPOLOGY']}, k={cfg['GOSSIP_K']}, "

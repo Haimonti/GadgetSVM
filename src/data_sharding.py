@@ -31,19 +31,26 @@ def _to_pm1(y):
 
 
 def _partition(X_train, y_train, X_test, y_test, n_workers):
-    """Partition train across workers and split test equally across workers."""
+    """Shard the training data; give every worker the SAME evaluation set.
+
+    Training data is private and must be disjoint — that is the point of the
+    setup. Test data is not: splitting it too made each worker's accuracy a
+    measurement of a different quantity, so the spread between workers mixed
+    "the models disagree" with "they were graded on different papers", and the
+    mean was not any model's accuracy on the full test set.
+    """
     tr = np.array_split(np.arange(X_train.shape[0]), n_workers)
-    te = np.array_split(np.arange(X_test.shape[0]), n_workers)
+    X_test = X_test.tocsr()
     data = []
     for i in range(n_workers):
         data.append({
             "X_csr":   X_train[tr[i]].tocsr(),
             "y":       y_train[tr[i]],
-            "X_test":  X_test[te[i]].tocsr(),
-            "y_test":  y_test[te[i]],
+            "X_test":  X_test,
+            "y_test":  y_test,
             "n_local": len(tr[i]),
         })
-        logger.info("data", f"Worker {i}: {len(tr[i])} train, {len(te[i])} test")
+        logger.info("data", f"Worker {i}: {len(tr[i])} train, {len(y_test)} test")
     return data
 
 

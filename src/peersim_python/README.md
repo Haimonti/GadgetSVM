@@ -38,13 +38,13 @@ substrate and the SDCA tenant sit at the package root.
 | File | Use case |
 |------|----------|
 | `simulation.py` | **`Simulation`** — the orchestrator. Seeds RNG, builds the network, wires topology, assigns shards, sets up observers, and drives `CDSimulator`. Public API: `Simulation(config, worker_data).run(cycles)`. |
-| `gossip_protocol.py` | **`GossipProtocol`** — the reusable, learner-agnostic gossip loop: inbox + send (via `Linkable`) + merge (via an `Aggregator`). A tenant supplies `get_payload`/`set_payload`/`local_update`/`record`/`payload_nbytes`. |
-| `aggregator.py` | `Aggregator` interface + `PlainAverageAggregator` (equal-weight mean). Swappable merge rule. |
-| `sdca_protocol.py` | `SDCAProtocol(GossipProtocol)` — the learner tenant. Payload = primal weight `w`; local step = one closed-form SDCA epoch; `alpha` stays local. Includes `sgd_init()` warm start. |
+| `gossip_protocol.py` | **`GossipProtocol`** — the reusable, learner-agnostic gossip loop: inbox + send (via `Linkable`) + merge (via an `Aggregator`). A tenant supplies `current_state`/`set_state`/`outgoing_payload`/`local_update`/`payload_nbytes`; neighbours are drawn without replacement. |
+| `aggregator.py` | `Aggregator` interface + `PlainAverageAggregator`, `IncrementAggregator`, and `VersionedContributionAggregator` — the last is the only one that keeps SDCA's primal and dual describing the same model. |
+| `sdca_protocol.py` | `SDCAProtocol(GossipProtocol)` — the learner tenant. Each node owns a disjoint block of the global dual and publishes a versioned contribution `X_k.T @ alpha_k / (lambda * n_global)`; `w` is the sum of the contributions it knows, rebuilt after each merge rather than accumulated. Includes `warm_start()`. |
 | `idle_protocol.py` | `IdleProtocol` — the reference `Linkable`: stores a node's neighbour list (protocol id 0). |
 | `graph.py` | `OverlayGraph` + `wireKOut` (PeerSim's exact k-random-out wiring). |
 | `dynamics.py` | Topology-wiring controls: `WireKOut` (`random_kout`), `WireRing`, `WireFull`, `WireStar`, `WireMesh`. |
-| `observers.py` | `DataInitializer` (hands each node its shard) + `ConvergenceObserver` (stops when every node's gap < threshold). |
+| `observers.py` | `DataInitializer` (shard + global constants) + `GlobalEvaluator` — the single place the *global* duality gap is measured. Early stopping is opt-in (`STOP_ON_THRESHOLD`), off by default so a run completes its full budget. |
 | `logger.py` | Tiny p2pfl-free stdout logger. |
 | `__init__.py` | Package docstring / design contract. |
 

@@ -57,9 +57,14 @@ class GossipProtocol(CDProtocol):
         if deg == 0:
             return
         payload = self.outgoing_payload()
-        for _ in range(min(self.gossip_k, deg)):
-            peer = link.getNeighbor(CommonState.r.randint(0, deg - 1))
-            peer.getProtocol(pid).inbox.append(payload.copy())
+        # Draw neighbours WITHOUT replacement. Drawing with replacement let one
+        # peer be picked twice in a cycle, so it received the same payload twice
+        # — harmless for an idempotent merge, but it double-charged the
+        # communication counter and, for an additive merge, applied the same
+        # update twice.
+        for peer_index in CommonState.r.sample(range(deg), min(self.gossip_k, deg)):
+            peer = link.getNeighbor(peer_index)
+            peer.getProtocol(pid).inbox.append(dict(payload))
             self.comm_bytes += self.payload_nbytes()
 
     # ---- hooks a concrete learner MUST implement ----------------------------
@@ -88,8 +93,12 @@ class GossipProtocol(CDProtocol):
         raise NotImplementedError
 
     def record(self):
-        """Append this cycle's metrics."""
-        raise NotImplementedError
+        """Append this cycle's metrics. No-op by default.
+
+        A learner whose metrics only mean something network-wide (a global
+        duality gap, say) leaves this alone and lets a Control measure it.
+        """
+        return None
 
     def payload_nbytes(self):
         """Bytes counted per gossip send (for comm-cost accounting)."""
