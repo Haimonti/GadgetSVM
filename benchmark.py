@@ -32,6 +32,21 @@ FILES = {
         "train": ("rcv1_train.binary.bz2", "rcv1_train.binary"),
         "test":  ("rcv1_test.binary.bz2",  "rcv1_test.binary"),
     },
+    # Three more binary LIBSVM sets, small enough to run the full comparison
+    # quickly and spread over the dimensionality range: a9a d=123, w8a d=300,
+    # ijcnn1 d=22. Each ships its own test split, unlike covtype.
+    "a9a": {
+        "train": ("a9a", "a9a"),
+        "test":  ("a9a.t", "a9a.t"),
+    },
+    "w8a": {
+        "train": ("w8a", "w8a"),
+        "test":  ("w8a.t", "w8a.t"),
+    },
+    "ijcnn1": {
+        "train": ("ijcnn1.tr.bz2", "ijcnn1.tr"),
+        "test":  ("ijcnn1.t.bz2",  "ijcnn1.t"),
+    },
     "covtype": {
         "train": ("covtype.libsvm.binary.scale.bz2", "covtype.libsvm.binary.scale"),
         "test":  ("covtype.libsvm.binary.scale.bz2", "covtype.libsvm.binary.scale"),
@@ -53,7 +68,10 @@ def _fetch(remote: str, data_dir: Path) -> Path:
     data_dir.mkdir(parents=True, exist_ok=True)
 
     archive = raw_dir / remote
-    target = data_dir / remote[: -len(".bz2")]
+    # Not every LIBSVM file is compressed — a9a and w8a are served as plain
+    # text, so only strip the suffix (and only decompress) when there is one.
+    compressed = remote.endswith(".bz2")
+    target = data_dir / (remote[: -len(".bz2")] if compressed else remote)
     # A zero-byte target means a previous extraction was interrupted: bz2 creates
     # the file before writing to it. Treat that as missing, not as done.
     if target.exists() and target.stat().st_size > 0:
@@ -65,10 +83,14 @@ def _fetch(remote: str, data_dir: Path) -> Path:
         print(f"[{remote}] downloading {url} ...")
         _download(url, archive)
 
-    print(f"[{remote}] extracting -> {target}", flush=True)
     tmp = target.with_suffix(target.suffix + ".part")
-    with bz2.open(archive, "rb") as f_in, open(tmp, "wb") as f_out:
-        shutil.copyfileobj(f_in, f_out)
+    if compressed:
+        print(f"[{remote}] extracting -> {target}", flush=True)
+        with bz2.open(archive, "rb") as f_in, open(tmp, "wb") as f_out:
+            shutil.copyfileobj(f_in, f_out)
+    else:
+        print(f"[{remote}] copying -> {target}", flush=True)
+        shutil.copyfile(archive, tmp)
     tmp.replace(target)          # atomic: the target only ever appears complete
     return target
 

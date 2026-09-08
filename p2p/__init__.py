@@ -27,6 +27,11 @@ from p2p.bdsvm_protocol import BDSVMProtocol
 from p2p.fdr_svm_protocol import FDRSVMProtocol
 from p2p.fedssl_protocol import FedSSLAMCProtocol
 
+# Sreekar's gossip-SDCA, driven through the same runner for a like-for-like
+# comparison. Imported from the engine, never modified — its set_data signature
+# and metrics keys already match everything in this package.
+from src.network_layer.peersim_python.sdca_protocol import SDCAProtocol
+
 PROTOCOLS = {
     "fedavg_svm": FedAvgProtocol,
     "cocoa":      CoCoAProtocol,
@@ -34,4 +39,5 @@ PROTOCOLS = {
     "bdsvm":      BDSVMProtocol,
     "fdr_svm":    FDRSVMProtocol,
     "fedssl_amc": FedSSLAMCProtocol,
+    "sdca":       SDCAProtocol,
 }
