@@ -91,21 +91,19 @@ def run(cycles: int = None) -> None:
         plot_accuracy_vs_time(all_metrics, plots / f"accuracy_{suffix}.png",     x_key=x_key)
         plot_comm_cost_vs_time(all_metrics, plots / f"comm_cost_{suffix}.png",   x_key=x_key)
 
-    # Aggregated view: mean trajectory ± 1 std across workers (per cycle), so the
-    # swarm's average convergence is shown against how far individual workers
-    # spread around it.
-    plot_std_band(all_metrics, plots / "duality_gap_std_band.png",
-                  "duality_gap", "Duality Gap — Mean ±1σ Across Workers",
-                  "Duality gap", log_y=True)
-    plot_std_band(all_metrics, plots / "loss_std_band.png",
-                  "hinge_loss", "Hinge Loss — Mean ±1σ Across Workers",
-                  "Hinge loss", log_y=True)
-    plot_std_band(all_metrics, plots / "accuracy_std_band.png",
-                  "accuracy", "Test Accuracy — Mean ±1σ Across Workers",
-                  "Test accuracy", log_y=False)
-    plot_std_band(all_metrics, plots / "comm_cost_std_band.png",
-                  "comm_bytes", "Communication Cost — Mean ±1σ Across Workers",
-                  "Cumulative bytes sent", log_y=False)
+    # Aggregated view: mean trajectory ± 1 std across workers, drawn against BOTH
+    # iterations and wall-clock time (one std-band plot per metric per axis).
+    std_band_specs = [
+        ("duality_gap", "duality_gap_std_band", "Duality Gap",        "Duality gap",           True),
+        ("hinge_loss",  "loss_std_band",        "Hinge Loss",         "Hinge loss",            True),
+        ("accuracy",    "accuracy_std_band",    "Test Accuracy",      "Test accuracy",         False),
+        ("comm_bytes",  "comm_cost_std_band",   "Communication Cost", "Cumulative bytes sent", False),
+    ]
+    for x_key, suffix in (("round", "vs_iterations"), ("wall_time", "vs_time")):
+        for y_key, base, name, ylabel, log_y in std_band_specs:
+            plot_std_band(all_metrics, plots / f"{base}_{suffix}.png",
+                          y_key, f"{name} — Mean ±1σ Across Workers",
+                          ylabel, log_y=log_y, x_key=x_key)
     logger.info("main", f"Plots saved → {plots}")
 
     # Communication cost — computed and saved once the run has stopped. Each
