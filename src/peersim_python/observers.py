@@ -41,25 +41,76 @@ class DataInitializer(Control):
         self.step_scale = step_scale
 
     def execute(self):
-        n_global = sum(int(wd["n_local"]) for wd in self.worker_data)
-        n_workers = len(self.worker_data)
-        for i, wd in enumerate(self.worker_data):
-            proto = Network.get(i).getProtocol(self.pid)
-            proto.gossip_k = self.gossip_k
-            proto.set_data(
-                wd["X_csr"], wd["y"], wd["X_test"], wd["y_test"], self.lambda_reg,
-            )
-            proto.configure_network(
-                i, n_global, n_workers, self.local_steps, self.step_scale
-            )
-            if self.warm_start:
-                proto.warm_start()
-            logger.info(
-                "init",
-                f"Node {i} loaded — {wd['n_local']} local samples"
-                + ("  (+warm start)" if self.warm_start else ""),
-            )
-        return False
+        protos = [
+            Network.get(i).getProtocol(self.pid) for i in range(Network.size())
+        ]
+        if not protos:
+            return False
+
+        cycle = CDState.getCycle()
+        is_last = self.total_cycles is not None and cycle >= self.total_cycles - 1
+        if cycle % self.eval_every and not is_last:
+            return False
+
+        n_global = sum(p.n for p in protos)
+        if n_global == 0:
+            return False
+
+        X_all, y_all = self._stacked_training_set(protos)
+        W = np.stack([p.w for p in protos])                  # (K, d)
+        # One sparse-dense product for the whole swarm, not K*K spmv.
+        margins = 1.0 - y_all[:, None] * X_all.dot(W.T)      # (N, K)
+        hinges = np.maximum(0.0, margins).mean(axis=0)       # (K,)
+
+        mean_w = W.mean(axis=0)
+        gaps, consensus_errors = [], []
+        for p, hinge in zip(protos, hinges):
+            reg = float((p.lambda_reg / 2.0) * np.dot(p.w, p.w))
+            primal = float(hinge) + reg
+            # Only origins this peer has actually heard from contribute dual
+            # mass, so a partly-informed peer reports a larger gap, never a
+            # smaller one.
+            alpha_sum = sum(entry[2] for entry in p.contributions.values())
+            dual = float(alpha_sum / n_global - reg)
+            gap = primal - dual
+            preds = np.where(p.X_test.dot(p.w) >= 0.0, 1.0, -1.0)
+            consensus_error = float(np.linalg.norm(p.w - mean_w))
+            is_complete = len(p.contributions) == len(protos)
+            # Per-node early stop (latching): a node stops once its gap is below
+            # threshold AND it has heard from every origin. A stopped node stops
+            # training and gossiping, so its communication cost freezes here.
+            if (self.stop_on_threshold and not p.stopped
+                    and is_complete and gap < self.gap_threshold):
+                p.stopped = True
+                p.stop_cycle = cycle
+            p.metrics.append({
+                "round": cycle + 1,
+                "primal": primal,
+                "dual": dual,
+                "duality_gap": gap,
+                "hinge_loss": float(hinge),
+                "accuracy": float(np.mean(preds == p.y_test)),
+                "consensus_error": consensus_error,
+                "known_origins": len(p.contributions),
+                "stopped": bool(p.stopped),
+                "wall_time": time.time() - p.start,
+                "comm_bytes": p.comm_bytes,
+            })
+            gaps.append(gap)
+            consensus_errors.append(consensus_error)
+
+        n_stopped = sum(1 for p in protos if p.stopped)
+        logger.info(
+            "observer",
+            f"cycle={cycle}  mean_gap={np.mean(gaps):.3e}  "
+            f"max_gap={np.max(gaps):.3e}  "
+            f"max_consensus={np.max(consensus_errors):.3e}  "
+            f"stopped={n_stopped}/{len(protos)}",
+        )
+        if not self.stop_on_threshold:
+            return False
+        # End the whole experiment once every node has stopped (converged).
+        return all(p.stopped for p in protos)
 
 
 class GlobalEvaluator(Control):

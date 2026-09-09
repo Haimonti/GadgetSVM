@@ -35,6 +35,7 @@ from src.evaluation.visualizer import (
 from src.peersim_python.core import Network
 from src.peersim_python.simulation import Simulation
 from src.peersim_python.logger import logger
+import json
 
 
 def _next_run_dir() -> Path:
@@ -102,7 +103,35 @@ def run(cycles: int = None) -> None:
     plot_std_band(all_metrics, plots / "accuracy_std_band.png",
                   "accuracy", "Test Accuracy — Mean ±1σ Across Workers",
                   "Test accuracy", log_y=False)
+    plot_std_band(all_metrics, plots / "comm_cost_std_band.png",
+                  "comm_bytes", "Communication Cost — Mean ±1σ Across Workers",
+                  "Cumulative bytes sent", log_y=False)
     logger.info("main", f"Plots saved → {plots}")
+
+    # Communication cost — computed and saved once the run has stopped. Each
+    # node's comm_bytes freezes when it converges and goes silent, so these are
+    # the final per-node totals.
+    final_comm = [p.comm_bytes for p in protos]
+    stop_cycles = [getattr(p, "stop_cycle", None) for p in protos]
+    total_comm = sum(final_comm)
+    mean_comm = total_comm / len(final_comm)
+    std_comm = (sum((c - mean_comm) ** 2 for c in final_comm) / len(final_comm)) ** 0.5
+    logger.info("comm", f"Total communication cost = {total_comm:,} bytes "
+                        f"({total_comm / 1e6:.2f} MB) over {len(final_comm)} nodes")
+    logger.info("comm", f"Per-node comm cost: mean={mean_comm / 1e3:.1f} KB, "
+                        f"std={std_comm / 1e3:.1f} KB")
+    logger.info("comm", f"Node stop cycles: {stop_cycles}")
+    comm_summary = {
+        "total_comm_bytes": total_comm,
+        "mean_comm_bytes_per_node": mean_comm,
+        "std_comm_bytes_per_node": std_comm,
+        "num_nodes": len(final_comm),
+        "per_node_comm_bytes": final_comm,
+        "per_node_stop_cycle": stop_cycles,
+    }
+    (results_dir / "comm_cost_summary.json").write_text(json.dumps(comm_summary, indent=2))
+    logger.info("comm", f"Communication-cost summary → "
+                        f"{results_dir / 'comm_cost_summary.json'}")
 
     print_summary([_MetricsView(m) for m in all_metrics], logger=logger)
     logger.info("main", f"Average accuracy: {avg_acc:.4f}")

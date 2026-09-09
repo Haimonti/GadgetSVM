@@ -34,10 +34,13 @@ class GossipProtocol(CDProtocol):
         self.aggregator = aggregator or PlainAverageAggregator()
         self.inbox: list = []   # received payloads — the async mailbox
         self.comm_bytes = 0
+        self.stopped = False    # set True by the observer once this node has
+                                # converged; a stopped node goes silent — no
+                                # training and no sending — so its comm cost freezes
 
     # ---- the per-cycle gossip loop (fixed; shared by every tenant) ----------
     def nextCycle(self, node, pid):
-        if not self.ready():
+        if not self.ready() or self.stopped:
             return
         self._drain_and_merge()   # 1. receive + fold neighbours' payloads in
         self.local_update()       # 2. local training step (may set the increment)
@@ -57,14 +60,16 @@ class GossipProtocol(CDProtocol):
         if deg == 0:
             return
         payload = self.outgoing_payload()
-        # Draw neighbours WITHOUT replacement. Drawing with replacement let one
-        # peer be picked twice in a cycle, so it received the same payload twice
-        # — harmless for an idempotent merge, but it double-charged the
-        # communication counter and, for an additive merge, applied the same
-        # update twice.
+        # Draw neighbours WITHOUT replacement (drawing with replacement let one
+        # peer be picked twice in a cycle, double-charging comm and, for an
+        # additive merge, applying the same update twice). Skip any neighbour that
+        # has already converged and gone silent, so no cost is charged for
+        # sending to a stopped node.
         for peer_index in CommonState.r.sample(range(deg), min(self.gossip_k, deg)):
-            peer = link.getNeighbor(peer_index)
-            peer.getProtocol(pid).inbox.append(dict(payload))
+            peer_proto = link.getNeighbor(peer_index).getProtocol(pid)
+            if peer_proto.stopped:
+                continue
+            peer_proto.inbox.append(dict(payload))
             self.comm_bytes += self.payload_nbytes()
 
     # ---- hooks a concrete learner MUST implement ----------------------------

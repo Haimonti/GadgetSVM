@@ -32,7 +32,7 @@ CONFIG = {
     # its full cycle budget. Halting the moment the gap first dips below a
     # threshold would show only that it touched that value once.
     "GAP_THRESHOLD": 1e-4,
-    "STOP_ON_THRESHOLD": False,
+    "STOP_ON_THRESHOLD": True,     # per-node early stop; end the run once all stop
     "EVAL_EVERY": 10,              # cycles between global evaluations
     "ACTIVATION": "shuffle",
     "DATASET": "covtype",
