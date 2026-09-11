@@ -1,0 +1,216 @@
+% ===========================================================================
+% P2P-BDSVM — paste into the shared Overleaf document.
+%
+% Insertion point: after the \end{algorithm} of Sreekar's
+% \subsection{P2P-SDCA Global Procedure}, and before \section{Conclusion}.
+%
+% Levelled as \subsection to sit alongside his SDCA subsections; nothing in his
+% part is modified. Notation: k is the worker index throughout this document, so
+% the kernel is written \kappa(.,.); \lambda is the SVM regulariser, so BDSVM's
+% convex-combination weight is written \rho.
+%
+% Requires a bibliography entry for navia2022bdsvm — see paper/bdsvm_refs.bib
+% or the thebibliography block at the end of this file.
+% ===========================================================================
+
+\subsection{BDSVM: Architecture}
+
+Two symbols collide between the two methods, and we resolve them in favour of
+the notation already established above. First, $k$ denotes the worker index
+throughout, so we write the kernel function as $\kappa(\cdot,\cdot)$ rather than
+$k(\cdot,\cdot)$ as in~\cite{navia2022bdsvm}. Second, $\lambda$ denotes the SVM
+regularisation parameter above, whereas BDSVM uses it for the convex-combination
+weight in its model update; we write that weight as $\rho$. Elsewhere we follow
+\cite{navia2022bdsvm}: $P$ is the budget, $C$ the penalty appearing in the
+weighting rule, and $\eta$ the stopping threshold.
+
+Unlike SDCA, BDSVM fixes the model architecture \emph{a priori}. Every worker
+uses the same set of $P$ \emph{pre-image} vectors $\{\mathbf{p}_j\}_{j=1}^{P}$,
+$\mathbf{p}_j \in \mathbb{R}^d$, drawn from a shared pseudorandom seed $S$; the
+classifier is the semiparametric expansion
+\begin{equation}
+  f(\mathbf{x}) \;=\; \sum_{j=1}^{P} \beta_j\,\kappa(\mathbf{p}_j, \mathbf{x}) \;+\; b ,
+\end{equation}
+where $\kappa(\cdot,\cdot)$ is a Gaussian kernel. Because the $\mathbf{p}_j$ are
+generated rather than selected from the data, no training pattern ever forms
+part of the shipped model, and only the seed $S$ is transmitted at setup.
+
+Each worker $k$ holds a local kernel matrix
+$\ddot{\mathbf{K}}_k = [\mathbf{K}_k \,|\, \mathbf{1}] \in \mathbb{R}^{n_k \times (P+1)}$
+with $(\mathbf{K}_k)_{ij} = \kappa(\mathbf{x}^k_i, \mathbf{p}_j)$, computed once,
+and the pre-image kernel
+\begin{equation}
+  \ddot{\mathbf{K}}_p =
+  \begin{bmatrix} \mathbf{K}_p & \mathbf{0} \\ \mathbf{0}^{\!\top} & 0 \end{bmatrix},
+  \qquad (\mathbf{K}_p)_{uv} = \kappa(\mathbf{p}_u, \mathbf{p}_v),
+\end{equation}
+with parameters stacked as
+$\ddot{\boldsymbol{\beta}} = [\boldsymbol{\beta}^{\!\top}, b]^{\!\top} \in \mathbb{R}^{P+1}$.
+In contrast to P2P-SDCA, what is gossiped is neither a primal weight vector nor
+a dual vector, but a pair of \emph{sufficient statistics}
+$(\mathbf{C}_k, \mathbf{d}_k)$ defined in~\eqref{eq:bdsvm-stats} below.
+
+\subsection{BDSVM: Core Functions}
+
+BDSVM solves the budgeted SVM by Iteratively Re-Weighted Least Squares. For a
+current $\ddot{\boldsymbol{\beta}}$, worker $k$ computes residuals and weights
+\begin{align}
+  \mathbf{e}_k &= \mathbf{y}^k - \ddot{\mathbf{K}}_k \ddot{\boldsymbol{\beta}}, \\
+  a^k_i &=
+  \begin{cases}
+    0, & e^k_i y^k_i < 0,\\[2pt]
+    \dfrac{2C}{e^k_i y^k_i}, & e^k_i y^k_i \geq 0,
+  \end{cases}
+  \qquad \mathbf{D}^k_a = \mathrm{diag}\{a^k_i\},
+\end{align}
+and from these the two quantities it will communicate:
+\begin{equation}
+  \mathbf{C}_k = \ddot{\mathbf{K}}_k^{\!\top} \mathbf{D}^k_a \ddot{\mathbf{K}}_k
+  \;\in\; \mathbb{R}^{(P+1)\times(P+1)},
+  \qquad
+  \mathbf{d}_k = \ddot{\mathbf{K}}_k^{\!\top} \mathbf{D}^k_a \mathbf{y}^k
+  \;\in\; \mathbb{R}^{P+1}.
+  \label{eq:bdsvm-stats}
+\end{equation}
+
+The centralised weighted least-squares problem is recovered exactly by summing
+these over all workers:
+\begin{equation}
+  \Bigl( \sum_{k=1}^{K} \mathbf{C}_k + \ddot{\mathbf{K}}_p \Bigr)
+  \ddot{\boldsymbol{\beta}} \;=\; \sum_{k=1}^{K} \mathbf{d}_k .
+  \label{eq:bdsvm-agg}
+\end{equation}
+This identity is what makes BDSVM insensitive to how the data is partitioned:
+\eqref{eq:bdsvm-agg} is algebraically equal to the centralised normal equations
+regardless of the partition, so there is no client-drift term to correct.
+Empirically we observe
+$\|\sum_k \mathbf{C}_k - \mathbf{C}_{\text{central}}\| / \|\mathbf{C}_{\text{central}}\|
+\approx 4.6\times 10^{-16}$ for IID, Dirichlet($\alpha{=}0.1$) and label-skewed
+partitions alike.
+
+\subsection{BDSVM: Decentralising the Aggregation}
+
+The federated form of~\eqref{eq:bdsvm-agg} requires a sum over \emph{all} $K$
+workers, which no single node in a P2P network can form. We therefore give each
+worker a \emph{contribution table}
+\begin{equation}
+  \mathcal{T}_k : \; \text{origin index} \;\longmapsto\; (\mathbf{C}_m, \mathbf{d}_m),
+\end{equation}
+holding the freshest statistics it has received from every origin it has heard
+of, and replace the global sum with a sum over the table. Two properties make
+this correct:
+
+\begin{enumerate}
+  \item \textbf{Idempotence.} Entries are keyed by origin, so re-receiving one
+        \emph{overwrites} rather than accumulates. A contribution reaching $k$
+        along several gossip paths is therefore counted exactly once. Summing on
+        arrival instead double-counts; in our experiments that variant left the
+        consensus error at $581$--$1820$ and accuracy $8$ points below the
+        federated baseline, against $17$--$27$ once keyed by origin.
+  \item \textbf{Staleness is self-correcting.} $\mathbf{C}_m$ is recomputed from
+        scratch each round from the current $\ddot{\boldsymbol{\beta}}_m$, so it
+        is a \emph{snapshot}, not an increment, and a newer copy legitimately
+        supersedes an older one. Increment-based methods such as CoCoA cannot
+        reuse this device, since overwriting would discard history.
+\end{enumerate}
+
+Once $\mathcal{T}_k$ covers every origin, the left-hand side of the local solve
+is \emph{exactly} $\sum_{k} \mathbf{C}_k$ and~\eqref{eq:bdsvm-agg} is recovered
+identically rather than asymptotically. This requires the overlay to be
+connected: contributions cannot cross a component boundary, and no number of
+rounds or bytes repairs a partitioned network.
+
+\subsection{P2P-BDSVM Global Procedure}
+
+\begin{algorithm}
+\caption{P2P-BDSVM at worker $k$ (one round)}
+\begin{algorithmic}[1]
+\STATE \textbf{Setup (once):} generate $\{\mathbf{p}_j\}_{j=1}^{P}$ from the
+       shared seed $S$; form $\ddot{\mathbf{K}}_p$ and $\ddot{\mathbf{K}}_k$;
+       set $\ddot{\boldsymbol{\beta}}_k \leftarrow \mathbf{0}$,
+       $\mathcal{T}_k \leftarrow \varnothing$
+\STATE
+\STATE \textbf{(1) Merge.}
+\FOR{each received entry $(m, \mathbf{C}_m, \mathbf{d}_m)$ with $m \neq k$}
+  \STATE $\mathcal{T}_k[m] \leftarrow (\mathbf{C}_m, \mathbf{d}_m)$
+         \hfill \COMMENT{overwrite by origin, never accumulate}
+\ENDFOR
+\STATE
+\STATE \textbf{(2) Solve} using all entries currently in $\mathcal{T}_k$:
+\STATE \quad $\ddot{\boldsymbol{\beta}}_{\text{new}} \leftarrow
+       \Bigl( \sum_{m \in \mathcal{T}_k} \mathbf{C}_m + \ddot{\mathbf{K}}_p \Bigr)^{-1}
+       \sum_{m \in \mathcal{T}_k} \mathbf{d}_m$
+\STATE \quad $\ddot{\boldsymbol{\beta}}_k \leftarrow
+       \rho\, \ddot{\boldsymbol{\beta}}_k
+       + (1-\rho)\, \ddot{\boldsymbol{\beta}}_{\text{new}}$
+\STATE
+\STATE \textbf{(3) Refresh own contribution} against the updated model:
+\STATE \quad $\mathbf{e}_k \leftarrow
+       \mathbf{y}^k - \ddot{\mathbf{K}}_k \ddot{\boldsymbol{\beta}}_k$;\quad
+       $a^k_i \leftarrow 0$ if $e^k_i y^k_i < 0$, else $2C / (e^k_i y^k_i)$
+\STATE \quad $\mathcal{T}_k[k] \leftarrow
+       \bigl( \ddot{\mathbf{K}}_k^{\!\top} \mathbf{D}^k_a \ddot{\mathbf{K}}_k,\;
+              \ddot{\mathbf{K}}_k^{\!\top} \mathbf{D}^k_a \mathbf{y}^k \bigr)$
+\STATE
+\STATE \textbf{(4) Gossip.} Pick $\min(\gamma, |\mathcal{N}(k)|)$ neighbours; to
+       each, send $E$ entries of $\mathcal{T}_k$ --- worker $k$'s own, plus
+       $E-1$ others chosen at random
+\STATE
+\STATE \textbf{Stopping:} halt when
+       $\|\ddot{\boldsymbol{\beta}}^{(r)}_k - \ddot{\boldsymbol{\beta}}^{(r-1)}_k\|_2
+        / \|\ddot{\boldsymbol{\beta}}^{(r-1)}_k\|_2 < \eta$
+\end{algorithmic}
+\end{algorithm}
+
+Carrying $E-1$ entries beyond a worker's own (step 4) is what lets a
+contribution reach nodes that are not adjacent to its origin; with $E = 1$ the
+table would only ever cover the immediate neighbourhood.
+
+\subsection{Communication Cost: P2P-BDSVM versus P2P-SDCA}
+
+Per round and per pushed message, P2P-SDCA sends one primal weight vector,
+$d$ floats. P2P-BDSVM sends $E$ table entries, each one $(P+1)\times(P+1)$
+matrix plus one $(P+1)$ vector:
+\begin{align}
+  B_{\text{SDCA}}  &= d \cdot b, \\
+  B_{\text{BDSVM}} &= E\bigl[(P+1)^2 + (P+1)\bigr] \cdot b
+                    \;=\; E(P+1)(P+2)\cdot b ,
+\end{align}
+with $b$ bytes per float. Over $T$ rounds with $K$ workers each pushing to
+$\gamma$ neighbours, the total volume is $K\,\gamma\,T\,B$.
+
+The two scale along different axes: SDCA is linear in the data dimension $d$ and
+independent of $P$; BDSVM is \emph{quadratic in the budget} $P$ and independent
+of $d$. With $E=2$, $\gamma=2$, $K=10$, $b=8$ for BDSVM and $b=4$ for SDCA:
+
+\begin{center}
+\begin{tabular}{lrrr}
+\hline
+& P2P-SDCA & P2P-BDSVM & ratio \\
+\hline
+\multicolumn{4}{l}{\emph{per message}} \\
+\quad covtype ($d{=}54$, $P{=}100$)     & $0.21$ KB  & $161.0$ KB    & $763\times$ \\
+\quad rcv1 ($d{=}47{,}236$, $P{=}1000$) & $184.5$ KB & $15{,}672$ KB & $85\times$ \\
+\multicolumn{4}{l}{\emph{network total, $T = 100$}} \\
+\quad covtype                            & $0.43$ MB  & $329.7$ MB    & $763\times$ \\
+\quad rcv1                               & $377.9$ MB & $32{,}096$ MB & $85\times$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent The ratio is \emph{smaller} on rcv1 not because BDSVM is cheaper there
+but because SDCA is dearer: a single weight vector is $185$ KB at $d = 47{,}236$
+against $0.21$ KB at $d = 54$.
+
+The budget cannot simply be reduced to save bandwidth, because $P$ must scale
+with the intrinsic dimension of the problem. On rcv1, $P = 100$ leaves the model
+at chance level; accuracy reaches $0.774$ at $P = 400$, $0.857$ at $P = 1000$
+and $0.900$ at $P = 2000$, while the matrix grows
+$0.08 \to 1.29 \to 8.02 \to 32.0$ MB. BDSVM's communication advantage therefore
+disappears precisely where its accuracy begins to require a larger budget.
+
+We note that~\cite{navia2022bdsvm} argues the per-round cost is repaid by
+converging in fewer rounds. That argument compares against a multilayer
+perceptron trained with FedAvg; against a linear model it does not hold. Even
+with BDSVM converging by round $20$ where the primal methods need $60$ or more,
+a $763\times$ per-round factor is not recovered.

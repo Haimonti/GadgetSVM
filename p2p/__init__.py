@@ -21,23 +21,14 @@ Each local solver is verified numerically identical to its server original, so
 the only thing that differs between a run_benchmark.py result and a PeerSim
 result is the aggregation rule. That is the entire point of the port.
 """
-from p2p.fedavg_protocol import FedAvgProtocol
-from p2p.cocoa_protocol import CoCoAProtocol, CoCoAPlusProtocol
-from p2p.bdsvm_protocol import BDSVMProtocol
-from p2p.fdr_svm_protocol import FDRSVMProtocol
-from p2p.fedssl_protocol import FedSSLAMCProtocol
-
-# Sreekar's gossip-SDCA, driven through the same runner for a like-for-like
-# comparison. Imported from the engine, never modified — its set_data signature
-# and metrics keys already match everything in this package.
-from src.network_layer.peersim_python.sdca_protocol import SDCAProtocol
+# The gossip layer was refactored on branch `sreekar` (d72eebd): the flat
+# src/network_layer/peersim_python/ this package was written against is gone,
+# replaced by src/peersim_python/ with a GossipProtocol base class and pluggable
+# aggregators. BDSVM has been ported (p2p/bdsvm_gossip.py); the other five still
+# target the old layout and are kept out of the import path until they follow.
+# The stale engine is parked at .stale/peersim_old for reference.
+from p2p.bdsvm_gossip import BDSVMGossipProtocol
 
 PROTOCOLS = {
-    "fedavg_svm": FedAvgProtocol,
-    "cocoa":      CoCoAProtocol,
-    "cocoa_plus": CoCoAPlusProtocol,
-    "bdsvm":      BDSVMProtocol,
-    "fdr_svm":    FDRSVMProtocol,
-    "fedssl_amc": FedSSLAMCProtocol,
-    "sdca":       SDCAProtocol,
+    "bdsvm": BDSVMGossipProtocol,
 }
