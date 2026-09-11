@@ -36,7 +36,9 @@ CONFIG = {
     "EVAL_EVERY": 10,              # cycles between global evaluations
     "ACTIVATION": "shuffle",
     "DATASET": "covtype",
-    "COVTYPE_PATH": DATA_DIR / "covtype.libsvm.binary.scale",
+    "COVTYPE_PATH": DATA_DIR / "covtype.uci.binary.scale",
+    "GISETTE_PATH": DATA_DIR / "gisette.binary.scale",
+    "REALSIM_PATH": DATA_DIR / "real-sim",
     "TEST_FRACTION": 0.2,
     "NUM_WORKERS": 10,
     "WARM_START": True,

@@ -7,9 +7,11 @@ metrics and renders the plots. All engine/assembly logic lives behind
 `Simulation`; this file only owns data loading, the results directory, and
 plotting.
 
-    python src/peersim_run.py        # run for CONFIG["ROUNDS"] cycles (or until
-                                     # the duality-gap threshold is met)
-    python src/peersim_run.py 5      # override: run at most 5 cycles (quick test)
+    python src/peersim_run.py        # run the default dataset (CONFIG["DATASET"])
+    python src/peersim_run.py rcv    # rcv1
+    python src/peersim_run.py cov    # covtype
+    python src/peersim_run.py gis    # gisette   (downloaded + preprocessed on first use)
+    python src/peersim_run.py rsim   # real-sim  (downloaded + preprocessed on first use)
 
 Results land in results/peersim_run<N>_<mm-dd-yyyy>/ (separate from main.py's
 run<N>_ folders).
@@ -136,6 +138,36 @@ def run(cycles: int = None) -> None:
     logger.info("main", "Done.")
 
 
+DATASET_KEYWORDS = {
+    "rcv":  "rcv1",
+    "cov":  "covtype",
+    "gis":  "gisette",
+    "rsim": "real-sim",
+}
+
+
+def _select_dataset(keyword: str) -> None:
+    """Map a CLI keyword to CONFIG['DATASET']; build the file on demand if missing."""
+    name = DATASET_KEYWORDS.get(keyword.lower())
+    if name is None:
+        valid = " | ".join(DATASET_KEYWORDS)
+        raise SystemExit(f"Unknown dataset '{keyword}'. Choose one of: {valid}")
+    CONFIG["DATASET"] = name
+    logger.info("main", f"Dataset '{keyword}' -> {name}")
+    # covtype, gisette and real-sim are downloaded + preprocessed on first use
+    # (idempotent — the raw download is deleted once the LIBSVM file is built).
+    if name == "covtype" and not CONFIG["COVTYPE_PATH"].exists():
+        from data.extract_data import preprocess_covertype_uci
+        preprocess_covertype_uci()
+    elif name == "gisette" and not CONFIG["GISETTE_PATH"].exists():
+        from data.extract_data import preprocess_gisette
+        preprocess_gisette()
+    elif name == "real-sim" and not CONFIG["REALSIM_PATH"].exists():
+        from data.extract_data import preprocess_real_sim
+        preprocess_real_sim()
+
+
 if __name__ == "__main__":
-    cli_cycles = int(sys.argv[1]) if len(sys.argv) > 1 else None
-    run(cli_cycles)
+    if len(sys.argv) > 1:
+        _select_dataset(sys.argv[1])
+    run()

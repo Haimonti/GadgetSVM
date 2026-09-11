@@ -69,8 +69,33 @@ def load_rcv1(train_path, test_path, n_workers, seed):
     return _partition(X_train, y_train, X_test, y_test, n_workers)
 
 
-def load_covtype(path, n_workers, seed, test_fraction):
-    """covtype: one LIBSVM file — hold out `test_fraction` as test, then partition."""
+
+
+def load_shards(config):
+    """Dispatch on config['DATASET'] and return exactly NUM_WORKERS data shards."""
+    ds = config.get("DATASET", "rcv1")
+    seed = config["SEED"]
+    n_workers = config["NUM_WORKERS"]
+    test_frac = config["TEST_FRACTION"]
+    if ds == "rcv1":
+        return load_rcv1(config["TRAIN_PATH"], config["TEST_PATH"], n_workers, seed)
+    if ds == "covtype":
+        return load_single_file(config["COVTYPE_PATH"], n_workers, seed, test_frac, "covtype")
+    if ds == "gisette":
+        return load_single_file(config["GISETTE_PATH"], n_workers, seed, test_frac, "gisette")
+    if ds == "real-sim":
+        return load_single_file(config["REALSIM_PATH"], n_workers, seed, test_frac, "real-sim")
+    raise ValueError(
+        f"Unknown DATASET '{ds}'. Choose: rcv1 | covtype | gisette | real-sim"
+    )
+
+def load_single_file(path, n_workers, seed, test_fraction, tag="dataset"):
+    """One LIBSVM file: shuffle, hold out `test_fraction` as test, then partition.
+
+    Used by every single-file binary dataset (covtype, gisette, real-sim). The
+    labels are mapped to +/-1 and the training data is split disjointly across
+    workers while the test set is shared (see _partition).
+    """
     rng = np.random.RandomState(seed)
     X, y = load_svmlight_file(str(path))
     y = _to_pm1(y)
@@ -79,24 +104,8 @@ def load_covtype(path, n_workers, seed, test_fraction):
     X = X[perm].tocsr()
     y = y[perm]
     n_test = int(test_fraction * n)
-    logger.info("data", f"covtype: {n} samples, {X.shape[1]} features -> "
+    logger.info("data", f"{tag}: {n} samples, {X.shape[1]} features -> "
                         f"{n - n_test} train / {n_test} test")
     return _partition(
         X[n_test:].tocsr(), y[n_test:], X[:n_test].tocsr(), y[:n_test], n_workers
     )
-
-
-def load_shards(config):
-    """Dispatch on config['DATASET'] and return exactly NUM_WORKERS data shards."""
-    ds = config.get("DATASET", "rcv1")
-    if ds == "covtype":
-        return load_covtype(
-            config["COVTYPE_PATH"], config["NUM_WORKERS"],
-            config["SEED"], config["TEST_FRACTION"],
-        )
-    if ds == "rcv1":
-        return load_rcv1(
-            config["TRAIN_PATH"], config["TEST_PATH"],
-            config["NUM_WORKERS"], config["SEED"],
-        )
-    raise ValueError(f"Unknown DATASET '{ds}'. Choose: covtype | rcv1")

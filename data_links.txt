@@ -1,0 +1,13 @@
+gisette: https://archive.ics.uci.edu/static/public/170/gisette.zip
+real-sim: https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/real-sim.bz2
+
+
+
+
+
+
+
+
+
+
+
