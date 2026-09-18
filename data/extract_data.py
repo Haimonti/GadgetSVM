@@ -259,6 +259,115 @@ def preprocess_real_sim() -> Path:
     _cleanup(bz2_path)
     return dest
 
+# --------------------------------------------------------------------------- #
+# w8a / ijcnn1 (LibSVM): already +/-1 LIBSVM; just download (+ decompress)     #
+# --------------------------------------------------------------------------- #
+W8A_TRAIN_URL = "https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/w8a"
+W8A_TEST_URL = "https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/w8a.t"
+
+IJCNN_TRAIN_URL = "https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/ijcnn1.bz2"
+IJCNN_TEST_URL = "https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/ijcnn1.t.bz2"
+
+
+def preprocess_w8a() -> Path:
+    """Download the LibSVM w8a train/test pair.
+
+    w8a is already a LIBSVM file with +/-1 labels (300 features, ~49,749 train /
+    14,951 test), so there is nothing to transform: the two plain-text files are
+    downloaded straight into DATA_DIR and the two-file loader splits the train
+    part across workers. Idempotent.
+    """
+    train_out = DATA_DIR / "w8a"
+    test_out = DATA_DIR / "w8a.t"
+    if train_out.exists() and test_out.exists():
+        print(f"[w8a] already built -> {train_out} (+ {test_out.name}) (skipped)")
+        return train_out
+
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    download_file(W8A_TRAIN_URL, train_out)
+    download_file(W8A_TEST_URL, test_out)
+    print(f"[preprocess] w8a ready -> {train_out} (+ {test_out.name})")
+    return train_out
+
+
+def preprocess_ijcnn1() -> Path:
+    """Download the LibSVM ijcnn1 train/test pair and decompress it.
+
+    ijcnn1 ships as bz2-compressed LIBSVM files with +/-1 labels (22 features,
+    ~49,990 train / 91,701 test). The archives are fetched into RAW_DIR,
+    decompressed into DATA_DIR, then deleted (keep only the processed files).
+    Idempotent.
+    """
+    train_out = DATA_DIR / "ijcnn1"
+    test_out = DATA_DIR / "ijcnn1.t"
+    if train_out.exists() and test_out.exists():
+        print(f"[ijcnn1] already built -> {train_out} (+ {test_out.name}) (skipped)")
+        return train_out
+
+    RAW_DIR.mkdir(parents=True, exist_ok=True)
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+    tr_bz2 = download_file(IJCNN_TRAIN_URL, RAW_DIR / "ijcnn1.bz2")
+    te_bz2 = download_file(IJCNN_TEST_URL, RAW_DIR / "ijcnn1.t.bz2")
+    extract_bz2(tr_bz2, DATA_DIR)   # -> DATA_DIR/ijcnn1
+    extract_bz2(te_bz2, DATA_DIR)   # -> DATA_DIR/ijcnn1.t
+    print(f"[extract] ijcnn1 -> {train_out} (+ {test_out.name})")
+    _cleanup(tr_bz2, te_bz2)
+    return train_out
+
+# --------------------------------------------------------------------------- #
+# a9a (Adult) / webspam-unigram (LibSVM): already +/-1 LIBSVM                  #
+# --------------------------------------------------------------------------- #
+A9A_TRAIN_URL = "https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/a9a"
+A9A_TEST_URL = "https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/a9a.t"
+
+WEBSPAM_URL = "https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/webspam_wc_normalized_unigram.svm.bz2"
+WEBSPAM_OUT = "webspam_unigram.svm"
+
+
+def preprocess_a9a() -> Path:
+    """Download the LibSVM a9a (Adult) train/test pair.
+
+    a9a is already a LIBSVM file with +/-1 labels (123 features, ~32,561 train /
+    16,281 test) and is one of the datasets used in the GADGET SVM paper. The two
+    plain-text files are downloaded straight into DATA_DIR; the two-file loader
+    splits the train part across workers. Idempotent.
+    """
+    train_out = DATA_DIR / "a9a"
+    test_out = DATA_DIR / "a9a.t"
+    if train_out.exists() and test_out.exists():
+        print(f"[a9a] already built -> {train_out} (+ {test_out.name}) (skipped)")
+        return train_out
+
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    download_file(A9A_TRAIN_URL, train_out)
+    download_file(A9A_TEST_URL, test_out)
+    print(f"[preprocess] a9a ready -> {train_out} (+ {test_out.name})")
+    return train_out
+
+
+def preprocess_webspam() -> Path:
+    """Download the LibSVM webspam (unigram) archive and decompress it.
+
+    webspam (normalized unigram) is a single LIBSVM file with +/-1 labels
+    (~350,000 examples, 254 features), so it only needs downloading +
+    decompressing; the loader holds out a shared test split and shards the rest.
+    The downloaded .bz2 is deleted afterwards. Idempotent.
+    """
+    out_path = DATA_DIR / WEBSPAM_OUT
+    if out_path.exists():
+        print(f"[{WEBSPAM_OUT}] already built -> {out_path} (skipped)")
+        return out_path
+
+    RAW_DIR.mkdir(parents=True, exist_ok=True)
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+    bz2_path = download_file(WEBSPAM_URL, RAW_DIR / "webspam_unigram.svm.bz2")
+    dest = extract_bz2(bz2_path, DATA_DIR)          # -> DATA_DIR/webspam_unigram.svm
+    print(f"[extract] {bz2_path.name} -> {dest}")
+    _cleanup(bz2_path)
+    return dest
+
 
 if __name__ == "__main__":
     # bz2 archives (rcv1, ready-made covtype) — only if any are present
@@ -275,6 +384,10 @@ if __name__ == "__main__":
         ("UCI Covertype", preprocess_covertype_uci),
         ("Gisette",       preprocess_gisette),
         ("real-sim",      preprocess_real_sim),
+        ("w8a",           preprocess_w8a),
+        ("ijcnn1",        preprocess_ijcnn1),
+        ("a9a",           preprocess_a9a),
+        ("webspam",       preprocess_webspam),
     ):
         print(f"\nBuilding {label} ...")
         try:

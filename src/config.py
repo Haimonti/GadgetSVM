@@ -44,4 +44,11 @@ CONFIG = {
     "WARM_START": True,
     "GOSSIP_K": 3,
     "ROUNDS": 5000,
+    "W8A_TRAIN_PATH": DATA_DIR / "w8a",
+    "W8A_TEST_PATH": DATA_DIR / "w8a.t",
+    "IJCNN_TRAIN_PATH": DATA_DIR / "ijcnn1",
+    "IJCNN_TEST_PATH": DATA_DIR / "ijcnn1.t",
+    "A9A_TRAIN_PATH": DATA_DIR / "a9a",
+    "A9A_TEST_PATH": DATA_DIR / "a9a.t",
+    "WEBSPAM_PATH": DATA_DIR / "webspam_unigram.svm",
 }

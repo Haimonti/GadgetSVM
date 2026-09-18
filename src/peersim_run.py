@@ -12,6 +12,10 @@ plotting.
     python src/peersim_run.py cov    # covtype
     python src/peersim_run.py gis    # gisette   (downloaded + preprocessed on first use)
     python src/peersim_run.py rsim   # real-sim  (downloaded + preprocessed on first use)
+    python src/peersim_run.py w8a    # w8a       (downloaded on first use)
+    python src/peersim_run.py ijcnn  # ijcnn1    (downloaded + decompressed on first use)
+    python src/peersim_run.py adult  # a9a       (downloaded on first use)
+    python src/peersim_run.py webspam # webspam  (downloaded + decompressed on first use)
 
 Results land in results/peersim_run<N>_<mm-dd-yyyy>/ (separate from main.py's
 run<N>_ folders).
@@ -143,6 +147,10 @@ DATASET_KEYWORDS = {
     "cov":  "covtype",
     "gis":  "gisette",
     "rsim": "real-sim",
+    "w8a": "w8a",
+    "ijcnn": "ijcnn1",
+    "adult": "a9a",
+    "webspam": "webspam",
 }
 
 
@@ -154,8 +162,10 @@ def _select_dataset(keyword: str) -> None:
         raise SystemExit(f"Unknown dataset '{keyword}'. Choose one of: {valid}")
     CONFIG["DATASET"] = name
     logger.info("main", f"Dataset '{keyword}' -> {name}")
-    # covtype, gisette and real-sim are downloaded + preprocessed on first use
-    # (idempotent — the raw download is deleted once the LIBSVM file is built).
+    # covtype, gisette, real-sim, w8a, ijcnn1, a9a and webspam are downloaded +
+    # preprocessed on first use (idempotent — raw downloads are deleted once the
+    # LIBSVM file is built; w8a/ijcnn1/a9a are already LIBSVM so they only need
+    # downloading, and ijcnn1/webspam additionally need decompressing).
     if name == "covtype" and not CONFIG["COVTYPE_PATH"].exists():
         from data.extract_data import preprocess_covertype_uci
         preprocess_covertype_uci()
@@ -165,6 +175,18 @@ def _select_dataset(keyword: str) -> None:
     elif name == "real-sim" and not CONFIG["REALSIM_PATH"].exists():
         from data.extract_data import preprocess_real_sim
         preprocess_real_sim()
+    elif name == "w8a" and not CONFIG["W8A_TRAIN_PATH"].exists():
+        from data.extract_data import preprocess_w8a
+        preprocess_w8a()
+    elif name == "ijcnn1" and not CONFIG["IJCNN_TRAIN_PATH"].exists():
+        from data.extract_data import preprocess_ijcnn1
+        preprocess_ijcnn1()
+    elif name == "a9a" and not CONFIG["A9A_TRAIN_PATH"].exists():
+        from data.extract_data import preprocess_a9a
+        preprocess_a9a()
+    elif name == "webspam" and not CONFIG["WEBSPAM_PATH"].exists():
+        from data.extract_data import preprocess_webspam
+        preprocess_webspam()
 
 
 if __name__ == "__main__":
