@@ -192,14 +192,19 @@ def _median_gamma(X, p, sample=2000, seed=0):
 # The pieces each worker computes (Algorithm 3)
 # ---------------------------------------------------------------------------
 
-def _worker_contribution(K_m, y_m, beta, C):
+def _worker_contribution(K_m, y_m, beta, C, ey_floor=1e-12):
     """Return (C_m, d_m) for one worker, given the current global weights.
 
     K_m is the worker's K'' = [K | 1], shape (n_m, P+1).
+
+    `ey_floor` bounds the weight a_i = 2C/(e_i y_i) at 2C/ey_floor. The paper's
+    rule has no bound, and the default keeps it that way; the gossip version
+    passes a real floor because there a single near-margin sample's unbounded
+    weight is published to the network and propagates as a collapse.
     """
     e = y_m - K_m @ beta                                   # step 5
     ey = e * y_m
-    a = np.where(ey < 0.0, 0.0, 2.0 * C / np.where(ey == 0.0, 1e-12, ey))   # (9)
+    a = np.where(ey < 0.0, 0.0, 2.0 * C / np.maximum(ey, ey_floor))         # (9)
     Ka = K_m * a[:, None]                                  # D_a K''
     return K_m.T @ Ka, Ka.T @ y_m                          # (15), (16)
 

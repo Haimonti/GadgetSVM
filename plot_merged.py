@@ -1,4 +1,8 @@
-"""The combined P2P-SDCA vs P2P-BDSVM figure, from one comparison run.
+"""The combined comparison figures, from one comparison run.
+
+Writes merged_three_way.png (SDCA, BDSVM, FedAvg) and, when they were run,
+merged_with_cocoa.png and merged_with_cocoa_plus.png — CoCoA and CoCoA+ each
+against the same three baselines, one figure per algorithm.
 
 Reads the two `*_metrics.json` files `run_compare.py` writes and draws each
 metric as one panel: per method, the mean over the 10 workers with a +/- 1 std
@@ -24,7 +28,20 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 METHODS = [("sdca", "P2P-SDCA", "#B4762A"),
-           ("bdsvm", "P2P-BDSVM", "#17595E")]
+           ("bdsvm", "P2P-BDSVM", "#17595E"),
+           ("fedavg", "P2P-FedAvg", "#A33A2C"),
+           ("cocoa", "P2P-CoCoA", "#6B4C9A"),
+           ("cocoa_plus", "P2P-CoCoA+", "#3F7FBF")]
+
+# CoCoA and CoCoA+ are two algorithms, so each gets its own figure against the
+# same three baselines rather than sharing one crowded panel.
+BASELINES = ("sdca", "bdsvm", "fedavg")
+FIGURES = [
+    # name,              methods drawn,                   single-panel suffix
+    ("three_way",        BASELINES,                       ""),
+    ("with_cocoa",       BASELINES + ("cocoa",),          "_cocoa"),
+    ("with_cocoa_plus",  BASELINES + ("cocoa_plus",),     "_cocoa_plus"),
+]
 
 # key, axis label, log scale, normalise-by-first-value
 #
@@ -85,9 +102,19 @@ def main():
     if not data:
         raise SystemExit(f"No *_metrics.json found in {run_dir}")
 
+    for name, keys, suffix in FIGURES:
+        methods = [m for m in METHODS if m[0] in keys]
+        if not any(m[0] in data for m in methods if m[0] not in BASELINES) \
+                and name != "three_way":
+            continue        # this figure's own algorithm was not run here
+        draw(methods, data, out_dir, name, suffix)
+
+
+def draw(methods, data, out_dir, name, suffix):
+    """One merged 2x2 figure plus the single-panel figures for `methods`."""
     fig, axes = plt.subplots(2, 2, figsize=(13, 9))
     for ax, (key, ylabel, log_y, norm) in zip(axes.ravel(), PANELS):
-        for m, label, colour in METHODS:
+        for m, label, colour in methods:
             if m not in data:
                 continue
             s = series(data[m]["per_node_metrics"], key)
@@ -108,24 +135,37 @@ def main():
         ax.legend(frameon=False)
 
     bits = []
-    for m, label, _c in METHODS:
+    for m, label, _c in methods:
         if m not in data:
             continue
         d = data[m]
         stops = [c for c in d["per_node_stop_cycle"] if c is not None]
-        where = (f"all 10 nodes stopped by cycle {max(stops)}"
-                 if len(stops) == len(d["per_node_stop_cycle"])
-                 else f"{len(stops)}/10 nodes stopped")
+        n = len(d["per_node_stop_cycle"])
+        cap = d.get("cycles_requested") or d["config"].get("ROUNDS")
+        if len(stops) == n:
+            where = f"all {n} nodes stopped by cycle {max(stops)}"
+        elif cap and d.get("stopped_at", 0) >= cap - 1:
+            # Hit the cycle budget with nodes still un-stalled. Shown so the
+            # curve can be read, but this is not a converged result.
+            where = f"CAPPED at {cap}, {len(stops)}/{n} stopped — not converged"
+        else:
+            where = f"{len(stops)}/{n} nodes stopped"
         bits.append(f"{label}: {where}, "
                     f"acc {d['average_accuracy']:.4f}, "
                     f"{d['total_comm_bytes'] / 1e6:.2f} MB")
-    fig.suptitle("P2P-SDCA vs P2P-BDSVM — covtype, 10 workers, random k-out (k=3), "
-                 "per-node early stopping", fontsize=12)
-    fig.text(0.5, 0.005, "   |   ".join(bits), ha="center", fontsize=9,
+    any_run = next(iter(data.values()))
+    cfg = any_run["config"]
+    dataset = cfg.get("DATASET", "?")
+    fig.suptitle(f"{' vs '.join(label for m, label, _c in methods if m in data)} — {dataset}, {cfg.get('NUM_WORKERS', '?')} workers, "
+                 f"{cfg.get('TOPOLOGY', '?')} (k={cfg.get('GOSSIP_K', '?')}), "
+                 f"per-node early stopping", fontsize=12)
+    # Two methods per caption line, so four or five methods still fit the width.
+    lines = ["   |   ".join(bits[i:i + 2]) for i in range(0, len(bits), 2)]
+    fig.text(0.5, 0.005, "\n".join(lines), ha="center", va="bottom", fontsize=9,
              color="#444444")
-    fig.tight_layout(rect=(0, 0.03, 1, 0.97))
+    fig.tight_layout(rect=(0, 0.02 + 0.018 * len(lines), 1, 0.97))
 
-    path = out_dir / "merged_sdca_vs_bdsvm.png"
+    path = out_dir / f"merged_{name}.png"
     fig.savefig(path, dpi=160)
     print(f"wrote {path}")
 
@@ -133,7 +173,7 @@ def main():
     for key, ylabel, log_y, norm in PANELS:
         f1, a1 = plt.subplots(figsize=(7, 4.5))
         drew = False
-        for m, label, colour in METHODS:
+        for m, label, colour in methods:
             if m not in data:
                 continue
             s = series(data[m]["per_node_metrics"], key)
@@ -158,10 +198,11 @@ def main():
         a1.legend(frameon=False)
         a1.set_title(f"{ylabel} — mean ±1σ across workers", fontsize=11)
         f1.tight_layout()
-        p1 = out_dir / f"merged_{key}.png"
+        p1 = out_dir / f"merged_{key}{suffix}.png"
         f1.savefig(p1, dpi=160)
         plt.close(f1)
         print(f"wrote {p1}")
+
 
 
 if __name__ == "__main__":

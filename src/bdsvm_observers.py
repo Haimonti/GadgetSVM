@@ -40,10 +40,14 @@ from methods.bdsvm import _rbf
 class BDSVMEvaluator(Control):
     """Record every peer's global state; optionally stop on the paper's eta."""
 
-    # Rows per chunk when building the kernel against the full training set.
-    # 464,810 x 100 float64 is 372 MB in one piece, x10 nodes per evaluation;
-    # chunking keeps the peak bounded without changing the arithmetic.
-    CHUNK = 50_000
+    # The kernel block against the full training set is rows x P float64, and P
+    # ranges from 100 (covtype) to 1000 (real-sim, rcv1), so a fixed row count
+    # would be 10x bigger on the high-P datasets. Budget the block by entries
+    # instead — ~20M entries, 160 MB — and derive the rows from P.
+    CHUNK_ENTRIES = 20_000_000
+
+    def _chunk_rows(self, P):
+        return max(1_000, self.CHUNK_ENTRIES // max(P, 1))
 
     def __init__(self, pid, eta=5e-3, eval_every=1, total_cycles=None,
                  stop_on_threshold=False):
@@ -70,8 +74,9 @@ class BDSVMEvaluator(Control):
         needs only its own slice of the kernel.
         """
         total, n = 0.0, X_all.shape[0]
-        for s in range(0, n, self.CHUNK):
-            e = min(s + self.CHUNK, n)
+        step = self._chunk_rows(p.P)
+        for s in range(0, n, step):
+            e = min(s + step, n)
             K = _rbf(X_all[s:e], p.p, p.gamma)
             scores = K @ p.beta[:p.P] + p.beta[p.P]
             total += float(np.sum(np.maximum(0.0, 1.0 - y_all[s:e] * scores)))

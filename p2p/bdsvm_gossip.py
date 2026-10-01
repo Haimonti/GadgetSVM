@@ -37,15 +37,20 @@ class BDSVMGossipProtocol(GossipProtocol):
     """Budget Distributed SVM (ACM TIST 13(6), 2022) as a gossip learner."""
 
     def __init__(self, gossip_k=1, P=100, C=30.0, rho=0.5,
-                 gamma=None, preimage="uniform", arch_seed=0):
+                 gamma=None, gamma_mult=1.0, preimage="uniform", arch_seed=0,
+                 ey_floor=1e-12):
         super().__init__(gossip_k=gossip_k,
                          aggregator=VersionedContributionAggregator())
         self.P = P                  # budget: number of pre-image vectors
         self.C = C                  # penalty in the weighting rule, Eq (9)
         self.rho = rho              # mixing weight, Algorithm 1 step 10
         self.gamma = gamma          # RBF width; None -> median heuristic
+        self.gamma_mult = gamma_mult  # scales the heuristic; the heuristic is a
+                                      # scale guess, and tune_bdsvm.py found 0.5x
+                                      # is what keeps real-sim from oscillating
         self.preimage = preimage
         self.arch_seed = arch_seed
+        self.ey_floor = ey_floor    # bound on Eq (9)'s weight; see _worker_contribution
         self.data_ready = False
         self.metrics: list = []
         self.version = 0
@@ -60,7 +65,9 @@ class BDSVMGossipProtocol(GossipProtocol):
     def clone(self):
         return BDSVMGossipProtocol(
             gossip_k=self.gossip_k, P=self.P, C=self.C, rho=self.rho,
-            gamma=self.gamma, preimage=self.preimage, arch_seed=self.arch_seed)
+            gamma=self.gamma, gamma_mult=self.gamma_mult,
+            preimage=self.preimage, arch_seed=self.arch_seed,
+            ey_floor=self.ey_floor)
 
     # ---- set-up ------------------------------------------------------------
     def set_data(self, X_csr, y, X_test, y_test, lambda_reg):
@@ -93,7 +100,8 @@ class BDSVMGossipProtocol(GossipProtocol):
         p = _make_preimages(self.P, self.d, self.arch_seed, kind=self.preimage)
         self.p = p
         if self.gamma is None:
-            self.gamma = _median_gamma(self.X, p) if self.n > 0 else 1.0
+            self.gamma = (self.gamma_mult * _median_gamma(self.X, p)
+                          if self.n > 0 else 1.0)
         self.Kpp = np.zeros((self.P + 1, self.P + 1))
         self.Kpp[:self.P, :self.P] = _rbf(p, p, self.gamma)
         if self.n > 0:
@@ -155,7 +163,8 @@ class BDSVMGossipProtocol(GossipProtocol):
         """Recompute this node's own (C_k, d_k) and bump its version."""
         if self.n == 0:
             return
-        C_k, d_k = _worker_contribution(self.Km, self.y, self.beta, self.C)
+        C_k, d_k = _worker_contribution(self.Km, self.y, self.beta, self.C,
+                                        ey_floor=self.ey_floor)
         self.version += 1
         self.contributions = dict(self.contributions)
         self.contributions[self.node_id] = (self.version, (C_k, d_k), float(self.n))
@@ -171,9 +180,35 @@ class BDSVMGossipProtocol(GossipProtocol):
         return None
 
     # ---- evaluation --------------------------------------------------------
+    # The test-set kernel k(x_test, p_j) depends only on the pre-images and
+    # gamma, both fixed once configure_network has run; beta is the only thing
+    # that changes between evaluations. So the kernel is built once and kept:
+    # rcv1's shared 677,399-row test set at P = 1000 is 5.4 GB per node, 54 GB
+    # across ten — which fits on a 128 GB host and turns each evaluation from a
+    # ~49 GFLOP sparse-times-dense product into a single matrix-vector product.
+    # Above the budget the block is streamed in chunks instead; the arithmetic
+    # is identical either way.
+    CACHE_BUDGET_BYTES = 8 * 1024 ** 3
+    CHUNK_ENTRIES = 20_000_000
+
+    def _test_kernel(self):
+        if getattr(self, "_K_te", None) is None:
+            self._K_te = _rbf(self.X_test, self.p, self.gamma)
+        return self._K_te
+
     def accuracy(self):
-        if self.X_test.shape[0] == 0:
+        n = self.X_test.shape[0]
+        if n == 0:
             return float("nan")
-        K_te = _rbf(self.X_test, self.p, self.gamma)
-        s = np.hstack([K_te, np.ones((K_te.shape[0], 1))]) @ self.beta
-        return float(np.mean(np.where(s >= 0, 1.0, -1.0) == self.y_test))
+        if n * self.P * 8 <= self.CACHE_BUDGET_BYTES:
+            scores = self._test_kernel() @ self.beta[:self.P] + self.beta[self.P]
+            return float(np.mean(np.where(scores >= 0, 1.0, -1.0) == self.y_test))
+        step = max(1_000, self.CHUNK_ENTRIES // max(self.P, 1))
+        correct = 0
+        for s in range(0, n, step):
+            e = min(s + step, n)
+            K = _rbf(self.X_test[s:e], self.p, self.gamma)
+            scores = K @ self.beta[:self.P] + self.beta[self.P]
+            correct += int(np.sum(np.where(scores >= 0, 1.0, -1.0)
+                                  == self.y_test[s:e]))
+        return correct / n

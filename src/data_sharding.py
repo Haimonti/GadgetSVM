@@ -54,23 +54,44 @@ def _partition(X_train, y_train, X_test, y_test, n_workers):
     return data
 
 
-def load_rcv1(train_path, test_path, n_workers, seed):
-    """rcv1: two LIBSVM files (separate train/test)."""
-    rng = np.random.RandomState(seed)
-    X_train, y_train = load_svmlight_file(str(train_path))
-    y_train = _to_pm1(y_train)
-    perm = rng.permutation(X_train.shape[0])
-    X_train = X_train[perm].tocsr()
-    y_train = y_train[perm]
-    X_test, y_test = load_svmlight_file(str(test_path), n_features=X_train.shape[1])
-    y_test = _to_pm1(y_test)
-    logger.info("data", f"rcv1: {X_train.shape[0]} train, {X_test.shape[0]} test, "
-                        f"{X_train.shape[1]} features")
-    return _partition(X_train, y_train, X_test, y_test, n_workers)
 
 
-def load_covtype(path, n_workers, seed, test_fraction):
-    """covtype: one LIBSVM file — hold out `test_fraction` as test, then partition."""
+
+
+def load_shards(config):
+    """Dispatch on config['DATASET'] and return exactly NUM_WORKERS data shards."""
+    ds = config.get("DATASET", "rcv1")
+    seed = config["SEED"]
+    n_workers = config["NUM_WORKERS"]
+    test_frac = config["TEST_FRACTION"]
+    if ds == "rcv1":
+        return load_two_files(config["TRAIN_PATH"], config["TEST_PATH"], n_workers, seed, "rcv1")
+    if ds == "covtype":
+        return load_single_file(config["COVTYPE_PATH"], n_workers, seed, test_frac, "covtype")
+    if ds == "gisette":
+        return load_single_file(config["GISETTE_PATH"], n_workers, seed, test_frac, "gisette")
+    if ds == "real-sim":
+        return load_single_file(config["REALSIM_PATH"], n_workers, seed, test_frac, "real-sim")
+    if ds == "w8a":
+        return load_two_files(config["W8A_TRAIN_PATH"], config["W8A_TEST_PATH"], n_workers, seed, "w8a")
+    if ds == "ijcnn1":
+        return load_two_files(config["IJCNN_TRAIN_PATH"], config["IJCNN_TEST_PATH"], n_workers, seed, "ijcnn1")
+    if ds == "a9a":
+        return load_two_files(config["A9A_TRAIN_PATH"], config["A9A_TEST_PATH"], n_workers, seed, "a9a")
+    if ds == "webspam":
+        return load_single_file(config["WEBSPAM_PATH"], n_workers, seed, test_frac, "webspam")
+    raise ValueError(
+        f"Unknown DATASET '{ds}'. Choose: rcv1 | covtype | gisette | real-sim | "
+        f"w8a | ijcnn1 | a9a | webspam"
+    )
+
+def load_single_file(path, n_workers, seed, test_fraction, tag="dataset"):
+    """One LIBSVM file: shuffle, hold out `test_fraction` as test, then partition.
+
+    Used by every single-file binary dataset (covtype, gisette, real-sim). The
+    labels are mapped to +/-1 and the training data is split disjointly across
+    workers while the test set is shared (see _partition).
+    """
     rng = np.random.RandomState(seed)
     X, y = load_svmlight_file(str(path))
     y = _to_pm1(y)
@@ -79,24 +100,27 @@ def load_covtype(path, n_workers, seed, test_fraction):
     X = X[perm].tocsr()
     y = y[perm]
     n_test = int(test_fraction * n)
-    logger.info("data", f"covtype: {n} samples, {X.shape[1]} features -> "
+    logger.info("data", f"{tag}: {n} samples, {X.shape[1]} features -> "
                         f"{n - n_test} train / {n_test} test")
     return _partition(
         X[n_test:].tocsr(), y[n_test:], X[:n_test].tocsr(), y[:n_test], n_workers
     )
 
+def load_two_files(train_path, test_path, n_workers, seed, tag="dataset"):
+    """Two separate LIBSVM files (train + test), e.g. rcv1, w8a, ijcnn1.
 
-def load_shards(config):
-    """Dispatch on config['DATASET'] and return exactly NUM_WORKERS data shards."""
-    ds = config.get("DATASET", "rcv1")
-    if ds == "covtype":
-        return load_covtype(
-            config["COVTYPE_PATH"], config["NUM_WORKERS"],
-            config["SEED"], config["TEST_FRACTION"],
-        )
-    if ds == "rcv1":
-        return load_rcv1(
-            config["TRAIN_PATH"], config["TEST_PATH"],
-            config["NUM_WORKERS"], config["SEED"],
-        )
-    raise ValueError(f"Unknown DATASET '{ds}'. Choose: covtype | rcv1")
+    Labels are mapped to +/-1, the training rows are shuffled then split
+    disjointly across workers, and the test file is loaded with the training
+    feature count so both matrices have the same width (see _partition).
+    """
+    rng = np.random.RandomState(seed)
+    X_train, y_train = load_svmlight_file(str(train_path))
+    y_train = _to_pm1(y_train)
+    perm = rng.permutation(X_train.shape[0])
+    X_train = X_train[perm].tocsr()
+    y_train = y_train[perm]
+    X_test, y_test = load_svmlight_file(str(test_path), n_features=X_train.shape[1])
+    y_test = _to_pm1(y_test)
+    logger.info("data", f"{tag}: {X_train.shape[0]} train, {X_test.shape[0]} test, "
+                        f"{X_train.shape[1]} features")
+    return _partition(X_train, y_train, X_test, y_test, n_workers)
