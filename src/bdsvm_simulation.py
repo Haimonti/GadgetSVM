@@ -108,6 +108,14 @@ class BDSVMSimulation:
         self.worker_data = worker_data
         self.params = dict(params if params is not None
                            else params_for(config["DATASET"]))
+        if self.params.get("kernel", "rbf") == "linear":
+            # A linear kernel has rank at most d. Extra random pre-images only
+            # inflate singular Gram systems on low-dimensional datasets.
+            self.params["P"] = min(self.params["P"], worker_data[0]["X_csr"].shape[1])
+            # Unit Gaussian directions span the full input space when P >= d;
+            # for d > P this is a fixed, seeded linear subspace.
+            self.params["preimage"] = "unit"
+            self.params["gamma"] = None
         self.eta = eta
         self.sim = None
 
@@ -177,6 +185,7 @@ class BDSVMSimulation:
             f"Training — topology={cfg['TOPOLOGY']}, k={cfg['GOSSIP_K']}, "
             f"max_cycles={cycles}, eta={self.eta}, "
             f"P={self.params['P']}, preimage={self.params['preimage']}, "
+            f"kernel={self.params.get('kernel', 'rbf')}, "
             f"C={self.params['C']}, gamma_mult={self.params['gamma_mult']}, "
             f"ey_floor={self.params['ey_floor']}, rho={self.params['rho']}",
         )

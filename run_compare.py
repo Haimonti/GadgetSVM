@@ -160,14 +160,14 @@ def _parse_overrides(items):
     return out
 
 
-def run_bdsvm(worker_data, cycles, overrides=None):
+def run_bdsvm(worker_data, cycles, overrides=None, method="bdsvm"):
     from src.bdsvm_simulation import params_for
     params = {**params_for(CONFIG["DATASET"]), **(overrides or {})}
     sim = BDSVMSimulation(CONFIG, worker_data, params=params)
     stopped_at = sim.run(cycles)
     protos = [Network.get(i).getProtocol(BDSVMSimulation.BDSVM_PID)
               for i in range(CONFIG["NUM_WORKERS"])]
-    out = _collect(protos, "bdsvm", stopped_at, cycles)
+    out = _collect(protos, method, stopped_at, cycles)
     out["bdsvm_params"] = sim.params
     out["bdsvm_eta"] = sim.eta
     return out
@@ -178,7 +178,7 @@ def main():
     ap.add_argument("--cycles", type=int, default=None,
                     help="cap on cycles (default: CONFIG['ROUNDS'])")
     ap.add_argument("--only", nargs="+", default=None,
-                    choices=["sdca", "bdsvm", "fedavg", "cocoa", "cocoa_plus"])
+                    choices=["sdca", "bdsvm", "bdsvm_linear", "fedavg", "cocoa", "cocoa_plus"])
     ap.add_argument("--out", default=None, help="results directory")
     ap.add_argument("--bdsvm", action="append", default=[], metavar="KEY=VALUE",
                     help="override a BDSVM hyperparameter, e.g. --bdsvm rho=0.9 "
@@ -216,6 +216,10 @@ def main():
             result = run_sdca(worker_data, args.cycles)
         elif m == "bdsvm":
             result = run_bdsvm(worker_data, args.cycles, _parse_overrides(args.bdsvm))
+        elif m == "bdsvm_linear":
+            result = run_bdsvm(worker_data, args.cycles,
+                               {**_parse_overrides(args.bdsvm), "kernel": "linear"},
+                               method=m)
         elif m == "fedavg":
             result = run_fedavg(worker_data, args.cycles)
         else:

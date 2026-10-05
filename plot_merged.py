@@ -29,6 +29,7 @@ import numpy as np
 
 METHODS = [("sdca", "P2P-SDCA", "#B4762A"),
            ("bdsvm", "P2P-BDSVM", "#17595E"),
+           ("bdsvm_linear", "P2P-BDSVM (linear)", "#1679A8"),
            ("fedavg", "P2P-FedAvg", "#A33A2C"),
            ("cocoa", "P2P-CoCoA", "#6B4C9A"),
            ("cocoa_plus", "P2P-CoCoA+", "#3F7FBF")]
@@ -41,6 +42,7 @@ FIGURES = [
     ("three_way",        BASELINES,                       ""),
     ("with_cocoa",       BASELINES + ("cocoa",),          "_cocoa"),
     ("with_cocoa_plus",  BASELINES + ("cocoa_plus",),     "_cocoa_plus"),
+    ("linear_vs_sdca",   ("sdca", "bdsvm_linear"),       "_linear"),
 ]
 
 # key, axis label, log scale, normalise-by-first-value

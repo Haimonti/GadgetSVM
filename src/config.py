@@ -1,8 +1,9 @@
+import os
 from pathlib import Path
 
 CODE_DIR = Path(__file__).resolve().parent.parent   # repo root (config.py lives in src/)
 RAW_DIR  = CODE_DIR / "data" / "raw"
-DATA_DIR = CODE_DIR / "data" / "processed"
+DATA_DIR = Path(os.environ.get("GADGETSVM_DATA_DIR", CODE_DIR / "data" / "processed"))
 
 CONFIG = {
     # p2p setup

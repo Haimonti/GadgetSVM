@@ -34,7 +34,6 @@ from src.peersim_python.cdsim import CDState
 from src.peersim_python.core import Control, Network
 from src.peersim_python.logger import logger
 
-from methods.bdsvm import _rbf
 
 
 class BDSVMEvaluator(Control):
@@ -74,10 +73,13 @@ class BDSVMEvaluator(Control):
         needs only its own slice of the kernel.
         """
         total, n = 0.0, X_all.shape[0]
+        if p.kernel == "linear":
+            scores = X_all @ (p.p.T @ p.beta[:p.P]) + p.beta[p.P]
+            return float(np.mean(np.maximum(0.0, 1.0 - y_all * scores)))
         step = self._chunk_rows(p.P)
         for s in range(0, n, step):
             e = min(s + step, n)
-            K = _rbf(X_all[s:e], p.p, p.gamma)
+            K = p._kernel(X_all[s:e], p.p)
             scores = K @ p.beta[:p.P] + p.beta[p.P]
             total += float(np.sum(np.maximum(0.0, 1.0 - y_all[s:e] * scores)))
         return total / n

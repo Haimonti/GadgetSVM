@@ -18,3 +18,11 @@ __pycache__/
 results_fast*.csv
 
 !results/*.csv
+!results/linear_*/*.json
+results/linear_*/run.log
+results/linear_*_smoke/
+results/linear_*-tr/
+results/linear_smoke_*/
+results/linear_summary_smoke.csv
+results/rbf_regression_smoke/
+!linear_data_manifest.json

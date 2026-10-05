@@ -119,6 +119,11 @@ def _rbf(A, B, gamma):
     return np.exp(-gamma * d2)
 
 
+def _linear(A, B):
+    """Linear kernel k(a, b) = a dot b for dense or CSR inputs."""
+    return np.asarray(A @ B.T)
+
+
 def _make_preimages(P, n_features, seed, scale=1.0, kind="uniform", nnz=64):
     """The P randomly generated pre-image vectors p_j (Algorithm 2, step 2).
 
