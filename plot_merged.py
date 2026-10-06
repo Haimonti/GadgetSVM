@@ -3,6 +3,8 @@
 Writes merged_three_way.png (SDCA, BDSVM, FedAvg) and, when they were run,
 merged_with_cocoa.png and merged_with_cocoa_plus.png — CoCoA and CoCoA+ each
 against the same three baselines, one figure per algorithm.
+When a run has linear BDSVM but no original BDSVM, the baseline figures use
+linear BDSVM instead of silently drawing SDCA alone.
 
 Reads the two `*_metrics.json` files `run_compare.py` writes and draws each
 metric as one panel: per method, the mean over the 10 workers with a +/- 1 std
@@ -44,6 +46,13 @@ FIGURES = [
     ("with_cocoa_plus",  BASELINES + ("cocoa_plus",),     "_cocoa_plus"),
     ("linear_vs_sdca",   ("sdca", "bdsvm_linear"),       "_linear"),
 ]
+
+
+def available_baselines(keys, available):
+    """Substitute linear BDSVM only when the historical BDSVM is absent."""
+    if "bdsvm" in keys and "bdsvm" not in available and "bdsvm_linear" in available:
+        return tuple("bdsvm_linear" if key == "bdsvm" else key for key in keys)
+    return keys
 
 # key, axis label, log scale, normalise-by-first-value
 #
@@ -105,10 +114,11 @@ def main():
         raise SystemExit(f"No *_metrics.json found in {run_dir}")
 
     for name, keys, suffix in FIGURES:
-        methods = [m for m in METHODS if m[0] in keys]
-        if not any(m[0] in data for m in methods if m[0] not in BASELINES) \
-                and name != "three_way":
+        if name != "three_way" and not any(
+                key in data for key in keys if key not in BASELINES):
             continue        # this figure's own algorithm was not run here
+        keys = available_baselines(keys, data)
+        methods = [m for m in METHODS if m[0] in keys]
         draw(methods, data, out_dir, name, suffix)
 
 

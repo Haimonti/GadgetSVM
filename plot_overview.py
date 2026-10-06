@@ -19,7 +19,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-from plot_merged import METHODS, BASELINES, FIGURES, series
+from plot_merged import METHODS, BASELINES, FIGURES, available_baselines, series
 
 ORDER = ["covtype", "gisette", "real-sim", "rcv1", "ijcnn1", "a9a", "w8a", "webspam"]
 
@@ -66,10 +66,12 @@ def main():
 
     # One overview per figure group, as plot_merged does: CoCoA and CoCoA+
     # are separate algorithms and each gets its own page against the baselines.
+    available = set().union(*(runs[ds] for ds in names))
     for _name, keys, suffix in FIGURES:
         own = [k for k in keys if k not in BASELINES]
         if own and not any(k in runs[ds] for ds in names for k in own):
             continue
+        keys = available_baselines(keys, available)
         methods = [m for m in METHODS if m[0] in keys]
         draw(names, runs, methods, suffix, args)
 
