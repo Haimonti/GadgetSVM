@@ -1,0 +1,693 @@
+[12:57:05]       main | Dataset: a9a -> a9a, a9a.t
+[12:57:05]       main | Comparison run ！ results ★ D:\LocalLLM\jobs\runs\950a9668-0013-41cb-be9b-752a6ac4b44e\work\results\fdr_full_2026-10-06\a9a
+[12:57:05]       data | a9a: 32561 train, 16281 test, 123 features
+[12:57:05]       data | Worker 0: 3257 train, 16281 test
+[12:57:05]       data | Worker 1: 3256 train, 16281 test
+[12:57:05]       data | Worker 2: 3256 train, 16281 test
+[12:57:05]       data | Worker 3: 3256 train, 16281 test
+[12:57:05]       data | Worker 4: 3256 train, 16281 test
+[12:57:05]       data | Worker 5: 3256 train, 16281 test
+[12:57:05]       data | Worker 6: 3256 train, 16281 test
+[12:57:05]       data | Worker 7: 3256 train, 16281 test
+[12:57:05]       data | Worker 8: 3256 train, 16281 test
+[12:57:05]       data | Worker 9: 3256 train, 16281 test
+[12:57:05]       main | === SDCA ===
+[12:57:05]    network | 10 nodes built (protocol 0=Linkable, 1=SDCA)
+[12:57:05]       main | Training ！ topology=random_kout, k=3, max_cycles=5000, gap_threshold=0.0001
+[12:57:05]       init | Node 0 loaded ！ 3257 local samples  (+warm start)
+[12:57:05]       init | Node 1 loaded ！ 3256 local samples  (+warm start)
+[12:57:05]       init | Node 2 loaded ！ 3256 local samples  (+warm start)
+[12:57:05]       init | Node 3 loaded ！ 3256 local samples  (+warm start)
+[12:57:05]       init | Node 4 loaded ！ 3256 local samples  (+warm start)
+[12:57:05]       init | Node 5 loaded ！ 3256 local samples  (+warm start)
+[12:57:05]       init | Node 6 loaded ！ 3256 local samples  (+warm start)
+[12:57:05]       init | Node 7 loaded ！ 3256 local samples  (+warm start)
+[12:57:05]       init | Node 8 loaded ！ 3256 local samples  (+warm start)
+[12:57:05]       init | Node 9 loaded ！ 3256 local samples  (+warm start)
+[12:57:05]      cdsim | Initialised ！ 10 nodes, 5000 cycles max
+[12:57:06]   observer | cycle=0  mean_gap=3.884e-01  max_gap=6.216e-01  max_consensus=2.683e+00  stopped=0/10
+[12:57:08]   observer | cycle=10  mean_gap=2.925e-02  max_gap=4.543e-02  max_consensus=1.291e+00  stopped=0/10
+[12:57:12]   observer | cycle=20  mean_gap=1.048e-02  max_gap=1.467e-02  max_consensus=7.149e-01  stopped=0/10
+[12:57:14]   observer | cycle=30  mean_gap=6.029e-03  max_gap=7.787e-03  max_consensus=4.859e-01  stopped=0/10
+[12:57:18]   observer | cycle=40  mean_gap=4.108e-03  max_gap=5.146e-03  max_consensus=3.485e-01  stopped=0/10
+[12:57:21]   observer | cycle=50  mean_gap=3.064e-03  max_gap=3.564e-03  max_consensus=3.309e-01  stopped=0/10
+[12:57:24]   observer | cycle=60  mean_gap=2.626e-03  max_gap=4.188e-03  max_consensus=2.272e-01  stopped=0/10
+[12:57:27]   observer | cycle=70  mean_gap=1.958e-03  max_gap=2.633e-03  max_consensus=2.092e-01  stopped=0/10
+[12:57:30]   observer | cycle=80  mean_gap=1.748e-03  max_gap=2.183e-03  max_consensus=1.942e-01  stopped=0/10
+[12:57:33]   observer | cycle=90  mean_gap=1.518e-03  max_gap=1.863e-03  max_consensus=1.616e-01  stopped=0/10
+[12:57:37]   observer | cycle=100  mean_gap=1.220e-03  max_gap=1.588e-03  max_consensus=1.415e-01  stopped=0/10
+[12:57:40]   observer | cycle=110  mean_gap=1.085e-03  max_gap=1.329e-03  max_consensus=1.531e-01  stopped=0/10
+[12:57:43]   observer | cycle=120  mean_gap=9.266e-04  max_gap=1.054e-03  max_consensus=1.272e-01  stopped=0/10
+[12:57:46]   observer | cycle=130  mean_gap=9.394e-04  max_gap=1.490e-03  max_consensus=1.287e-01  stopped=0/10
+[12:57:49]   observer | cycle=140  mean_gap=6.791e-04  max_gap=7.879e-04  max_consensus=1.003e-01  stopped=0/10
+[12:57:52]   observer | cycle=150  mean_gap=6.538e-04  max_gap=8.842e-04  max_consensus=9.014e-02  stopped=0/10
+[12:57:56]   observer | cycle=160  mean_gap=6.328e-04  max_gap=9.919e-04  max_consensus=8.929e-02  stopped=0/10
+[12:57:59]   observer | cycle=170  mean_gap=5.356e-04  max_gap=6.084e-04  max_consensus=9.653e-02  stopped=0/10
+[12:58:02]   observer | cycle=180  mean_gap=5.148e-04  max_gap=6.457e-04  max_consensus=8.488e-02  stopped=0/10
+[12:58:05]   observer | cycle=190  mean_gap=5.387e-04  max_gap=7.314e-04  max_consensus=7.573e-02  stopped=0/10
+[12:58:09]   observer | cycle=200  mean_gap=4.802e-04  max_gap=6.267e-04  max_consensus=6.174e-02  stopped=0/10
+[12:58:12]   observer | cycle=210  mean_gap=4.333e-04  max_gap=5.237e-04  max_consensus=6.358e-02  stopped=0/10
+[12:58:15]   observer | cycle=220  mean_gap=4.518e-04  max_gap=7.845e-04  max_consensus=8.500e-02  stopped=0/10
+[12:58:18]   observer | cycle=230  mean_gap=4.530e-04  max_gap=9.722e-04  max_consensus=7.058e-02  stopped=0/10
+[12:58:21]   observer | cycle=240  mean_gap=4.078e-04  max_gap=6.176e-04  max_consensus=6.716e-02  stopped=0/10
+[12:58:25]   observer | cycle=250  mean_gap=3.505e-04  max_gap=5.121e-04  max_consensus=5.596e-02  stopped=0/10
+[12:58:28]   observer | cycle=260  mean_gap=3.539e-04  max_gap=5.731e-04  max_consensus=5.239e-02  stopped=0/10
+[12:58:31]   observer | cycle=270  mean_gap=3.175e-04  max_gap=5.063e-04  max_consensus=5.347e-02  stopped=0/10
+[12:58:34]   observer | cycle=280  mean_gap=3.122e-04  max_gap=4.461e-04  max_consensus=5.054e-02  stopped=0/10
+[12:58:37]   observer | cycle=290  mean_gap=2.925e-04  max_gap=3.818e-04  max_consensus=4.383e-02  stopped=0/10
+[12:58:40]   observer | cycle=300  mean_gap=2.763e-04  max_gap=4.719e-04  max_consensus=4.994e-02  stopped=0/10
+[12:58:42]   observer | cycle=310  mean_gap=2.429e-04  max_gap=3.605e-04  max_consensus=3.905e-02  stopped=0/10
+[12:58:46]   observer | cycle=320  mean_gap=2.907e-04  max_gap=4.539e-04  max_consensus=4.958e-02  stopped=0/10
+[12:58:49]   observer | cycle=330  mean_gap=2.784e-04  max_gap=4.907e-04  max_consensus=3.698e-02  stopped=0/10
+[12:58:51]   observer | cycle=340  mean_gap=2.275e-04  max_gap=3.140e-04  max_consensus=4.238e-02  stopped=0/10
+[12:58:55]   observer | cycle=350  mean_gap=2.105e-04  max_gap=3.402e-04  max_consensus=4.174e-02  stopped=0/10
+[12:58:58]   observer | cycle=360  mean_gap=1.999e-04  max_gap=2.548e-04  max_consensus=3.957e-02  stopped=0/10
+[12:59:01]   observer | cycle=370  mean_gap=2.023e-04  max_gap=3.673e-04  max_consensus=3.425e-02  stopped=0/10
+[12:59:04]   observer | cycle=380  mean_gap=2.134e-04  max_gap=3.555e-04  max_consensus=3.457e-02  stopped=0/10
+[12:59:07]   observer | cycle=390  mean_gap=1.952e-04  max_gap=2.953e-04  max_consensus=3.971e-02  stopped=0/10
+[12:59:10]   observer | cycle=400  mean_gap=1.897e-04  max_gap=3.550e-04  max_consensus=3.174e-02  stopped=0/10
+[12:59:13]   observer | cycle=410  mean_gap=1.876e-04  max_gap=3.682e-04  max_consensus=3.057e-02  stopped=0/10
+[12:59:17]   observer | cycle=420  mean_gap=1.907e-04  max_gap=4.026e-04  max_consensus=3.079e-02  stopped=0/10
+[12:59:19]   observer | cycle=430  mean_gap=1.705e-04  max_gap=2.956e-04  max_consensus=3.125e-02  stopped=0/10
+[12:59:23]   observer | cycle=440  mean_gap=2.019e-04  max_gap=4.179e-04  max_consensus=2.815e-02  stopped=0/10
+[12:59:26]   observer | cycle=450  mean_gap=1.621e-04  max_gap=2.590e-04  max_consensus=2.337e-02  stopped=0/10
+[12:59:29]   observer | cycle=460  mean_gap=1.553e-04  max_gap=3.140e-04  max_consensus=2.159e-02  stopped=0/10
+[12:59:32]   observer | cycle=470  mean_gap=1.563e-04  max_gap=2.687e-04  max_consensus=2.678e-02  stopped=0/10
+[12:59:35]   observer | cycle=480  mean_gap=1.732e-04  max_gap=2.959e-04  max_consensus=2.904e-02  stopped=0/10
+[12:59:38]   observer | cycle=490  mean_gap=1.455e-04  max_gap=2.831e-04  max_consensus=3.150e-02  stopped=1/10
+[12:59:40]   observer | cycle=500  mean_gap=1.331e-04  max_gap=2.230e-04  max_consensus=2.895e-02  stopped=2/10
+[12:59:43]   observer | cycle=510  mean_gap=1.444e-04  max_gap=2.735e-04  max_consensus=2.822e-02  stopped=3/10
+[12:59:45]   observer | cycle=520  mean_gap=1.278e-04  max_gap=2.589e-04  max_consensus=3.242e-02  stopped=4/10
+[12:59:47]   observer | cycle=530  mean_gap=1.324e-04  max_gap=2.763e-04  max_consensus=3.325e-02  stopped=5/10
+[12:59:48]   observer | cycle=540  mean_gap=1.339e-04  max_gap=2.837e-04  max_consensus=3.515e-02  stopped=5/10
+[12:59:50]   observer | cycle=550  mean_gap=1.359e-04  max_gap=2.600e-04  max_consensus=3.517e-02  stopped=5/10
+[12:59:52]   observer | cycle=560  mean_gap=1.287e-04  max_gap=2.662e-04  max_consensus=3.691e-02  stopped=5/10
+[12:59:53]   observer | cycle=570  mean_gap=1.240e-04  max_gap=2.421e-04  max_consensus=3.802e-02  stopped=5/10
+[12:59:55]   observer | cycle=580  mean_gap=1.269e-04  max_gap=2.152e-04  max_consensus=3.928e-02  stopped=5/10
+[12:59:56]   observer | cycle=590  mean_gap=1.255e-04  max_gap=2.487e-04  max_consensus=3.968e-02  stopped=6/10
+[12:59:57]   observer | cycle=600  mean_gap=1.382e-04  max_gap=2.498e-04  max_consensus=4.018e-02  stopped=6/10
+[12:59:59]   observer | cycle=610  mean_gap=1.347e-04  max_gap=2.565e-04  max_consensus=3.962e-02  stopped=6/10
+[13:00:00]   observer | cycle=620  mean_gap=1.339e-04  max_gap=2.639e-04  max_consensus=3.980e-02  stopped=6/10
+[13:00:02]   observer | cycle=630  mean_gap=1.288e-04  max_gap=2.226e-04  max_consensus=3.940e-02  stopped=6/10
+[13:00:03]   observer | cycle=640  mean_gap=1.320e-04  max_gap=2.336e-04  max_consensus=3.946e-02  stopped=6/10
+[13:00:04]   observer | cycle=650  mean_gap=1.286e-04  max_gap=2.346e-04  max_consensus=3.954e-02  stopped=6/10
+[13:00:06]   observer | cycle=660  mean_gap=1.316e-04  max_gap=2.356e-04  max_consensus=3.954e-02  stopped=6/10
+[13:00:07]   observer | cycle=670  mean_gap=1.337e-04  max_gap=2.409e-04  max_consensus=3.963e-02  stopped=6/10
+[13:00:08]   observer | cycle=680  mean_gap=1.346e-04  max_gap=2.528e-04  max_consensus=3.996e-02  stopped=6/10
+[13:00:09]   observer | cycle=690  mean_gap=1.323e-04  max_gap=2.458e-04  max_consensus=4.019e-02  stopped=6/10
+[13:00:10]   observer | cycle=700  mean_gap=1.372e-04  max_gap=2.731e-04  max_consensus=4.038e-02  stopped=6/10
+[13:00:12]   observer | cycle=710  mean_gap=1.338e-04  max_gap=2.423e-04  max_consensus=4.014e-02  stopped=6/10
+[13:00:13]   observer | cycle=720  mean_gap=1.371e-04  max_gap=2.465e-04  max_consensus=4.058e-02  stopped=6/10
+[13:00:14]   observer | cycle=730  mean_gap=1.358e-04  max_gap=2.556e-04  max_consensus=4.063e-02  stopped=6/10
+[13:00:16]   observer | cycle=740  mean_gap=1.379e-04  max_gap=2.786e-04  max_consensus=4.056e-02  stopped=6/10
+[13:00:17]   observer | cycle=750  mean_gap=1.341e-04  max_gap=2.582e-04  max_consensus=4.027e-02  stopped=6/10
+[13:00:18]   observer | cycle=760  mean_gap=1.384e-04  max_gap=2.433e-04  max_consensus=4.031e-02  stopped=6/10
+[13:00:19]   observer | cycle=770  mean_gap=1.374e-04  max_gap=2.420e-04  max_consensus=4.065e-02  stopped=6/10
+[13:00:21]   observer | cycle=780  mean_gap=1.315e-04  max_gap=2.263e-04  max_consensus=4.062e-02  stopped=6/10
+[13:00:22]   observer | cycle=790  mean_gap=1.352e-04  max_gap=2.513e-04  max_consensus=4.117e-02  stopped=6/10
+[13:00:23]   observer | cycle=800  mean_gap=1.399e-04  max_gap=2.430e-04  max_consensus=4.111e-02  stopped=6/10
+[13:00:24]   observer | cycle=810  mean_gap=1.352e-04  max_gap=2.244e-04  max_consensus=4.102e-02  stopped=6/10
+[13:00:26]   observer | cycle=820  mean_gap=1.358e-04  max_gap=2.212e-04  max_consensus=4.125e-02  stopped=6/10
+[13:00:27]   observer | cycle=830  mean_gap=1.363e-04  max_gap=2.631e-04  max_consensus=4.147e-02  stopped=6/10
+[13:00:28]   observer | cycle=840  mean_gap=1.381e-04  max_gap=2.510e-04  max_consensus=4.140e-02  stopped=6/10
+[13:00:30]   observer | cycle=850  mean_gap=1.345e-04  max_gap=2.322e-04  max_consensus=4.170e-02  stopped=6/10
+[13:00:31]   observer | cycle=860  mean_gap=1.395e-04  max_gap=2.517e-04  max_consensus=4.148e-02  stopped=6/10
+[13:00:32]   observer | cycle=870  mean_gap=1.385e-04  max_gap=2.566e-04  max_consensus=4.165e-02  stopped=6/10
+[13:00:34]   observer | cycle=880  mean_gap=1.318e-04  max_gap=2.284e-04  max_consensus=4.173e-02  stopped=6/10
+[13:00:35]   observer | cycle=890  mean_gap=1.362e-04  max_gap=2.291e-04  max_consensus=4.180e-02  stopped=6/10
+[13:00:37]   observer | cycle=900  mean_gap=1.354e-04  max_gap=2.534e-04  max_consensus=4.177e-02  stopped=6/10
+[13:00:38]   observer | cycle=910  mean_gap=1.361e-04  max_gap=2.429e-04  max_consensus=4.182e-02  stopped=6/10
+[13:00:39]   observer | cycle=920  mean_gap=1.368e-04  max_gap=2.404e-04  max_consensus=4.195e-02  stopped=6/10
+[13:00:40]   observer | cycle=930  mean_gap=1.387e-04  max_gap=2.602e-04  max_consensus=4.224e-02  stopped=6/10
+[13:00:42]   observer | cycle=940  mean_gap=1.376e-04  max_gap=2.732e-04  max_consensus=4.214e-02  stopped=6/10
+[13:00:43]   observer | cycle=950  mean_gap=1.336e-04  max_gap=2.553e-04  max_consensus=4.204e-02  stopped=6/10
+[13:00:44]   observer | cycle=960  mean_gap=1.359e-04  max_gap=2.610e-04  max_consensus=4.195e-02  stopped=6/10
+[13:00:46]   observer | cycle=970  mean_gap=1.358e-04  max_gap=2.475e-04  max_consensus=4.221e-02  stopped=6/10
+[13:00:47]   observer | cycle=980  mean_gap=1.337e-04  max_gap=2.391e-04  max_consensus=4.216e-02  stopped=6/10
+[13:00:48]   observer | cycle=990  mean_gap=1.359e-04  max_gap=2.447e-04  max_consensus=4.236e-02  stopped=6/10
+[13:00:50]   observer | cycle=1000  mean_gap=1.334e-04  max_gap=2.261e-04  max_consensus=4.240e-02  stopped=6/10
+[13:00:51]   observer | cycle=1010  mean_gap=1.322e-04  max_gap=2.352e-04  max_consensus=4.257e-02  stopped=6/10
+[13:00:53]   observer | cycle=1020  mean_gap=1.345e-04  max_gap=2.565e-04  max_consensus=4.293e-02  stopped=6/10
+[13:00:54]   observer | cycle=1030  mean_gap=1.337e-04  max_gap=2.377e-04  max_consensus=4.295e-02  stopped=6/10
+[13:00:56]   observer | cycle=1040  mean_gap=1.360e-04  max_gap=2.598e-04  max_consensus=4.294e-02  stopped=6/10
+[13:00:57]   observer | cycle=1050  mean_gap=1.305e-04  max_gap=2.258e-04  max_consensus=4.289e-02  stopped=6/10
+[13:00:59]   observer | cycle=1060  mean_gap=1.332e-04  max_gap=2.343e-04  max_consensus=4.317e-02  stopped=6/10
+[13:01:00]   observer | cycle=1070  mean_gap=1.331e-04  max_gap=2.333e-04  max_consensus=4.329e-02  stopped=6/10
+[13:01:02]   observer | cycle=1080  mean_gap=1.316e-04  max_gap=2.323e-04  max_consensus=4.307e-02  stopped=6/10
+[13:01:03]   observer | cycle=1090  mean_gap=1.314e-04  max_gap=2.253e-04  max_consensus=4.299e-02  stopped=6/10
+[13:01:05]   observer | cycle=1100  mean_gap=1.348e-04  max_gap=2.399e-04  max_consensus=4.363e-02  stopped=6/10
+[13:01:06]   observer | cycle=1110  mean_gap=1.328e-04  max_gap=2.327e-04  max_consensus=4.390e-02  stopped=6/10
+[13:01:08]   observer | cycle=1120  mean_gap=1.351e-04  max_gap=2.420e-04  max_consensus=4.388e-02  stopped=6/10
+[13:01:09]   observer | cycle=1130  mean_gap=1.336e-04  max_gap=2.251e-04  max_consensus=4.412e-02  stopped=6/10
+[13:01:11]   observer | cycle=1140  mean_gap=1.360e-04  max_gap=2.372e-04  max_consensus=4.420e-02  stopped=6/10
+[13:01:11]   observer | cycle=1140  1 node(s) stopped on stall (rel_change < 0.001)
+[13:01:12]   observer | cycle=1150  mean_gap=1.349e-04  max_gap=2.424e-04  max_consensus=4.442e-02  stopped=7/10
+[13:01:13]   observer | cycle=1160  mean_gap=1.356e-04  max_gap=2.440e-04  max_consensus=4.449e-02  stopped=7/10
+[13:01:13]   observer | cycle=1160  3 node(s) stopped on stall (rel_change < 0.001)
+[13:01:13]      cdsim | Convergence threshold met ！ stopping at cycle 1160
+[13:01:13]      cdsim | Simulation finished after 1161 cycle(s)
+[13:01:13]       main | Training complete
+[13:01:13]       sdca | Node 0 test accuracy = 0.8498
+[13:01:13]       sdca | Node 1 test accuracy = 0.8509
+[13:01:13]       sdca | Node 2 test accuracy = 0.8508
+[13:01:13]       sdca | Node 3 test accuracy = 0.8503
+[13:01:13]       sdca | Node 4 test accuracy = 0.8499
+[13:01:13]       sdca | Node 5 test accuracy = 0.8500
+[13:01:13]       sdca | Node 6 test accuracy = 0.8499
+[13:01:13]       sdca | Node 7 test accuracy = 0.8496
+[13:01:13]       sdca | Node 8 test accuracy = 0.8497
+[13:01:13]       sdca | Node 9 test accuracy = 0.8498
+[13:01:13]       sdca | Average test accuracy across nodes = 0.8501
+[13:01:13]       sdca | Total communication = 180,681,000 bytes (180.68 MB) over 10 nodes
+[13:01:13]       sdca | Node stop cycles: [490, 1160, 1160, 1160, 500, 1140, 510, 590, 530, 520]
+[13:01:13]       sdca | Node stop reasons: ['gap', 'stall', 'stall', 'stall', 'gap', 'stall', 'gap', 'gap', 'gap', 'gap']
+[13:01:13]       main | sdca metrics ★ D:\LocalLLM\jobs\runs\950a9668-0013-41cb-be9b-752a6ac4b44e\work\results\fdr_full_2026-10-06\a9a\sdca_metrics.json
+[13:01:13]       main | === FDR_SVM ===
+[13:01:13]       init | Node 0 loaded ！ 3257 local samples
+[13:01:13]       init | Node 1 loaded ！ 3256 local samples
+[13:01:13]       init | Node 2 loaded ！ 3256 local samples
+[13:01:13]       init | Node 3 loaded ！ 3256 local samples
+[13:01:13]       init | Node 4 loaded ！ 3256 local samples
+[13:01:13]       init | Node 5 loaded ！ 3256 local samples
+[13:01:13]       init | Node 6 loaded ！ 3256 local samples
+[13:01:13]       init | Node 7 loaded ！ 3256 local samples
+[13:01:13]       init | Node 8 loaded ！ 3256 local samples
+[13:01:13]       init | Node 9 loaded ！ 3256 local samples
+[13:01:13]      cdsim | Initialised ！ 10 nodes, 5000 cycles max
+[13:01:13]   observer | cycle=0  mean_rel_change=nan  max_consensus=2.712e-01  stopped=0/10
+[13:01:13]   observer | cycle=10  mean_rel_change=1.580e+00  max_consensus=2.660e-01  stopped=0/10
+[13:01:14]   observer | cycle=20  mean_rel_change=2.939e-01  max_consensus=2.248e-01  stopped=0/10
+[13:01:14]   observer | cycle=30  mean_rel_change=2.387e-01  max_consensus=2.305e-01  stopped=0/10
+[13:01:14]   observer | cycle=40  mean_rel_change=1.764e-01  max_consensus=2.219e-01  stopped=0/10
+[13:01:14]   observer | cycle=50  mean_rel_change=1.789e-01  max_consensus=2.328e-01  stopped=0/10
+[13:01:14]   observer | cycle=60  mean_rel_change=1.823e-01  max_consensus=2.297e-01  stopped=0/10
+[13:01:14]   observer | cycle=70  mean_rel_change=1.826e-01  max_consensus=2.390e-01  stopped=0/10
+[13:01:14]   observer | cycle=80  mean_rel_change=1.760e-01  max_consensus=2.246e-01  stopped=0/10
+[13:01:14]   observer | cycle=90  mean_rel_change=1.836e-01  max_consensus=2.361e-01  stopped=0/10
+[13:01:15]   observer | cycle=100  mean_rel_change=1.865e-01  max_consensus=2.258e-01  stopped=0/10
+[13:01:15]   observer | cycle=110  mean_rel_change=1.954e-01  max_consensus=2.591e-01  stopped=0/10
+[13:01:15]   observer | cycle=120  mean_rel_change=1.897e-01  max_consensus=2.594e-01  stopped=0/10
+[13:01:15]   observer | cycle=130  mean_rel_change=1.928e-01  max_consensus=2.406e-01  stopped=0/10
+[13:01:15]   observer | cycle=140  mean_rel_change=1.835e-01  max_consensus=2.437e-01  stopped=0/10
+[13:01:15]   observer | cycle=150  mean_rel_change=1.780e-01  max_consensus=2.351e-01  stopped=0/10
+[13:01:15]   observer | cycle=160  mean_rel_change=1.912e-01  max_consensus=2.247e-01  stopped=0/10
+[13:01:16]   observer | cycle=170  mean_rel_change=1.732e-01  max_consensus=2.332e-01  stopped=0/10
+[13:01:16]   observer | cycle=180  mean_rel_change=1.967e-01  max_consensus=2.023e-01  stopped=0/10
+[13:01:16]   observer | cycle=190  mean_rel_change=1.992e-01  max_consensus=2.287e-01  stopped=0/10
+[13:01:16]   observer | cycle=200  mean_rel_change=1.879e-01  max_consensus=2.383e-01  stopped=0/10
+[13:01:16]   observer | cycle=210  mean_rel_change=1.944e-01  max_consensus=2.366e-01  stopped=0/10
+[13:01:16]   observer | cycle=220  mean_rel_change=1.990e-01  max_consensus=2.510e-01  stopped=0/10
+[13:01:16]   observer | cycle=230  mean_rel_change=2.020e-01  max_consensus=2.582e-01  stopped=0/10
+[13:01:17]   observer | cycle=240  mean_rel_change=2.096e-01  max_consensus=2.857e-01  stopped=0/10
+[13:01:17]   observer | cycle=250  mean_rel_change=1.969e-01  max_consensus=2.939e-01  stopped=0/10
+[13:01:17]   observer | cycle=260  mean_rel_change=1.804e-01  max_consensus=2.348e-01  stopped=0/10
+[13:01:17]   observer | cycle=270  mean_rel_change=1.832e-01  max_consensus=2.393e-01  stopped=0/10
+[13:01:17]   observer | cycle=280  mean_rel_change=2.097e-01  max_consensus=2.066e-01  stopped=0/10
+[13:01:17]   observer | cycle=290  mean_rel_change=1.958e-01  max_consensus=3.238e-01  stopped=0/10
+[13:01:17]   observer | cycle=300  mean_rel_change=2.142e-01  max_consensus=2.418e-01  stopped=0/10
+[13:01:18]   observer | cycle=310  mean_rel_change=1.846e-01  max_consensus=2.966e-01  stopped=0/10
+[13:01:18]   observer | cycle=320  mean_rel_change=1.939e-01  max_consensus=2.289e-01  stopped=0/10
+[13:01:18]   observer | cycle=330  mean_rel_change=1.844e-01  max_consensus=2.774e-01  stopped=0/10
+[13:01:18]   observer | cycle=340  mean_rel_change=1.978e-01  max_consensus=2.803e-01  stopped=0/10
+[13:01:18]   observer | cycle=350  mean_rel_change=1.915e-01  max_consensus=2.682e-01  stopped=0/10
+[13:01:18]   observer | cycle=360  mean_rel_change=1.834e-01  max_consensus=2.457e-01  stopped=0/10
+[13:01:18]   observer | cycle=370  mean_rel_change=1.850e-01  max_consensus=2.277e-01  stopped=0/10
+[13:01:18]   observer | cycle=380  mean_rel_change=2.005e-01  max_consensus=2.086e-01  stopped=0/10
+[13:01:19]   observer | cycle=390  mean_rel_change=1.867e-01  max_consensus=2.289e-01  stopped=0/10
+[13:01:19]   observer | cycle=400  mean_rel_change=1.923e-01  max_consensus=2.668e-01  stopped=0/10
+[13:01:19]   observer | cycle=410  mean_rel_change=1.907e-01  max_consensus=2.612e-01  stopped=0/10
+[13:01:19]   observer | cycle=420  mean_rel_change=1.832e-01  max_consensus=2.678e-01  stopped=0/10
+[13:01:19]   observer | cycle=430  mean_rel_change=1.886e-01  max_consensus=2.245e-01  stopped=0/10
+[13:01:19]   observer | cycle=440  mean_rel_change=1.747e-01  max_consensus=2.650e-01  stopped=0/10
+[13:01:19]   observer | cycle=450  mean_rel_change=1.770e-01  max_consensus=2.207e-01  stopped=0/10
+[13:01:19]   observer | cycle=460  mean_rel_change=1.773e-01  max_consensus=2.130e-01  stopped=0/10
+[13:01:20]   observer | cycle=470  mean_rel_change=1.830e-01  max_consensus=2.269e-01  stopped=0/10
+[13:01:20]   observer | cycle=480  mean_rel_change=1.751e-01  max_consensus=2.298e-01  stopped=0/10
+[13:01:20]   observer | cycle=490  mean_rel_change=1.764e-01  max_consensus=2.464e-01  stopped=0/10
+[13:01:20]   observer | cycle=500  mean_rel_change=1.856e-01  max_consensus=2.295e-01  stopped=0/10
+[13:01:20]   observer | cycle=510  mean_rel_change=2.169e-01  max_consensus=2.549e-01  stopped=0/10
+[13:01:20]   observer | cycle=520  mean_rel_change=1.994e-01  max_consensus=2.289e-01  stopped=0/10
+[13:01:21]   observer | cycle=530  mean_rel_change=2.072e-01  max_consensus=2.152e-01  stopped=0/10
+[13:01:21]   observer | cycle=540  mean_rel_change=1.785e-01  max_consensus=2.087e-01  stopped=0/10
+[13:01:21]   observer | cycle=550  mean_rel_change=1.927e-01  max_consensus=2.854e-01  stopped=0/10
+[13:01:21]   observer | cycle=560  mean_rel_change=1.769e-01  max_consensus=2.436e-01  stopped=0/10
+[13:01:21]   observer | cycle=570  mean_rel_change=1.888e-01  max_consensus=2.597e-01  stopped=0/10
+[13:01:21]   observer | cycle=580  mean_rel_change=2.155e-01  max_consensus=2.501e-01  stopped=0/10
+[13:01:21]   observer | cycle=590  mean_rel_change=1.895e-01  max_consensus=2.088e-01  stopped=0/10
+[13:01:22]   observer | cycle=600  mean_rel_change=1.933e-01  max_consensus=2.545e-01  stopped=0/10
+[13:01:22]   observer | cycle=610  mean_rel_change=1.926e-01  max_consensus=2.700e-01  stopped=0/10
+[13:01:22]   observer | cycle=620  mean_rel_change=2.039e-01  max_consensus=2.784e-01  stopped=0/10
+[13:01:22]   observer | cycle=630  mean_rel_change=1.864e-01  max_consensus=2.102e-01  stopped=0/10
+[13:01:22]   observer | cycle=640  mean_rel_change=1.879e-01  max_consensus=2.539e-01  stopped=0/10
+[13:01:22]   observer | cycle=650  mean_rel_change=1.964e-01  max_consensus=2.427e-01  stopped=0/10
+[13:01:22]   observer | cycle=660  mean_rel_change=1.874e-01  max_consensus=2.212e-01  stopped=0/10
+[13:01:23]   observer | cycle=670  mean_rel_change=1.945e-01  max_consensus=2.506e-01  stopped=0/10
+[13:01:23]   observer | cycle=680  mean_rel_change=1.923e-01  max_consensus=2.223e-01  stopped=0/10
+[13:01:23]   observer | cycle=690  mean_rel_change=1.826e-01  max_consensus=2.325e-01  stopped=0/10
+[13:01:23]   observer | cycle=700  mean_rel_change=2.115e-01  max_consensus=2.396e-01  stopped=0/10
+[13:01:23]   observer | cycle=710  mean_rel_change=2.021e-01  max_consensus=2.327e-01  stopped=0/10
+[13:01:23]   observer | cycle=720  mean_rel_change=1.873e-01  max_consensus=2.810e-01  stopped=0/10
+[13:01:24]   observer | cycle=730  mean_rel_change=1.820e-01  max_consensus=1.929e-01  stopped=0/10
+[13:01:24]   observer | cycle=740  mean_rel_change=1.869e-01  max_consensus=2.539e-01  stopped=0/10
+[13:01:24]   observer | cycle=750  mean_rel_change=1.740e-01  max_consensus=2.683e-01  stopped=0/10
+[13:01:24]   observer | cycle=760  mean_rel_change=2.177e-01  max_consensus=2.735e-01  stopped=0/10
+[13:01:24]   observer | cycle=770  mean_rel_change=1.920e-01  max_consensus=2.948e-01  stopped=0/10
+[13:01:24]   observer | cycle=780  mean_rel_change=1.838e-01  max_consensus=2.365e-01  stopped=0/10
+[13:01:24]   observer | cycle=790  mean_rel_change=1.911e-01  max_consensus=2.213e-01  stopped=0/10
+[13:01:25]   observer | cycle=800  mean_rel_change=1.822e-01  max_consensus=2.419e-01  stopped=0/10
+[13:01:25]   observer | cycle=810  mean_rel_change=1.895e-01  max_consensus=2.124e-01  stopped=0/10
+[13:01:25]   observer | cycle=820  mean_rel_change=1.804e-01  max_consensus=2.476e-01  stopped=0/10
+[13:01:25]   observer | cycle=830  mean_rel_change=1.821e-01  max_consensus=2.390e-01  stopped=0/10
+[13:01:25]   observer | cycle=840  mean_rel_change=2.012e-01  max_consensus=2.192e-01  stopped=0/10
+[13:01:25]   observer | cycle=850  mean_rel_change=1.859e-01  max_consensus=2.008e-01  stopped=0/10
+[13:01:25]   observer | cycle=860  mean_rel_change=1.787e-01  max_consensus=2.365e-01  stopped=0/10
+[13:01:26]   observer | cycle=870  mean_rel_change=2.045e-01  max_consensus=2.168e-01  stopped=0/10
+[13:01:26]   observer | cycle=880  mean_rel_change=1.986e-01  max_consensus=2.619e-01  stopped=0/10
+[13:01:26]   observer | cycle=890  mean_rel_change=1.956e-01  max_consensus=2.216e-01  stopped=0/10
+[13:01:26]   observer | cycle=900  mean_rel_change=1.853e-01  max_consensus=2.610e-01  stopped=0/10
+[13:01:26]   observer | cycle=910  mean_rel_change=1.782e-01  max_consensus=2.837e-01  stopped=0/10
+[13:01:26]   observer | cycle=920  mean_rel_change=1.757e-01  max_consensus=1.926e-01  stopped=0/10
+[13:01:26]   observer | cycle=930  mean_rel_change=1.873e-01  max_consensus=2.113e-01  stopped=0/10
+[13:01:26]   observer | cycle=940  mean_rel_change=2.016e-01  max_consensus=2.381e-01  stopped=0/10
+[13:01:27]   observer | cycle=950  mean_rel_change=1.865e-01  max_consensus=2.350e-01  stopped=0/10
+[13:01:27]   observer | cycle=960  mean_rel_change=1.785e-01  max_consensus=2.395e-01  stopped=0/10
+[13:01:27]   observer | cycle=970  mean_rel_change=1.920e-01  max_consensus=2.119e-01  stopped=0/10
+[13:01:27]   observer | cycle=980  mean_rel_change=1.959e-01  max_consensus=2.288e-01  stopped=0/10
+[13:01:27]   observer | cycle=990  mean_rel_change=1.992e-01  max_consensus=2.188e-01  stopped=0/10
+[13:01:27]   observer | cycle=1000  mean_rel_change=1.812e-01  max_consensus=2.405e-01  stopped=0/10
+[13:01:28]   observer | cycle=1010  mean_rel_change=1.826e-01  max_consensus=2.320e-01  stopped=0/10
+[13:01:28]   observer | cycle=1020  mean_rel_change=1.814e-01  max_consensus=2.466e-01  stopped=0/10
+[13:01:28]   observer | cycle=1030  mean_rel_change=1.824e-01  max_consensus=2.502e-01  stopped=0/10
+[13:01:28]   observer | cycle=1040  mean_rel_change=1.930e-01  max_consensus=2.584e-01  stopped=0/10
+[13:01:28]   observer | cycle=1050  mean_rel_change=2.112e-01  max_consensus=2.368e-01  stopped=0/10
+[13:01:28]   observer | cycle=1060  mean_rel_change=1.898e-01  max_consensus=2.431e-01  stopped=0/10
+[13:01:28]   observer | cycle=1070  mean_rel_change=1.996e-01  max_consensus=3.090e-01  stopped=0/10
+[13:01:28]   observer | cycle=1080  mean_rel_change=1.957e-01  max_consensus=2.733e-01  stopped=0/10
+[13:01:29]   observer | cycle=1090  mean_rel_change=1.896e-01  max_consensus=2.246e-01  stopped=0/10
+[13:01:29]   observer | cycle=1100  mean_rel_change=1.966e-01  max_consensus=2.509e-01  stopped=0/10
+[13:01:29]   observer | cycle=1110  mean_rel_change=1.964e-01  max_consensus=2.204e-01  stopped=0/10
+[13:01:29]   observer | cycle=1120  mean_rel_change=1.891e-01  max_consensus=2.307e-01  stopped=0/10
+[13:01:29]   observer | cycle=1130  mean_rel_change=1.800e-01  max_consensus=2.160e-01  stopped=0/10
+[13:01:29]   observer | cycle=1140  mean_rel_change=1.971e-01  max_consensus=2.270e-01  stopped=0/10
+[13:01:29]   observer | cycle=1150  mean_rel_change=1.945e-01  max_consensus=2.252e-01  stopped=0/10
+[13:01:30]   observer | cycle=1160  mean_rel_change=1.818e-01  max_consensus=2.387e-01  stopped=0/10
+[13:01:30]   observer | cycle=1170  mean_rel_change=1.857e-01  max_consensus=2.454e-01  stopped=0/10
+[13:01:30]   observer | cycle=1180  mean_rel_change=1.821e-01  max_consensus=2.113e-01  stopped=0/10
+[13:01:30]   observer | cycle=1190  mean_rel_change=1.886e-01  max_consensus=2.727e-01  stopped=0/10
+[13:01:30]   observer | cycle=1200  mean_rel_change=1.973e-01  max_consensus=2.456e-01  stopped=0/10
+[13:01:30]   observer | cycle=1210  mean_rel_change=1.957e-01  max_consensus=2.752e-01  stopped=0/10
+[13:01:31]   observer | cycle=1220  mean_rel_change=1.924e-01  max_consensus=2.088e-01  stopped=0/10
+[13:01:31]   observer | cycle=1230  mean_rel_change=2.082e-01  max_consensus=2.595e-01  stopped=0/10
+[13:01:31]   observer | cycle=1240  mean_rel_change=1.929e-01  max_consensus=2.417e-01  stopped=0/10
+[13:01:31]   observer | cycle=1250  mean_rel_change=1.913e-01  max_consensus=2.518e-01  stopped=0/10
+[13:01:31]   observer | cycle=1260  mean_rel_change=1.801e-01  max_consensus=2.012e-01  stopped=0/10
+[13:01:31]   observer | cycle=1270  mean_rel_change=1.757e-01  max_consensus=2.332e-01  stopped=0/10
+[13:01:31]   observer | cycle=1280  mean_rel_change=1.793e-01  max_consensus=2.764e-01  stopped=0/10
+[13:01:32]   observer | cycle=1290  mean_rel_change=1.887e-01  max_consensus=2.182e-01  stopped=0/10
+[13:01:32]   observer | cycle=1300  mean_rel_change=2.043e-01  max_consensus=2.162e-01  stopped=0/10
+[13:01:32]   observer | cycle=1310  mean_rel_change=1.837e-01  max_consensus=2.719e-01  stopped=0/10
+[13:01:32]   observer | cycle=1320  mean_rel_change=1.845e-01  max_consensus=3.426e-01  stopped=0/10
+[13:01:32]   observer | cycle=1330  mean_rel_change=1.740e-01  max_consensus=2.346e-01  stopped=0/10
+[13:01:32]   observer | cycle=1340  mean_rel_change=1.826e-01  max_consensus=2.348e-01  stopped=0/10
+[13:01:32]   observer | cycle=1350  mean_rel_change=2.008e-01  max_consensus=2.712e-01  stopped=0/10
+[13:01:33]   observer | cycle=1360  mean_rel_change=1.822e-01  max_consensus=2.393e-01  stopped=0/10
+[13:01:33]   observer | cycle=1370  mean_rel_change=2.037e-01  max_consensus=2.573e-01  stopped=0/10
+[13:01:33]   observer | cycle=1380  mean_rel_change=1.820e-01  max_consensus=2.253e-01  stopped=0/10
+[13:01:33]   observer | cycle=1390  mean_rel_change=1.825e-01  max_consensus=2.478e-01  stopped=0/10
+[13:01:33]   observer | cycle=1400  mean_rel_change=1.665e-01  max_consensus=2.334e-01  stopped=0/10
+[13:01:33]   observer | cycle=1410  mean_rel_change=1.912e-01  max_consensus=2.828e-01  stopped=0/10
+[13:01:33]   observer | cycle=1420  mean_rel_change=1.915e-01  max_consensus=2.480e-01  stopped=0/10
+[13:01:34]   observer | cycle=1430  mean_rel_change=1.804e-01  max_consensus=2.954e-01  stopped=0/10
+[13:01:34]   observer | cycle=1440  mean_rel_change=1.967e-01  max_consensus=2.407e-01  stopped=0/10
+[13:01:34]   observer | cycle=1450  mean_rel_change=1.980e-01  max_consensus=2.380e-01  stopped=0/10
+[13:01:34]   observer | cycle=1460  mean_rel_change=1.846e-01  max_consensus=2.329e-01  stopped=0/10
+[13:01:34]   observer | cycle=1470  mean_rel_change=1.747e-01  max_consensus=2.506e-01  stopped=0/10
+[13:01:34]   observer | cycle=1480  mean_rel_change=2.062e-01  max_consensus=2.614e-01  stopped=0/10
+[13:01:34]   observer | cycle=1490  mean_rel_change=1.851e-01  max_consensus=2.273e-01  stopped=0/10
+[13:01:35]   observer | cycle=1500  mean_rel_change=1.790e-01  max_consensus=2.119e-01  stopped=0/10
+[13:01:35]   observer | cycle=1510  mean_rel_change=1.801e-01  max_consensus=2.427e-01  stopped=0/10
+[13:01:35]   observer | cycle=1520  mean_rel_change=1.951e-01  max_consensus=2.500e-01  stopped=0/10
+[13:01:35]   observer | cycle=1530  mean_rel_change=1.928e-01  max_consensus=2.519e-01  stopped=0/10
+[13:01:35]   observer | cycle=1540  mean_rel_change=1.900e-01  max_consensus=2.215e-01  stopped=0/10
+[13:01:35]   observer | cycle=1550  mean_rel_change=1.999e-01  max_consensus=2.246e-01  stopped=0/10
+[13:01:35]   observer | cycle=1560  mean_rel_change=1.848e-01  max_consensus=2.275e-01  stopped=0/10
+[13:01:35]   observer | cycle=1570  mean_rel_change=1.770e-01  max_consensus=2.583e-01  stopped=0/10
+[13:01:36]   observer | cycle=1580  mean_rel_change=1.805e-01  max_consensus=2.311e-01  stopped=0/10
+[13:01:36]   observer | cycle=1590  mean_rel_change=1.731e-01  max_consensus=2.508e-01  stopped=0/10
+[13:01:36]   observer | cycle=1600  mean_rel_change=1.805e-01  max_consensus=2.204e-01  stopped=0/10
+[13:01:36]   observer | cycle=1610  mean_rel_change=1.881e-01  max_consensus=2.144e-01  stopped=0/10
+[13:01:36]   observer | cycle=1620  mean_rel_change=1.868e-01  max_consensus=2.515e-01  stopped=0/10
+[13:01:36]   observer | cycle=1630  mean_rel_change=1.913e-01  max_consensus=2.163e-01  stopped=0/10
+[13:01:37]   observer | cycle=1640  mean_rel_change=1.784e-01  max_consensus=2.911e-01  stopped=0/10
+[13:01:37]   observer | cycle=1650  mean_rel_change=1.838e-01  max_consensus=2.176e-01  stopped=0/10
+[13:01:37]   observer | cycle=1660  mean_rel_change=2.051e-01  max_consensus=2.234e-01  stopped=0/10
+[13:01:37]   observer | cycle=1670  mean_rel_change=1.763e-01  max_consensus=2.194e-01  stopped=0/10
+[13:01:37]   observer | cycle=1680  mean_rel_change=1.883e-01  max_consensus=2.397e-01  stopped=0/10
+[13:01:37]   observer | cycle=1690  mean_rel_change=1.968e-01  max_consensus=2.125e-01  stopped=0/10
+[13:01:37]   observer | cycle=1700  mean_rel_change=1.947e-01  max_consensus=2.956e-01  stopped=0/10
+[13:01:38]   observer | cycle=1710  mean_rel_change=2.130e-01  max_consensus=2.361e-01  stopped=0/10
+[13:01:38]   observer | cycle=1720  mean_rel_change=1.884e-01  max_consensus=2.330e-01  stopped=0/10
+[13:01:38]   observer | cycle=1730  mean_rel_change=1.879e-01  max_consensus=2.772e-01  stopped=0/10
+[13:01:38]   observer | cycle=1740  mean_rel_change=2.017e-01  max_consensus=2.601e-01  stopped=0/10
+[13:01:38]   observer | cycle=1750  mean_rel_change=2.155e-01  max_consensus=2.565e-01  stopped=0/10
+[13:01:38]   observer | cycle=1760  mean_rel_change=1.933e-01  max_consensus=2.166e-01  stopped=0/10
+[13:01:38]   observer | cycle=1770  mean_rel_change=1.906e-01  max_consensus=2.776e-01  stopped=0/10
+[13:01:39]   observer | cycle=1780  mean_rel_change=2.001e-01  max_consensus=2.304e-01  stopped=0/10
+[13:01:39]   observer | cycle=1790  mean_rel_change=1.895e-01  max_consensus=2.736e-01  stopped=0/10
+[13:01:39]   observer | cycle=1800  mean_rel_change=1.846e-01  max_consensus=2.189e-01  stopped=0/10
+[13:01:39]   observer | cycle=1810  mean_rel_change=1.741e-01  max_consensus=2.078e-01  stopped=0/10
+[13:01:39]   observer | cycle=1820  mean_rel_change=1.996e-01  max_consensus=2.671e-01  stopped=0/10
+[13:01:39]   observer | cycle=1830  mean_rel_change=1.860e-01  max_consensus=2.631e-01  stopped=0/10
+[13:01:39]   observer | cycle=1840  mean_rel_change=1.907e-01  max_consensus=2.523e-01  stopped=0/10
+[13:01:40]   observer | cycle=1850  mean_rel_change=1.905e-01  max_consensus=2.644e-01  stopped=0/10
+[13:01:40]   observer | cycle=1860  mean_rel_change=2.057e-01  max_consensus=2.232e-01  stopped=0/10
+[13:01:40]   observer | cycle=1870  mean_rel_change=1.953e-01  max_consensus=2.653e-01  stopped=0/10
+[13:01:40]   observer | cycle=1880  mean_rel_change=1.841e-01  max_consensus=2.709e-01  stopped=0/10
+[13:01:40]   observer | cycle=1890  mean_rel_change=1.804e-01  max_consensus=2.254e-01  stopped=0/10
+[13:01:40]   observer | cycle=1900  mean_rel_change=1.870e-01  max_consensus=2.475e-01  stopped=0/10
+[13:01:40]   observer | cycle=1910  mean_rel_change=1.978e-01  max_consensus=2.137e-01  stopped=0/10
+[13:01:41]   observer | cycle=1920  mean_rel_change=2.031e-01  max_consensus=2.957e-01  stopped=0/10
+[13:01:41]   observer | cycle=1930  mean_rel_change=1.967e-01  max_consensus=2.360e-01  stopped=0/10
+[13:01:41]   observer | cycle=1940  mean_rel_change=1.918e-01  max_consensus=2.390e-01  stopped=0/10
+[13:01:41]   observer | cycle=1950  mean_rel_change=1.810e-01  max_consensus=2.399e-01  stopped=0/10
+[13:01:41]   observer | cycle=1960  mean_rel_change=1.735e-01  max_consensus=2.052e-01  stopped=0/10
+[13:01:41]   observer | cycle=1970  mean_rel_change=1.963e-01  max_consensus=2.538e-01  stopped=0/10
+[13:01:41]   observer | cycle=1980  mean_rel_change=1.934e-01  max_consensus=2.407e-01  stopped=0/10
+[13:01:42]   observer | cycle=1990  mean_rel_change=1.947e-01  max_consensus=2.160e-01  stopped=0/10
+[13:01:42]   observer | cycle=2000  mean_rel_change=1.806e-01  max_consensus=2.476e-01  stopped=0/10
+[13:01:42]   observer | cycle=2010  mean_rel_change=1.805e-01  max_consensus=2.384e-01  stopped=0/10
+[13:01:42]   observer | cycle=2020  mean_rel_change=1.769e-01  max_consensus=2.110e-01  stopped=0/10
+[13:01:42]   observer | cycle=2030  mean_rel_change=1.741e-01  max_consensus=2.224e-01  stopped=0/10
+[13:01:42]   observer | cycle=2040  mean_rel_change=2.024e-01  max_consensus=2.179e-01  stopped=0/10
+[13:01:43]   observer | cycle=2050  mean_rel_change=1.987e-01  max_consensus=2.578e-01  stopped=0/10
+[13:01:43]   observer | cycle=2060  mean_rel_change=1.895e-01  max_consensus=2.115e-01  stopped=0/10
+[13:01:43]   observer | cycle=2070  mean_rel_change=1.848e-01  max_consensus=2.605e-01  stopped=0/10
+[13:01:43]   observer | cycle=2080  mean_rel_change=1.785e-01  max_consensus=2.279e-01  stopped=0/10
+[13:01:43]   observer | cycle=2090  mean_rel_change=1.796e-01  max_consensus=2.319e-01  stopped=0/10
+[13:01:43]   observer | cycle=2100  mean_rel_change=1.965e-01  max_consensus=2.529e-01  stopped=0/10
+[13:01:43]   observer | cycle=2110  mean_rel_change=1.981e-01  max_consensus=3.025e-01  stopped=0/10
+[13:01:44]   observer | cycle=2120  mean_rel_change=1.990e-01  max_consensus=2.425e-01  stopped=0/10
+[13:01:44]   observer | cycle=2130  mean_rel_change=1.807e-01  max_consensus=2.595e-01  stopped=0/10
+[13:01:44]   observer | cycle=2140  mean_rel_change=1.802e-01  max_consensus=3.005e-01  stopped=0/10
+[13:01:44]   observer | cycle=2150  mean_rel_change=1.869e-01  max_consensus=2.266e-01  stopped=0/10
+[13:01:44]   observer | cycle=2160  mean_rel_change=1.865e-01  max_consensus=2.606e-01  stopped=0/10
+[13:01:44]   observer | cycle=2170  mean_rel_change=1.996e-01  max_consensus=2.385e-01  stopped=0/10
+[13:01:44]   observer | cycle=2180  mean_rel_change=1.903e-01  max_consensus=2.594e-01  stopped=0/10
+[13:01:45]   observer | cycle=2190  mean_rel_change=1.737e-01  max_consensus=2.325e-01  stopped=0/10
+[13:01:45]   observer | cycle=2200  mean_rel_change=1.705e-01  max_consensus=2.105e-01  stopped=0/10
+[13:01:45]   observer | cycle=2210  mean_rel_change=1.999e-01  max_consensus=2.498e-01  stopped=0/10
+[13:01:45]   observer | cycle=2220  mean_rel_change=2.025e-01  max_consensus=2.340e-01  stopped=0/10
+[13:01:45]   observer | cycle=2230  mean_rel_change=1.760e-01  max_consensus=2.042e-01  stopped=0/10
+[13:01:45]   observer | cycle=2240  mean_rel_change=1.731e-01  max_consensus=2.201e-01  stopped=0/10
+[13:01:45]   observer | cycle=2250  mean_rel_change=1.926e-01  max_consensus=2.516e-01  stopped=0/10
+[13:01:46]   observer | cycle=2260  mean_rel_change=1.954e-01  max_consensus=2.489e-01  stopped=0/10
+[13:01:46]   observer | cycle=2270  mean_rel_change=1.730e-01  max_consensus=2.420e-01  stopped=0/10
+[13:01:46]   observer | cycle=2280  mean_rel_change=1.910e-01  max_consensus=2.857e-01  stopped=0/10
+[13:01:46]   observer | cycle=2290  mean_rel_change=1.950e-01  max_consensus=2.183e-01  stopped=0/10
+[13:01:46]   observer | cycle=2300  mean_rel_change=1.642e-01  max_consensus=2.166e-01  stopped=0/10
+[13:01:46]   observer | cycle=2310  mean_rel_change=1.805e-01  max_consensus=2.330e-01  stopped=0/10
+[13:01:46]   observer | cycle=2320  mean_rel_change=1.787e-01  max_consensus=2.255e-01  stopped=0/10
+[13:01:47]   observer | cycle=2330  mean_rel_change=1.982e-01  max_consensus=3.365e-01  stopped=0/10
+[13:01:47]   observer | cycle=2340  mean_rel_change=1.877e-01  max_consensus=2.987e-01  stopped=0/10
+[13:01:47]   observer | cycle=2350  mean_rel_change=2.012e-01  max_consensus=2.247e-01  stopped=0/10
+[13:01:47]   observer | cycle=2360  mean_rel_change=1.952e-01  max_consensus=2.740e-01  stopped=0/10
+[13:01:47]   observer | cycle=2370  mean_rel_change=1.924e-01  max_consensus=2.708e-01  stopped=0/10
+[13:01:47]   observer | cycle=2380  mean_rel_change=1.798e-01  max_consensus=2.441e-01  stopped=0/10
+[13:01:48]   observer | cycle=2390  mean_rel_change=1.804e-01  max_consensus=2.277e-01  stopped=0/10
+[13:01:48]   observer | cycle=2400  mean_rel_change=1.861e-01  max_consensus=2.361e-01  stopped=0/10
+[13:01:48]   observer | cycle=2410  mean_rel_change=1.904e-01  max_consensus=3.348e-01  stopped=0/10
+[13:01:48]   observer | cycle=2420  mean_rel_change=1.854e-01  max_consensus=2.065e-01  stopped=0/10
+[13:01:48]   observer | cycle=2430  mean_rel_change=1.745e-01  max_consensus=2.155e-01  stopped=0/10
+[13:01:48]   observer | cycle=2440  mean_rel_change=1.855e-01  max_consensus=2.481e-01  stopped=0/10
+[13:01:48]   observer | cycle=2450  mean_rel_change=1.944e-01  max_consensus=3.139e-01  stopped=0/10
+[13:01:49]   observer | cycle=2460  mean_rel_change=2.012e-01  max_consensus=2.598e-01  stopped=0/10
+[13:01:49]   observer | cycle=2470  mean_rel_change=2.109e-01  max_consensus=2.586e-01  stopped=0/10
+[13:01:49]   observer | cycle=2480  mean_rel_change=1.788e-01  max_consensus=2.499e-01  stopped=0/10
+[13:01:49]   observer | cycle=2490  mean_rel_change=2.008e-01  max_consensus=2.557e-01  stopped=0/10
+[13:01:49]   observer | cycle=2500  mean_rel_change=1.762e-01  max_consensus=2.356e-01  stopped=0/10
+[13:01:49]   observer | cycle=2510  mean_rel_change=2.076e-01  max_consensus=2.878e-01  stopped=0/10
+[13:01:49]   observer | cycle=2520  mean_rel_change=2.146e-01  max_consensus=2.105e-01  stopped=0/10
+[13:01:50]   observer | cycle=2530  mean_rel_change=1.827e-01  max_consensus=2.564e-01  stopped=0/10
+[13:01:50]   observer | cycle=2540  mean_rel_change=1.994e-01  max_consensus=2.564e-01  stopped=0/10
+[13:01:50]   observer | cycle=2550  mean_rel_change=1.869e-01  max_consensus=2.391e-01  stopped=0/10
+[13:01:50]   observer | cycle=2560  mean_rel_change=1.882e-01  max_consensus=2.728e-01  stopped=0/10
+[13:01:50]   observer | cycle=2570  mean_rel_change=1.727e-01  max_consensus=2.283e-01  stopped=0/10
+[13:01:50]   observer | cycle=2580  mean_rel_change=1.985e-01  max_consensus=2.385e-01  stopped=0/10
+[13:01:50]   observer | cycle=2590  mean_rel_change=1.783e-01  max_consensus=2.259e-01  stopped=0/10
+[13:01:51]   observer | cycle=2600  mean_rel_change=1.724e-01  max_consensus=2.118e-01  stopped=0/10
+[13:01:51]   observer | cycle=2610  mean_rel_change=1.901e-01  max_consensus=2.513e-01  stopped=0/10
+[13:01:51]   observer | cycle=2620  mean_rel_change=1.955e-01  max_consensus=2.373e-01  stopped=0/10
+[13:01:51]   observer | cycle=2630  mean_rel_change=1.877e-01  max_consensus=2.626e-01  stopped=0/10
+[13:01:51]   observer | cycle=2640  mean_rel_change=1.809e-01  max_consensus=2.439e-01  stopped=0/10
+[13:01:51]   observer | cycle=2650  mean_rel_change=1.808e-01  max_consensus=2.454e-01  stopped=0/10
+[13:01:51]   observer | cycle=2660  mean_rel_change=1.795e-01  max_consensus=2.610e-01  stopped=0/10
+[13:01:52]   observer | cycle=2670  mean_rel_change=1.757e-01  max_consensus=2.338e-01  stopped=0/10
+[13:01:52]   observer | cycle=2680  mean_rel_change=1.940e-01  max_consensus=3.128e-01  stopped=0/10
+[13:01:52]   observer | cycle=2690  mean_rel_change=1.852e-01  max_consensus=2.214e-01  stopped=0/10
+[13:01:52]   observer | cycle=2700  mean_rel_change=2.027e-01  max_consensus=2.114e-01  stopped=0/10
+[13:01:52]   observer | cycle=2710  mean_rel_change=2.075e-01  max_consensus=2.406e-01  stopped=0/10
+[13:01:52]   observer | cycle=2720  mean_rel_change=1.829e-01  max_consensus=2.508e-01  stopped=0/10
+[13:01:52]   observer | cycle=2730  mean_rel_change=1.975e-01  max_consensus=2.496e-01  stopped=0/10
+[13:01:53]   observer | cycle=2740  mean_rel_change=1.881e-01  max_consensus=1.931e-01  stopped=0/10
+[13:01:53]   observer | cycle=2750  mean_rel_change=1.699e-01  max_consensus=2.288e-01  stopped=0/10
+[13:01:53]   observer | cycle=2760  mean_rel_change=1.911e-01  max_consensus=3.235e-01  stopped=0/10
+[13:01:53]   observer | cycle=2770  mean_rel_change=1.926e-01  max_consensus=2.328e-01  stopped=0/10
+[13:01:53]   observer | cycle=2780  mean_rel_change=1.874e-01  max_consensus=2.284e-01  stopped=0/10
+[13:01:53]   observer | cycle=2790  mean_rel_change=1.831e-01  max_consensus=2.291e-01  stopped=0/10
+[13:01:53]   observer | cycle=2800  mean_rel_change=1.936e-01  max_consensus=2.149e-01  stopped=0/10
+[13:01:54]   observer | cycle=2810  mean_rel_change=1.816e-01  max_consensus=2.448e-01  stopped=0/10
+[13:01:54]   observer | cycle=2820  mean_rel_change=1.908e-01  max_consensus=2.333e-01  stopped=0/10
+[13:01:54]   observer | cycle=2830  mean_rel_change=1.788e-01  max_consensus=2.133e-01  stopped=0/10
+[13:01:54]   observer | cycle=2840  mean_rel_change=1.881e-01  max_consensus=2.291e-01  stopped=0/10
+[13:01:54]   observer | cycle=2850  mean_rel_change=1.762e-01  max_consensus=2.339e-01  stopped=0/10
+[13:01:54]   observer | cycle=2860  mean_rel_change=1.869e-01  max_consensus=2.622e-01  stopped=0/10
+[13:01:54]   observer | cycle=2870  mean_rel_change=1.841e-01  max_consensus=2.435e-01  stopped=0/10
+[13:01:55]   observer | cycle=2880  mean_rel_change=1.820e-01  max_consensus=2.986e-01  stopped=0/10
+[13:01:55]   observer | cycle=2890  mean_rel_change=1.966e-01  max_consensus=2.142e-01  stopped=0/10
+[13:01:55]   observer | cycle=2900  mean_rel_change=1.995e-01  max_consensus=2.702e-01  stopped=0/10
+[13:01:55]   observer | cycle=2910  mean_rel_change=1.965e-01  max_consensus=2.711e-01  stopped=0/10
+[13:01:55]   observer | cycle=2920  mean_rel_change=1.934e-01  max_consensus=2.492e-01  stopped=0/10
+[13:01:55]   observer | cycle=2930  mean_rel_change=1.906e-01  max_consensus=2.684e-01  stopped=0/10
+[13:01:55]   observer | cycle=2940  mean_rel_change=1.934e-01  max_consensus=2.358e-01  stopped=0/10
+[13:01:56]   observer | cycle=2950  mean_rel_change=1.821e-01  max_consensus=2.192e-01  stopped=0/10
+[13:01:56]   observer | cycle=2960  mean_rel_change=1.708e-01  max_consensus=2.355e-01  stopped=0/10
+[13:01:56]   observer | cycle=2970  mean_rel_change=1.802e-01  max_consensus=2.646e-01  stopped=0/10
+[13:01:56]   observer | cycle=2980  mean_rel_change=1.982e-01  max_consensus=2.352e-01  stopped=0/10
+[13:01:56]   observer | cycle=2990  mean_rel_change=1.797e-01  max_consensus=2.546e-01  stopped=0/10
+[13:01:56]   observer | cycle=3000  mean_rel_change=1.967e-01  max_consensus=2.825e-01  stopped=0/10
+[13:01:57]   observer | cycle=3010  mean_rel_change=1.796e-01  max_consensus=2.432e-01  stopped=0/10
+[13:01:57]   observer | cycle=3020  mean_rel_change=1.953e-01  max_consensus=2.517e-01  stopped=0/10
+[13:01:57]   observer | cycle=3030  mean_rel_change=2.060e-01  max_consensus=2.405e-01  stopped=0/10
+[13:01:57]   observer | cycle=3040  mean_rel_change=2.055e-01  max_consensus=2.691e-01  stopped=0/10
+[13:01:57]   observer | cycle=3050  mean_rel_change=1.864e-01  max_consensus=2.264e-01  stopped=0/10
+[13:01:57]   observer | cycle=3060  mean_rel_change=1.969e-01  max_consensus=2.134e-01  stopped=0/10
+[13:01:57]   observer | cycle=3070  mean_rel_change=1.847e-01  max_consensus=2.010e-01  stopped=0/10
+[13:01:58]   observer | cycle=3080  mean_rel_change=1.793e-01  max_consensus=2.235e-01  stopped=0/10
+[13:01:58]   observer | cycle=3090  mean_rel_change=1.921e-01  max_consensus=2.204e-01  stopped=0/10
+[13:01:58]   observer | cycle=3100  mean_rel_change=1.861e-01  max_consensus=2.444e-01  stopped=0/10
+[13:01:58]   observer | cycle=3110  mean_rel_change=1.744e-01  max_consensus=2.623e-01  stopped=0/10
+[13:01:58]   observer | cycle=3120  mean_rel_change=1.898e-01  max_consensus=2.440e-01  stopped=0/10
+[13:01:58]   observer | cycle=3130  mean_rel_change=2.035e-01  max_consensus=2.106e-01  stopped=0/10
+[13:01:58]   observer | cycle=3140  mean_rel_change=1.844e-01  max_consensus=2.042e-01  stopped=0/10
+[13:01:59]   observer | cycle=3150  mean_rel_change=1.700e-01  max_consensus=2.524e-01  stopped=0/10
+[13:01:59]   observer | cycle=3160  mean_rel_change=1.615e-01  max_consensus=2.015e-01  stopped=0/10
+[13:01:59]   observer | cycle=3170  mean_rel_change=1.776e-01  max_consensus=2.258e-01  stopped=0/10
+[13:01:59]   observer | cycle=3180  mean_rel_change=1.812e-01  max_consensus=2.602e-01  stopped=0/10
+[13:01:59]   observer | cycle=3190  mean_rel_change=1.938e-01  max_consensus=2.850e-01  stopped=0/10
+[13:01:59]   observer | cycle=3200  mean_rel_change=1.772e-01  max_consensus=2.386e-01  stopped=0/10
+[13:01:59]   observer | cycle=3210  mean_rel_change=1.892e-01  max_consensus=2.435e-01  stopped=0/10
+[13:01:59]   observer | cycle=3220  mean_rel_change=1.950e-01  max_consensus=2.620e-01  stopped=0/10
+[13:02:00]   observer | cycle=3230  mean_rel_change=1.822e-01  max_consensus=2.531e-01  stopped=0/10
+[13:02:00]   observer | cycle=3240  mean_rel_change=2.071e-01  max_consensus=2.502e-01  stopped=0/10
+[13:02:00]   observer | cycle=3250  mean_rel_change=2.007e-01  max_consensus=2.504e-01  stopped=0/10
+[13:02:00]   observer | cycle=3260  mean_rel_change=1.989e-01  max_consensus=2.406e-01  stopped=0/10
+[13:02:00]   observer | cycle=3270  mean_rel_change=1.858e-01  max_consensus=2.384e-01  stopped=0/10
+[13:02:00]   observer | cycle=3280  mean_rel_change=1.939e-01  max_consensus=2.241e-01  stopped=0/10
+[13:02:00]   observer | cycle=3290  mean_rel_change=2.029e-01  max_consensus=2.229e-01  stopped=0/10
+[13:02:01]   observer | cycle=3300  mean_rel_change=1.818e-01  max_consensus=2.245e-01  stopped=0/10
+[13:02:01]   observer | cycle=3310  mean_rel_change=2.035e-01  max_consensus=2.751e-01  stopped=0/10
+[13:02:01]   observer | cycle=3320  mean_rel_change=1.873e-01  max_consensus=2.298e-01  stopped=0/10
+[13:02:01]   observer | cycle=3330  mean_rel_change=1.916e-01  max_consensus=2.511e-01  stopped=0/10
+[13:02:01]   observer | cycle=3340  mean_rel_change=1.816e-01  max_consensus=2.212e-01  stopped=0/10
+[13:02:01]   observer | cycle=3350  mean_rel_change=1.718e-01  max_consensus=2.641e-01  stopped=0/10
+[13:02:01]   observer | cycle=3360  mean_rel_change=1.783e-01  max_consensus=2.333e-01  stopped=0/10
+[13:02:02]   observer | cycle=3370  mean_rel_change=1.790e-01  max_consensus=2.200e-01  stopped=0/10
+[13:02:02]   observer | cycle=3380  mean_rel_change=1.821e-01  max_consensus=2.093e-01  stopped=0/10
+[13:02:02]   observer | cycle=3390  mean_rel_change=1.681e-01  max_consensus=2.308e-01  stopped=0/10
+[13:02:02]   observer | cycle=3400  mean_rel_change=1.770e-01  max_consensus=2.204e-01  stopped=0/10
+[13:02:02]   observer | cycle=3410  mean_rel_change=1.690e-01  max_consensus=2.679e-01  stopped=0/10
+[13:02:02]   observer | cycle=3420  mean_rel_change=1.891e-01  max_consensus=2.393e-01  stopped=0/10
+[13:02:02]   observer | cycle=3430  mean_rel_change=1.923e-01  max_consensus=2.344e-01  stopped=0/10
+[13:02:03]   observer | cycle=3440  mean_rel_change=1.923e-01  max_consensus=2.525e-01  stopped=0/10
+[13:02:03]   observer | cycle=3450  mean_rel_change=1.744e-01  max_consensus=2.140e-01  stopped=0/10
+[13:02:03]   observer | cycle=3460  mean_rel_change=1.861e-01  max_consensus=2.341e-01  stopped=0/10
+[13:02:03]   observer | cycle=3470  mean_rel_change=2.049e-01  max_consensus=2.375e-01  stopped=0/10
+[13:02:03]   observer | cycle=3480  mean_rel_change=1.663e-01  max_consensus=2.260e-01  stopped=0/10
+[13:02:03]   observer | cycle=3490  mean_rel_change=1.765e-01  max_consensus=2.239e-01  stopped=0/10
+[13:02:03]   observer | cycle=3500  mean_rel_change=1.629e-01  max_consensus=2.582e-01  stopped=0/10
+[13:02:04]   observer | cycle=3510  mean_rel_change=1.732e-01  max_consensus=2.147e-01  stopped=0/10
+[13:02:04]   observer | cycle=3520  mean_rel_change=1.857e-01  max_consensus=2.313e-01  stopped=0/10
+[13:02:04]   observer | cycle=3530  mean_rel_change=1.805e-01  max_consensus=2.366e-01  stopped=0/10
+[13:02:04]   observer | cycle=3540  mean_rel_change=1.918e-01  max_consensus=2.180e-01  stopped=0/10
+[13:02:04]   observer | cycle=3550  mean_rel_change=2.038e-01  max_consensus=2.640e-01  stopped=0/10
+[13:02:04]   observer | cycle=3560  mean_rel_change=1.987e-01  max_consensus=2.071e-01  stopped=0/10
+[13:02:05]   observer | cycle=3570  mean_rel_change=1.750e-01  max_consensus=2.100e-01  stopped=0/10
+[13:02:05]   observer | cycle=3580  mean_rel_change=1.894e-01  max_consensus=2.305e-01  stopped=0/10
+[13:02:05]   observer | cycle=3590  mean_rel_change=1.835e-01  max_consensus=2.383e-01  stopped=0/10
+[13:02:05]   observer | cycle=3600  mean_rel_change=1.808e-01  max_consensus=2.342e-01  stopped=0/10
+[13:02:05]   observer | cycle=3610  mean_rel_change=1.770e-01  max_consensus=2.477e-01  stopped=0/10
+[13:02:05]   observer | cycle=3620  mean_rel_change=1.856e-01  max_consensus=2.176e-01  stopped=0/10
+[13:02:05]   observer | cycle=3630  mean_rel_change=1.909e-01  max_consensus=1.949e-01  stopped=0/10
+[13:02:06]   observer | cycle=3640  mean_rel_change=1.853e-01  max_consensus=2.309e-01  stopped=0/10
+[13:02:06]   observer | cycle=3650  mean_rel_change=1.755e-01  max_consensus=1.937e-01  stopped=0/10
+[13:02:06]   observer | cycle=3660  mean_rel_change=1.910e-01  max_consensus=2.220e-01  stopped=0/10
+[13:02:06]   observer | cycle=3670  mean_rel_change=1.849e-01  max_consensus=2.280e-01  stopped=0/10
+[13:02:06]   observer | cycle=3680  mean_rel_change=1.963e-01  max_consensus=2.491e-01  stopped=0/10
+[13:02:06]   observer | cycle=3690  mean_rel_change=1.794e-01  max_consensus=2.309e-01  stopped=0/10
+[13:02:06]   observer | cycle=3700  mean_rel_change=2.001e-01  max_consensus=2.508e-01  stopped=0/10
+[13:02:07]   observer | cycle=3710  mean_rel_change=1.993e-01  max_consensus=2.310e-01  stopped=0/10
+[13:02:07]   observer | cycle=3720  mean_rel_change=1.938e-01  max_consensus=2.112e-01  stopped=0/10
+[13:02:07]   observer | cycle=3730  mean_rel_change=1.822e-01  max_consensus=2.597e-01  stopped=0/10
+[13:02:07]   observer | cycle=3740  mean_rel_change=1.775e-01  max_consensus=2.297e-01  stopped=0/10
+[13:02:07]   observer | cycle=3750  mean_rel_change=1.892e-01  max_consensus=2.562e-01  stopped=0/10
+[13:02:07]   observer | cycle=3760  mean_rel_change=1.846e-01  max_consensus=2.358e-01  stopped=0/10
+[13:02:07]   observer | cycle=3770  mean_rel_change=1.844e-01  max_consensus=2.302e-01  stopped=0/10
+[13:02:08]   observer | cycle=3780  mean_rel_change=1.762e-01  max_consensus=1.982e-01  stopped=0/10
+[13:02:08]   observer | cycle=3790  mean_rel_change=1.880e-01  max_consensus=2.201e-01  stopped=0/10
+[13:02:08]   observer | cycle=3800  mean_rel_change=1.851e-01  max_consensus=2.236e-01  stopped=0/10
+[13:02:08]   observer | cycle=3810  mean_rel_change=1.877e-01  max_consensus=2.185e-01  stopped=0/10
+[13:02:08]   observer | cycle=3820  mean_rel_change=2.070e-01  max_consensus=2.333e-01  stopped=0/10
+[13:02:08]   observer | cycle=3830  mean_rel_change=2.093e-01  max_consensus=3.429e-01  stopped=0/10
+[13:02:08]   observer | cycle=3840  mean_rel_change=2.072e-01  max_consensus=2.459e-01  stopped=0/10
+[13:02:09]   observer | cycle=3850  mean_rel_change=2.072e-01  max_consensus=2.850e-01  stopped=0/10
+[13:02:09]   observer | cycle=3860  mean_rel_change=1.927e-01  max_consensus=2.134e-01  stopped=0/10
+[13:02:09]   observer | cycle=3870  mean_rel_change=1.903e-01  max_consensus=2.396e-01  stopped=0/10
+[13:02:09]   observer | cycle=3880  mean_rel_change=1.852e-01  max_consensus=2.350e-01  stopped=0/10
+[13:02:09]   observer | cycle=3890  mean_rel_change=1.955e-01  max_consensus=2.452e-01  stopped=0/10
+[13:02:09]   observer | cycle=3900  mean_rel_change=2.154e-01  max_consensus=2.546e-01  stopped=0/10
+[13:02:09]   observer | cycle=3910  mean_rel_change=1.928e-01  max_consensus=2.699e-01  stopped=0/10
+[13:02:10]   observer | cycle=3920  mean_rel_change=1.786e-01  max_consensus=2.091e-01  stopped=0/10
+[13:02:10]   observer | cycle=3930  mean_rel_change=2.039e-01  max_consensus=2.560e-01  stopped=0/10
+[13:02:10]   observer | cycle=3940  mean_rel_change=1.873e-01  max_consensus=2.303e-01  stopped=0/10
+[13:02:10]   observer | cycle=3950  mean_rel_change=1.868e-01  max_consensus=2.052e-01  stopped=0/10
+[13:02:10]   observer | cycle=3960  mean_rel_change=1.632e-01  max_consensus=2.268e-01  stopped=0/10
+[13:02:10]   observer | cycle=3970  mean_rel_change=2.088e-01  max_consensus=2.648e-01  stopped=0/10
+[13:02:10]   observer | cycle=3980  mean_rel_change=2.000e-01  max_consensus=2.305e-01  stopped=0/10
+[13:02:11]   observer | cycle=3990  mean_rel_change=1.568e-01  max_consensus=2.232e-01  stopped=0/10
+[13:02:11]   observer | cycle=4000  mean_rel_change=1.818e-01  max_consensus=2.761e-01  stopped=0/10
+[13:02:11]   observer | cycle=4010  mean_rel_change=1.812e-01  max_consensus=1.998e-01  stopped=0/10
+[13:02:11]   observer | cycle=4020  mean_rel_change=1.743e-01  max_consensus=2.376e-01  stopped=0/10
+[13:02:11]   observer | cycle=4030  mean_rel_change=1.821e-01  max_consensus=3.073e-01  stopped=0/10
+[13:02:11]   observer | cycle=4040  mean_rel_change=1.885e-01  max_consensus=2.394e-01  stopped=0/10
+[13:02:12]   observer | cycle=4050  mean_rel_change=1.735e-01  max_consensus=2.835e-01  stopped=0/10
+[13:02:12]   observer | cycle=4060  mean_rel_change=1.936e-01  max_consensus=2.357e-01  stopped=0/10
+[13:02:12]   observer | cycle=4070  mean_rel_change=1.752e-01  max_consensus=2.344e-01  stopped=0/10
+[13:02:12]   observer | cycle=4080  mean_rel_change=1.802e-01  max_consensus=2.785e-01  stopped=0/10
+[13:02:12]   observer | cycle=4090  mean_rel_change=1.876e-01  max_consensus=2.300e-01  stopped=0/10
+[13:02:12]   observer | cycle=4100  mean_rel_change=1.834e-01  max_consensus=2.781e-01  stopped=0/10
+[13:02:12]   observer | cycle=4110  mean_rel_change=1.880e-01  max_consensus=2.351e-01  stopped=0/10
+[13:02:13]   observer | cycle=4120  mean_rel_change=1.941e-01  max_consensus=2.667e-01  stopped=0/10
+[13:02:13]   observer | cycle=4130  mean_rel_change=1.979e-01  max_consensus=2.845e-01  stopped=0/10
+[13:02:13]   observer | cycle=4140  mean_rel_change=1.861e-01  max_consensus=2.286e-01  stopped=0/10
+[13:02:13]   observer | cycle=4150  mean_rel_change=1.807e-01  max_consensus=2.665e-01  stopped=0/10
+[13:02:13]   observer | cycle=4160  mean_rel_change=1.963e-01  max_consensus=2.839e-01  stopped=0/10
+[13:02:13]   observer | cycle=4170  mean_rel_change=1.980e-01  max_consensus=2.323e-01  stopped=0/10
+[13:02:13]   observer | cycle=4180  mean_rel_change=2.024e-01  max_consensus=3.166e-01  stopped=0/10
+[13:02:14]   observer | cycle=4190  mean_rel_change=2.184e-01  max_consensus=2.553e-01  stopped=0/10
+[13:02:14]   observer | cycle=4200  mean_rel_change=1.750e-01  max_consensus=2.264e-01  stopped=0/10
+[13:02:14]   observer | cycle=4210  mean_rel_change=1.966e-01  max_consensus=2.225e-01  stopped=0/10
+[13:02:14]   observer | cycle=4220  mean_rel_change=1.998e-01  max_consensus=2.551e-01  stopped=0/10
+[13:02:14]   observer | cycle=4230  mean_rel_change=1.827e-01  max_consensus=2.161e-01  stopped=0/10
+[13:02:14]   observer | cycle=4240  mean_rel_change=1.983e-01  max_consensus=2.496e-01  stopped=0/10
+[13:02:14]   observer | cycle=4250  mean_rel_change=2.144e-01  max_consensus=2.593e-01  stopped=0/10
+[13:02:15]   observer | cycle=4260  mean_rel_change=2.199e-01  max_consensus=2.517e-01  stopped=0/10
+[13:02:15]   observer | cycle=4270  mean_rel_change=1.779e-01  max_consensus=2.161e-01  stopped=0/10
+[13:02:15]   observer | cycle=4280  mean_rel_change=1.870e-01  max_consensus=2.364e-01  stopped=0/10
+[13:02:15]   observer | cycle=4290  mean_rel_change=1.689e-01  max_consensus=2.045e-01  stopped=0/10
+[13:02:15]   observer | cycle=4300  mean_rel_change=1.815e-01  max_consensus=2.222e-01  stopped=0/10
+[13:02:15]   observer | cycle=4310  mean_rel_change=1.901e-01  max_consensus=2.175e-01  stopped=0/10
+[13:02:15]   observer | cycle=4320  mean_rel_change=2.039e-01  max_consensus=2.602e-01  stopped=0/10
+[13:02:16]   observer | cycle=4330  mean_rel_change=1.941e-01  max_consensus=2.239e-01  stopped=0/10
+[13:02:16]   observer | cycle=4340  mean_rel_change=1.918e-01  max_consensus=2.688e-01  stopped=0/10
+[13:02:16]   observer | cycle=4350  mean_rel_change=1.947e-01  max_consensus=2.871e-01  stopped=0/10
+[13:02:16]   observer | cycle=4360  mean_rel_change=1.864e-01  max_consensus=2.309e-01  stopped=0/10
+[13:02:16]   observer | cycle=4370  mean_rel_change=1.715e-01  max_consensus=2.120e-01  stopped=0/10
+[13:02:16]   observer | cycle=4380  mean_rel_change=1.645e-01  max_consensus=2.452e-01  stopped=0/10
+[13:02:16]   observer | cycle=4390  mean_rel_change=1.941e-01  max_consensus=3.407e-01  stopped=0/10
+[13:02:17]   observer | cycle=4400  mean_rel_change=1.854e-01  max_consensus=2.297e-01  stopped=0/10
+[13:02:17]   observer | cycle=4410  mean_rel_change=1.865e-01  max_consensus=2.388e-01  stopped=0/10
+[13:02:17]   observer | cycle=4420  mean_rel_change=1.917e-01  max_consensus=2.788e-01  stopped=0/10
+[13:02:17]   observer | cycle=4430  mean_rel_change=1.997e-01  max_consensus=2.214e-01  stopped=0/10
+[13:02:17]   observer | cycle=4440  mean_rel_change=1.933e-01  max_consensus=2.495e-01  stopped=0/10
+[13:02:17]   observer | cycle=4450  mean_rel_change=2.005e-01  max_consensus=2.394e-01  stopped=0/10
+[13:02:17]   observer | cycle=4460  mean_rel_change=1.847e-01  max_consensus=2.500e-01  stopped=0/10
+[13:02:18]   observer | cycle=4470  mean_rel_change=1.784e-01  max_consensus=2.120e-01  stopped=0/10
+[13:02:18]   observer | cycle=4480  mean_rel_change=1.782e-01  max_consensus=2.289e-01  stopped=0/10
+[13:02:18]   observer | cycle=4490  mean_rel_change=1.775e-01  max_consensus=2.658e-01  stopped=0/10
+[13:02:18]   observer | cycle=4500  mean_rel_change=2.032e-01  max_consensus=2.399e-01  stopped=0/10
+[13:02:18]   observer | cycle=4510  mean_rel_change=1.969e-01  max_consensus=2.687e-01  stopped=0/10
+[13:02:18]   observer | cycle=4520  mean_rel_change=1.832e-01  max_consensus=2.405e-01  stopped=0/10
+[13:02:18]   observer | cycle=4530  mean_rel_change=1.956e-01  max_consensus=2.521e-01  stopped=0/10
+[13:02:19]   observer | cycle=4540  mean_rel_change=1.921e-01  max_consensus=2.584e-01  stopped=0/10
+[13:02:19]   observer | cycle=4550  mean_rel_change=2.127e-01  max_consensus=2.447e-01  stopped=0/10
+[13:02:19]   observer | cycle=4560  mean_rel_change=1.912e-01  max_consensus=2.359e-01  stopped=0/10
+[13:02:19]   observer | cycle=4570  mean_rel_change=1.868e-01  max_consensus=2.556e-01  stopped=0/10
+[13:02:19]   observer | cycle=4580  mean_rel_change=1.844e-01  max_consensus=2.288e-01  stopped=0/10
+[13:02:19]   observer | cycle=4590  mean_rel_change=1.813e-01  max_consensus=2.276e-01  stopped=0/10
+[13:02:19]   observer | cycle=4600  mean_rel_change=1.830e-01  max_consensus=2.126e-01  stopped=0/10
+[13:02:20]   observer | cycle=4610  mean_rel_change=1.829e-01  max_consensus=2.403e-01  stopped=0/10
+[13:02:20]   observer | cycle=4620  mean_rel_change=1.982e-01  max_consensus=3.559e-01  stopped=0/10
+[13:02:20]   observer | cycle=4630  mean_rel_change=2.019e-01  max_consensus=2.581e-01  stopped=0/10
+[13:02:20]   observer | cycle=4640  mean_rel_change=1.892e-01  max_consensus=2.457e-01  stopped=0/10
+[13:02:20]   observer | cycle=4650  mean_rel_change=1.865e-01  max_consensus=2.427e-01  stopped=0/10
+[13:02:20]   observer | cycle=4660  mean_rel_change=1.931e-01  max_consensus=2.720e-01  stopped=0/10
+[13:02:20]   observer | cycle=4670  mean_rel_change=1.950e-01  max_consensus=2.259e-01  stopped=0/10
+[13:02:21]   observer | cycle=4680  mean_rel_change=1.872e-01  max_consensus=2.580e-01  stopped=0/10
+[13:02:21]   observer | cycle=4690  mean_rel_change=1.796e-01  max_consensus=2.247e-01  stopped=0/10
+[13:02:21]   observer | cycle=4700  mean_rel_change=2.008e-01  max_consensus=2.494e-01  stopped=0/10
+[13:02:21]   observer | cycle=4710  mean_rel_change=1.923e-01  max_consensus=2.287e-01  stopped=0/10
+[13:02:21]   observer | cycle=4720  mean_rel_change=1.871e-01  max_consensus=2.438e-01  stopped=0/10
+[13:02:21]   observer | cycle=4730  mean_rel_change=1.861e-01  max_consensus=2.663e-01  stopped=0/10
+[13:02:21]   observer | cycle=4740  mean_rel_change=1.777e-01  max_consensus=2.172e-01  stopped=0/10
+[13:02:22]   observer | cycle=4750  mean_rel_change=1.671e-01  max_consensus=1.970e-01  stopped=0/10
+[13:02:22]   observer | cycle=4760  mean_rel_change=1.750e-01  max_consensus=2.162e-01  stopped=0/10
+[13:02:22]   observer | cycle=4770  mean_rel_change=1.953e-01  max_consensus=2.518e-01  stopped=0/10
+[13:02:22]   observer | cycle=4780  mean_rel_change=1.820e-01  max_consensus=2.286e-01  stopped=0/10
+[13:02:22]   observer | cycle=4790  mean_rel_change=1.727e-01  max_consensus=2.338e-01  stopped=0/10
+[13:02:22]   observer | cycle=4800  mean_rel_change=1.886e-01  max_consensus=2.667e-01  stopped=0/10
+[13:02:22]   observer | cycle=4810  mean_rel_change=1.890e-01  max_consensus=2.366e-01  stopped=0/10
+[13:02:23]   observer | cycle=4820  mean_rel_change=1.817e-01  max_consensus=2.497e-01  stopped=0/10
+[13:02:23]   observer | cycle=4830  mean_rel_change=2.026e-01  max_consensus=2.573e-01  stopped=0/10
+[13:02:23]   observer | cycle=4840  mean_rel_change=1.809e-01  max_consensus=2.762e-01  stopped=0/10
+[13:02:23]   observer | cycle=4850  mean_rel_change=1.985e-01  max_consensus=2.532e-01  stopped=0/10
+[13:02:23]   observer | cycle=4860  mean_rel_change=1.905e-01  max_consensus=2.233e-01  stopped=0/10
+[13:02:23]   observer | cycle=4870  mean_rel_change=2.005e-01  max_consensus=2.116e-01  stopped=0/10
+[13:02:23]   observer | cycle=4880  mean_rel_change=1.859e-01  max_consensus=2.440e-01  stopped=0/10
+[13:02:23]   observer | cycle=4890  mean_rel_change=1.902e-01  max_consensus=2.830e-01  stopped=0/10
+[13:02:24]   observer | cycle=4900  mean_rel_change=1.893e-01  max_consensus=2.847e-01  stopped=0/10
+[13:02:24]   observer | cycle=4910  mean_rel_change=2.016e-01  max_consensus=2.318e-01  stopped=0/10
+[13:02:24]   observer | cycle=4920  mean_rel_change=1.759e-01  max_consensus=2.371e-01  stopped=0/10
+[13:02:24]   observer | cycle=4930  mean_rel_change=1.759e-01  max_consensus=2.484e-01  stopped=0/10
+[13:02:24]   observer | cycle=4940  mean_rel_change=1.818e-01  max_consensus=2.480e-01  stopped=0/10
+[13:02:24]   observer | cycle=4950  mean_rel_change=1.794e-01  max_consensus=2.249e-01  stopped=0/10
+[13:02:25]   observer | cycle=4960  mean_rel_change=1.738e-01  max_consensus=2.131e-01  stopped=0/10
+[13:02:25]   observer | cycle=4970  mean_rel_change=1.769e-01  max_consensus=2.402e-01  stopped=0/10
+[13:02:25]   observer | cycle=4980  mean_rel_change=1.959e-01  max_consensus=2.442e-01  stopped=0/10
+[13:02:25]   observer | cycle=4990  mean_rel_change=1.928e-01  max_consensus=2.590e-01  stopped=0/10
+[13:02:25]   observer | cycle=4999  mean_rel_change=2.028e-01  max_consensus=2.384e-01  stopped=0/10
+[13:02:25]      cdsim | Simulation finished after 5000 cycle(s)
+[13:02:25]    fdr_svm | Node 0 test accuracy = 0.8371
+[13:02:25]    fdr_svm | Node 1 test accuracy = 0.8420
+[13:02:25]    fdr_svm | Node 2 test accuracy = 0.8399
+[13:02:25]    fdr_svm | Node 3 test accuracy = 0.8433
+[13:02:25]    fdr_svm | Node 4 test accuracy = 0.8393
+[13:02:25]    fdr_svm | Node 5 test accuracy = 0.8448
+[13:02:25]    fdr_svm | Node 6 test accuracy = 0.8331
+[13:02:25]    fdr_svm | Node 7 test accuracy = 0.8403
+[13:02:25]    fdr_svm | Node 8 test accuracy = 0.8363
+[13:02:25]    fdr_svm | Node 9 test accuracy = 0.8423
+[13:02:25]    fdr_svm | Average test accuracy across nodes = 0.8398
+[13:02:25]    fdr_svm | Total communication = 130,000,000 bytes (130.00 MB) over 10 nodes
+[13:02:25]    fdr_svm | Node stop cycles: [None, None, None, None, None, None, None, None, None, None]
+[13:02:25]       main | fdr_svm metrics ★ D:\LocalLLM\jobs\runs\950a9668-0013-41cb-be9b-752a6ac4b44e\work\results\fdr_full_2026-10-06\a9a\fdr_svm_metrics.json
+[13:02:25]       main | Done.

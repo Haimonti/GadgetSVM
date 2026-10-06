@@ -46,6 +46,7 @@ from src.sdca_observers import StallAwareSimulation
 from src.bdsvm_simulation import BDSVMSimulation
 from src.fedavg_simulation import FedAvgSimulation
 from src.cocoa_simulation import CoCoASimulation
+from src.fdr_svm_simulation import FDRSVMSimulation
 
 
 # Sreekar's keyword convention (src/peersim_run.py @ 5b8aca8), kept identical
@@ -136,6 +137,21 @@ def run_fedavg(worker_data, cycles):
     return out
 
 
+def run_fdr_svm(worker_data, cycles):
+    sim = FDRSVMSimulation(CONFIG, worker_data)
+    stopped_at = sim.run(cycles)
+    protos = [Network.get(i).getProtocol(FDRSVMSimulation.FDR_PID)
+              for i in range(CONFIG["NUM_WORKERS"])]
+    out = _collect(protos, "fdr_svm", stopped_at, cycles)
+    out["fdr_params"] = {
+        "rho": CONFIG.get("FDR_RHO", 1.0),
+        "eps_scale": CONFIG.get("FDR_EPS_SCALE", 1.0),
+        "local_steps": CONFIG.get("FDR_LOCAL_STEPS", 100),
+        "per_node_eps": [p.eps for p in protos],
+    }
+    return out
+
+
 def run_cocoa(worker_data, cycles, variant="cocoa"):
     # Gossip-CoCoA(+): SDCA's contribution tables with CoCoA's commit rule,
     # stopped by SDCA's gap-or-stall rule; see src/cocoa_simulation.py.
@@ -178,7 +194,7 @@ def main():
     ap.add_argument("--cycles", type=int, default=None,
                     help="cap on cycles (default: CONFIG['ROUNDS'])")
     ap.add_argument("--only", nargs="+", default=None,
-                    choices=["sdca", "bdsvm", "bdsvm_linear", "fedavg", "cocoa", "cocoa_plus"])
+                    choices=["sdca", "bdsvm", "bdsvm_linear", "fedavg", "fdr_svm", "cocoa", "cocoa_plus"])
     ap.add_argument("--out", default=None, help="results directory")
     ap.add_argument("--bdsvm", action="append", default=[], metavar="KEY=VALUE",
                     help="override a BDSVM hyperparameter, e.g. --bdsvm rho=0.9 "
@@ -222,6 +238,8 @@ def main():
                                method=m)
         elif m == "fedavg":
             result = run_fedavg(worker_data, args.cycles)
+        elif m == "fdr_svm":
+            result = run_fdr_svm(worker_data, args.cycles)
         else:
             result = run_cocoa(worker_data, args.cycles, m)
         path = out_dir / f"{m}_metrics.json"

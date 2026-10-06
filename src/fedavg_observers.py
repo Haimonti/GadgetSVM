@@ -56,6 +56,10 @@ class FedAvgEvaluator(Control):
             return False
 
         X_all, y_all = self._stacked_training_set(protos)
+        # FDR's quadratic robustness surrogate contributes a shard-weighted
+        # radius to the common objective evaluated at every node's w.
+        robust_eps = (sum(p.n * p.eps for p in protos) / sum(p.n for p in protos)
+                      if all(hasattr(p, "eps") for p in protos) else 0.0)
         W = np.stack([p.w for p in protos])                 # (K, d)
         margins = 1.0 - y_all[:, None] * X_all.dot(W.T)     # (N, K)
         hinges = np.maximum(0.0, margins).mean(axis=0)
@@ -83,7 +87,8 @@ class FedAvgEvaluator(Control):
 
             p.metrics.append({
                 "round": cycle + 1,
-                "primal": float(hinge) + float((p.lambda_reg / 2.0) * np.dot(p.w, p.w)),
+                "primal": float(hinge) + float(((p.lambda_reg + robust_eps) / 2.0)
+                                               * np.dot(p.w, p.w)),
                 "dual": float("nan"),
                 "duality_gap": float("nan"),
                 "rel_change": float(window_change),

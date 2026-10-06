@@ -37,8 +37,8 @@ CONFIG = {
     "EVAL_EVERY": 10,              # cycles between global evaluations
     "ACTIVATION": "shuffle",
     "DATASET": "covtype",
-    "COVTYPE_PATH": DATA_DIR / "covtype.uci.binary.scale",
-    "GISETTE_PATH": DATA_DIR / "gisette.binary.scale",
+    "COVTYPE_PATH": Path(os.environ.get("GADGETSVM_COVTYPE_PATH", DATA_DIR / "covtype.uci.binary.scale")),
+    "GISETTE_PATH": Path(os.environ.get("GADGETSVM_GISETTE_PATH", DATA_DIR / "gisette.binary.scale")),
     "REALSIM_PATH": DATA_DIR / "real-sim",
     "TEST_FRACTION": 0.2,
     "NUM_WORKERS": 10,
