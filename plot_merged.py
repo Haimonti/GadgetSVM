@@ -34,7 +34,9 @@ METHODS = [("sdca", "P2P-SDCA", "#B4762A"),
            ("bdsvm_linear", "P2P-BDSVM (linear)", "#1679A8"),
            ("fedavg", "P2P-FedAvg", "#A33A2C"),
            ("cocoa", "P2P-CoCoA", "#6B4C9A"),
-           ("cocoa_plus", "P2P-CoCoA+", "#3F7FBF")]
+           ("cocoa_plus", "P2P-CoCoA+", "#3F7FBF"),
+           ("fedssl_amc", "P2P-FedSSL-AMC", "#875A9C"),
+           ("fdr_svm", "P2P-FDR-SVM", "#CC5B29")]
 
 # CoCoA and CoCoA+ are two algorithms, so each gets its own figure against the
 # same three baselines rather than sharing one crowded panel.
@@ -45,6 +47,8 @@ FIGURES = [
     ("with_cocoa",       BASELINES + ("cocoa",),          "_cocoa"),
     ("with_cocoa_plus",  BASELINES + ("cocoa_plus",),     "_cocoa_plus"),
     ("linear_vs_sdca",   ("sdca", "bdsvm_linear"),       "_linear"),
+    ("with_fedssl_amc", ("sdca", "bdsvm_linear", "fedssl_amc"), "_fedssl_amc"),
+    ("with_fdr_svm", ("sdca", "bdsvm_linear", "fdr_svm"), "_fdr_svm"),
 ]
 
 
@@ -80,7 +84,8 @@ def series(per_node, key):
     rounds, vals = [], []
     for rows in per_node:
         r = np.array([m["round"] for m in rows], dtype=float)
-        v = np.array([m.get(key, np.nan) for m in rows], dtype=float)
+        v = np.array([np.nan if key == "consensus_error" and m.get("phase", 2) == 1
+                      else m.get(key, np.nan) for m in rows], dtype=float)
         ok = ~np.isnan(v)
         if ok.any():
             rounds.append(r[ok])
@@ -114,15 +119,19 @@ def main():
         raise SystemExit(f"No *_metrics.json found in {run_dir}")
 
     for name, keys, suffix in FIGURES:
+        if name.startswith("with_f") and keys[-1] not in data:
+            continue
         if name != "three_way" and not any(
                 key in data for key in keys if key not in BASELINES):
             continue        # this figure's own algorithm was not run here
         keys = available_baselines(keys, data)
+        if not any(key in data for key in keys):
+            continue
         methods = [m for m in METHODS if m[0] in keys]
         draw(methods, data, out_dir, name, suffix)
 
 
-def draw(methods, data, out_dir, name, suffix):
+def draw(methods, data, out_dir, name, suffix, single_panels=True, footer_method=None):
     """One merged 2x2 figure plus the single-panel figures for `methods`."""
     fig, axes = plt.subplots(2, 2, figsize=(13, 9))
     for ax, (key, ylabel, log_y, norm) in zip(axes.ravel(), PANELS):
@@ -173,13 +182,25 @@ def draw(methods, data, out_dir, name, suffix):
                  f"per-node early stopping", fontsize=12)
     # Two methods per caption line, so four or five methods still fit the width.
     lines = ["   |   ".join(bits[i:i + 2]) for i in range(0, len(bits), 2)]
-    fig.text(0.5, 0.005, "\n".join(lines), ha="center", va="bottom", fontsize=9,
+    fig.text(0.5, 0.045 if footer_method else 0.005, "\n".join(lines), ha="center", va="bottom", fontsize=9,
              color="#444444")
-    fig.tight_layout(rect=(0, 0.02 + 0.018 * len(lines), 1, 0.97))
+    if footer_method:
+        result = data[footer_method]
+        label = next(label for m, label, _ in methods if m == footer_method)
+        total = result["total_comm_bytes"]
+        fig.text(0.5, 0.012,
+                 f"Total communication (all {cfg['NUM_WORKERS']} nodes) — {label}: "
+                 f"{total:,} bytes ({total / 1e6:,.2f} MB)",
+                 ha="center", va="bottom", fontsize=11, fontweight="bold")
+    fig.tight_layout(rect=(0, (0.06 if footer_method else 0.02) + 0.018 * len(lines), 1, 0.97))
 
     path = out_dir / f"merged_{name}.png"
     fig.savefig(path, dpi=160)
+    plt.close(fig)
     print(f"wrote {path}")
+
+    if not single_panels:
+        return path
 
     # Each panel also on its own, for slides.
     for key, ylabel, log_y, norm in PANELS:

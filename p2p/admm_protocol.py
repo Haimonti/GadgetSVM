@@ -37,8 +37,8 @@ import time
 
 import numpy as np
 
-from src.network_layer.peersim_python.cdsim import CDProtocol
-from src.network_layer.peersim_python.core import CommonState
+from src.peersim_python.cdsim import CDProtocol
+from src.peersim_python.core import CommonState
 
 from p2p._prox import prox_pegasos
 
@@ -71,7 +71,7 @@ class ConsensusADMMProtocol(CDProtocol):
         """Subclass hook: copy any extra hyperparameters onto the clone."""
 
     # ---- set-up (called once per node by DataInitializer) -------------------
-    def set_data(self, X_csr, y, X_test, y_test, lambda_reg, t0_fraction):
+    def set_data(self, X_csr, y, X_test, y_test, lambda_reg, t0_fraction=None):
         # Same signature as SDCAProtocol.set_data so the existing
         # DataInitializer drives this protocol unchanged. ADMM has no primal
         # averaging, so t0_fraction is accepted and ignored.
@@ -91,6 +91,11 @@ class ConsensusADMMProtocol(CDProtocol):
         self.start = time.time()
         self._setup_extra()
         self.data_ready = True
+
+    def configure_network(self, node_id, n_global, n_workers, local_steps, step_scale):
+        self.node_id = node_id
+        if local_steps is not None:
+            self.n_local_steps = int(local_steps)
 
     def _setup_extra(self):
         """Subclass hook: allocate anything derived from the shard."""

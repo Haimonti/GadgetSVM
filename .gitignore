@@ -28,3 +28,10 @@ results/rbf_regression_smoke/
 !linear_data_manifest.json
 !results/fdr_svm_sdca_2026-10-06/*.json
 !results/fdr_svm_sdca_2026-10-06/*/*.json
+!results/additional_*/*.json
+!results/additional_validation_*.json
+results/additional_*/*.log
+results/additional_batch_*.log
+results/additional_*smoke*/
+results/plots_additional_smoke*/
+results/additional_summary_smoke*.csv

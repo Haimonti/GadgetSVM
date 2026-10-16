@@ -68,10 +68,14 @@ def main():
     # are separate algorithms and each gets its own page against the baselines.
     available = set().union(*(runs[ds] for ds in names))
     for _name, keys, suffix in FIGURES:
+        if _name.startswith("with_f") and not any(keys[-1] in runs[ds] for ds in names):
+            continue
         own = [k for k in keys if k not in BASELINES]
         if own and not any(k in runs[ds] for ds in names for k in own):
             continue
         keys = available_baselines(keys, available)
+        if not any(key in available for key in keys):
+            continue
         methods = [m for m in METHODS if m[0] in keys]
         draw(names, runs, methods, suffix, args)
 

@@ -19,12 +19,14 @@ P2P version — both aggregations become gossip, the phase boundary a cycle coun
              dominant subspace with no server. The payload is a d_enc x d
              matrix, by far the most expensive message in this package, which
              shows up plainly on the comm_bytes curve.
-    Phase 2  the encoder freezes, each node encodes its shard once and fits its
-             local SVM, and from then on only the d_enc-dimensional classifier
-             is gossiped (age-weighted average, as in SDCAProtocol).
+    Phase 2  each encoder freezes and fits a local SVM. Its coefficients are
+             lifted into original feature coordinates before gossip, because
+             independently frozen encoders do not share coordinate axes.
+             The intercept travels with the full-feature classifier.
 
-Freezing the encoder at the boundary matters: if nodes kept re-averaging V while
-also training on Z, they would be learning against a moving basis.
+Both phases use fixed local sample-count weights, avoiding exponential growth
+of aggregation ages. Repeated QR/averaging is the existing encoder heuristic;
+it is not claimed to be an exact distributed PCA or a paper reproduction.
 
 Known limitation, measured, not a porting bug
 ---------------------------------------------
@@ -40,8 +42,8 @@ import time
 
 import numpy as np
 
-from src.network_layer.peersim_python.cdsim import CDProtocol
-from src.network_layer.peersim_python.core import CommonState
+from src.peersim_python.cdsim import CDProtocol
+from src.peersim_python.core import CommonState
 
 
 class FedSSLAMCProtocol(CDProtocol):
@@ -61,7 +63,7 @@ class FedSSLAMCProtocol(CDProtocol):
         self.start = None
 
     def clone(self):
-        c = FedSSLAMCProtocol()
+        c = type(self)()
         c.gossip_k = self.gossip_k
         c.d_enc = self.d_enc
         c.svm_C = self.svm_C
@@ -69,7 +71,7 @@ class FedSSLAMCProtocol(CDProtocol):
         return c
 
     # ---- set-up (called once per node by DataInitializer) -------------------
-    def set_data(self, X_csr, y, X_test, y_test, lambda_reg, t0_fraction):
+    def set_data(self, X_csr, y, X_test, y_test, lambda_reg, t0_fraction=None):
         from sklearn.decomposition import TruncatedSVD
 
         # Same signature as SDCAProtocol.set_data so the existing
@@ -101,10 +103,14 @@ class FedSSLAMCProtocol(CDProtocol):
             svd.fit(self.X)
             V[:n_comp] = svd.components_.astype(np.float32)
         self.V = V
-        self.w = np.zeros(self.d_enc, dtype=np.float32)  # lives in encoded space
+        self.w = np.zeros(self.d, dtype=np.float32)
+        self.bias = 0.0
         self.age = float(max(self.n, 1))
         self.start = time.time()
         self.data_ready = True
+
+    def configure_network(self, node_id, n_global, n_workers, local_steps, step_scale):
+        self.node_id = node_id
 
     # ---- one cycle ----------------------------------------------------------
     def nextCycle(self, node, pid):
@@ -120,16 +126,20 @@ class FedSSLAMCProtocol(CDProtocol):
         if not self.inbox:
             return
         key = "V" if self.phase == 1 else "w"
-        msgs = [(p[key], a) for p, a in self.inbox if key in p]
+        messages = self.inbox
+        msgs = [(p[key], a) for p, a in messages if key in p]
         self.inbox = []
         if not msgs:
             return
         cur = self.V if key == "V" else self.w
         total = float(self.age)
         accum = cur.astype(np.float64) * self.age
+        bias_accum = self.bias * self.age
         for peer_val, peer_age in msgs:
             accum += peer_val.astype(np.float64) * peer_age
             total += peer_age
+        if key == "w":
+            bias_accum += sum(p.get("bias", 0.0) * a for p, a in messages if "w" in p)
         if total <= 0:       # every contributor had zero weight
             return
         merged = (accum / total).astype(np.float32)
@@ -137,7 +147,9 @@ class FedSSLAMCProtocol(CDProtocol):
             self.V = merged
         else:
             self.w = merged
-        self.age = total
+            self.bias = bias_accum / total
+        # Fixed local sample weights avoid exponential age overflow in long runs.
+        self.age = float(self.n) if key == "V" or self.trainable else 0.0
 
     # ---- (2) phase 1 re-orthogonalises; the boundary freezes the encoder ----
     def _local_epoch(self):
@@ -157,14 +169,16 @@ class FedSSLAMCProtocol(CDProtocol):
 
         self.phase = 2
         self.Z = np.asarray(self.X.dot(self.V.T), dtype=np.float64)
-        self.Z_test = np.asarray(self.X_test.dot(self.V.T), dtype=np.float64)
 
-        w = np.zeros(self.d_enc, dtype=np.float32)
+        w = np.zeros(self.d, dtype=np.float32)
         self.trainable = self.n > 0 and len(np.unique(self.y)) > 1
         if self.trainable:
-            clf = LinearSVC(C=self.svm_C, max_iter=2000)
+            clf = LinearSVC(C=self.svm_C, max_iter=2000, random_state=0)
             clf.fit(self.Z, self.y)
-            w = clf.coef_.ravel().astype(np.float32)
+            # Each peer freezes a different basis. Lift to the original feature
+            # space before gossip so classifier coordinates mean the same thing.
+            w = np.asarray(self.V.T @ clf.coef_.ravel(), dtype=np.float32)
+            self.bias = float(clf.intercept_[0])
         self.w = w
         # Age 0 for a node that could not fit a classifier: under a skewed split
         # a single-class node has nothing to contribute, and age-weighting then
@@ -182,8 +196,8 @@ class FedSSLAMCProtocol(CDProtocol):
             payload = {"V": self.V.copy()}
             n_bytes = self.V.size * 4
         else:
-            payload = {"w": self.w.copy()}
-            n_bytes = self.w.size * 4
+            payload = {"w": self.w.copy(), "bias": self.bias}
+            n_bytes = self.w.size * 4 + 8
 
         # Sample with replacement, matching SDCAProtocol exactly: a peer can
         # be drawn twice in one cycle and receive the same message twice. Kept
@@ -201,7 +215,7 @@ class FedSSLAMCProtocol(CDProtocol):
             # leave the loss undefined rather than reporting a meaningless zero.
             hinge = primal = float("nan")
         else:
-            scores = self.Z @ self.w
+            scores = self.X.dot(self.w) + self.bias
             hinge = float(np.mean(np.maximum(0.0, 1.0 - self.y * scores)))
             primal = hinge + float((self.lambda_reg / 2.0) * np.dot(self.w, self.w))
         self.metrics.append({
@@ -217,8 +231,8 @@ class FedSSLAMCProtocol(CDProtocol):
 
     # ---- evaluation ---------------------------------------------------------
     def accuracy(self):
-        if self.phase != 2 or self.Z_test is None or self.Z_test.shape[0] == 0:
+        if self.phase != 2 or self.X_test.shape[0] == 0:
             return float("nan")
-        preds = np.sign(self.Z_test @ self.w)
+        preds = np.sign(self.X_test.dot(self.w) + self.bias)
         preds[preds == 0] = 1.0
         return float(np.mean(preds == self.y_test))

@@ -194,7 +194,10 @@ def main():
     ap.add_argument("--cycles", type=int, default=None,
                     help="cap on cycles (default: CONFIG['ROUNDS'])")
     ap.add_argument("--only", nargs="+", default=None,
-                    choices=["sdca", "bdsvm", "bdsvm_linear", "fedavg", "fdr_svm", "cocoa", "cocoa_plus"])
+                    choices=["sdca", "bdsvm", "bdsvm_linear", "fedavg", "cocoa", "cocoa_plus", "fedssl_amc", "fdr_svm"])
+    ap.add_argument("--additional-protocol", action="store_true",
+                    help="use the 4096-step FDR variant from the additional-method experiments; "
+                         "the existing FDR runner remains the default")
     ap.add_argument("--out", default=None, help="results directory")
     ap.add_argument("--bdsvm", action="append", default=[], metavar="KEY=VALUE",
                     help="override a BDSVM hyperparameter, e.g. --bdsvm rho=0.9 "
@@ -238,8 +241,11 @@ def main():
                                method=m)
         elif m == "fedavg":
             result = run_fedavg(worker_data, args.cycles)
-        elif m == "fdr_svm":
+        elif m == "fdr_svm" and not args.additional_protocol:
             result = run_fdr_svm(worker_data, args.cycles)
+        elif m in ("fedssl_amc", "fdr_svm"):
+            from src.additional_simulation import run_additional
+            result = run_additional(CONFIG, worker_data, m, args.cycles)
         else:
             result = run_cocoa(worker_data, args.cycles, m)
         path = out_dir / f"{m}_metrics.json"
