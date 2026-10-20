@@ -1,0 +1,339 @@
+{
+  "sha": "7cf7dc290aa208ef525c56b4591a501e547b8abf",
+  "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/trees/7cf7dc290aa208ef525c56b4591a501e547b8abf",
+  "tree": [
+    {
+      "path": ".gitattributes",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dfe0770424b2a19faf507a501ebfc23be8f54e7b",
+      "size": 66,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/dfe0770424b2a19faf507a501ebfc23be8f54e7b"
+    },
+    {
+      "path": "Common_functions.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "95b3d619821f654d038123d7cfbafb8a4a3d00c1",
+      "size": 24967,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/95b3d619821f654d038123d7cfbafb8a4a3d00c1"
+    },
+    {
+      "path": "Generate_Dataset.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d25397c6228beb82d3e9604b0112fbe59503fa1b",
+      "size": 8801,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/d25397c6228beb82d3e9604b0112fbe59503fa1b"
+    },
+    {
+      "path": "Output_Layer_Personalized_Client.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c1b79d6aa10e3ef1531831dfc18654378498a370",
+      "size": 4742,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/c1b79d6aa10e3ef1531831dfc18654378498a370"
+    },
+    {
+      "path": "Output_layer_Personlized_Main.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "123d3c5ea3e550a538869e9a48658ebbad7e1863",
+      "size": 4449,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/123d3c5ea3e550a538869e9a48658ebbad7e1863"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "286109f2949b5b417e90a1d30f10e51016709bbc",
+      "size": 1821,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/286109f2949b5b417e90a1d30f10e51016709bbc"
+    },
+    {
+      "path": "Train_Encoder_Client.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d4debe407156d4a2335a0cd2aa1cf149e7f4b8e5",
+      "size": 4739,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/d4debe407156d4a2335a0cd2aa1cf149e7f4b8e5"
+    },
+    {
+      "path": "Train_Encoder_Server.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8c44f33620071083298197608d07034606352519",
+      "size": 5529,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/8c44f33620071083298197608d07034606352519"
+    },
+    {
+      "path": "default_hyperparameters.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "75bf6cf1de9c7d78ac4000169bce311ee0707615",
+      "size": 299,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/75bf6cf1de9c7d78ac4000169bce311ee0707615"
+    },
+    {
+      "path": "losses",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "29218359cd58f8b2a6638f12a5c31027bd6477e4",
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/trees/29218359cd58f8b2a6638f12a5c31027bd6477e4"
+    },
+    {
+      "path": "losses/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4b028927740e0087a090001051af2d2c406fb774",
+      "size": 1022,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/4b028927740e0087a090001051af2d2c406fb774"
+    },
+    {
+      "path": "losses/__pycache__",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b6a2191a67dfd125a3a39e870e168cb0d1e4fd1b",
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/trees/b6a2191a67dfd125a3a39e870e168cb0d1e4fd1b"
+    },
+    {
+      "path": "losses/__pycache__/__init__.cpython-310.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9f157eba815deecb4a435520cf3a501ec23d323c",
+      "size": 375,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/9f157eba815deecb4a435520cf3a501ec23d323c"
+    },
+    {
+      "path": "losses/__pycache__/__init__.cpython-311.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e324f66794c1632c06b85c72e1aa6460a363167f",
+      "size": 632,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/e324f66794c1632c06b85c72e1aa6460a363167f"
+    },
+    {
+      "path": "losses/__pycache__/__init__.cpython-37.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "44a7ec6c7e84b014baf5054d8da1eb391e463f0e",
+      "size": 362,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/44a7ec6c7e84b014baf5054d8da1eb391e463f0e"
+    },
+    {
+      "path": "losses/__pycache__/__init__.cpython-38.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "743aec8ea2b6c5588327953bc93de0c6aeccaef5",
+      "size": 362,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/743aec8ea2b6c5588327953bc93de0c6aeccaef5"
+    },
+    {
+      "path": "losses/__pycache__/triplet_loss.cpython-310.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f310675915888fd87f32ad2d27c0560d94b7da98",
+      "size": 9882,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/f310675915888fd87f32ad2d27c0560d94b7da98"
+    },
+    {
+      "path": "losses/__pycache__/triplet_loss.cpython-311.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3307d00fdc7ffbd7dd5b97d0275a5e438399cf17",
+      "size": 18031,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/3307d00fdc7ffbd7dd5b97d0275a5e438399cf17"
+    },
+    {
+      "path": "losses/__pycache__/triplet_loss.cpython-37.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ca4389785c02e5320765f499c738fa776fa101e0",
+      "size": 8965,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/ca4389785c02e5320765f499c738fa776fa101e0"
+    },
+    {
+      "path": "losses/__pycache__/triplet_loss.cpython-38.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8524340e510b64ba5ec4d15debbb076cf36ac5f0",
+      "size": 9044,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/8524340e510b64ba5ec4d15debbb076cf36ac5f0"
+    },
+    {
+      "path": "losses/triplet_loss.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "862e7913113a9e6c182f46c9fbd98f0eb42e9827",
+      "size": 16659,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/862e7913113a9e6c182f46c9fbd98f0eb42e9827"
+    },
+    {
+      "path": "networks",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "400508f965e4429bee201cea459b4612323b9f25",
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/trees/400508f965e4429bee201cea459b4612323b9f25"
+    },
+    {
+      "path": "networks/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4b028927740e0087a090001051af2d2c406fb774",
+      "size": 1022,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/4b028927740e0087a090001051af2d2c406fb774"
+    },
+    {
+      "path": "networks/__pycache__",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b1139f60ea05430d0afd3ddaf7e72fb069a14359",
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/trees/b1139f60ea05430d0afd3ddaf7e72fb069a14359"
+    },
+    {
+      "path": "networks/__pycache__/__init__.cpython-310.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c5bdd767a87f52f4ccf070237718b17e5982dba1",
+      "size": 377,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/c5bdd767a87f52f4ccf070237718b17e5982dba1"
+    },
+    {
+      "path": "networks/__pycache__/__init__.cpython-311.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cb40286fcfcd78c27f815b98894231f1379e9cc4",
+      "size": 634,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/cb40286fcfcd78c27f815b98894231f1379e9cc4"
+    },
+    {
+      "path": "networks/__pycache__/__init__.cpython-37.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ffce425e411e3a5948804abc81510db0cdd8768a",
+      "size": 364,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/ffce425e411e3a5948804abc81510db0cdd8768a"
+    },
+    {
+      "path": "networks/__pycache__/__init__.cpython-38.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "39530f7ffeac611e1f730b8dc4679a5323184eab",
+      "size": 364,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/39530f7ffeac611e1f730b8dc4679a5323184eab"
+    },
+    {
+      "path": "networks/__pycache__/causal_cnn.cpython-310.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3c96f7ba0ad79d166e00e2d1d992244fb4355524",
+      "size": 5996,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/3c96f7ba0ad79d166e00e2d1d992244fb4355524"
+    },
+    {
+      "path": "networks/__pycache__/causal_cnn.cpython-311.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1600f8e69866e0adbaf20e60ca4ab2fd8e3fd9e2",
+      "size": 9204,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/1600f8e69866e0adbaf20e60ca4ab2fd8e3fd9e2"
+    },
+    {
+      "path": "networks/__pycache__/causal_cnn.cpython-37.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d3054067d6443d7b24554727dc8a1e66ef3f34c1",
+      "size": 6178,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/d3054067d6443d7b24554727dc8a1e66ef3f34c1"
+    },
+    {
+      "path": "networks/__pycache__/causal_cnn.cpython-38.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "50d2d0360dd0d4f33025248116978d96722be997",
+      "size": 6157,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/50d2d0360dd0d4f33025248116978d96722be997"
+    },
+    {
+      "path": "networks/__pycache__/lstm.cpython-310.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c015e754c9b9ceac196b5533d0ac05caeb8e657b",
+      "size": 1259,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/c015e754c9b9ceac196b5533d0ac05caeb8e657b"
+    },
+    {
+      "path": "networks/__pycache__/lstm.cpython-311.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c3d8beed527e65b78f96300d2e579f94c822954a",
+      "size": 1881,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/c3d8beed527e65b78f96300d2e579f94c822954a"
+    },
+    {
+      "path": "networks/__pycache__/lstm.cpython-37.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "31139f831b46c3f26389dfe6ecbe82e769036a9a",
+      "size": 1230,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/31139f831b46c3f26389dfe6ecbe82e769036a9a"
+    },
+    {
+      "path": "networks/__pycache__/lstm.cpython-38.pyc",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "804379eebd50e7a3a2625226c5596adf6eaa18b2",
+      "size": 1250,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/804379eebd50e7a3a2625226c5596adf6eaa18b2"
+    },
+    {
+      "path": "networks/causal_cnn.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f8dd22951d6d5fd5cc4c0db1d2a71021c742dcad",
+      "size": 8314,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/f8dd22951d6d5fd5cc4c0db1d2a71021c742dcad"
+    },
+    {
+      "path": "networks/global_model_round_ditto",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f6ad78172a0cd1a88b08019261ffff08f1f4a0f4",
+      "size": 1596161,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/f6ad78172a0cd1a88b08019261ffff08f1f4a0f4"
+    },
+    {
+      "path": "networks/lstm.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "163cee0643584675a19fb7007288bd4a14505377",
+      "size": 1537,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/163cee0643584675a19fb7007288bd4a14505377"
+    },
+    {
+      "path": "requirements.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "65e67da11f1874e4472d56d87e46e0813fed1b73",
+      "size": 204,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/65e67da11f1874e4472d56d87e46e0813fed1b73"
+    },
+    {
+      "path": "scikit_wrappers_0.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ccf8f87747430cecff711cc5ce98a53e42209b34",
+      "size": 32642,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/ccf8f87747430cecff711cc5ce98a53e42209b34"
+    },
+    {
+      "path": "utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b2a0478795c5a25fcd52e15d7fe99e843769c5b6",
+      "size": 1744,
+      "url": "https://api.github.com/repos/usmanakua927/FedSSL-AMC_Github/git/blobs/b2a0478795c5a25fcd52e15d7fe99e843769c5b6"
+    }
+  ],
+  "truncated": false
+}

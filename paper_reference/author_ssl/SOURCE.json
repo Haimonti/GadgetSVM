@@ -1,0 +1,24 @@
+{
+  "repo": "https://github.com/usmanakua927/FedSSL-AMC_Github",
+  "commit": "7cf7dc290aa208ef525c56b4591a501e547b8abf",
+  "hashes": {
+    "README.md": "809580cd89e4dd27afbde11458111a72ebd25573b7336a83258903a9facb5946",
+    "default_hyperparameters.json": "ad46254e64bc6b5540bcc451c541bd88f552d1dc1a6853514d11afa58ffd4f24",
+    "Train_Encoder_Client.py": "43847e40c6e9d1efc528805ca89e70d09a6f570e6b2b91d9ba36772d42eb0bff",
+    "Train_Encoder_Server.py": "cc678fb22f9a4e54cec93bf2438a7293357b6ce9a36b9e32dd05a27020021fa2",
+    "Output_Layer_Personalized_Client.py": "00ade3f5cf3a368b552add17d8954ce93680e446e75ae2f63f31ead367c0224a",
+    "Output_layer_Personlized_Main.py": "86f57a1c295a4783819117e6a43a298e7cd93fb1b324cf5079649f1a9ea2c668",
+    "Generate_Dataset.py": "1b09bac3a4ab9030bba0307161618e31486bb6987aa5f56cff73f39ee7e9c3c7",
+    "networks/causal_cnn.py": "ce13abe81e4335be07171c5e522e7cd3ee84cab28d595764a3307488d7fc812a",
+    "losses/triplet_loss.py": "9a702193c0c9b8c2ff2b238efa335504a9c7dcf0907a696554c61b51f7953a70",
+    "scikit_wrappers_0.py": "a4ebd30693f1f9d0af00c7154bc726877ef0856e64c3b54790cd074f92b75fe0",
+    "Common_functions.py": "068ce96cdb1c04197eccecf2e9b6a6f509fe5c17210a2d26db4fa8fa4b5ade84"
+  },
+  "license": "No repository-wide license found; reference snapshots for local audit. Preserve embedded upstream notices.",
+  "derived_files": {
+    "signal_functions.py": {
+      "source": "Generate_Dataset.py",
+      "transform": "Function-only AST extraction, function bodies unchanged; omit dataset-writing module body"
+    }
+  }
+}
