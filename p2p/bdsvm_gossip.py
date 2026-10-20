@@ -33,14 +33,27 @@ from methods.bdsvm import (_rbf, _linear, _make_preimages, _median_gamma,
                            _worker_contribution)
 
 
+class BDSVMStateAggregator:
+    """Immutable geometry proposals plus versioned IRWLS statistics."""
+    def aggregate(self,current,peers):
+        geometry=dict(current['geometry'])
+        for peer in peers:
+            for origin,value in peer['geometry'].items():
+                if origin in geometry and geometry[origin]!=value:
+                    raise ValueError('BDSVM geometry proposal changed within a run')
+                geometry[origin]=value
+        stats=VersionedContributionAggregator().aggregate(current['stats'],[p['stats'] for p in peers])
+        return {'geometry':geometry,'stats':stats}
+
+
 class BDSVMGossipProtocol(GossipProtocol):
     """Budget Distributed SVM (ACM TIST 13(6), 2022) as a gossip learner."""
 
     def __init__(self, gossip_k=1, P=100, C=30.0, rho=0.5,
                  gamma=None, gamma_mult=1.0, preimage="uniform", arch_seed=0,
-                 ey_floor=1e-12, kernel="rbf"):
+                 ey_floor=1e-12, kernel="linear"):
         super().__init__(gossip_k=gossip_k,
-                         aggregator=VersionedContributionAggregator())
+                         aggregator=BDSVMStateAggregator())
         self.P = P                  # budget: number of pre-image vectors
         self.C = C                  # penalty in the weighting rule, Eq (9)
         self.rho = rho              # mixing weight, Algorithm 1 step 10
@@ -58,6 +71,8 @@ class BDSVMGossipProtocol(GossipProtocol):
         self.metrics: list = []
         self.version = 0
         self.contributions = {}     # origin -> (version, (C_k, d_k), n_k)
+        self.geometry = {}
+        self.kernel_ready = False
         self.node_id = None
         self.n_global = None
         self.start = None
@@ -97,14 +112,22 @@ class BDSVMGossipProtocol(GossipProtocol):
         """
         self.node_id = int(node_id)
         self.n_global = int(n_global)
+        self.n_workers = int(n_workers)
 
         # Architecture: every node regenerates the SAME P pre-images from the
         # shared seed, so it is common knowledge without being transmitted.
         p = _make_preimages(self.P, self.d, self.arch_seed, kind=self.preimage)
         self.p = p
         if self.kernel == "rbf" and self.gamma is None:
-            self.gamma = (self.gamma_mult * _median_gamma(self.X, p)
-                          if self.n > 0 else 1.0)
+            candidate=self.gamma_mult*_median_gamma(self.X,p) if self.n>0 else 0.
+            self.geometry={self.node_id:(float(candidate),self.n)}
+            return  # Disseminate scalar proposals before any kernel statistics.
+        if self.kernel=='rbf' and (not np.isfinite(self.gamma) or self.gamma<=0):
+            raise ValueError('RBF gamma must be positive and common across peers')
+        self._initialize_kernel()
+
+    def _initialize_kernel(self):
+        p=self.p
         self.Kpp = np.zeros((self.P + 1, self.P + 1))
         self.Kpp[:self.P, :self.P] = self._kernel(p, p)
         if self.n > 0:
@@ -112,6 +135,7 @@ class BDSVMGossipProtocol(GossipProtocol):
             self.Km = np.hstack([Km, np.ones((Km.shape[0], 1))])
         else:
             self.Km = np.zeros((0, self.P + 1))
+        self.kernel_ready=True
         self._publish()
 
     def warm_start(self):
@@ -125,23 +149,34 @@ class BDSVMGossipProtocol(GossipProtocol):
         return self.data_ready and self.n_global is not None
 
     def current_state(self):
-        return self.contributions
+        return {'geometry':dict(self.geometry),'stats':dict(self.contributions)}
 
     def set_state(self, merged):
-        self.contributions = merged
+        self.geometry=merged['geometry']
+        self.contributions=merged['stats']
 
     def outgoing_payload(self):
-        return self.contributions
+        return self.current_state()
 
     def payload_nbytes(self):
         # One (P+1)x(P+1) matrix plus one (P+1) vector per entry, float64.
         per = ((self.P + 1) ** 2 + (self.P + 1)) * 8
-        return per * max(len(self.contributions), 1)
+        # Three numeric metadata scalars (origin, version, local size) per entry;
+        # geometry proposals carry origin, candidate gamma and local size.
+        return (per+24)*len(self.contributions)+24*len(self.geometry)
 
     def local_update(self):
         """Solve Eq (17) over the contributions known, then republish."""
-        if self.n == 0:
+        if not self.kernel_ready:
+            if len(self.geometry)<self.n_workers:return
+            values=[self.geometry[i][0] for i in range(self.n_workers) if self.geometry[i][1]>0]
+            if not values:raise ValueError('BDSVM has no nonempty clients')
+            # One training-only shared heuristic. This is the median of client
+            # candidates, not the pooled median of all raw pairwise distances.
+            self.gamma=float(np.median(values))
+            self._initialize_kernel()
             return
+        if len(self.contributions)<self.n_workers:return
         C_sum = np.zeros((self.P + 1, self.P + 1))
         d_sum = np.zeros(self.P + 1)
         for _version, (C_k, d_k), _n_k in self.contributions.values():
@@ -164,8 +199,7 @@ class BDSVMGossipProtocol(GossipProtocol):
 
     def _publish(self):
         """Recompute this node's own (C_k, d_k) and bump its version."""
-        if self.n == 0:
-            return
+        # Empty clients publish zero statistics and still relay/solve globally.
         C_k, d_k = _worker_contribution(self.Km, self.y, self.beta, self.C,
                                         ey_floor=self.ey_floor)
         self.version += 1
@@ -203,6 +237,7 @@ class BDSVMGossipProtocol(GossipProtocol):
         return _linear(A, B) if self.kernel == "linear" else _rbf(A, B, self.gamma)
 
     def accuracy(self):
+        if not self.kernel_ready:raise RuntimeError('BDSVM kernel calibration incomplete')
         n = self.X_test.shape[0]
         if n == 0:
             return float("nan")

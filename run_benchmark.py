@@ -52,9 +52,9 @@ METHOD_KWARGS = {
     # C tuned on validation AUC (see methods/bdsvm.py): 1.0 underfits badly,
     # converging to 0.691 where anything from 10 up reaches ~0.756-0.760 against
     # a 0.758 upper bound. 30 is the plateau's peak.
-    "bdsvm":       {"P": 100, "C": 30.0, "lam": 0.5, "eta": 5e-3},
-    "fdr_svm":     {"n_local_steps": 100, "lambda_reg": 0.01, "rho": 1.0, "eps_scale": 1.0},
-    "fedssl_amc":  {"d_enc": 64, "svm_C": 1.0},
+    "bdsvm":       {"P": 100, "C": 30.0, "lam": 0.5, "eta": 5e-3, "kernel":"linear"},
+    "fdr_svm":     {"rho": 0.01, "kappa": 1.0, "dual_norm": 1},
+    "fedssl_amc":  {},  # I/Q-only API; tabular invocation raises a clear error.
 }
 
 
@@ -109,7 +109,9 @@ def main():
 
     fast       = args.fast
     datasets   = args.datasets or (FAST_DATASETS if fast else FULL_DATASETS)
-    all_methods = args.methods  or list(METHODS.keys())
+    all_methods = args.methods or [m for m in METHODS if m != 'fedssl_amc']
+    if 'fedssl_amc' in all_methods:
+        ap.error('FedSSL-AMC is I/Q-only; use run_paper_reference.py ssl. Tabular adaptation is deferred.')
     n_clients_list = FAST_CLIENTS if fast else FULL_CLIENTS
     n_rounds   = FAST_ROUNDS if fast else FULL_ROUNDS
     max_test   = FAST_MAX_TEST  if fast else FULL_MAX_TEST

@@ -90,6 +90,8 @@ class BDSVMEvaluator(Control):
         ]
         if not protos:
             return False
+        if not all(getattr(p,'kernel_ready',True) for p in protos):
+            return False  # calibration traffic is counted; no premature score
 
         cycle = CDState.getCycle()
         is_last = self.total_cycles is not None and cycle >= self.total_cycles - 1

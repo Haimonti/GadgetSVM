@@ -34,6 +34,8 @@ class GossipProtocol(CDProtocol):
         self.aggregator = aggregator or PlainAverageAggregator()
         self.inbox: list = []   # received payloads — the async mailbox
         self.comm_bytes = 0
+        self.messages_sent = 0
+        self.communication_trace = []
         self.stopped = False    # set True by the observer once this node has
                                 # converged; a stopped node goes silent — no
                                 # training and no sending — so its comm cost freezes
@@ -65,12 +67,19 @@ class GossipProtocol(CDProtocol):
         # additive merge, applying the same update twice). Skip any neighbour that
         # has already converged and gone silent, so no cost is charged for
         # sending to a stopped node.
-        for peer_index in CommonState.r.sample(range(deg), min(self.gossip_k, deg)):
-            peer_proto = link.getNeighbor(peer_index).getProtocol(pid)
-            if peer_proto.stopped:
-                continue
+        from src.peersim_python.communication import selected_neighbors,numeric_payload_nbytes
+        from src.peersim_python.cdsim.cd_state import CDState
+        cycle=CDState.getCycle()
+        destinations=[]
+        size=numeric_payload_nbytes(payload)
+        for peer in selected_neighbors(node,getattr(CommonState,'experiment_seed',0),cycle,self.gossip_k,self.LINKABLE_PID):
+            peer_proto=peer.getProtocol(pid)
+            if peer_proto.stopped:continue
             peer_proto.inbox.append(dict(payload))
-            self.comm_bytes += self.payload_nbytes()
+            self.comm_bytes+=size
+            self.messages_sent+=1
+            destinations.append(peer.getIndex())
+        self.communication_trace.append((cycle,tuple(destinations),size))
 
     # ---- hooks a concrete learner MUST implement ----------------------------
     def ready(self):

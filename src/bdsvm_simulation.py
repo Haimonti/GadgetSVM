@@ -61,6 +61,7 @@ from p2p.bdsvm_gossip import BDSVMGossipProtocol
 # cycles 40-50; rho = 0.9 only slowed the collapse. covtype keeps the paper's
 # unbounded rule because its results were produced with it and are not rerun.
 BDSVM_DEFAULTS = {
+    "kernel": "linear",  # current comparison is against linear SDCA
     "rho": 0.5,        # mixing weight in beta <- rho*beta + (1-rho)*beta_new
     "gamma": None,     # None -> gamma_mult x median heuristic
     "arch_seed": 0,    # shared, so every node regenerates the same pre-images
@@ -108,6 +109,7 @@ class BDSVMSimulation:
         self.worker_data = worker_data
         self.params = dict(params if params is not None
                            else params_for(config["DATASET"]))
+        self.params.setdefault('kernel','linear')
         if self.params.get("kernel", "rbf") == "linear":
             # A linear kernel has rank at most d. Extra random pre-images only
             # inflate singular Gram systems on low-dimensional datasets.

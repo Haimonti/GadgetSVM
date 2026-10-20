@@ -1,41 +1,7 @@
-"""P2P FedSSL-AMC — decentralised counterpart of `methods/fedssl_amc.py`.
+"""Retired SVD/averaged-classifier approximation (old engine layout).
 
-The only two-phase method in the set, so the only protocol whose nextCycle needs
-a state machine rather than one repeated step.
-
-Server version
-    Phase 1  every client fits a local truncated SVD; the server averages the
-             right-singular-vector matrices V_k (weighted by n_k) and
-             re-orthogonalises -> one shared encoder.
-    Phase 2  every client encodes Z_k = X_k V^T, fits a local LinearSVC, and the
-             server FedAvgs the classifier weights.
-
-P2P version — both aggregations become gossip, the phase boundary a cycle count.
-    Phase 1 (cycle < encoder_cycles)
-             each node age-weight-averages the V matrices it receives, then
-             re-orthogonalises its own copy by QR. This is decentralised
-             federated power iteration: repeated averaging plus
-             re-orthogonalisation drives every node's encoder toward the same
-             dominant subspace with no server. The payload is a d_enc x d
-             matrix, by far the most expensive message in this package, which
-             shows up plainly on the comm_bytes curve.
-    Phase 2  each encoder freezes and fits a local SVM. Its coefficients are
-             lifted into original feature coordinates before gossip, because
-             independently frozen encoders do not share coordinate axes.
-             The intercept travels with the full-feature classifier.
-
-Both phases use fixed local sample-count weights, avoiding exponential growth
-of aggregation ages. Repeated QR/averaging is the existing encoder heuristic;
-it is not claimed to be an exact distributed PCA or a paper reproduction.
-
-Known limitation, measured, not a porting bug
----------------------------------------------
-Under label_skew every node holds a single class, so no node can fit a local
-SVM and the method cannot learn. Server version scores 0.5012, this one 0.4963,
-both chance. Nodes that cannot train broadcast age 0 so their zero vectors do
-not drag their neighbours down, but when *every* node is single-class there is
-nothing to recover from. Decide whether to report the limitation or drop the
-combination from the grid before running it.
+This is not FedSSL-AMC: the paper trains an I/Q CNN using contrastive triplets
+and retains personalized SVMs. Current code: paper_reference.ssl.
 """
 
 import time

@@ -1,0 +1,10575 @@
+{
+  "method": "cocoa",
+  "converged": true,
+  "stop_reason": "train_objective_plateau",
+  "rounds": 252,
+  "average_accuracy": 0.8495178428843438,
+  "per_node_accuracy": [
+    0.8491493151526319,
+    0.8495792641729624,
+    0.8492721577298692,
+    0.8490264725753947,
+    0.8498863706160555,
+    0.8501320557705301,
+    0.8493335790184878,
+    0.850316319636386,
+    0.8493950003071065,
+    0.8490878938640133
+  ],
+  "final_train_hinge": 0.3512821887027281,
+  "total_comm_bytes": 75953808,
+  "per_node_comm_bytes": [
+    7599312,
+    7599312,
+    7602336,
+    7581168,
+    7599312,
+    7608384,
+    7587216,
+    7590240,
+    7593264,
+    7593264
+  ],
+  "per_node_metrics": [
+    [
+      {
+        "round": 1,
+        "hinge_loss": 0.6669989627880428,
+        "primal": 0.6670275879900242,
+        "comm_bytes": 9072,
+        "stopped": false,
+        "wall_time": 0.20197660001576878
+      },
+      {
+        "round": 10,
+        "hinge_loss": 0.36463340391020627,
+        "primal": 0.36504969253215386,
+        "comm_bytes": 281232,
+        "stopped": false,
+        "wall_time": 2.3540442000085022
+      },
+      {
+        "round": 20,
+        "hinge_loss": 0.36169689422322204,
+        "primal": 0.3621913560854063,
+        "comm_bytes": 583632,
+        "stopped": false,
+        "wall_time": 5.526873399998294
+      },
+      {
+        "round": 30,
+        "hinge_loss": 0.35634572628579064,
+        "primal": 0.3569181101134311,
+        "comm_bytes": 886032,
+        "stopped": false,
+        "wall_time": 8.47256270001526
+      },
+      {
+        "round": 40,
+        "hinge_loss": 0.35535262661612727,
+        "primal": 0.3559546214528363,
+        "comm_bytes": 1188432,
+        "stopped": false,
+        "wall_time": 11.18285929999547
+      },
+      {
+        "round": 50,
+        "hinge_loss": 0.353199814967177,
+        "primal": 0.3538525419031838,
+        "comm_bytes": 1490832,
+        "stopped": false,
+        "wall_time": 14.101904200011631
+      },
+      {
+        "round": 60,
+        "hinge_loss": 0.351797180929204,
+        "primal": 0.3524782808948544,
+        "comm_bytes": 1793232,
+        "stopped": false,
+        "wall_time": 17.15643010000349
+      },
+      {
+        "round": 70,
+        "hinge_loss": 0.3519064574916773,
+        "primal": 0.35260532491252655,
+        "comm_bytes": 2095632,
+        "stopped": false,
+        "wall_time": 20.207211600005394
+      },
+      {
+        "round": 80,
+        "hinge_loss": 0.3517677551217395,
+        "primal": 0.3524938363407182,
+        "comm_bytes": 2398032,
+        "stopped": false,
+        "wall_time": 23.040485000004992
+      },
+      {
+        "round": 90,
+        "hinge_loss": 0.351446563091436,
+        "primal": 0.35218565379708666,
+        "comm_bytes": 2700432,
+        "stopped": false,
+        "wall_time": 25.92622900000424
+      },
+      {
+        "round": 100,
+        "hinge_loss": 0.3516649263960046,
+        "primal": 0.3524155475855771,
+        "comm_bytes": 3002832,
+        "stopped": false,
+        "wall_time": 28.930507500015665
+      },
+      {
+        "round": 110,
+        "hinge_loss": 0.35136593171536856,
+        "primal": 0.3521217865076799,
+        "comm_bytes": 3305232,
+        "stopped": false,
+        "wall_time": 31.57624679998844
+      },
+      {
+        "round": 120,
+        "hinge_loss": 0.3513692807262491,
+        "primal": 0.3521325961785942,
+        "comm_bytes": 3607632,
+        "stopped": false,
+        "wall_time": 34.57069349999074
+      },
+      {
+        "round": 130,
+        "hinge_loss": 0.3512606251420447,
+        "primal": 0.35202241324706135,
+        "comm_bytes": 3910032,
+        "stopped": false,
+        "wall_time": 37.57855279999785
+      },
+      {
+        "round": 140,
+        "hinge_loss": 0.3512639851827943,
+        "primal": 0.3520274958000095,
+        "comm_bytes": 4212432,
+        "stopped": false,
+        "wall_time": 40.44209970001248
+      },
+      {
+        "round": 150,
+        "hinge_loss": 0.35134355607446605,
+        "primal": 0.35210689871747824,
+        "comm_bytes": 4514832,
+        "stopped": false,
+        "wall_time": 43.01899959999719
+      },
+      {
+        "round": 160,
+        "hinge_loss": 0.3513158441658171,
+        "primal": 0.35208105390826133,
+        "comm_bytes": 4817232,
+        "stopped": false,
+        "wall_time": 46.01062539999839
+      },
+      {
+        "round": 170,
+        "hinge_loss": 0.35123413660176694,
+        "primal": 0.35199819215244205,
+        "comm_bytes": 5119632,
+        "stopped": false,
+        "wall_time": 48.96279520000098
+      },
+      {
+        "round": 180,
+        "hinge_loss": 0.35120735350466725,
+        "primal": 0.3519744424448125,
+        "comm_bytes": 5422032,
+        "stopped": false,
+        "wall_time": 51.62213319999864
+      },
+      {
+        "round": 190,
+        "hinge_loss": 0.35123673295957464,
+        "primal": 0.35199939572644506,
+        "comm_bytes": 5724432,
+        "stopped": false,
+        "wall_time": 54.66592890000902
+      },
+      {
+        "round": 200,
+        "hinge_loss": 0.35122278714073646,
+        "primal": 0.35198580471016844,
+        "comm_bytes": 6026832,
+        "stopped": false,
+        "wall_time": 57.188999000005424
+      },
+      {
+        "round": 210,
+        "hinge_loss": 0.35120399296778454,
+        "primal": 0.35196908438292646,
+        "comm_bytes": 6329232,
+        "stopped": false,
+        "wall_time": 59.84108370001195
+      },
+      {
+        "round": 220,
+        "hinge_loss": 0.351257301344636,
+        "primal": 0.3520193972851023,
+        "comm_bytes": 6631632,
+        "stopped": false,
+        "wall_time": 62.696922700008145
+      },
+      {
+        "round": 230,
+        "hinge_loss": 0.3512070146001094,
+        "primal": 0.35196925111890215,
+        "comm_bytes": 6934032,
+        "stopped": false,
+        "wall_time": 65.65057520000846
+      },
+      {
+        "round": 240,
+        "hinge_loss": 0.3512186831467745,
+        "primal": 0.3519821171182359,
+        "comm_bytes": 7236432,
+        "stopped": false,
+        "wall_time": 68.4253166000126
+      },
+      {
+        "round": 250,
+        "hinge_loss": 0.35121197035670726,
+        "primal": 0.35197748068444473,
+        "comm_bytes": 7538832,
+        "stopped": false,
+        "wall_time": 71.16489479999291
+      },
+      {
+        "round": 252,
+        "hinge_loss": 0.35130906514110616,
+        "primal": 0.3520729557614253,
+        "comm_bytes": 7599312,
+        "stopped": true,
+        "wall_time": 71.78212730001542
+      }
+    ],
+    [
+      {
+        "round": 1,
+        "hinge_loss": 0.681829969920566,
+        "primal": 0.6818618209206981,
+        "comm_bytes": 9072,
+        "stopped": false,
+        "wall_time": 0.20197660001576878
+      },
+      {
+        "round": 10,
+        "hinge_loss": 0.36651087250573694,
+        "primal": 0.3669209691398703,
+        "comm_bytes": 281232,
+        "stopped": false,
+        "wall_time": 2.3540442000085022
+      },
+      {
+        "round": 20,
+        "hinge_loss": 0.36215963352167513,
+        "primal": 0.36265983693166715,
+        "comm_bytes": 583632,
+        "stopped": false,
+        "wall_time": 5.526873399998294
+      },
+      {
+        "round": 30,
+        "hinge_loss": 0.3580122789356978,
+        "primal": 0.35858099308038466,
+        "comm_bytes": 886032,
+        "stopped": false,
+        "wall_time": 8.47256270001526
+      },
+      {
+        "round": 40,
+        "hinge_loss": 0.3574672055833087,
+        "primal": 0.35807348156195473,
+        "comm_bytes": 1188432,
+        "stopped": false,
+        "wall_time": 11.18285929999547
+      },
+      {
+        "round": 50,
+        "hinge_loss": 0.3533676915776352,
+        "primal": 0.35401180284874567,
+        "comm_bytes": 1490832,
+        "stopped": false,
+        "wall_time": 14.101904200011631
+      },
+      {
+        "round": 60,
+        "hinge_loss": 0.35210694416606236,
+        "primal": 0.35278206970634785,
+        "comm_bytes": 1793232,
+        "stopped": false,
+        "wall_time": 17.15643010000349
+      },
+      {
+        "round": 70,
+        "hinge_loss": 0.35205767069745925,
+        "primal": 0.35276011730167,
+        "comm_bytes": 2095632,
+        "stopped": false,
+        "wall_time": 20.207211600005394
+      },
+      {
+        "round": 80,
+        "hinge_loss": 0.3516116292552359,
+        "primal": 0.35233491331783395,
+        "comm_bytes": 2398032,
+        "stopped": false,
+        "wall_time": 23.040485000004992
+      },
+      {
+        "round": 90,
+        "hinge_loss": 0.35151034456730335,
+        "primal": 0.35224547509212634,
+        "comm_bytes": 2700432,
+        "stopped": false,
+        "wall_time": 25.92622900000424
+      },
+      {
+        "round": 100,
+        "hinge_loss": 0.3513218402800188,
+        "primal": 0.3520744242179705,
+        "comm_bytes": 3002832,
+        "stopped": false,
+        "wall_time": 28.930507500015665
+      },
+      {
+        "round": 110,
+        "hinge_loss": 0.35136028822107773,
+        "primal": 0.35212197958348,
+        "comm_bytes": 3305232,
+        "stopped": false,
+        "wall_time": 31.57624679998844
+      },
+      {
+        "round": 120,
+        "hinge_loss": 0.3513147872252377,
+        "primal": 0.35207862744453206,
+        "comm_bytes": 3607632,
+        "stopped": false,
+        "wall_time": 34.57069349999074
+      },
+      {
+        "round": 130,
+        "hinge_loss": 0.3512607664754677,
+        "primal": 0.3520238452193633,
+        "comm_bytes": 3910032,
+        "stopped": false,
+        "wall_time": 37.57855279999785
+      },
+      {
+        "round": 140,
+        "hinge_loss": 0.35133073273004006,
+        "primal": 0.3520954286564237,
+        "comm_bytes": 4212432,
+        "stopped": false,
+        "wall_time": 40.44209970001248
+      },
+      {
+        "round": 150,
+        "hinge_loss": 0.35136668380406,
+        "primal": 0.3521333228327489,
+        "comm_bytes": 4514832,
+        "stopped": false,
+        "wall_time": 43.01899959999719
+      },
+      {
+        "round": 160,
+        "hinge_loss": 0.35129755290455267,
+        "primal": 0.35206161537776787,
+        "comm_bytes": 4817232,
+        "stopped": false,
+        "wall_time": 46.01062539999839
+      },
+      {
+        "round": 170,
+        "hinge_loss": 0.3512923009827526,
+        "primal": 0.3520566602232939,
+        "comm_bytes": 5119632,
+        "stopped": false,
+        "wall_time": 48.96279520000098
+      },
+      {
+        "round": 180,
+        "hinge_loss": 0.3512599108570671,
+        "primal": 0.3520283767482491,
+        "comm_bytes": 5422032,
+        "stopped": false,
+        "wall_time": 51.62213319999864
+      },
+      {
+        "round": 190,
+        "hinge_loss": 0.3513045212019415,
+        "primal": 0.3520677775800888,
+        "comm_bytes": 5724432,
+        "stopped": false,
+        "wall_time": 54.66592890000902
+      },
+      {
+        "round": 200,
+        "hinge_loss": 0.35123321528429524,
+        "primal": 0.3519954927089679,
+        "comm_bytes": 6026832,
+        "stopped": false,
+        "wall_time": 57.188999000005424
+      },
+      {
+        "round": 210,
+        "hinge_loss": 0.3512813745763308,
+        "primal": 0.35204334853645747,
+        "comm_bytes": 6329232,
+        "stopped": false,
+        "wall_time": 59.84108370001195
+      },
+      {
+        "round": 220,
+        "hinge_loss": 0.3512602304063101,
+        "primal": 0.3520216289573183,
+        "comm_bytes": 6631632,
+        "stopped": false,
+        "wall_time": 62.696922700008145
+      },
+      {
+        "round": 230,
+        "hinge_loss": 0.35121092251618496,
+        "primal": 0.35197234494011015,
+        "comm_bytes": 6934032,
+        "stopped": false,
+        "wall_time": 65.65057520000846
+      },
+      {
+        "round": 240,
+        "hinge_loss": 0.3511970280415071,
+        "primal": 0.35196173004644477,
+        "comm_bytes": 7236432,
+        "stopped": false,
+        "wall_time": 68.4253166000126
+      },
+      {
+        "round": 250,
+        "hinge_loss": 0.35121281306064217,
+        "primal": 0.35197460596413566,
+        "comm_bytes": 7538832,
+        "stopped": false,
+        "wall_time": 71.16489479999291
+      },
+      {
+        "round": 252,
+        "hinge_loss": 0.35130267713032176,
+        "primal": 0.3520657743250474,
+        "comm_bytes": 7599312,
+        "stopped": true,
+        "wall_time": 71.78212730001542
+      }
+    ],
+    [
+      {
+        "round": 1,
+        "hinge_loss": 0.44923600179427986,
+        "primal": 0.4493535904175084,
+        "comm_bytes": 21168,
+        "stopped": false,
+        "wall_time": 0.20197660001576878
+      },
+      {
+        "round": 10,
+        "hinge_loss": 0.36859892084575346,
+        "primal": 0.3690222716136788,
+        "comm_bytes": 284256,
+        "stopped": false,
+        "wall_time": 2.3540442000085022
+      },
+      {
+        "round": 20,
+        "hinge_loss": 0.3623768189392798,
+        "primal": 0.3628712196475848,
+        "comm_bytes": 586656,
+        "stopped": false,
+        "wall_time": 5.526873399998294
+      },
+      {
+        "round": 30,
+        "hinge_loss": 0.3585696385345069,
+        "primal": 0.3591473974275196,
+        "comm_bytes": 889056,
+        "stopped": false,
+        "wall_time": 8.47256270001526
+      },
+      {
+        "round": 40,
+        "hinge_loss": 0.355784850436378,
+        "primal": 0.35637953651841425,
+        "comm_bytes": 1191456,
+        "stopped": false,
+        "wall_time": 11.18285929999547
+      },
+      {
+        "round": 50,
+        "hinge_loss": 0.3534751202802588,
+        "primal": 0.3541125866754529,
+        "comm_bytes": 1493856,
+        "stopped": false,
+        "wall_time": 14.101904200011631
+      },
+      {
+        "round": 60,
+        "hinge_loss": 0.35243745261343395,
+        "primal": 0.35310619122707615,
+        "comm_bytes": 1796256,
+        "stopped": false,
+        "wall_time": 17.15643010000349
+      },
+      {
+        "round": 70,
+        "hinge_loss": 0.3520612585627562,
+        "primal": 0.3527532154712256,
+        "comm_bytes": 2098656,
+        "stopped": false,
+        "wall_time": 20.207211600005394
+      },
+      {
+        "round": 80,
+        "hinge_loss": 0.35157572027674533,
+        "primal": 0.3522980082330413,
+        "comm_bytes": 2401056,
+        "stopped": false,
+        "wall_time": 23.040485000004992
+      },
+      {
+        "round": 90,
+        "hinge_loss": 0.35158398892657583,
+        "primal": 0.3523145399183841,
+        "comm_bytes": 2703456,
+        "stopped": false,
+        "wall_time": 25.92622900000424
+      },
+      {
+        "round": 100,
+        "hinge_loss": 0.35159394897831775,
+        "primal": 0.3523416264836849,
+        "comm_bytes": 3005856,
+        "stopped": false,
+        "wall_time": 28.930507500015665
+      },
+      {
+        "round": 110,
+        "hinge_loss": 0.3514100619946253,
+        "primal": 0.3521659333322729,
+        "comm_bytes": 3308256,
+        "stopped": false,
+        "wall_time": 31.57624679998844
+      },
+      {
+        "round": 120,
+        "hinge_loss": 0.3515826357623445,
+        "primal": 0.35233968456309517,
+        "comm_bytes": 3610656,
+        "stopped": false,
+        "wall_time": 34.57069349999074
+      },
+      {
+        "round": 130,
+        "hinge_loss": 0.3513669354314125,
+        "primal": 0.3521247430846988,
+        "comm_bytes": 3913056,
+        "stopped": false,
+        "wall_time": 37.57855279999785
+      },
+      {
+        "round": 140,
+        "hinge_loss": 0.351269338587211,
+        "primal": 0.3520313037407384,
+        "comm_bytes": 4215456,
+        "stopped": false,
+        "wall_time": 40.44209970001248
+      },
+      {
+        "round": 150,
+        "hinge_loss": 0.3514319557717892,
+        "primal": 0.3521955733868995,
+        "comm_bytes": 4517856,
+        "stopped": false,
+        "wall_time": 43.01899959999719
+      },
+      {
+        "round": 160,
+        "hinge_loss": 0.3513113792751544,
+        "primal": 0.35207152197003094,
+        "comm_bytes": 4820256,
+        "stopped": false,
+        "wall_time": 46.01062539999839
+      },
+      {
+        "round": 170,
+        "hinge_loss": 0.3512816461559496,
+        "primal": 0.3520454847778961,
+        "comm_bytes": 5122656,
+        "stopped": false,
+        "wall_time": 48.96279520000098
+      },
+      {
+        "round": 180,
+        "hinge_loss": 0.35122105744301724,
+        "primal": 0.35198836670986566,
+        "comm_bytes": 5425056,
+        "stopped": false,
+        "wall_time": 51.62213319999864
+      },
+      {
+        "round": 190,
+        "hinge_loss": 0.35119791740391904,
+        "primal": 0.3519598836328256,
+        "comm_bytes": 5727456,
+        "stopped": false,
+        "wall_time": 54.66592890000902
+      },
+      {
+        "round": 200,
+        "hinge_loss": 0.35126919559912645,
+        "primal": 0.35203284985619093,
+        "comm_bytes": 6029856,
+        "stopped": false,
+        "wall_time": 57.188999000005424
+      },
+      {
+        "round": 210,
+        "hinge_loss": 0.35122449441603754,
+        "primal": 0.3519865421757375,
+        "comm_bytes": 6332256,
+        "stopped": false,
+        "wall_time": 59.84108370001195
+      },
+      {
+        "round": 220,
+        "hinge_loss": 0.3512435561967271,
+        "primal": 0.35200491187283445,
+        "comm_bytes": 6634656,
+        "stopped": false,
+        "wall_time": 62.696922700008145
+      },
+      {
+        "round": 230,
+        "hinge_loss": 0.35126617197696924,
+        "primal": 0.3520281714821781,
+        "comm_bytes": 6937056,
+        "stopped": false,
+        "wall_time": 65.65057520000846
+      },
+      {
+        "round": 240,
+        "hinge_loss": 0.3512104262320124,
+        "primal": 0.3519729088853196,
+        "comm_bytes": 7239456,
+        "stopped": false,
+        "wall_time": 68.4253166000126
+      },
+      {
+        "round": 250,
+        "hinge_loss": 0.3512237188449357,
+        "primal": 0.3519858008424124,
+        "comm_bytes": 7541856,
+        "stopped": false,
+        "wall_time": 71.16489479999291
+      },
+      {
+        "round": 252,
+        "hinge_loss": 0.351251303499013,
+        "primal": 0.3520146750950709,
+        "comm_bytes": 7602336,
+        "stopped": true,
+        "wall_time": 71.78212730001542
+      }
+    ],
+    [
+      {
+        "round": 1,
+        "hinge_loss": 0.7987528485449161,
+        "primal": 0.7987682444076085,
+        "comm_bytes": 6048,
+        "stopped": false,
+        "wall_time": 0.20197660001576878
+      },
+      {
+        "round": 10,
+        "hinge_loss": 0.36569271759843924,
+        "primal": 0.3661214025078969,
+        "comm_bytes": 263088,
+        "stopped": false,
+        "wall_time": 2.3540442000085022
+      },
+      {
+        "round": 20,
+        "hinge_loss": 0.3623998657864663,
+        "primal": 0.36289210894476914,
+        "comm_bytes": 565488,
+        "stopped": false,
+        "wall_time": 5.526873399998294
+      },
+      {
+        "round": 30,
+        "hinge_loss": 0.3580987721717335,
+        "primal": 0.3586740226650069,
+        "comm_bytes": 867888,
+        "stopped": false,
+        "wall_time": 8.47256270001526
+      },
+      {
+        "round": 40,
+        "hinge_loss": 0.3561404276219397,
+        "primal": 0.35673855328845394,
+        "comm_bytes": 1170288,
+        "stopped": false,
+        "wall_time": 11.18285929999547
+      },
+      {
+        "round": 50,
+        "hinge_loss": 0.3528396353358626,
+        "primal": 0.35348949282488157,
+        "comm_bytes": 1472688,
+        "stopped": false,
+        "wall_time": 14.101904200011631
+      },
+      {
+        "round": 60,
+        "hinge_loss": 0.35282119891850183,
+        "primal": 0.35349544143280504,
+        "comm_bytes": 1775088,
+        "stopped": false,
+        "wall_time": 17.15643010000349
+      },
+      {
+        "round": 70,
+        "hinge_loss": 0.35226409369299927,
+        "primal": 0.35295670451773603,
+        "comm_bytes": 2077488,
+        "stopped": false,
+        "wall_time": 20.207211600005394
+      },
+      {
+        "round": 80,
+        "hinge_loss": 0.3515629968270653,
+        "primal": 0.3522857278326091,
+        "comm_bytes": 2379888,
+        "stopped": false,
+        "wall_time": 23.040485000004992
+      },
+      {
+        "round": 90,
+        "hinge_loss": 0.3515006768229139,
+        "primal": 0.35223110286957754,
+        "comm_bytes": 2682288,
+        "stopped": false,
+        "wall_time": 25.92622900000424
+      },
+      {
+        "round": 100,
+        "hinge_loss": 0.35142733142600896,
+        "primal": 0.3521760026430187,
+        "comm_bytes": 2984688,
+        "stopped": false,
+        "wall_time": 28.930507500015665
+      },
+      {
+        "round": 110,
+        "hinge_loss": 0.3514410426570728,
+        "primal": 0.3521996674535775,
+        "comm_bytes": 3287088,
+        "stopped": false,
+        "wall_time": 31.57624679998844
+      },
+      {
+        "round": 120,
+        "hinge_loss": 0.3514799554783102,
+        "primal": 0.35224169703805946,
+        "comm_bytes": 3589488,
+        "stopped": false,
+        "wall_time": 34.57069349999074
+      },
+      {
+        "round": 130,
+        "hinge_loss": 0.35134252099998864,
+        "primal": 0.3521029347958017,
+        "comm_bytes": 3891888,
+        "stopped": false,
+        "wall_time": 37.57855279999785
+      },
+      {
+        "round": 140,
+        "hinge_loss": 0.3514323651471951,
+        "primal": 0.3521937089998177,
+        "comm_bytes": 4194288,
+        "stopped": false,
+        "wall_time": 40.44209970001248
+      },
+      {
+        "round": 150,
+        "hinge_loss": 0.35141527237336284,
+        "primal": 0.35217888982743495,
+        "comm_bytes": 4496688,
+        "stopped": false,
+        "wall_time": 43.01899959999719
+      },
+      {
+        "round": 160,
+        "hinge_loss": 0.35131015153989087,
+        "primal": 0.35207164600955604,
+        "comm_bytes": 4799088,
+        "stopped": false,
+        "wall_time": 46.01062539999839
+      },
+      {
+        "round": 170,
+        "hinge_loss": 0.3512785201528183,
+        "primal": 0.3520399551921239,
+        "comm_bytes": 5101488,
+        "stopped": false,
+        "wall_time": 48.96279520000098
+      },
+      {
+        "round": 180,
+        "hinge_loss": 0.351283996271221,
+        "primal": 0.3520530037244971,
+        "comm_bytes": 5403888,
+        "stopped": false,
+        "wall_time": 51.62213319999864
+      },
+      {
+        "round": 190,
+        "hinge_loss": 0.35126158572570343,
+        "primal": 0.35202068209888066,
+        "comm_bytes": 5706288,
+        "stopped": false,
+        "wall_time": 54.66592890000902
+      },
+      {
+        "round": 200,
+        "hinge_loss": 0.3513248406832865,
+        "primal": 0.35208659240222606,
+        "comm_bytes": 6008688,
+        "stopped": false,
+        "wall_time": 57.188999000005424
+      },
+      {
+        "round": 210,
+        "hinge_loss": 0.35122419373562513,
+        "primal": 0.35198575601044435,
+        "comm_bytes": 6311088,
+        "stopped": false,
+        "wall_time": 59.84108370001195
+      },
+      {
+        "round": 220,
+        "hinge_loss": 0.35133081004404804,
+        "primal": 0.35209152258964266,
+        "comm_bytes": 6613488,
+        "stopped": false,
+        "wall_time": 62.696922700008145
+      },
+      {
+        "round": 230,
+        "hinge_loss": 0.35122955684766377,
+        "primal": 0.3519921087040296,
+        "comm_bytes": 6915888,
+        "stopped": false,
+        "wall_time": 65.65057520000846
+      },
+      {
+        "round": 240,
+        "hinge_loss": 0.3512450707085483,
+        "primal": 0.3520079264794653,
+        "comm_bytes": 7218288,
+        "stopped": false,
+        "wall_time": 68.4253166000126
+      },
+      {
+        "round": 250,
+        "hinge_loss": 0.351301011908441,
+        "primal": 0.3520623218408876,
+        "comm_bytes": 7520688,
+        "stopped": false,
+        "wall_time": 71.16489479999291
+      },
+      {
+        "round": 252,
+        "hinge_loss": 0.3513403614083874,
+        "primal": 0.35210256972364257,
+        "comm_bytes": 7581168,
+        "stopped": true,
+        "wall_time": 71.78212730001542
+      }
+    ],
+    [
+      {
+        "round": 1,
+        "hinge_loss": 0.6301820913887198,
+        "primal": 0.630228364021502,
+        "comm_bytes": 12096,
+        "stopped": false,
+        "wall_time": 0.20197660001576878
+      },
+      {
+        "round": 10,
+        "hinge_loss": 0.36657409637904964,
+        "primal": 0.36699462493457913,
+        "comm_bytes": 281232,
+        "stopped": false,
+        "wall_time": 2.3540442000085022
+      },
+      {
+        "round": 20,
+        "hinge_loss": 0.36290930976956176,
+        "primal": 0.363399073127662,
+        "comm_bytes": 583632,
+        "stopped": false,
+        "wall_time": 5.526873399998294
+      },
+      {
+        "round": 30,
+        "hinge_loss": 0.3575673761439385,
+        "primal": 0.35814104880617526,
+        "comm_bytes": 886032,
+        "stopped": false,
+        "wall_time": 8.47256270001526
+      },
+      {
+        "round": 40,
+        "hinge_loss": 0.35592187642258527,
+        "primal": 0.35652245448346115,
+        "comm_bytes": 1188432,
+        "stopped": false,
+        "wall_time": 11.18285929999547
+      },
+      {
+        "round": 50,
+        "hinge_loss": 0.3538689964422468,
+        "primal": 0.3545155786257825,
+        "comm_bytes": 1490832,
+        "stopped": false,
+        "wall_time": 14.101904200011631
+      },
+      {
+        "round": 60,
+        "hinge_loss": 0.35238566396334725,
+        "primal": 0.3530518610773934,
+        "comm_bytes": 1793232,
+        "stopped": false,
+        "wall_time": 17.15643010000349
+      },
+      {
+        "round": 70,
+        "hinge_loss": 0.35224990516960464,
+        "primal": 0.352944371414732,
+        "comm_bytes": 2095632,
+        "stopped": false,
+        "wall_time": 20.207211600005394
+      },
+      {
+        "round": 80,
+        "hinge_loss": 0.35205879251342964,
+        "primal": 0.3527745033198743,
+        "comm_bytes": 2398032,
+        "stopped": false,
+        "wall_time": 23.040485000004992
+      },
+      {
+        "round": 90,
+        "hinge_loss": 0.3515171099731437,
+        "primal": 0.35225074757398595,
+        "comm_bytes": 2700432,
+        "stopped": false,
+        "wall_time": 25.92622900000424
+      },
+      {
+        "round": 100,
+        "hinge_loss": 0.351419440448678,
+        "primal": 0.35216617417731516,
+        "comm_bytes": 3002832,
+        "stopped": false,
+        "wall_time": 28.930507500015665
+      },
+      {
+        "round": 110,
+        "hinge_loss": 0.35140928448618447,
+        "primal": 0.35216086016311365,
+        "comm_bytes": 3305232,
+        "stopped": false,
+        "wall_time": 31.57624679998844
+      },
+      {
+        "round": 120,
+        "hinge_loss": 0.3514503133386833,
+        "primal": 0.3522094437213272,
+        "comm_bytes": 3607632,
+        "stopped": false,
+        "wall_time": 34.57069349999074
+      },
+      {
+        "round": 130,
+        "hinge_loss": 0.35131542526102155,
+        "primal": 0.35207681497577303,
+        "comm_bytes": 3910032,
+        "stopped": false,
+        "wall_time": 37.57855279999785
+      },
+      {
+        "round": 140,
+        "hinge_loss": 0.3514365673167815,
+        "primal": 0.3521976071002328,
+        "comm_bytes": 4212432,
+        "stopped": false,
+        "wall_time": 40.44209970001248
+      },
+      {
+        "round": 150,
+        "hinge_loss": 0.351428398809977,
+        "primal": 0.35219192737085947,
+        "comm_bytes": 4514832,
+        "stopped": false,
+        "wall_time": 43.01899959999719
+      },
+      {
+        "round": 160,
+        "hinge_loss": 0.3514168252912002,
+        "primal": 0.3521785054896722,
+        "comm_bytes": 4817232,
+        "stopped": false,
+        "wall_time": 46.01062539999839
+      },
+      {
+        "round": 170,
+        "hinge_loss": 0.3512970356017723,
+        "primal": 0.35206182054470836,
+        "comm_bytes": 5119632,
+        "stopped": false,
+        "wall_time": 48.96279520000098
+      },
+      {
+        "round": 180,
+        "hinge_loss": 0.35123260616539237,
+        "primal": 0.3519991365063834,
+        "comm_bytes": 5422032,
+        "stopped": false,
+        "wall_time": 51.62213319999864
+      },
+      {
+        "round": 190,
+        "hinge_loss": 0.3512711772282438,
+        "primal": 0.3520291577449663,
+        "comm_bytes": 5724432,
+        "stopped": false,
+        "wall_time": 54.66592890000902
+      },
+      {
+        "round": 200,
+        "hinge_loss": 0.35132044583525784,
+        "primal": 0.3520823729844662,
+        "comm_bytes": 6026832,
+        "stopped": false,
+        "wall_time": 57.188999000005424
+      },
+      {
+        "round": 210,
+        "hinge_loss": 0.3513301312918896,
+        "primal": 0.35209032495502607,
+        "comm_bytes": 6329232,
+        "stopped": false,
+        "wall_time": 59.84108370001195
+      },
+      {
+        "round": 220,
+        "hinge_loss": 0.35140522565056376,
+        "primal": 0.35216222039771095,
+        "comm_bytes": 6631632,
+        "stopped": false,
+        "wall_time": 62.696922700008145
+      },
+      {
+        "round": 230,
+        "hinge_loss": 0.3512863916914258,
+        "primal": 0.3520474674996529,
+        "comm_bytes": 6934032,
+        "stopped": false,
+        "wall_time": 65.65057520000846
+      },
+      {
+        "round": 240,
+        "hinge_loss": 0.35127658471759915,
+        "primal": 0.35203717233636994,
+        "comm_bytes": 7236432,
+        "stopped": false,
+        "wall_time": 68.4253166000126
+      },
+      {
+        "round": 250,
+        "hinge_loss": 0.35125439723435287,
+        "primal": 0.3520156877108303,
+        "comm_bytes": 7538832,
+        "stopped": false,
+        "wall_time": 71.16489479999291
+      },
+      {
+        "round": 252,
+        "hinge_loss": 0.3512894270503337,
+        "primal": 0.352051008191681,
+        "comm_bytes": 7599312,
+        "stopped": true,
+        "wall_time": 71.78212730001542
+      }
+    ],
+    [
+      {
+        "round": 1,
+        "hinge_loss": 0.4764552642238666,
+        "primal": 0.4765436239994515,
+        "comm_bytes": 18144,
+        "stopped": false,
+        "wall_time": 0.20197660001576878
+      },
+      {
+        "round": 10,
+        "hinge_loss": 0.3649618077841575,
+        "primal": 0.365382783752301,
+        "comm_bytes": 290304,
+        "stopped": false,
+        "wall_time": 2.3540442000085022
+      },
+      {
+        "round": 20,
+        "hinge_loss": 0.36509983606180424,
+        "primal": 0.3656213082467353,
+        "comm_bytes": 592704,
+        "stopped": false,
+        "wall_time": 5.526873399998294
+      },
+      {
+        "round": 30,
+        "hinge_loss": 0.35736675547053953,
+        "primal": 0.35793155616507855,
+        "comm_bytes": 895104,
+        "stopped": false,
+        "wall_time": 8.47256270001526
+      },
+      {
+        "round": 40,
+        "hinge_loss": 0.3548872870728759,
+        "primal": 0.35549092722291087,
+        "comm_bytes": 1197504,
+        "stopped": false,
+        "wall_time": 11.18285929999547
+      },
+      {
+        "round": 50,
+        "hinge_loss": 0.35312080069973667,
+        "primal": 0.35376948285324433,
+        "comm_bytes": 1499904,
+        "stopped": false,
+        "wall_time": 14.101904200011631
+      },
+      {
+        "round": 60,
+        "hinge_loss": 0.35301780335653304,
+        "primal": 0.35367416221000303,
+        "comm_bytes": 1802304,
+        "stopped": false,
+        "wall_time": 17.15643010000349
+      },
+      {
+        "round": 70,
+        "hinge_loss": 0.35218598541873897,
+        "primal": 0.3528762382044011,
+        "comm_bytes": 2104704,
+        "stopped": false,
+        "wall_time": 20.207211600005394
+      },
+      {
+        "round": 80,
+        "hinge_loss": 0.3517447464137482,
+        "primal": 0.35246626872760767,
+        "comm_bytes": 2407104,
+        "stopped": false,
+        "wall_time": 23.040485000004992
+      },
+      {
+        "round": 90,
+        "hinge_loss": 0.3518572149690387,
+        "primal": 0.3525836839289234,
+        "comm_bytes": 2709504,
+        "stopped": false,
+        "wall_time": 25.92622900000424
+      },
+      {
+        "round": 100,
+        "hinge_loss": 0.351363268127127,
+        "primal": 0.35211182032686855,
+        "comm_bytes": 3011904,
+        "stopped": false,
+        "wall_time": 28.930507500015665
+      },
+      {
+        "round": 110,
+        "hinge_loss": 0.3513884260481296,
+        "primal": 0.35214851021491006,
+        "comm_bytes": 3314304,
+        "stopped": false,
+        "wall_time": 31.57624679998844
+      },
+      {
+        "round": 120,
+        "hinge_loss": 0.3512775898267911,
+        "primal": 0.35204067065769235,
+        "comm_bytes": 3616704,
+        "stopped": false,
+        "wall_time": 34.57069349999074
+      },
+      {
+        "round": 130,
+        "hinge_loss": 0.3513155979965376,
+        "primal": 0.3520748263524142,
+        "comm_bytes": 3919104,
+        "stopped": false,
+        "wall_time": 37.57855279999785
+      },
+      {
+        "round": 140,
+        "hinge_loss": 0.35130324500187987,
+        "primal": 0.3520645805095521,
+        "comm_bytes": 4221504,
+        "stopped": false,
+        "wall_time": 40.44209970001248
+      },
+      {
+        "round": 150,
+        "hinge_loss": 0.35128088769457316,
+        "primal": 0.3520456867193795,
+        "comm_bytes": 4523904,
+        "stopped": false,
+        "wall_time": 43.01899959999719
+      },
+      {
+        "round": 160,
+        "hinge_loss": 0.35129643527204857,
+        "primal": 0.35205564517766835,
+        "comm_bytes": 4826304,
+        "stopped": false,
+        "wall_time": 46.01062539999839
+      },
+      {
+        "round": 170,
+        "hinge_loss": 0.35124048588209605,
+        "primal": 0.3520036191502069,
+        "comm_bytes": 5128704,
+        "stopped": false,
+        "wall_time": 48.96279520000098
+      },
+      {
+        "round": 180,
+        "hinge_loss": 0.35125465940283984,
+        "primal": 0.35202187754758824,
+        "comm_bytes": 5431104,
+        "stopped": false,
+        "wall_time": 51.62213319999864
+      },
+      {
+        "round": 190,
+        "hinge_loss": 0.35129875231322655,
+        "primal": 0.3520603782611526,
+        "comm_bytes": 5733504,
+        "stopped": false,
+        "wall_time": 54.66592890000902
+      },
+      {
+        "round": 200,
+        "hinge_loss": 0.3512317301706767,
+        "primal": 0.3519937755474576,
+        "comm_bytes": 6035904,
+        "stopped": false,
+        "wall_time": 57.188999000005424
+      },
+      {
+        "round": 210,
+        "hinge_loss": 0.3512036771351415,
+        "primal": 0.3519667861385523,
+        "comm_bytes": 6338304,
+        "stopped": false,
+        "wall_time": 59.84108370001195
+      },
+      {
+        "round": 220,
+        "hinge_loss": 0.35127410644471563,
+        "primal": 0.35203333403021964,
+        "comm_bytes": 6640704,
+        "stopped": false,
+        "wall_time": 62.696922700008145
+      },
+      {
+        "round": 230,
+        "hinge_loss": 0.351155643473745,
+        "primal": 0.35191657834279594,
+        "comm_bytes": 6943104,
+        "stopped": false,
+        "wall_time": 65.65057520000846
+      },
+      {
+        "round": 240,
+        "hinge_loss": 0.3512028765576551,
+        "primal": 0.3519669422876068,
+        "comm_bytes": 7245504,
+        "stopped": false,
+        "wall_time": 68.4253166000126
+      },
+      {
+        "round": 250,
+        "hinge_loss": 0.35122270142892276,
+        "primal": 0.351986544883541,
+        "comm_bytes": 7547904,
+        "stopped": false,
+        "wall_time": 71.16489479999291
+      },
+      {
+        "round": 252,
+        "hinge_loss": 0.35121466651633937,
+        "primal": 0.3519767413974066,
+        "comm_bytes": 7608384,
+        "stopped": true,
+        "wall_time": 71.78212730001542
+      }
+    ],
+    [
+      {
+        "round": 1,
+        "hinge_loss": 0.7425080635940511,
+        "primal": 0.7425220031685504,
+        "comm_bytes": 6048,
+        "stopped": false,
+        "wall_time": 0.20197660001576878
+      },
+      {
+        "round": 10,
+        "hinge_loss": 0.36522599691673413,
+        "primal": 0.3656423810963946,
+        "comm_bytes": 269136,
+        "stopped": false,
+        "wall_time": 2.3540442000085022
+      },
+      {
+        "round": 20,
+        "hinge_loss": 0.3631482620991505,
+        "primal": 0.36363943224927303,
+        "comm_bytes": 571536,
+        "stopped": false,
+        "wall_time": 5.526873399998294
+      },
+      {
+        "round": 30,
+        "hinge_loss": 0.3562966869299182,
+        "primal": 0.35686529405752565,
+        "comm_bytes": 873936,
+        "stopped": false,
+        "wall_time": 8.47256270001526
+      },
+      {
+        "round": 40,
+        "hinge_loss": 0.3553349763840271,
+        "primal": 0.35593497531577334,
+        "comm_bytes": 1176336,
+        "stopped": false,
+        "wall_time": 11.18285929999547
+      },
+      {
+        "round": 50,
+        "hinge_loss": 0.3531754482040095,
+        "primal": 0.35382069833601737,
+        "comm_bytes": 1478736,
+        "stopped": false,
+        "wall_time": 14.101904200011631
+      },
+      {
+        "round": 60,
+        "hinge_loss": 0.3523623801949575,
+        "primal": 0.3530340670051619,
+        "comm_bytes": 1781136,
+        "stopped": false,
+        "wall_time": 17.15643010000349
+      },
+      {
+        "round": 70,
+        "hinge_loss": 0.35205059878180617,
+        "primal": 0.3527405460132425,
+        "comm_bytes": 2083536,
+        "stopped": false,
+        "wall_time": 20.207211600005394
+      },
+      {
+        "round": 80,
+        "hinge_loss": 0.35178881197047235,
+        "primal": 0.352507694040522,
+        "comm_bytes": 2385936,
+        "stopped": false,
+        "wall_time": 23.040485000004992
+      },
+      {
+        "round": 90,
+        "hinge_loss": 0.3515746795714042,
+        "primal": 0.35230603293684265,
+        "comm_bytes": 2688336,
+        "stopped": false,
+        "wall_time": 25.92622900000424
+      },
+      {
+        "round": 100,
+        "hinge_loss": 0.3515334991704921,
+        "primal": 0.3522786601852325,
+        "comm_bytes": 2990736,
+        "stopped": false,
+        "wall_time": 28.930507500015665
+      },
+      {
+        "round": 110,
+        "hinge_loss": 0.35136051786689265,
+        "primal": 0.3521151779762431,
+        "comm_bytes": 3293136,
+        "stopped": false,
+        "wall_time": 31.57624679998844
+      },
+      {
+        "round": 120,
+        "hinge_loss": 0.3515360276103196,
+        "primal": 0.3522966388284239,
+        "comm_bytes": 3595536,
+        "stopped": false,
+        "wall_time": 34.57069349999074
+      },
+      {
+        "round": 130,
+        "hinge_loss": 0.3514211487241667,
+        "primal": 0.3521789519532642,
+        "comm_bytes": 3897936,
+        "stopped": false,
+        "wall_time": 37.57855279999785
+      },
+      {
+        "round": 140,
+        "hinge_loss": 0.3514130896204518,
+        "primal": 0.352173074516712,
+        "comm_bytes": 4200336,
+        "stopped": false,
+        "wall_time": 40.44209970001248
+      },
+      {
+        "round": 150,
+        "hinge_loss": 0.3512951860409531,
+        "primal": 0.3520589881257813,
+        "comm_bytes": 4502736,
+        "stopped": false,
+        "wall_time": 43.01899959999719
+      },
+      {
+        "round": 160,
+        "hinge_loss": 0.35133026780297466,
+        "primal": 0.3520925973230368,
+        "comm_bytes": 4805136,
+        "stopped": false,
+        "wall_time": 46.01062539999839
+      },
+      {
+        "round": 170,
+        "hinge_loss": 0.351299789548506,
+        "primal": 0.3520638359741686,
+        "comm_bytes": 5107536,
+        "stopped": false,
+        "wall_time": 48.96279520000098
+      },
+      {
+        "round": 180,
+        "hinge_loss": 0.3512147943624567,
+        "primal": 0.35198069409790195,
+        "comm_bytes": 5409936,
+        "stopped": false,
+        "wall_time": 51.62213319999864
+      },
+      {
+        "round": 190,
+        "hinge_loss": 0.35124841267414897,
+        "primal": 0.3520097777498461,
+        "comm_bytes": 5712336,
+        "stopped": false,
+        "wall_time": 54.66592890000902
+      },
+      {
+        "round": 200,
+        "hinge_loss": 0.3512362614790704,
+        "primal": 0.35199941620254604,
+        "comm_bytes": 6014736,
+        "stopped": false,
+        "wall_time": 57.188999000005424
+      },
+      {
+        "round": 210,
+        "hinge_loss": 0.3512252796008631,
+        "primal": 0.3519899974475635,
+        "comm_bytes": 6317136,
+        "stopped": false,
+        "wall_time": 59.84108370001195
+      },
+      {
+        "round": 220,
+        "hinge_loss": 0.3512104630465997,
+        "primal": 0.35196991843397846,
+        "comm_bytes": 6619536,
+        "stopped": false,
+        "wall_time": 62.696922700008145
+      },
+      {
+        "round": 230,
+        "hinge_loss": 0.3512621472981061,
+        "primal": 0.3520234713029652,
+        "comm_bytes": 6921936,
+        "stopped": false,
+        "wall_time": 65.65057520000846
+      },
+      {
+        "round": 240,
+        "hinge_loss": 0.3512028205490737,
+        "primal": 0.35196640874373075,
+        "comm_bytes": 7224336,
+        "stopped": false,
+        "wall_time": 68.4253166000126
+      },
+      {
+        "round": 250,
+        "hinge_loss": 0.35124054153699896,
+        "primal": 0.3520019257051313,
+        "comm_bytes": 7526736,
+        "stopped": false,
+        "wall_time": 71.16489479999291
+      },
+      {
+        "round": 252,
+        "hinge_loss": 0.35130585554135835,
+        "primal": 0.3520692008353193,
+        "comm_bytes": 7587216,
+        "stopped": true,
+        "wall_time": 71.78212730001542
+      }
+    ],
+    [
+      {
+        "round": 1,
+        "hinge_loss": 0.8775974908964291,
+        "primal": 0.8776025808046978,
+        "comm_bytes": 3024,
+        "stopped": false,
+        "wall_time": 0.20197660001576878
+      },
+      {
+        "round": 10,
+        "hinge_loss": 0.36602842314404455,
+        "primal": 0.3664418196872498,
+        "comm_bytes": 272160,
+        "stopped": false,
+        "wall_time": 2.3540442000085022
+      },
+      {
+        "round": 20,
+        "hinge_loss": 0.3623533357559685,
+        "primal": 0.36285900056988263,
+        "comm_bytes": 574560,
+        "stopped": false,
+        "wall_time": 5.526873399998294
+      },
+      {
+        "round": 30,
+        "hinge_loss": 0.3573350694576137,
+        "primal": 0.35790235655720354,
+        "comm_bytes": 876960,
+        "stopped": false,
+        "wall_time": 8.47256270001526
+      },
+      {
+        "round": 40,
+        "hinge_loss": 0.35509597095459106,
+        "primal": 0.3557008298644087,
+        "comm_bytes": 1179360,
+        "stopped": false,
+        "wall_time": 11.18285929999547
+      },
+      {
+        "round": 50,
+        "hinge_loss": 0.35317605945784397,
+        "primal": 0.35383344951145057,
+        "comm_bytes": 1481760,
+        "stopped": false,
+        "wall_time": 14.101904200011631
+      },
+      {
+        "round": 60,
+        "hinge_loss": 0.3520902629082854,
+        "primal": 0.35276761169643495,
+        "comm_bytes": 1784160,
+        "stopped": false,
+        "wall_time": 17.15643010000349
+      },
+      {
+        "round": 70,
+        "hinge_loss": 0.3519331794703511,
+        "primal": 0.3526394655305814,
+        "comm_bytes": 2086560,
+        "stopped": false,
+        "wall_time": 20.207211600005394
+      },
+      {
+        "round": 80,
+        "hinge_loss": 0.35166686776218187,
+        "primal": 0.35239023073088016,
+        "comm_bytes": 2388960,
+        "stopped": false,
+        "wall_time": 23.040485000004992
+      },
+      {
+        "round": 90,
+        "hinge_loss": 0.35140211895747653,
+        "primal": 0.352144104569799,
+        "comm_bytes": 2691360,
+        "stopped": false,
+        "wall_time": 25.92622900000424
+      },
+      {
+        "round": 100,
+        "hinge_loss": 0.35156203865546765,
+        "primal": 0.35230724927777934,
+        "comm_bytes": 2993760,
+        "stopped": false,
+        "wall_time": 28.930507500015665
+      },
+      {
+        "round": 110,
+        "hinge_loss": 0.3513250916469874,
+        "primal": 0.35208360081524276,
+        "comm_bytes": 3296160,
+        "stopped": false,
+        "wall_time": 31.57624679998844
+      },
+      {
+        "round": 120,
+        "hinge_loss": 0.35142471783819235,
+        "primal": 0.35218860344223196,
+        "comm_bytes": 3598560,
+        "stopped": false,
+        "wall_time": 34.57069349999074
+      },
+      {
+        "round": 130,
+        "hinge_loss": 0.3513318138437489,
+        "primal": 0.3520945996276909,
+        "comm_bytes": 3900960,
+        "stopped": false,
+        "wall_time": 37.57855279999785
+      },
+      {
+        "round": 140,
+        "hinge_loss": 0.35129823668362253,
+        "primal": 0.35206282852556414,
+        "comm_bytes": 4203360,
+        "stopped": false,
+        "wall_time": 40.44209970001248
+      },
+      {
+        "round": 150,
+        "hinge_loss": 0.35125109780498215,
+        "primal": 0.35201224578330154,
+        "comm_bytes": 4505760,
+        "stopped": false,
+        "wall_time": 43.01899959999719
+      },
+      {
+        "round": 160,
+        "hinge_loss": 0.3513420629566914,
+        "primal": 0.35210473529858904,
+        "comm_bytes": 4808160,
+        "stopped": false,
+        "wall_time": 46.01062539999839
+      },
+      {
+        "round": 170,
+        "hinge_loss": 0.3513121507800519,
+        "primal": 0.3520770244612245,
+        "comm_bytes": 5110560,
+        "stopped": false,
+        "wall_time": 48.96279520000098
+      },
+      {
+        "round": 180,
+        "hinge_loss": 0.3512232674946636,
+        "primal": 0.3519913607125971,
+        "comm_bytes": 5412960,
+        "stopped": false,
+        "wall_time": 51.62213319999864
+      },
+      {
+        "round": 190,
+        "hinge_loss": 0.3512935011908456,
+        "primal": 0.35205439457115417,
+        "comm_bytes": 5715360,
+        "stopped": false,
+        "wall_time": 54.66592890000902
+      },
+      {
+        "round": 200,
+        "hinge_loss": 0.3512468142030909,
+        "primal": 0.3520109037095275,
+        "comm_bytes": 6017760,
+        "stopped": false,
+        "wall_time": 57.188999000005424
+      },
+      {
+        "round": 210,
+        "hinge_loss": 0.3513070478908897,
+        "primal": 0.35206783058862123,
+        "comm_bytes": 6320160,
+        "stopped": false,
+        "wall_time": 59.84108370001195
+      },
+      {
+        "round": 220,
+        "hinge_loss": 0.35125259273854226,
+        "primal": 0.35201293988402643,
+        "comm_bytes": 6622560,
+        "stopped": false,
+        "wall_time": 62.696922700008145
+      },
+      {
+        "round": 230,
+        "hinge_loss": 0.35127396295539887,
+        "primal": 0.35203478744499966,
+        "comm_bytes": 6924960,
+        "stopped": false,
+        "wall_time": 65.65057520000846
+      },
+      {
+        "round": 240,
+        "hinge_loss": 0.3512917239348507,
+        "primal": 0.3520541898042201,
+        "comm_bytes": 7227360,
+        "stopped": false,
+        "wall_time": 68.4253166000126
+      },
+      {
+        "round": 250,
+        "hinge_loss": 0.35122958925618286,
+        "primal": 0.3519916868770543,
+        "comm_bytes": 7529760,
+        "stopped": false,
+        "wall_time": 71.16489479999291
+      },
+      {
+        "round": 252,
+        "hinge_loss": 0.351238953657045,
+        "primal": 0.35200158389691316,
+        "comm_bytes": 7590240,
+        "stopped": true,
+        "wall_time": 71.78212730001542
+      }
+    ],
+    [
+      {
+        "round": 1,
+        "hinge_loss": 0.7180054976058672,
+        "primal": 0.7180341859066289,
+        "comm_bytes": 9072,
+        "stopped": false,
+        "wall_time": 0.20197660001576878
+      },
+      {
+        "round": 10,
+        "hinge_loss": 0.3651499607621644,
+        "primal": 0.3655762250962829,
+        "comm_bytes": 275184,
+        "stopped": false,
+        "wall_time": 2.3540442000085022
+      },
+      {
+        "round": 20,
+        "hinge_loss": 0.3622254474991204,
+        "primal": 0.36273420767030806,
+        "comm_bytes": 577584,
+        "stopped": false,
+        "wall_time": 5.526873399998294
+      },
+      {
+        "round": 30,
+        "hinge_loss": 0.3555128836095067,
+        "primal": 0.35608548340540325,
+        "comm_bytes": 879984,
+        "stopped": false,
+        "wall_time": 8.47256270001526
+      },
+      {
+        "round": 40,
+        "hinge_loss": 0.35577451065900945,
+        "primal": 0.3563737229929545,
+        "comm_bytes": 1182384,
+        "stopped": false,
+        "wall_time": 11.18285929999547
+      },
+      {
+        "round": 50,
+        "hinge_loss": 0.35327045050690514,
+        "primal": 0.3539158061912564,
+        "comm_bytes": 1484784,
+        "stopped": false,
+        "wall_time": 14.101904200011631
+      },
+      {
+        "round": 60,
+        "hinge_loss": 0.3527611297300737,
+        "primal": 0.3534356955332304,
+        "comm_bytes": 1787184,
+        "stopped": false,
+        "wall_time": 17.15643010000349
+      },
+      {
+        "round": 70,
+        "hinge_loss": 0.35217657726572016,
+        "primal": 0.3528701118583964,
+        "comm_bytes": 2089584,
+        "stopped": false,
+        "wall_time": 20.207211600005394
+      },
+      {
+        "round": 80,
+        "hinge_loss": 0.35159506843215454,
+        "primal": 0.35231989761154375,
+        "comm_bytes": 2391984,
+        "stopped": false,
+        "wall_time": 23.040485000004992
+      },
+      {
+        "round": 90,
+        "hinge_loss": 0.35156111073775514,
+        "primal": 0.3522970856790243,
+        "comm_bytes": 2694384,
+        "stopped": false,
+        "wall_time": 25.92622900000424
+      },
+      {
+        "round": 100,
+        "hinge_loss": 0.351508144632066,
+        "primal": 0.3522538082311039,
+        "comm_bytes": 2996784,
+        "stopped": false,
+        "wall_time": 28.930507500015665
+      },
+      {
+        "round": 110,
+        "hinge_loss": 0.3513907921722137,
+        "primal": 0.3521444368843393,
+        "comm_bytes": 3299184,
+        "stopped": false,
+        "wall_time": 31.57624679998844
+      },
+      {
+        "round": 120,
+        "hinge_loss": 0.35143942660972527,
+        "primal": 0.35219913146400217,
+        "comm_bytes": 3601584,
+        "stopped": false,
+        "wall_time": 34.57069349999074
+      },
+      {
+        "round": 130,
+        "hinge_loss": 0.3514804351899044,
+        "primal": 0.35223805581751205,
+        "comm_bytes": 3903984,
+        "stopped": false,
+        "wall_time": 37.57855279999785
+      },
+      {
+        "round": 140,
+        "hinge_loss": 0.3514022084898046,
+        "primal": 0.35216373046447363,
+        "comm_bytes": 4206384,
+        "stopped": false,
+        "wall_time": 40.44209970001248
+      },
+      {
+        "round": 150,
+        "hinge_loss": 0.3514271482352806,
+        "primal": 0.3521919198305743,
+        "comm_bytes": 4508784,
+        "stopped": false,
+        "wall_time": 43.01899959999719
+      },
+      {
+        "round": 160,
+        "hinge_loss": 0.35147768430053594,
+        "primal": 0.35223839155869324,
+        "comm_bytes": 4811184,
+        "stopped": false,
+        "wall_time": 46.01062539999839
+      },
+      {
+        "round": 170,
+        "hinge_loss": 0.35125225695523093,
+        "primal": 0.3520134617519535,
+        "comm_bytes": 5113584,
+        "stopped": false,
+        "wall_time": 48.96279520000098
+      },
+      {
+        "round": 180,
+        "hinge_loss": 0.35127440776148844,
+        "primal": 0.3520420791030933,
+        "comm_bytes": 5415984,
+        "stopped": false,
+        "wall_time": 51.62213319999864
+      },
+      {
+        "round": 190,
+        "hinge_loss": 0.35123135829866475,
+        "primal": 0.35199330153028796,
+        "comm_bytes": 5718384,
+        "stopped": false,
+        "wall_time": 54.66592890000902
+      },
+      {
+        "round": 200,
+        "hinge_loss": 0.351306478908264,
+        "primal": 0.3520696614577188,
+        "comm_bytes": 6020784,
+        "stopped": false,
+        "wall_time": 57.188999000005424
+      },
+      {
+        "round": 210,
+        "hinge_loss": 0.351274436108073,
+        "primal": 0.3520379868280791,
+        "comm_bytes": 6323184,
+        "stopped": false,
+        "wall_time": 59.84108370001195
+      },
+      {
+        "round": 220,
+        "hinge_loss": 0.35131210793298956,
+        "primal": 0.35207091469529017,
+        "comm_bytes": 6625584,
+        "stopped": false,
+        "wall_time": 62.696922700008145
+      },
+      {
+        "round": 230,
+        "hinge_loss": 0.35124676183503073,
+        "primal": 0.35200877700871724,
+        "comm_bytes": 6927984,
+        "stopped": false,
+        "wall_time": 65.65057520000846
+      },
+      {
+        "round": 240,
+        "hinge_loss": 0.35123190610445826,
+        "primal": 0.3519945140894433,
+        "comm_bytes": 7230384,
+        "stopped": false,
+        "wall_time": 68.4253166000126
+      },
+      {
+        "round": 250,
+        "hinge_loss": 0.3512656206965391,
+        "primal": 0.3520257963920824,
+        "comm_bytes": 7532784,
+        "stopped": false,
+        "wall_time": 71.16489479999291
+      },
+      {
+        "round": 252,
+        "hinge_loss": 0.3512617559989782,
+        "primal": 0.35202408741384883,
+        "comm_bytes": 7593264,
+        "stopped": true,
+        "wall_time": 71.78212730001542
+      }
+    ],
+    [
+      {
+        "round": 1,
+        "hinge_loss": 0.9053789140043443,
+        "primal": 0.905384753539256,
+        "comm_bytes": 3024,
+        "stopped": false,
+        "wall_time": 0.20197660001576878
+      },
+      {
+        "round": 10,
+        "hinge_loss": 0.3742654000041906,
+        "primal": 0.37467519552783424,
+        "comm_bytes": 275184,
+        "stopped": false,
+        "wall_time": 2.3540442000085022
+      },
+      {
+        "round": 20,
+        "hinge_loss": 0.36387321134724926,
+        "primal": 0.36437105015584437,
+        "comm_bytes": 577584,
+        "stopped": false,
+        "wall_time": 5.526873399998294
+      },
+      {
+        "round": 30,
+        "hinge_loss": 0.35690047765827887,
+        "primal": 0.35748005064291877,
+        "comm_bytes": 879984,
+        "stopped": false,
+        "wall_time": 8.47256270001526
+      },
+      {
+        "round": 40,
+        "hinge_loss": 0.3546024142721503,
+        "primal": 0.35520972041984233,
+        "comm_bytes": 1182384,
+        "stopped": false,
+        "wall_time": 11.18285929999547
+      },
+      {
+        "round": 50,
+        "hinge_loss": 0.35288782640576216,
+        "primal": 0.3535388395372147,
+        "comm_bytes": 1484784,
+        "stopped": false,
+        "wall_time": 14.101904200011631
+      },
+      {
+        "round": 60,
+        "hinge_loss": 0.35229474852049525,
+        "primal": 0.35296450633121346,
+        "comm_bytes": 1787184,
+        "stopped": false,
+        "wall_time": 17.15643010000349
+      },
+      {
+        "round": 70,
+        "hinge_loss": 0.35201994522378766,
+        "primal": 0.35271228721406445,
+        "comm_bytes": 2089584,
+        "stopped": false,
+        "wall_time": 20.207211600005394
+      },
+      {
+        "round": 80,
+        "hinge_loss": 0.3515360259514536,
+        "primal": 0.3522588532841769,
+        "comm_bytes": 2391984,
+        "stopped": false,
+        "wall_time": 23.040485000004992
+      },
+      {
+        "round": 90,
+        "hinge_loss": 0.3516663534537042,
+        "primal": 0.35239969657543063,
+        "comm_bytes": 2694384,
+        "stopped": false,
+        "wall_time": 25.92622900000424
+      },
+      {
+        "round": 100,
+        "hinge_loss": 0.35134176530809064,
+        "primal": 0.35209308987737553,
+        "comm_bytes": 2996784,
+        "stopped": false,
+        "wall_time": 28.930507500015665
+      },
+      {
+        "round": 110,
+        "hinge_loss": 0.3514559567409392,
+        "primal": 0.35221259934989624,
+        "comm_bytes": 3299184,
+        "stopped": false,
+        "wall_time": 31.57624679998844
+      },
+      {
+        "round": 120,
+        "hinge_loss": 0.35145290312803407,
+        "primal": 0.35221309919234745,
+        "comm_bytes": 3601584,
+        "stopped": false,
+        "wall_time": 34.57069349999074
+      },
+      {
+        "round": 130,
+        "hinge_loss": 0.35135730765056883,
+        "primal": 0.3521159620274514,
+        "comm_bytes": 3903984,
+        "stopped": false,
+        "wall_time": 37.57855279999785
+      },
+      {
+        "round": 140,
+        "hinge_loss": 0.3512693525926202,
+        "primal": 0.3520305409109223,
+        "comm_bytes": 4206384,
+        "stopped": false,
+        "wall_time": 40.44209970001248
+      },
+      {
+        "round": 150,
+        "hinge_loss": 0.3513137627621193,
+        "primal": 0.35207980224029073,
+        "comm_bytes": 4508784,
+        "stopped": false,
+        "wall_time": 43.01899959999719
+      },
+      {
+        "round": 160,
+        "hinge_loss": 0.35130001236624164,
+        "primal": 0.3520595407467343,
+        "comm_bytes": 4811184,
+        "stopped": false,
+        "wall_time": 46.01062539999839
+      },
+      {
+        "round": 170,
+        "hinge_loss": 0.3512949715709003,
+        "primal": 0.3520592628595451,
+        "comm_bytes": 5113584,
+        "stopped": false,
+        "wall_time": 48.96279520000098
+      },
+      {
+        "round": 180,
+        "hinge_loss": 0.35132604972632914,
+        "primal": 0.3520930304015819,
+        "comm_bytes": 5415984,
+        "stopped": false,
+        "wall_time": 51.62213319999864
+      },
+      {
+        "round": 190,
+        "hinge_loss": 0.35138114763512396,
+        "primal": 0.35214478960400386,
+        "comm_bytes": 5718384,
+        "stopped": false,
+        "wall_time": 54.66592890000902
+      },
+      {
+        "round": 200,
+        "hinge_loss": 0.35127136870115033,
+        "primal": 0.35203429202353775,
+        "comm_bytes": 6020784,
+        "stopped": false,
+        "wall_time": 57.188999000005424
+      },
+      {
+        "round": 210,
+        "hinge_loss": 0.3512599312254483,
+        "primal": 0.3520230654996539,
+        "comm_bytes": 6323184,
+        "stopped": false,
+        "wall_time": 59.84108370001195
+      },
+      {
+        "round": 220,
+        "hinge_loss": 0.3512837499219122,
+        "primal": 0.3520430525570881,
+        "comm_bytes": 6625584,
+        "stopped": false,
+        "wall_time": 62.696922700008145
+      },
+      {
+        "round": 230,
+        "hinge_loss": 0.3511698804998195,
+        "primal": 0.3519307981023775,
+        "comm_bytes": 6927984,
+        "stopped": false,
+        "wall_time": 65.65057520000846
+      },
+      {
+        "round": 240,
+        "hinge_loss": 0.3512265895291175,
+        "primal": 0.35198954014381667,
+        "comm_bytes": 7230384,
+        "stopped": false,
+        "wall_time": 68.4253166000126
+      },
+      {
+        "round": 250,
+        "hinge_loss": 0.3512376608877451,
+        "primal": 0.3519993169642946,
+        "comm_bytes": 7532784,
+        "stopped": false,
+        "wall_time": 71.16489479999291
+      },
+      {
+        "round": 252,
+        "hinge_loss": 0.3513078210843987,
+        "primal": 0.3520704387234785,
+        "comm_bytes": 7593264,
+        "stopped": true,
+        "wall_time": 71.78212730001542
+      }
+    ]
+  ],
+  "history": [
+    {
+      "round": 1,
+      "train_hinge": 0.6946945104761083,
+      "train_objective": 0.6947326755175924,
+      "comm_bytes": 96768,
+      "seconds": 0.20197660001576878
+    },
+    {
+      "round": 10,
+      "train_hinge": 0.36676415998504763,
+      "train_objective": 0.36718273658882417,
+      "comm_bytes": 2773008,
+      "seconds": 2.3540442000085022
+    },
+    {
+      "round": 20,
+      "train_hinge": 0.3628242615003498,
+      "train_objective": 0.3633238593629133,
+      "comm_bytes": 5797008,
+      "seconds": 5.526873399998294
+    },
+    {
+      "round": 30,
+      "train_hinge": 0.35720056651975246,
+      "train_objective": 0.35777263129206477,
+      "comm_bytes": 8821008,
+      "seconds": 8.47256270001526
+    },
+    {
+      "round": 40,
+      "train_hinge": 0.3556362146022992,
+      "train_objective": 0.35623788231210096,
+      "comm_bytes": 11845008,
+      "seconds": 11.18285929999547
+    },
+    {
+      "round": 50,
+      "train_hinge": 0.3532381843877438,
+      "train_objective": 0.353886027930723,
+      "comm_bytes": 14869008,
+      "seconds": 14.101904200011631
+    },
+    {
+      "round": 60,
+      "train_hinge": 0.3524074765300894,
+      "train_objective": 0.35307898871145205,
+      "comm_bytes": 17893008,
+      "seconds": 17.15643010000349
+    },
+    {
+      "round": 70,
+      "train_hinge": 0.3520905671774901,
+      "train_objective": 0.3527858382438576,
+      "comm_bytes": 20917008,
+      "seconds": 20.207211600005394
+    },
+    {
+      "round": 80,
+      "train_hinge": 0.35169084145242263,
+      "train_objective": 0.35241299334388076,
+      "comm_bytes": 23941008,
+      "seconds": 23.040485000004992
+    },
+    {
+      "round": 90,
+      "train_hinge": 0.35156201610707516,
+      "train_objective": 0.3522958122941181,
+      "comm_bytes": 26965008,
+      "seconds": 25.92622900000424
+    },
+    {
+      "round": 100,
+      "train_hinge": 0.3514736203422272,
+      "train_objective": 0.3522218403005926,
+      "comm_bytes": 29989008,
+      "seconds": 28.930507500015665
+    },
+    {
+      "round": 110,
+      "train_hinge": 0.35139073935494913,
+      "train_objective": 0.35214745522807556,
+      "comm_bytes": 33013008,
+      "seconds": 31.57624679998844
+    },
+    {
+      "round": 120,
+      "train_hinge": 0.3514327637543887,
+      "train_objective": 0.35219401925303057,
+      "comm_bytes": 36037008,
+      "seconds": 34.57069349999074
+    },
+    {
+      "round": 130,
+      "train_hinge": 0.35134525767148617,
+      "train_objective": 0.3521053147101031,
+      "comm_bytes": 39061008,
+      "seconds": 37.57855279999785
+    },
+    {
+      "round": 140,
+      "train_hinge": 0.35134191213524013,
+      "train_objective": 0.3521040299224446,
+      "comm_bytes": 42085008,
+      "seconds": 40.44209970001248
+    },
+    {
+      "round": 150,
+      "train_hinge": 0.3513553949371564,
+      "train_objective": 0.35211952548347486,
+      "comm_bytes": 45109008,
+      "seconds": 43.01899959999719
+    },
+    {
+      "round": 160,
+      "train_hinge": 0.3513398215875107,
+      "train_objective": 0.352101525286001,
+      "comm_bytes": 48133008,
+      "seconds": 46.01062539999839
+    },
+    {
+      "round": 170,
+      "train_hinge": 0.3512783294231845,
+      "train_objective": 0.3520419317087563,
+      "comm_bytes": 51157008,
+      "seconds": 48.96279520000098
+    },
+    {
+      "round": 180,
+      "train_hinge": 0.3512498102989142,
+      "train_objective": 0.3520172367996571,
+      "comm_bytes": 54181008,
+      "seconds": 51.62213319999864
+    },
+    {
+      "round": 190,
+      "train_hinge": 0.35127251066313925,
+      "train_objective": 0.35203395384996516,
+      "comm_bytes": 57205008,
+      "seconds": 54.66592890000902
+    },
+    {
+      "round": 200,
+      "train_hinge": 0.35126631380049544,
+      "train_objective": 0.3520291161602807,
+      "comm_bytes": 60229008,
+      "seconds": 57.188999000005424
+    },
+    {
+      "round": 210,
+      "train_hinge": 0.3512534558948083,
+      "train_objective": 0.35201607225630616,
+      "comm_bytes": 63253008,
+      "seconds": 59.84108370001195
+    },
+    {
+      "round": 220,
+      "train_hinge": 0.3512830143727044,
+      "train_objective": 0.35204298407032114,
+      "comm_bytes": 66277008,
+      "seconds": 62.696922700008145
+    },
+    {
+      "round": 230,
+      "train_hinge": 0.3512308453694453,
+      "train_objective": 0.3519923755946729,
+      "comm_bytes": 69301008,
+      "seconds": 65.65057520000846
+    },
+    {
+      "round": 240,
+      "train_hinge": 0.3512303709521597,
+      "train_objective": 0.3519933449934653,
+      "comm_bytes": 72325008,
+      "seconds": 68.4253166000126
+    },
+    {
+      "round": 250,
+      "train_hinge": 0.35124000252114673,
+      "train_objective": 0.3520021167864814,
+      "comm_bytes": 75349008,
+      "seconds": 71.16489479999291
+    },
+    {
+      "round": 252,
+      "train_hinge": 0.3512821887027281,
+      "train_objective": 0.3520449035363833,
+      "comm_bytes": 75953808,
+      "seconds": 71.78212730001542
+    }
+  ],
+  "training_seconds": 71.78232430000207,
+  "local_solver_converged": true,
+  "communication_policy": "numeric-v1: array dtype bytes; numeric scalars/IDs 8 bytes; fixed schema keys and physical headers excluded",
+  "schedule_policy": "event-hashed activation and neighbor selection, independent of learning RNG",
+  "adjacency": [
+    [
+      1,
+      2,
+      3,
+      5,
+      6,
+      7
+    ],
+    [
+      0,
+      2,
+      3,
+      5,
+      7,
+      9
+    ],
+    [
+      0,
+      1,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9
+    ],
+    [
+      0,
+      1,
+      2,
+      4,
+      8,
+      9
+    ],
+    [
+      2,
+      3,
+      7,
+      8
+    ],
+    [
+      0,
+      1,
+      9
+    ],
+    [
+      0,
+      2,
+      7,
+      8
+    ],
+    [
+      0,
+      1,
+      2,
+      4,
+      6
+    ],
+    [
+      2,
+      3,
+      4,
+      6,
+      9
+    ],
+    [
+      1,
+      2,
+      3,
+      5,
+      8
+    ]
+  ],
+  "messages_sent": 7560,
+  "neighbor_schedule_first_100": [
+    [
+      [
+        0,
+        [
+          7,
+          5,
+          3
+        ]
+      ],
+      [
+        1,
+        [
+          3,
+          5,
+          7
+        ]
+      ],
+      [
+        2,
+        [
+          2,
+          7,
+          5
+        ]
+      ],
+      [
+        3,
+        [
+          6,
+          5,
+          3
+        ]
+      ],
+      [
+        4,
+        [
+          6,
+          3,
+          7
+        ]
+      ],
+      [
+        5,
+        [
+          6,
+          5,
+          1
+        ]
+      ],
+      [
+        6,
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      [
+        7,
+        [
+          3,
+          1,
+          2
+        ]
+      ],
+      [
+        8,
+        [
+          6,
+          1,
+          5
+        ]
+      ],
+      [
+        9,
+        [
+          6,
+          3,
+          5
+        ]
+      ],
+      [
+        10,
+        [
+          1,
+          3,
+          7
+        ]
+      ],
+      [
+        11,
+        [
+          5,
+          6,
+          7
+        ]
+      ],
+      [
+        12,
+        [
+          2,
+          6,
+          1
+        ]
+      ],
+      [
+        13,
+        [
+          5,
+          1,
+          3
+        ]
+      ],
+      [
+        14,
+        [
+          6,
+          5,
+          7
+        ]
+      ],
+      [
+        15,
+        [
+          2,
+          6,
+          1
+        ]
+      ],
+      [
+        16,
+        [
+          3,
+          1,
+          5
+        ]
+      ],
+      [
+        17,
+        [
+          5,
+          3,
+          6
+        ]
+      ],
+      [
+        18,
+        [
+          3,
+          7,
+          1
+        ]
+      ],
+      [
+        19,
+        [
+          2,
+          5,
+          1
+        ]
+      ],
+      [
+        20,
+        [
+          3,
+          1,
+          5
+        ]
+      ],
+      [
+        21,
+        [
+          1,
+          3,
+          6
+        ]
+      ],
+      [
+        22,
+        [
+          7,
+          2,
+          3
+        ]
+      ],
+      [
+        23,
+        [
+          1,
+          3,
+          6
+        ]
+      ],
+      [
+        24,
+        [
+          3,
+          2,
+          1
+        ]
+      ],
+      [
+        25,
+        [
+          2,
+          3,
+          1
+        ]
+      ],
+      [
+        26,
+        [
+          6,
+          7,
+          5
+        ]
+      ],
+      [
+        27,
+        [
+          7,
+          5,
+          3
+        ]
+      ],
+      [
+        28,
+        [
+          2,
+          7,
+          1
+        ]
+      ],
+      [
+        29,
+        [
+          6,
+          5,
+          7
+        ]
+      ],
+      [
+        30,
+        [
+          3,
+          1,
+          2
+        ]
+      ],
+      [
+        31,
+        [
+          2,
+          1,
+          5
+        ]
+      ],
+      [
+        32,
+        [
+          3,
+          2,
+          5
+        ]
+      ],
+      [
+        33,
+        [
+          2,
+          3,
+          1
+        ]
+      ],
+      [
+        34,
+        [
+          3,
+          6,
+          1
+        ]
+      ],
+      [
+        35,
+        [
+          1,
+          7,
+          3
+        ]
+      ],
+      [
+        36,
+        [
+          6,
+          3,
+          2
+        ]
+      ],
+      [
+        37,
+        [
+          7,
+          1,
+          5
+        ]
+      ],
+      [
+        38,
+        [
+          7,
+          2,
+          6
+        ]
+      ],
+      [
+        39,
+        [
+          1,
+          5,
+          7
+        ]
+      ],
+      [
+        40,
+        [
+          2,
+          5,
+          1
+        ]
+      ],
+      [
+        41,
+        [
+          7,
+          2,
+          1
+        ]
+      ],
+      [
+        42,
+        [
+          5,
+          3,
+          6
+        ]
+      ],
+      [
+        43,
+        [
+          7,
+          1,
+          2
+        ]
+      ],
+      [
+        44,
+        [
+          2,
+          5,
+          6
+        ]
+      ],
+      [
+        45,
+        [
+          1,
+          6,
+          5
+        ]
+      ],
+      [
+        46,
+        [
+          7,
+          5,
+          3
+        ]
+      ],
+      [
+        47,
+        [
+          1,
+          7,
+          3
+        ]
+      ],
+      [
+        48,
+        [
+          5,
+          6,
+          2
+        ]
+      ],
+      [
+        49,
+        [
+          2,
+          7,
+          5
+        ]
+      ],
+      [
+        50,
+        [
+          5,
+          1,
+          2
+        ]
+      ],
+      [
+        51,
+        [
+          7,
+          3,
+          5
+        ]
+      ],
+      [
+        52,
+        [
+          5,
+          7,
+          2
+        ]
+      ],
+      [
+        53,
+        [
+          7,
+          6,
+          5
+        ]
+      ],
+      [
+        54,
+        [
+          5,
+          2,
+          6
+        ]
+      ],
+      [
+        55,
+        [
+          6,
+          5,
+          1
+        ]
+      ],
+      [
+        56,
+        [
+          2,
+          6,
+          7
+        ]
+      ],
+      [
+        57,
+        [
+          1,
+          6,
+          2
+        ]
+      ],
+      [
+        58,
+        [
+          2,
+          6,
+          3
+        ]
+      ],
+      [
+        59,
+        [
+          6,
+          3,
+          2
+        ]
+      ],
+      [
+        60,
+        [
+          1,
+          7,
+          2
+        ]
+      ],
+      [
+        61,
+        [
+          2,
+          1,
+          3
+        ]
+      ],
+      [
+        62,
+        [
+          6,
+          3,
+          5
+        ]
+      ],
+      [
+        63,
+        [
+          5,
+          3,
+          7
+        ]
+      ],
+      [
+        64,
+        [
+          2,
+          6,
+          5
+        ]
+      ],
+      [
+        65,
+        [
+          6,
+          2,
+          3
+        ]
+      ],
+      [
+        66,
+        [
+          6,
+          7,
+          3
+        ]
+      ],
+      [
+        67,
+        [
+          7,
+          5,
+          3
+        ]
+      ],
+      [
+        68,
+        [
+          2,
+          7,
+          6
+        ]
+      ],
+      [
+        69,
+        [
+          2,
+          5,
+          1
+        ]
+      ],
+      [
+        70,
+        [
+          1,
+          3,
+          5
+        ]
+      ],
+      [
+        71,
+        [
+          2,
+          5,
+          3
+        ]
+      ],
+      [
+        72,
+        [
+          7,
+          3,
+          5
+        ]
+      ],
+      [
+        73,
+        [
+          3,
+          6,
+          5
+        ]
+      ],
+      [
+        74,
+        [
+          7,
+          2,
+          5
+        ]
+      ],
+      [
+        75,
+        [
+          5,
+          3,
+          2
+        ]
+      ],
+      [
+        76,
+        [
+          6,
+          2,
+          5
+        ]
+      ],
+      [
+        77,
+        [
+          6,
+          3,
+          7
+        ]
+      ],
+      [
+        78,
+        [
+          1,
+          3,
+          2
+        ]
+      ],
+      [
+        79,
+        [
+          7,
+          5,
+          1
+        ]
+      ],
+      [
+        80,
+        [
+          5,
+          3,
+          7
+        ]
+      ],
+      [
+        81,
+        [
+          7,
+          2,
+          5
+        ]
+      ],
+      [
+        82,
+        [
+          7,
+          3,
+          1
+        ]
+      ],
+      [
+        83,
+        [
+          7,
+          1,
+          5
+        ]
+      ],
+      [
+        84,
+        [
+          7,
+          6,
+          1
+        ]
+      ],
+      [
+        85,
+        [
+          5,
+          7,
+          2
+        ]
+      ],
+      [
+        86,
+        [
+          3,
+          6,
+          7
+        ]
+      ],
+      [
+        87,
+        [
+          5,
+          2,
+          3
+        ]
+      ],
+      [
+        88,
+        [
+          3,
+          1,
+          2
+        ]
+      ],
+      [
+        89,
+        [
+          3,
+          6,
+          7
+        ]
+      ],
+      [
+        90,
+        [
+          6,
+          5,
+          7
+        ]
+      ],
+      [
+        91,
+        [
+          6,
+          3,
+          1
+        ]
+      ],
+      [
+        92,
+        [
+          6,
+          2,
+          5
+        ]
+      ],
+      [
+        93,
+        [
+          7,
+          3,
+          2
+        ]
+      ],
+      [
+        94,
+        [
+          6,
+          3,
+          1
+        ]
+      ],
+      [
+        95,
+        [
+          1,
+          2,
+          6
+        ]
+      ],
+      [
+        96,
+        [
+          3,
+          7,
+          5
+        ]
+      ],
+      [
+        97,
+        [
+          2,
+          5,
+          6
+        ]
+      ],
+      [
+        98,
+        [
+          2,
+          5,
+          3
+        ]
+      ],
+      [
+        99,
+        [
+          2,
+          1,
+          5
+        ]
+      ]
+    ],
+    [
+      [
+        0,
+        [
+          2,
+          9,
+          5
+        ]
+      ],
+      [
+        1,
+        [
+          3,
+          7,
+          5
+        ]
+      ],
+      [
+        2,
+        [
+          5,
+          7,
+          9
+        ]
+      ],
+      [
+        3,
+        [
+          3,
+          5,
+          9
+        ]
+      ],
+      [
+        4,
+        [
+          7,
+          2,
+          0
+        ]
+      ],
+      [
+        5,
+        [
+          2,
+          9,
+          0
+        ]
+      ],
+      [
+        6,
+        [
+          3,
+          5,
+          2
+        ]
+      ],
+      [
+        7,
+        [
+          5,
+          3,
+          7
+        ]
+      ],
+      [
+        8,
+        [
+          0,
+          3,
+          5
+        ]
+      ],
+      [
+        9,
+        [
+          5,
+          7,
+          0
+        ]
+      ],
+      [
+        10,
+        [
+          2,
+          3,
+          7
+        ]
+      ],
+      [
+        11,
+        [
+          7,
+          9,
+          2
+        ]
+      ],
+      [
+        12,
+        [
+          2,
+          5,
+          3
+        ]
+      ],
+      [
+        13,
+        [
+          5,
+          2,
+          9
+        ]
+      ],
+      [
+        14,
+        [
+          3,
+          2,
+          7
+        ]
+      ],
+      [
+        15,
+        [
+          3,
+          9,
+          0
+        ]
+      ],
+      [
+        16,
+        [
+          7,
+          5,
+          0
+        ]
+      ],
+      [
+        17,
+        [
+          5,
+          7,
+          9
+        ]
+      ],
+      [
+        18,
+        [
+          9,
+          0,
+          2
+        ]
+      ],
+      [
+        19,
+        [
+          9,
+          2,
+          5
+        ]
+      ],
+      [
+        20,
+        [
+          7,
+          2,
+          9
+        ]
+      ],
+      [
+        21,
+        [
+          3,
+          9,
+          7
+        ]
+      ],
+      [
+        22,
+        [
+          5,
+          9,
+          0
+        ]
+      ],
+      [
+        23,
+        [
+          3,
+          7,
+          9
+        ]
+      ],
+      [
+        24,
+        [
+          9,
+          7,
+          2
+        ]
+      ],
+      [
+        25,
+        [
+          9,
+          5,
+          0
+        ]
+      ],
+      [
+        26,
+        [
+          7,
+          5,
+          2
+        ]
+      ],
+      [
+        27,
+        [
+          0,
+          9,
+          5
+        ]
+      ],
+      [
+        28,
+        [
+          3,
+          7,
+          9
+        ]
+      ],
+      [
+        29,
+        [
+          5,
+          2,
+          7
+        ]
+      ],
+      [
+        30,
+        [
+          9,
+          0,
+          3
+        ]
+      ],
+      [
+        31,
+        [
+          0,
+          9,
+          5
+        ]
+      ],
+      [
+        32,
+        [
+          0,
+          5,
+          7
+        ]
+      ],
+      [
+        33,
+        [
+          7,
+          0,
+          2
+        ]
+      ],
+      [
+        34,
+        [
+          2,
+          9,
+          0
+        ]
+      ],
+      [
+        35,
+        [
+          2,
+          5,
+          9
+        ]
+      ],
+      [
+        36,
+        [
+          3,
+          2,
+          7
+        ]
+      ],
+      [
+        37,
+        [
+          2,
+          3,
+          7
+        ]
+      ],
+      [
+        38,
+        [
+          7,
+          9,
+          3
+        ]
+      ],
+      [
+        39,
+        [
+          9,
+          2,
+          0
+        ]
+      ],
+      [
+        40,
+        [
+          9,
+          0,
+          3
+        ]
+      ],
+      [
+        41,
+        [
+          0,
+          9,
+          3
+        ]
+      ],
+      [
+        42,
+        [
+          7,
+          9,
+          0
+        ]
+      ],
+      [
+        43,
+        [
+          7,
+          9,
+          2
+        ]
+      ],
+      [
+        44,
+        [
+          0,
+          7,
+          9
+        ]
+      ],
+      [
+        45,
+        [
+          2,
+          5,
+          7
+        ]
+      ],
+      [
+        46,
+        [
+          2,
+          5,
+          7
+        ]
+      ],
+      [
+        47,
+        [
+          9,
+          7,
+          5
+        ]
+      ],
+      [
+        48,
+        [
+          3,
+          7,
+          0
+        ]
+      ],
+      [
+        49,
+        [
+          7,
+          9,
+          0
+        ]
+      ],
+      [
+        50,
+        [
+          9,
+          7,
+          3
+        ]
+      ],
+      [
+        51,
+        [
+          5,
+          0,
+          9
+        ]
+      ],
+      [
+        52,
+        [
+          3,
+          9,
+          0
+        ]
+      ],
+      [
+        53,
+        [
+          3,
+          7,
+          2
+        ]
+      ],
+      [
+        54,
+        [
+          0,
+          2,
+          9
+        ]
+      ],
+      [
+        55,
+        [
+          9,
+          0,
+          5
+        ]
+      ],
+      [
+        56,
+        [
+          2,
+          0,
+          7
+        ]
+      ],
+      [
+        57,
+        [
+          0,
+          9,
+          2
+        ]
+      ],
+      [
+        58,
+        [
+          2,
+          7,
+          0
+        ]
+      ],
+      [
+        59,
+        [
+          9,
+          7,
+          2
+        ]
+      ],
+      [
+        60,
+        [
+          3,
+          5,
+          0
+        ]
+      ],
+      [
+        61,
+        [
+          5,
+          0,
+          2
+        ]
+      ],
+      [
+        62,
+        [
+          2,
+          5,
+          7
+        ]
+      ],
+      [
+        63,
+        [
+          7,
+          2,
+          9
+        ]
+      ],
+      [
+        64,
+        [
+          9,
+          2,
+          0
+        ]
+      ],
+      [
+        65,
+        [
+          5,
+          3,
+          2
+        ]
+      ],
+      [
+        66,
+        [
+          3,
+          9,
+          2
+        ]
+      ],
+      [
+        67,
+        [
+          9,
+          5,
+          3
+        ]
+      ],
+      [
+        68,
+        [
+          0,
+          2,
+          5
+        ]
+      ],
+      [
+        69,
+        [
+          7,
+          2,
+          0
+        ]
+      ],
+      [
+        70,
+        [
+          9,
+          0,
+          3
+        ]
+      ],
+      [
+        71,
+        [
+          2,
+          7,
+          3
+        ]
+      ],
+      [
+        72,
+        [
+          0,
+          5,
+          9
+        ]
+      ],
+      [
+        73,
+        [
+          2,
+          0,
+          7
+        ]
+      ],
+      [
+        74,
+        [
+          0,
+          7,
+          9
+        ]
+      ],
+      [
+        75,
+        [
+          0,
+          7,
+          9
+        ]
+      ],
+      [
+        76,
+        [
+          3,
+          0,
+          7
+        ]
+      ],
+      [
+        77,
+        [
+          5,
+          7,
+          0
+        ]
+      ],
+      [
+        78,
+        [
+          3,
+          7,
+          9
+        ]
+      ],
+      [
+        79,
+        [
+          7,
+          5,
+          2
+        ]
+      ],
+      [
+        80,
+        [
+          0,
+          2,
+          3
+        ]
+      ],
+      [
+        81,
+        [
+          9,
+          0,
+          7
+        ]
+      ],
+      [
+        82,
+        [
+          7,
+          2,
+          0
+        ]
+      ],
+      [
+        83,
+        [
+          5,
+          9,
+          2
+        ]
+      ],
+      [
+        84,
+        [
+          0,
+          2,
+          7
+        ]
+      ],
+      [
+        85,
+        [
+          5,
+          7,
+          0
+        ]
+      ],
+      [
+        86,
+        [
+          2,
+          7,
+          0
+        ]
+      ],
+      [
+        87,
+        [
+          0,
+          7,
+          9
+        ]
+      ],
+      [
+        88,
+        [
+          9,
+          2,
+          3
+        ]
+      ],
+      [
+        89,
+        [
+          3,
+          5,
+          0
+        ]
+      ],
+      [
+        90,
+        [
+          5,
+          0,
+          9
+        ]
+      ],
+      [
+        91,
+        [
+          2,
+          0,
+          7
+        ]
+      ],
+      [
+        92,
+        [
+          2,
+          7,
+          5
+        ]
+      ],
+      [
+        93,
+        [
+          9,
+          2,
+          3
+        ]
+      ],
+      [
+        94,
+        [
+          7,
+          0,
+          9
+        ]
+      ],
+      [
+        95,
+        [
+          0,
+          7,
+          3
+        ]
+      ],
+      [
+        96,
+        [
+          5,
+          0,
+          7
+        ]
+      ],
+      [
+        97,
+        [
+          3,
+          2,
+          9
+        ]
+      ],
+      [
+        98,
+        [
+          2,
+          5,
+          0
+        ]
+      ],
+      [
+        99,
+        [
+          9,
+          3,
+          0
+        ]
+      ]
+    ],
+    [
+      [
+        0,
+        [
+          6,
+          7,
+          0
+        ]
+      ],
+      [
+        1,
+        [
+          6,
+          8,
+          0
+        ]
+      ],
+      [
+        2,
+        [
+          6,
+          8,
+          4
+        ]
+      ],
+      [
+        3,
+        [
+          9,
+          1,
+          6
+        ]
+      ],
+      [
+        4,
+        [
+          0,
+          8,
+          1
+        ]
+      ],
+      [
+        5,
+        [
+          0,
+          1,
+          7
+        ]
+      ],
+      [
+        6,
+        [
+          1,
+          8,
+          7
+        ]
+      ],
+      [
+        7,
+        [
+          4,
+          6,
+          8
+        ]
+      ],
+      [
+        8,
+        [
+          7,
+          4,
+          8
+        ]
+      ],
+      [
+        9,
+        [
+          0,
+          6,
+          8
+        ]
+      ],
+      [
+        10,
+        [
+          8,
+          4,
+          6
+        ]
+      ],
+      [
+        11,
+        [
+          7,
+          3,
+          8
+        ]
+      ],
+      [
+        12,
+        [
+          4,
+          9,
+          8
+        ]
+      ],
+      [
+        13,
+        [
+          0,
+          9,
+          6
+        ]
+      ],
+      [
+        14,
+        [
+          4,
+          8,
+          0
+        ]
+      ],
+      [
+        15,
+        [
+          1,
+          9,
+          6
+        ]
+      ],
+      [
+        16,
+        [
+          4,
+          9,
+          8
+        ]
+      ],
+      [
+        17,
+        [
+          6,
+          8,
+          9
+        ]
+      ],
+      [
+        18,
+        [
+          9,
+          0,
+          8
+        ]
+      ],
+      [
+        19,
+        [
+          6,
+          0,
+          8
+        ]
+      ],
+      [
+        20,
+        [
+          4,
+          7,
+          9
+        ]
+      ],
+      [
+        21,
+        [
+          3,
+          1,
+          9
+        ]
+      ],
+      [
+        22,
+        [
+          6,
+          7,
+          4
+        ]
+      ],
+      [
+        23,
+        [
+          9,
+          0,
+          3
+        ]
+      ],
+      [
+        24,
+        [
+          6,
+          8,
+          4
+        ]
+      ],
+      [
+        25,
+        [
+          1,
+          8,
+          3
+        ]
+      ],
+      [
+        26,
+        [
+          0,
+          6,
+          8
+        ]
+      ],
+      [
+        27,
+        [
+          1,
+          8,
+          0
+        ]
+      ],
+      [
+        28,
+        [
+          3,
+          8,
+          4
+        ]
+      ],
+      [
+        29,
+        [
+          0,
+          4,
+          8
+        ]
+      ],
+      [
+        30,
+        [
+          0,
+          1,
+          4
+        ]
+      ],
+      [
+        31,
+        [
+          3,
+          8,
+          0
+        ]
+      ],
+      [
+        32,
+        [
+          8,
+          0,
+          3
+        ]
+      ],
+      [
+        33,
+        [
+          8,
+          0,
+          7
+        ]
+      ],
+      [
+        34,
+        [
+          4,
+          8,
+          1
+        ]
+      ],
+      [
+        35,
+        [
+          9,
+          8,
+          7
+        ]
+      ],
+      [
+        36,
+        [
+          4,
+          1,
+          9
+        ]
+      ],
+      [
+        37,
+        [
+          1,
+          7,
+          9
+        ]
+      ],
+      [
+        38,
+        [
+          6,
+          8,
+          7
+        ]
+      ],
+      [
+        39,
+        [
+          8,
+          1,
+          0
+        ]
+      ],
+      [
+        40,
+        [
+          8,
+          4,
+          1
+        ]
+      ],
+      [
+        41,
+        [
+          0,
+          6,
+          4
+        ]
+      ],
+      [
+        42,
+        [
+          6,
+          3,
+          9
+        ]
+      ],
+      [
+        43,
+        [
+          3,
+          6,
+          1
+        ]
+      ],
+      [
+        44,
+        [
+          3,
+          0,
+          9
+        ]
+      ],
+      [
+        45,
+        [
+          9,
+          4,
+          6
+        ]
+      ],
+      [
+        46,
+        [
+          7,
+          6,
+          8
+        ]
+      ],
+      [
+        47,
+        [
+          8,
+          0,
+          6
+        ]
+      ],
+      [
+        48,
+        [
+          3,
+          9,
+          4
+        ]
+      ],
+      [
+        49,
+        [
+          0,
+          1,
+          4
+        ]
+      ],
+      [
+        50,
+        [
+          4,
+          1,
+          8
+        ]
+      ],
+      [
+        51,
+        [
+          0,
+          3,
+          4
+        ]
+      ],
+      [
+        52,
+        [
+          1,
+          4,
+          7
+        ]
+      ],
+      [
+        53,
+        [
+          4,
+          6,
+          7
+        ]
+      ],
+      [
+        54,
+        [
+          6,
+          9,
+          8
+        ]
+      ],
+      [
+        55,
+        [
+          7,
+          4,
+          0
+        ]
+      ],
+      [
+        56,
+        [
+          7,
+          4,
+          0
+        ]
+      ],
+      [
+        57,
+        [
+          7,
+          9,
+          3
+        ]
+      ],
+      [
+        58,
+        [
+          1,
+          0,
+          6
+        ]
+      ],
+      [
+        59,
+        [
+          0,
+          9,
+          3
+        ]
+      ],
+      [
+        60,
+        [
+          4,
+          1,
+          6
+        ]
+      ],
+      [
+        61,
+        [
+          7,
+          8,
+          9
+        ]
+      ],
+      [
+        62,
+        [
+          1,
+          7,
+          8
+        ]
+      ],
+      [
+        63,
+        [
+          3,
+          1,
+          0
+        ]
+      ],
+      [
+        64,
+        [
+          0,
+          1,
+          4
+        ]
+      ],
+      [
+        65,
+        [
+          4,
+          3,
+          8
+        ]
+      ],
+      [
+        66,
+        [
+          0,
+          4,
+          9
+        ]
+      ],
+      [
+        67,
+        [
+          0,
+          6,
+          9
+        ]
+      ],
+      [
+        68,
+        [
+          9,
+          3,
+          4
+        ]
+      ],
+      [
+        69,
+        [
+          8,
+          6,
+          9
+        ]
+      ],
+      [
+        70,
+        [
+          4,
+          1,
+          0
+        ]
+      ],
+      [
+        71,
+        [
+          1,
+          6,
+          9
+        ]
+      ],
+      [
+        72,
+        [
+          1,
+          6,
+          7
+        ]
+      ],
+      [
+        73,
+        [
+          8,
+          4,
+          9
+        ]
+      ],
+      [
+        74,
+        [
+          0,
+          4,
+          6
+        ]
+      ],
+      [
+        75,
+        [
+          6,
+          0,
+          8
+        ]
+      ],
+      [
+        76,
+        [
+          7,
+          0,
+          1
+        ]
+      ],
+      [
+        77,
+        [
+          0,
+          6,
+          4
+        ]
+      ],
+      [
+        78,
+        [
+          4,
+          1,
+          0
+        ]
+      ],
+      [
+        79,
+        [
+          0,
+          9,
+          7
+        ]
+      ],
+      [
+        80,
+        [
+          7,
+          4,
+          9
+        ]
+      ],
+      [
+        81,
+        [
+          1,
+          4,
+          6
+        ]
+      ],
+      [
+        82,
+        [
+          7,
+          6,
+          3
+        ]
+      ],
+      [
+        83,
+        [
+          8,
+          4,
+          7
+        ]
+      ],
+      [
+        84,
+        [
+          7,
+          4,
+          1
+        ]
+      ],
+      [
+        85,
+        [
+          1,
+          0,
+          8
+        ]
+      ],
+      [
+        86,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        87,
+        [
+          7,
+          6,
+          9
+        ]
+      ],
+      [
+        88,
+        [
+          7,
+          4,
+          9
+        ]
+      ],
+      [
+        89,
+        [
+          6,
+          8,
+          3
+        ]
+      ],
+      [
+        90,
+        [
+          8,
+          6,
+          9
+        ]
+      ],
+      [
+        91,
+        [
+          1,
+          3,
+          7
+        ]
+      ],
+      [
+        92,
+        [
+          0,
+          3,
+          6
+        ]
+      ],
+      [
+        93,
+        [
+          8,
+          0,
+          3
+        ]
+      ],
+      [
+        94,
+        [
+          3,
+          8,
+          9
+        ]
+      ],
+      [
+        95,
+        [
+          9,
+          1,
+          0
+        ]
+      ],
+      [
+        96,
+        [
+          6,
+          4,
+          1
+        ]
+      ],
+      [
+        97,
+        [
+          6,
+          9,
+          7
+        ]
+      ],
+      [
+        98,
+        [
+          6,
+          3,
+          7
+        ]
+      ],
+      [
+        99,
+        [
+          4,
+          0,
+          7
+        ]
+      ]
+    ],
+    [
+      [
+        0,
+        [
+          0,
+          8,
+          4
+        ]
+      ],
+      [
+        1,
+        [
+          4,
+          0,
+          1
+        ]
+      ],
+      [
+        2,
+        [
+          2,
+          8,
+          0
+        ]
+      ],
+      [
+        3,
+        [
+          8,
+          0,
+          1
+        ]
+      ],
+      [
+        4,
+        [
+          9,
+          4,
+          8
+        ]
+      ],
+      [
+        5,
+        [
+          8,
+          9,
+          4
+        ]
+      ],
+      [
+        6,
+        [
+          4,
+          9,
+          2
+        ]
+      ],
+      [
+        7,
+        [
+          8,
+          2,
+          4
+        ]
+      ],
+      [
+        8,
+        [
+          4,
+          1,
+          2
+        ]
+      ],
+      [
+        9,
+        [
+          8,
+          0,
+          9
+        ]
+      ],
+      [
+        10,
+        [
+          8,
+          1,
+          0
+        ]
+      ],
+      [
+        11,
+        [
+          4,
+          2,
+          8
+        ]
+      ],
+      [
+        12,
+        [
+          1,
+          4,
+          2
+        ]
+      ],
+      [
+        13,
+        [
+          0,
+          8,
+          2
+        ]
+      ],
+      [
+        14,
+        [
+          1,
+          0,
+          9
+        ]
+      ],
+      [
+        15,
+        [
+          1,
+          8,
+          4
+        ]
+      ],
+      [
+        16,
+        [
+          2,
+          1,
+          0
+        ]
+      ],
+      [
+        17,
+        [
+          0,
+          1,
+          8
+        ]
+      ],
+      [
+        18,
+        [
+          2,
+          0,
+          4
+        ]
+      ],
+      [
+        19,
+        [
+          2,
+          4,
+          1
+        ]
+      ],
+      [
+        20,
+        [
+          4,
+          1,
+          0
+        ]
+      ],
+      [
+        21,
+        [
+          0,
+          9,
+          2
+        ]
+      ],
+      [
+        22,
+        [
+          9,
+          8,
+          0
+        ]
+      ],
+      [
+        23,
+        [
+          8,
+          9,
+          1
+        ]
+      ],
+      [
+        24,
+        [
+          9,
+          8,
+          0
+        ]
+      ],
+      [
+        25,
+        [
+          4,
+          2,
+          0
+        ]
+      ],
+      [
+        26,
+        [
+          8,
+          9,
+          1
+        ]
+      ],
+      [
+        27,
+        [
+          9,
+          4,
+          1
+        ]
+      ],
+      [
+        28,
+        [
+          9,
+          8,
+          1
+        ]
+      ],
+      [
+        29,
+        [
+          1,
+          0,
+          2
+        ]
+      ],
+      [
+        30,
+        [
+          9,
+          1,
+          0
+        ]
+      ],
+      [
+        31,
+        [
+          2,
+          1,
+          4
+        ]
+      ],
+      [
+        32,
+        [
+          9,
+          8,
+          1
+        ]
+      ],
+      [
+        33,
+        [
+          4,
+          9,
+          2
+        ]
+      ],
+      [
+        34,
+        [
+          4,
+          9,
+          1
+        ]
+      ],
+      [
+        35,
+        [
+          8,
+          1,
+          4
+        ]
+      ],
+      [
+        36,
+        [
+          2,
+          0,
+          9
+        ]
+      ],
+      [
+        37,
+        [
+          1,
+          4,
+          0
+        ]
+      ],
+      [
+        38,
+        [
+          8,
+          1,
+          0
+        ]
+      ],
+      [
+        39,
+        [
+          2,
+          8,
+          4
+        ]
+      ],
+      [
+        40,
+        [
+          9,
+          2,
+          4
+        ]
+      ],
+      [
+        41,
+        [
+          9,
+          1,
+          2
+        ]
+      ],
+      [
+        42,
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      [
+        43,
+        [
+          2,
+          8,
+          4
+        ]
+      ],
+      [
+        44,
+        [
+          8,
+          9,
+          0
+        ]
+      ],
+      [
+        45,
+        [
+          0,
+          9,
+          4
+        ]
+      ],
+      [
+        46,
+        [
+          1,
+          4,
+          2
+        ]
+      ],
+      [
+        47,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        48,
+        [
+          4,
+          9,
+          2
+        ]
+      ],
+      [
+        49,
+        [
+          2,
+          0,
+          8
+        ]
+      ],
+      [
+        50,
+        [
+          2,
+          9,
+          0
+        ]
+      ],
+      [
+        51,
+        [
+          2,
+          9,
+          1
+        ]
+      ],
+      [
+        52,
+        [
+          9,
+          2,
+          0
+        ]
+      ],
+      [
+        53,
+        [
+          8,
+          4,
+          0
+        ]
+      ],
+      [
+        54,
+        [
+          2,
+          1,
+          9
+        ]
+      ],
+      [
+        55,
+        [
+          4,
+          9,
+          8
+        ]
+      ],
+      [
+        56,
+        [
+          0,
+          8,
+          4
+        ]
+      ],
+      [
+        57,
+        [
+          4,
+          9,
+          8
+        ]
+      ],
+      [
+        58,
+        [
+          4,
+          0,
+          1
+        ]
+      ],
+      [
+        59,
+        [
+          9,
+          0,
+          1
+        ]
+      ],
+      [
+        60,
+        [
+          4,
+          1,
+          0
+        ]
+      ],
+      [
+        61,
+        [
+          0,
+          4,
+          1
+        ]
+      ],
+      [
+        62,
+        [
+          9,
+          0,
+          8
+        ]
+      ],
+      [
+        63,
+        [
+          4,
+          0,
+          8
+        ]
+      ],
+      [
+        64,
+        [
+          1,
+          0,
+          9
+        ]
+      ],
+      [
+        65,
+        [
+          0,
+          4,
+          1
+        ]
+      ],
+      [
+        66,
+        [
+          0,
+          1,
+          8
+        ]
+      ],
+      [
+        67,
+        [
+          9,
+          1,
+          4
+        ]
+      ],
+      [
+        68,
+        [
+          4,
+          0,
+          8
+        ]
+      ],
+      [
+        69,
+        [
+          8,
+          4,
+          0
+        ]
+      ],
+      [
+        70,
+        [
+          0,
+          8,
+          1
+        ]
+      ],
+      [
+        71,
+        [
+          0,
+          2,
+          9
+        ]
+      ],
+      [
+        72,
+        [
+          2,
+          8,
+          9
+        ]
+      ],
+      [
+        73,
+        [
+          1,
+          8,
+          0
+        ]
+      ],
+      [
+        74,
+        [
+          1,
+          4,
+          9
+        ]
+      ],
+      [
+        75,
+        [
+          8,
+          1,
+          4
+        ]
+      ],
+      [
+        76,
+        [
+          9,
+          4,
+          0
+        ]
+      ],
+      [
+        77,
+        [
+          9,
+          8,
+          4
+        ]
+      ],
+      [
+        78,
+        [
+          8,
+          0,
+          4
+        ]
+      ],
+      [
+        79,
+        [
+          0,
+          2,
+          9
+        ]
+      ],
+      [
+        80,
+        [
+          9,
+          1,
+          4
+        ]
+      ],
+      [
+        81,
+        [
+          4,
+          2,
+          1
+        ]
+      ],
+      [
+        82,
+        [
+          0,
+          9,
+          1
+        ]
+      ],
+      [
+        83,
+        [
+          2,
+          9,
+          1
+        ]
+      ],
+      [
+        84,
+        [
+          0,
+          8,
+          2
+        ]
+      ],
+      [
+        85,
+        [
+          0,
+          9,
+          4
+        ]
+      ],
+      [
+        86,
+        [
+          4,
+          0,
+          2
+        ]
+      ],
+      [
+        87,
+        [
+          0,
+          2,
+          9
+        ]
+      ],
+      [
+        88,
+        [
+          0,
+          4,
+          8
+        ]
+      ],
+      [
+        89,
+        [
+          0,
+          1,
+          8
+        ]
+      ],
+      [
+        90,
+        [
+          9,
+          1,
+          8
+        ]
+      ],
+      [
+        91,
+        [
+          4,
+          9,
+          0
+        ]
+      ],
+      [
+        92,
+        [
+          4,
+          0,
+          8
+        ]
+      ],
+      [
+        93,
+        [
+          1,
+          2,
+          4
+        ]
+      ],
+      [
+        94,
+        [
+          0,
+          8,
+          4
+        ]
+      ],
+      [
+        95,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        96,
+        [
+          8,
+          9,
+          0
+        ]
+      ],
+      [
+        97,
+        [
+          0,
+          2,
+          8
+        ]
+      ],
+      [
+        98,
+        [
+          9,
+          2,
+          8
+        ]
+      ],
+      [
+        99,
+        [
+          2,
+          0,
+          9
+        ]
+      ]
+    ],
+    [
+      [
+        0,
+        [
+          7,
+          8,
+          3
+        ]
+      ],
+      [
+        1,
+        [
+          3,
+          2,
+          7
+        ]
+      ],
+      [
+        2,
+        [
+          3,
+          7,
+          2
+        ]
+      ],
+      [
+        3,
+        [
+          8,
+          3,
+          2
+        ]
+      ],
+      [
+        4,
+        [
+          2,
+          8,
+          3
+        ]
+      ],
+      [
+        5,
+        [
+          8,
+          7,
+          2
+        ]
+      ],
+      [
+        6,
+        [
+          2,
+          8,
+          7
+        ]
+      ],
+      [
+        7,
+        [
+          7,
+          8,
+          3
+        ]
+      ],
+      [
+        8,
+        [
+          8,
+          3,
+          2
+        ]
+      ],
+      [
+        9,
+        [
+          2,
+          3,
+          7
+        ]
+      ],
+      [
+        10,
+        [
+          2,
+          8,
+          3
+        ]
+      ],
+      [
+        11,
+        [
+          2,
+          7,
+          8
+        ]
+      ],
+      [
+        12,
+        [
+          2,
+          3,
+          8
+        ]
+      ],
+      [
+        13,
+        [
+          8,
+          2,
+          3
+        ]
+      ],
+      [
+        14,
+        [
+          8,
+          7,
+          3
+        ]
+      ],
+      [
+        15,
+        [
+          3,
+          8,
+          7
+        ]
+      ],
+      [
+        16,
+        [
+          7,
+          2,
+          8
+        ]
+      ],
+      [
+        17,
+        [
+          3,
+          8,
+          2
+        ]
+      ],
+      [
+        18,
+        [
+          7,
+          3,
+          8
+        ]
+      ],
+      [
+        19,
+        [
+          3,
+          2,
+          8
+        ]
+      ],
+      [
+        20,
+        [
+          2,
+          3,
+          8
+        ]
+      ],
+      [
+        21,
+        [
+          2,
+          3,
+          8
+        ]
+      ],
+      [
+        22,
+        [
+          3,
+          2,
+          7
+        ]
+      ],
+      [
+        23,
+        [
+          2,
+          7,
+          8
+        ]
+      ],
+      [
+        24,
+        [
+          3,
+          2,
+          7
+        ]
+      ],
+      [
+        25,
+        [
+          2,
+          8,
+          3
+        ]
+      ],
+      [
+        26,
+        [
+          2,
+          8,
+          3
+        ]
+      ],
+      [
+        27,
+        [
+          3,
+          2,
+          8
+        ]
+      ],
+      [
+        28,
+        [
+          8,
+          7,
+          2
+        ]
+      ],
+      [
+        29,
+        [
+          2,
+          3,
+          8
+        ]
+      ],
+      [
+        30,
+        [
+          2,
+          3,
+          8
+        ]
+      ],
+      [
+        31,
+        [
+          3,
+          8,
+          2
+        ]
+      ],
+      [
+        32,
+        [
+          7,
+          2,
+          3
+        ]
+      ],
+      [
+        33,
+        [
+          2,
+          7,
+          8
+        ]
+      ],
+      [
+        34,
+        [
+          2,
+          7,
+          3
+        ]
+      ],
+      [
+        35,
+        [
+          2,
+          7,
+          3
+        ]
+      ],
+      [
+        36,
+        [
+          7,
+          8,
+          3
+        ]
+      ],
+      [
+        37,
+        [
+          7,
+          8,
+          3
+        ]
+      ],
+      [
+        38,
+        [
+          2,
+          7,
+          3
+        ]
+      ],
+      [
+        39,
+        [
+          7,
+          8,
+          3
+        ]
+      ],
+      [
+        40,
+        [
+          8,
+          7,
+          2
+        ]
+      ],
+      [
+        41,
+        [
+          3,
+          7,
+          2
+        ]
+      ],
+      [
+        42,
+        [
+          3,
+          8,
+          7
+        ]
+      ],
+      [
+        43,
+        [
+          2,
+          7,
+          3
+        ]
+      ],
+      [
+        44,
+        [
+          3,
+          2,
+          7
+        ]
+      ],
+      [
+        45,
+        [
+          8,
+          7,
+          2
+        ]
+      ],
+      [
+        46,
+        [
+          7,
+          2,
+          8
+        ]
+      ],
+      [
+        47,
+        [
+          7,
+          8,
+          3
+        ]
+      ],
+      [
+        48,
+        [
+          3,
+          8,
+          7
+        ]
+      ],
+      [
+        49,
+        [
+          3,
+          7,
+          2
+        ]
+      ],
+      [
+        50,
+        [
+          3,
+          8,
+          7
+        ]
+      ],
+      [
+        51,
+        [
+          2,
+          7,
+          3
+        ]
+      ],
+      [
+        52,
+        [
+          3,
+          2,
+          7
+        ]
+      ],
+      [
+        53,
+        [
+          2,
+          8,
+          3
+        ]
+      ],
+      [
+        54,
+        [
+          7,
+          8,
+          2
+        ]
+      ],
+      [
+        55,
+        [
+          3,
+          2,
+          7
+        ]
+      ],
+      [
+        56,
+        [
+          3,
+          7,
+          8
+        ]
+      ],
+      [
+        57,
+        [
+          2,
+          7,
+          8
+        ]
+      ],
+      [
+        58,
+        [
+          3,
+          8,
+          7
+        ]
+      ],
+      [
+        59,
+        [
+          8,
+          2,
+          7
+        ]
+      ],
+      [
+        60,
+        [
+          2,
+          3,
+          8
+        ]
+      ],
+      [
+        61,
+        [
+          3,
+          2,
+          8
+        ]
+      ],
+      [
+        62,
+        [
+          2,
+          8,
+          7
+        ]
+      ],
+      [
+        63,
+        [
+          8,
+          7,
+          2
+        ]
+      ],
+      [
+        64,
+        [
+          3,
+          8,
+          7
+        ]
+      ],
+      [
+        65,
+        [
+          7,
+          2,
+          3
+        ]
+      ],
+      [
+        66,
+        [
+          2,
+          7,
+          3
+        ]
+      ],
+      [
+        67,
+        [
+          3,
+          8,
+          2
+        ]
+      ],
+      [
+        68,
+        [
+          3,
+          2,
+          8
+        ]
+      ],
+      [
+        69,
+        [
+          8,
+          7,
+          2
+        ]
+      ],
+      [
+        70,
+        [
+          2,
+          3,
+          8
+        ]
+      ],
+      [
+        71,
+        [
+          2,
+          7,
+          8
+        ]
+      ],
+      [
+        72,
+        [
+          7,
+          8,
+          2
+        ]
+      ],
+      [
+        73,
+        [
+          2,
+          7,
+          8
+        ]
+      ],
+      [
+        74,
+        [
+          8,
+          3,
+          7
+        ]
+      ],
+      [
+        75,
+        [
+          2,
+          8,
+          7
+        ]
+      ],
+      [
+        76,
+        [
+          2,
+          3,
+          7
+        ]
+      ],
+      [
+        77,
+        [
+          3,
+          2,
+          7
+        ]
+      ],
+      [
+        78,
+        [
+          8,
+          3,
+          7
+        ]
+      ],
+      [
+        79,
+        [
+          8,
+          3,
+          2
+        ]
+      ],
+      [
+        80,
+        [
+          2,
+          7,
+          3
+        ]
+      ],
+      [
+        81,
+        [
+          7,
+          8,
+          2
+        ]
+      ],
+      [
+        82,
+        [
+          2,
+          3,
+          7
+        ]
+      ],
+      [
+        83,
+        [
+          2,
+          7,
+          3
+        ]
+      ],
+      [
+        84,
+        [
+          8,
+          3,
+          7
+        ]
+      ],
+      [
+        85,
+        [
+          8,
+          2,
+          7
+        ]
+      ],
+      [
+        86,
+        [
+          8,
+          7,
+          3
+        ]
+      ],
+      [
+        87,
+        [
+          7,
+          8,
+          2
+        ]
+      ],
+      [
+        88,
+        [
+          8,
+          7,
+          3
+        ]
+      ],
+      [
+        89,
+        [
+          3,
+          7,
+          8
+        ]
+      ],
+      [
+        90,
+        [
+          7,
+          8,
+          3
+        ]
+      ],
+      [
+        91,
+        [
+          2,
+          7,
+          8
+        ]
+      ],
+      [
+        92,
+        [
+          7,
+          3,
+          8
+        ]
+      ],
+      [
+        93,
+        [
+          2,
+          3,
+          7
+        ]
+      ],
+      [
+        94,
+        [
+          8,
+          3,
+          7
+        ]
+      ],
+      [
+        95,
+        [
+          7,
+          8,
+          3
+        ]
+      ],
+      [
+        96,
+        [
+          2,
+          7,
+          8
+        ]
+      ],
+      [
+        97,
+        [
+          3,
+          7,
+          2
+        ]
+      ],
+      [
+        98,
+        [
+          3,
+          7,
+          2
+        ]
+      ],
+      [
+        99,
+        [
+          7,
+          8,
+          3
+        ]
+      ]
+    ],
+    [
+      [
+        0,
+        [
+          9,
+          1,
+          0
+        ]
+      ],
+      [
+        1,
+        [
+          1,
+          9,
+          0
+        ]
+      ],
+      [
+        2,
+        [
+          9,
+          0,
+          1
+        ]
+      ],
+      [
+        3,
+        [
+          9,
+          0,
+          1
+        ]
+      ],
+      [
+        4,
+        [
+          1,
+          9,
+          0
+        ]
+      ],
+      [
+        5,
+        [
+          0,
+          9,
+          1
+        ]
+      ],
+      [
+        6,
+        [
+          1,
+          9,
+          0
+        ]
+      ],
+      [
+        7,
+        [
+          0,
+          9,
+          1
+        ]
+      ],
+      [
+        8,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        9,
+        [
+          9,
+          0,
+          1
+        ]
+      ],
+      [
+        10,
+        [
+          9,
+          1,
+          0
+        ]
+      ],
+      [
+        11,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        12,
+        [
+          9,
+          0,
+          1
+        ]
+      ],
+      [
+        13,
+        [
+          1,
+          9,
+          0
+        ]
+      ],
+      [
+        14,
+        [
+          1,
+          0,
+          9
+        ]
+      ],
+      [
+        15,
+        [
+          9,
+          0,
+          1
+        ]
+      ],
+      [
+        16,
+        [
+          1,
+          0,
+          9
+        ]
+      ],
+      [
+        17,
+        [
+          9,
+          0,
+          1
+        ]
+      ],
+      [
+        18,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        19,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        20,
+        [
+          9,
+          1,
+          0
+        ]
+      ],
+      [
+        21,
+        [
+          9,
+          1,
+          0
+        ]
+      ],
+      [
+        22,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        23,
+        [
+          9,
+          1,
+          0
+        ]
+      ],
+      [
+        24,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        25,
+        [
+          0,
+          9,
+          1
+        ]
+      ],
+      [
+        26,
+        [
+          1,
+          9,
+          0
+        ]
+      ],
+      [
+        27,
+        [
+          1,
+          0,
+          9
+        ]
+      ],
+      [
+        28,
+        [
+          0,
+          9,
+          1
+        ]
+      ],
+      [
+        29,
+        [
+          0,
+          9,
+          1
+        ]
+      ],
+      [
+        30,
+        [
+          9,
+          0,
+          1
+        ]
+      ],
+      [
+        31,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        32,
+        [
+          1,
+          0,
+          9
+        ]
+      ],
+      [
+        33,
+        [
+          1,
+          9,
+          0
+        ]
+      ],
+      [
+        34,
+        [
+          0,
+          9,
+          1
+        ]
+      ],
+      [
+        35,
+        [
+          9,
+          1,
+          0
+        ]
+      ],
+      [
+        36,
+        [
+          9,
+          1,
+          0
+        ]
+      ],
+      [
+        37,
+        [
+          1,
+          9,
+          0
+        ]
+      ],
+      [
+        38,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        39,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        40,
+        [
+          0,
+          9,
+          1
+        ]
+      ],
+      [
+        41,
+        [
+          9,
+          1,
+          0
+        ]
+      ],
+      [
+        42,
+        [
+          0,
+          9,
+          1
+        ]
+      ],
+      [
+        43,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        44,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        45,
+        [
+          1,
+          9,
+          0
+        ]
+      ],
+      [
+        46,
+        [
+          9,
+          1,
+          0
+        ]
+      ],
+      [
+        47,
+        [
+          1,
+          9,
+          0
+        ]
+      ],
+      [
+        48,
+        [
+          1,
+          9,
+          0
+        ]
+      ],
+      [
+        49,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        50,
+        [
+          1,
+          9,
+          0
+        ]
+      ],
+      [
+        51,
+        [
+          1,
+          9,
+          0
+        ]
+      ],
+      [
+        52,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        53,
+        [
+          1,
+          0,
+          9
+        ]
+      ],
+      [
+        54,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        55,
+        [
+          1,
+          0,
+          9
+        ]
+      ],
+      [
+        56,
+        [
+          9,
+          1,
+          0
+        ]
+      ],
+      [
+        57,
+        [
+          9,
+          1,
+          0
+        ]
+      ],
+      [
+        58,
+        [
+          1,
+          9,
+          0
+        ]
+      ],
+      [
+        59,
+        [
+          9,
+          0,
+          1
+        ]
+      ],
+      [
+        60,
+        [
+          0,
+          9,
+          1
+        ]
+      ],
+      [
+        61,
+        [
+          1,
+          9,
+          0
+        ]
+      ],
+      [
+        62,
+        [
+          1,
+          9,
+          0
+        ]
+      ],
+      [
+        63,
+        [
+          1,
+          9,
+          0
+        ]
+      ],
+      [
+        64,
+        [
+          9,
+          0,
+          1
+        ]
+      ],
+      [
+        65,
+        [
+          1,
+          0,
+          9
+        ]
+      ],
+      [
+        66,
+        [
+          9,
+          0,
+          1
+        ]
+      ],
+      [
+        67,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        68,
+        [
+          1,
+          9,
+          0
+        ]
+      ],
+      [
+        69,
+        [
+          0,
+          9,
+          1
+        ]
+      ],
+      [
+        70,
+        [
+          1,
+          0,
+          9
+        ]
+      ],
+      [
+        71,
+        [
+          9,
+          1,
+          0
+        ]
+      ],
+      [
+        72,
+        [
+          9,
+          1,
+          0
+        ]
+      ],
+      [
+        73,
+        [
+          1,
+          0,
+          9
+        ]
+      ],
+      [
+        74,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        75,
+        [
+          1,
+          9,
+          0
+        ]
+      ],
+      [
+        76,
+        [
+          0,
+          9,
+          1
+        ]
+      ],
+      [
+        77,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        78,
+        [
+          1,
+          9,
+          0
+        ]
+      ],
+      [
+        79,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        80,
+        [
+          0,
+          9,
+          1
+        ]
+      ],
+      [
+        81,
+        [
+          1,
+          0,
+          9
+        ]
+      ],
+      [
+        82,
+        [
+          9,
+          0,
+          1
+        ]
+      ],
+      [
+        83,
+        [
+          9,
+          0,
+          1
+        ]
+      ],
+      [
+        84,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        85,
+        [
+          0,
+          9,
+          1
+        ]
+      ],
+      [
+        86,
+        [
+          9,
+          1,
+          0
+        ]
+      ],
+      [
+        87,
+        [
+          9,
+          1,
+          0
+        ]
+      ],
+      [
+        88,
+        [
+          9,
+          0,
+          1
+        ]
+      ],
+      [
+        89,
+        [
+          1,
+          0,
+          9
+        ]
+      ],
+      [
+        90,
+        [
+          9,
+          1,
+          0
+        ]
+      ],
+      [
+        91,
+        [
+          9,
+          0,
+          1
+        ]
+      ],
+      [
+        92,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        93,
+        [
+          0,
+          1,
+          9
+        ]
+      ],
+      [
+        94,
+        [
+          9,
+          1,
+          0
+        ]
+      ],
+      [
+        95,
+        [
+          1,
+          0,
+          9
+        ]
+      ],
+      [
+        96,
+        [
+          9,
+          1,
+          0
+        ]
+      ],
+      [
+        97,
+        [
+          1,
+          0,
+          9
+        ]
+      ],
+      [
+        98,
+        [
+          0,
+          9,
+          1
+        ]
+      ],
+      [
+        99,
+        [
+          0,
+          9,
+          1
+        ]
+      ]
+    ],
+    [
+      [
+        0,
+        [
+          2,
+          0,
+          7
+        ]
+      ],
+      [
+        1,
+        [
+          7,
+          8,
+          0
+        ]
+      ],
+      [
+        2,
+        [
+          0,
+          7,
+          2
+        ]
+      ],
+      [
+        3,
+        [
+          2,
+          8,
+          7
+        ]
+      ],
+      [
+        4,
+        [
+          8,
+          2,
+          7
+        ]
+      ],
+      [
+        5,
+        [
+          0,
+          8,
+          2
+        ]
+      ],
+      [
+        6,
+        [
+          8,
+          2,
+          0
+        ]
+      ],
+      [
+        7,
+        [
+          2,
+          7,
+          0
+        ]
+      ],
+      [
+        8,
+        [
+          7,
+          8,
+          0
+        ]
+      ],
+      [
+        9,
+        [
+          7,
+          2,
+          8
+        ]
+      ],
+      [
+        10,
+        [
+          0,
+          8,
+          7
+        ]
+      ],
+      [
+        11,
+        [
+          0,
+          7,
+          8
+        ]
+      ],
+      [
+        12,
+        [
+          2,
+          0,
+          7
+        ]
+      ],
+      [
+        13,
+        [
+          7,
+          8,
+          0
+        ]
+      ],
+      [
+        14,
+        [
+          0,
+          7,
+          8
+        ]
+      ],
+      [
+        15,
+        [
+          7,
+          0,
+          2
+        ]
+      ],
+      [
+        16,
+        [
+          8,
+          2,
+          7
+        ]
+      ],
+      [
+        17,
+        [
+          0,
+          8,
+          7
+        ]
+      ],
+      [
+        18,
+        [
+          0,
+          8,
+          7
+        ]
+      ],
+      [
+        19,
+        [
+          2,
+          7,
+          8
+        ]
+      ],
+      [
+        20,
+        [
+          7,
+          0,
+          2
+        ]
+      ],
+      [
+        21,
+        [
+          7,
+          0,
+          8
+        ]
+      ],
+      [
+        22,
+        [
+          2,
+          8,
+          7
+        ]
+      ],
+      [
+        23,
+        [
+          2,
+          8,
+          0
+        ]
+      ],
+      [
+        24,
+        [
+          8,
+          7,
+          0
+        ]
+      ],
+      [
+        25,
+        [
+          0,
+          2,
+          7
+        ]
+      ],
+      [
+        26,
+        [
+          7,
+          2,
+          0
+        ]
+      ],
+      [
+        27,
+        [
+          7,
+          8,
+          2
+        ]
+      ],
+      [
+        28,
+        [
+          0,
+          7,
+          8
+        ]
+      ],
+      [
+        29,
+        [
+          0,
+          8,
+          7
+        ]
+      ],
+      [
+        30,
+        [
+          7,
+          2,
+          8
+        ]
+      ],
+      [
+        31,
+        [
+          0,
+          8,
+          2
+        ]
+      ],
+      [
+        32,
+        [
+          2,
+          7,
+          0
+        ]
+      ],
+      [
+        33,
+        [
+          7,
+          2,
+          0
+        ]
+      ],
+      [
+        34,
+        [
+          7,
+          8,
+          2
+        ]
+      ],
+      [
+        35,
+        [
+          2,
+          8,
+          0
+        ]
+      ],
+      [
+        36,
+        [
+          0,
+          8,
+          2
+        ]
+      ],
+      [
+        37,
+        [
+          8,
+          7,
+          0
+        ]
+      ],
+      [
+        38,
+        [
+          8,
+          2,
+          0
+        ]
+      ],
+      [
+        39,
+        [
+          0,
+          2,
+          8
+        ]
+      ],
+      [
+        40,
+        [
+          0,
+          8,
+          7
+        ]
+      ],
+      [
+        41,
+        [
+          7,
+          8,
+          0
+        ]
+      ],
+      [
+        42,
+        [
+          0,
+          8,
+          2
+        ]
+      ],
+      [
+        43,
+        [
+          8,
+          7,
+          2
+        ]
+      ],
+      [
+        44,
+        [
+          8,
+          7,
+          0
+        ]
+      ],
+      [
+        45,
+        [
+          0,
+          7,
+          2
+        ]
+      ],
+      [
+        46,
+        [
+          8,
+          0,
+          7
+        ]
+      ],
+      [
+        47,
+        [
+          7,
+          2,
+          8
+        ]
+      ],
+      [
+        48,
+        [
+          2,
+          8,
+          7
+        ]
+      ],
+      [
+        49,
+        [
+          8,
+          0,
+          7
+        ]
+      ],
+      [
+        50,
+        [
+          2,
+          7,
+          8
+        ]
+      ],
+      [
+        51,
+        [
+          8,
+          0,
+          2
+        ]
+      ],
+      [
+        52,
+        [
+          7,
+          2,
+          0
+        ]
+      ],
+      [
+        53,
+        [
+          7,
+          2,
+          8
+        ]
+      ],
+      [
+        54,
+        [
+          7,
+          0,
+          2
+        ]
+      ],
+      [
+        55,
+        [
+          8,
+          0,
+          7
+        ]
+      ],
+      [
+        56,
+        [
+          8,
+          0,
+          7
+        ]
+      ],
+      [
+        57,
+        [
+          2,
+          0,
+          8
+        ]
+      ],
+      [
+        58,
+        [
+          7,
+          2,
+          8
+        ]
+      ],
+      [
+        59,
+        [
+          7,
+          2,
+          0
+        ]
+      ],
+      [
+        60,
+        [
+          8,
+          7,
+          0
+        ]
+      ],
+      [
+        61,
+        [
+          0,
+          2,
+          8
+        ]
+      ],
+      [
+        62,
+        [
+          0,
+          7,
+          8
+        ]
+      ],
+      [
+        63,
+        [
+          7,
+          2,
+          0
+        ]
+      ],
+      [
+        64,
+        [
+          8,
+          7,
+          2
+        ]
+      ],
+      [
+        65,
+        [
+          0,
+          8,
+          2
+        ]
+      ],
+      [
+        66,
+        [
+          7,
+          8,
+          2
+        ]
+      ],
+      [
+        67,
+        [
+          7,
+          2,
+          0
+        ]
+      ],
+      [
+        68,
+        [
+          7,
+          2,
+          0
+        ]
+      ],
+      [
+        69,
+        [
+          0,
+          8,
+          2
+        ]
+      ],
+      [
+        70,
+        [
+          7,
+          2,
+          8
+        ]
+      ],
+      [
+        71,
+        [
+          8,
+          2,
+          7
+        ]
+      ],
+      [
+        72,
+        [
+          8,
+          7,
+          0
+        ]
+      ],
+      [
+        73,
+        [
+          8,
+          2,
+          7
+        ]
+      ],
+      [
+        74,
+        [
+          0,
+          7,
+          2
+        ]
+      ],
+      [
+        75,
+        [
+          2,
+          0,
+          7
+        ]
+      ],
+      [
+        76,
+        [
+          7,
+          2,
+          0
+        ]
+      ],
+      [
+        77,
+        [
+          2,
+          7,
+          0
+        ]
+      ],
+      [
+        78,
+        [
+          0,
+          2,
+          7
+        ]
+      ],
+      [
+        79,
+        [
+          8,
+          0,
+          7
+        ]
+      ],
+      [
+        80,
+        [
+          7,
+          2,
+          8
+        ]
+      ],
+      [
+        81,
+        [
+          7,
+          8,
+          0
+        ]
+      ],
+      [
+        82,
+        [
+          8,
+          7,
+          0
+        ]
+      ],
+      [
+        83,
+        [
+          7,
+          2,
+          8
+        ]
+      ],
+      [
+        84,
+        [
+          2,
+          0,
+          8
+        ]
+      ],
+      [
+        85,
+        [
+          2,
+          0,
+          8
+        ]
+      ],
+      [
+        86,
+        [
+          2,
+          7,
+          8
+        ]
+      ],
+      [
+        87,
+        [
+          0,
+          7,
+          2
+        ]
+      ],
+      [
+        88,
+        [
+          8,
+          0,
+          7
+        ]
+      ],
+      [
+        89,
+        [
+          7,
+          0,
+          8
+        ]
+      ],
+      [
+        90,
+        [
+          2,
+          8,
+          0
+        ]
+      ],
+      [
+        91,
+        [
+          0,
+          7,
+          8
+        ]
+      ],
+      [
+        92,
+        [
+          7,
+          8,
+          2
+        ]
+      ],
+      [
+        93,
+        [
+          2,
+          0,
+          8
+        ]
+      ],
+      [
+        94,
+        [
+          2,
+          0,
+          7
+        ]
+      ],
+      [
+        95,
+        [
+          8,
+          0,
+          7
+        ]
+      ],
+      [
+        96,
+        [
+          2,
+          8,
+          0
+        ]
+      ],
+      [
+        97,
+        [
+          0,
+          2,
+          7
+        ]
+      ],
+      [
+        98,
+        [
+          0,
+          8,
+          7
+        ]
+      ],
+      [
+        99,
+        [
+          8,
+          2,
+          0
+        ]
+      ]
+    ],
+    [
+      [
+        0,
+        [
+          1,
+          6,
+          2
+        ]
+      ],
+      [
+        1,
+        [
+          1,
+          2,
+          0
+        ]
+      ],
+      [
+        2,
+        [
+          2,
+          1,
+          6
+        ]
+      ],
+      [
+        3,
+        [
+          6,
+          0,
+          2
+        ]
+      ],
+      [
+        4,
+        [
+          0,
+          4,
+          6
+        ]
+      ],
+      [
+        5,
+        [
+          0,
+          2,
+          6
+        ]
+      ],
+      [
+        6,
+        [
+          6,
+          0,
+          2
+        ]
+      ],
+      [
+        7,
+        [
+          1,
+          0,
+          2
+        ]
+      ],
+      [
+        8,
+        [
+          0,
+          1,
+          4
+        ]
+      ],
+      [
+        9,
+        [
+          4,
+          6,
+          2
+        ]
+      ],
+      [
+        10,
+        [
+          4,
+          0,
+          1
+        ]
+      ],
+      [
+        11,
+        [
+          0,
+          4,
+          6
+        ]
+      ],
+      [
+        12,
+        [
+          1,
+          0,
+          4
+        ]
+      ],
+      [
+        13,
+        [
+          0,
+          4,
+          1
+        ]
+      ],
+      [
+        14,
+        [
+          0,
+          2,
+          6
+        ]
+      ],
+      [
+        15,
+        [
+          1,
+          4,
+          2
+        ]
+      ],
+      [
+        16,
+        [
+          1,
+          2,
+          4
+        ]
+      ],
+      [
+        17,
+        [
+          2,
+          1,
+          6
+        ]
+      ],
+      [
+        18,
+        [
+          6,
+          4,
+          1
+        ]
+      ],
+      [
+        19,
+        [
+          2,
+          0,
+          1
+        ]
+      ],
+      [
+        20,
+        [
+          4,
+          6,
+          1
+        ]
+      ],
+      [
+        21,
+        [
+          0,
+          4,
+          6
+        ]
+      ],
+      [
+        22,
+        [
+          2,
+          4,
+          1
+        ]
+      ],
+      [
+        23,
+        [
+          6,
+          1,
+          0
+        ]
+      ],
+      [
+        24,
+        [
+          2,
+          1,
+          4
+        ]
+      ],
+      [
+        25,
+        [
+          6,
+          4,
+          2
+        ]
+      ],
+      [
+        26,
+        [
+          0,
+          6,
+          4
+        ]
+      ],
+      [
+        27,
+        [
+          2,
+          0,
+          1
+        ]
+      ],
+      [
+        28,
+        [
+          2,
+          0,
+          1
+        ]
+      ],
+      [
+        29,
+        [
+          1,
+          6,
+          2
+        ]
+      ],
+      [
+        30,
+        [
+          6,
+          2,
+          1
+        ]
+      ],
+      [
+        31,
+        [
+          0,
+          2,
+          1
+        ]
+      ],
+      [
+        32,
+        [
+          1,
+          0,
+          2
+        ]
+      ],
+      [
+        33,
+        [
+          2,
+          1,
+          4
+        ]
+      ],
+      [
+        34,
+        [
+          6,
+          4,
+          0
+        ]
+      ],
+      [
+        35,
+        [
+          0,
+          2,
+          6
+        ]
+      ],
+      [
+        36,
+        [
+          6,
+          1,
+          2
+        ]
+      ],
+      [
+        37,
+        [
+          1,
+          4,
+          2
+        ]
+      ],
+      [
+        38,
+        [
+          0,
+          1,
+          2
+        ]
+      ],
+      [
+        39,
+        [
+          1,
+          6,
+          2
+        ]
+      ],
+      [
+        40,
+        [
+          6,
+          4,
+          2
+        ]
+      ],
+      [
+        41,
+        [
+          1,
+          0,
+          2
+        ]
+      ],
+      [
+        42,
+        [
+          1,
+          6,
+          4
+        ]
+      ],
+      [
+        43,
+        [
+          2,
+          4,
+          1
+        ]
+      ],
+      [
+        44,
+        [
+          6,
+          4,
+          2
+        ]
+      ],
+      [
+        45,
+        [
+          6,
+          4,
+          0
+        ]
+      ],
+      [
+        46,
+        [
+          6,
+          0,
+          1
+        ]
+      ],
+      [
+        47,
+        [
+          0,
+          2,
+          4
+        ]
+      ],
+      [
+        48,
+        [
+          1,
+          2,
+          4
+        ]
+      ],
+      [
+        49,
+        [
+          4,
+          6,
+          2
+        ]
+      ],
+      [
+        50,
+        [
+          4,
+          6,
+          0
+        ]
+      ],
+      [
+        51,
+        [
+          1,
+          6,
+          2
+        ]
+      ],
+      [
+        52,
+        [
+          6,
+          4,
+          2
+        ]
+      ],
+      [
+        53,
+        [
+          1,
+          4,
+          6
+        ]
+      ],
+      [
+        54,
+        [
+          0,
+          4,
+          1
+        ]
+      ],
+      [
+        55,
+        [
+          1,
+          0,
+          2
+        ]
+      ],
+      [
+        56,
+        [
+          6,
+          2,
+          1
+        ]
+      ],
+      [
+        57,
+        [
+          6,
+          0,
+          2
+        ]
+      ],
+      [
+        58,
+        [
+          4,
+          6,
+          1
+        ]
+      ],
+      [
+        59,
+        [
+          4,
+          0,
+          1
+        ]
+      ],
+      [
+        60,
+        [
+          1,
+          6,
+          0
+        ]
+      ],
+      [
+        61,
+        [
+          2,
+          4,
+          6
+        ]
+      ],
+      [
+        62,
+        [
+          4,
+          0,
+          1
+        ]
+      ],
+      [
+        63,
+        [
+          6,
+          0,
+          2
+        ]
+      ],
+      [
+        64,
+        [
+          0,
+          4,
+          1
+        ]
+      ],
+      [
+        65,
+        [
+          2,
+          4,
+          1
+        ]
+      ],
+      [
+        66,
+        [
+          2,
+          4,
+          1
+        ]
+      ],
+      [
+        67,
+        [
+          1,
+          2,
+          6
+        ]
+      ],
+      [
+        68,
+        [
+          0,
+          6,
+          2
+        ]
+      ],
+      [
+        69,
+        [
+          4,
+          1,
+          0
+        ]
+      ],
+      [
+        70,
+        [
+          4,
+          6,
+          0
+        ]
+      ],
+      [
+        71,
+        [
+          0,
+          4,
+          2
+        ]
+      ],
+      [
+        72,
+        [
+          2,
+          6,
+          0
+        ]
+      ],
+      [
+        73,
+        [
+          0,
+          6,
+          2
+        ]
+      ],
+      [
+        74,
+        [
+          4,
+          0,
+          1
+        ]
+      ],
+      [
+        75,
+        [
+          6,
+          2,
+          0
+        ]
+      ],
+      [
+        76,
+        [
+          2,
+          0,
+          4
+        ]
+      ],
+      [
+        77,
+        [
+          2,
+          4,
+          0
+        ]
+      ],
+      [
+        78,
+        [
+          1,
+          2,
+          6
+        ]
+      ],
+      [
+        79,
+        [
+          1,
+          2,
+          4
+        ]
+      ],
+      [
+        80,
+        [
+          0,
+          1,
+          6
+        ]
+      ],
+      [
+        81,
+        [
+          6,
+          4,
+          0
+        ]
+      ],
+      [
+        82,
+        [
+          2,
+          0,
+          4
+        ]
+      ],
+      [
+        83,
+        [
+          4,
+          2,
+          0
+        ]
+      ],
+      [
+        84,
+        [
+          1,
+          0,
+          2
+        ]
+      ],
+      [
+        85,
+        [
+          1,
+          0,
+          2
+        ]
+      ],
+      [
+        86,
+        [
+          1,
+          4,
+          2
+        ]
+      ],
+      [
+        87,
+        [
+          6,
+          2,
+          1
+        ]
+      ],
+      [
+        88,
+        [
+          2,
+          4,
+          0
+        ]
+      ],
+      [
+        89,
+        [
+          6,
+          2,
+          4
+        ]
+      ],
+      [
+        90,
+        [
+          0,
+          6,
+          4
+        ]
+      ],
+      [
+        91,
+        [
+          0,
+          6,
+          2
+        ]
+      ],
+      [
+        92,
+        [
+          4,
+          2,
+          1
+        ]
+      ],
+      [
+        93,
+        [
+          6,
+          1,
+          2
+        ]
+      ],
+      [
+        94,
+        [
+          6,
+          2,
+          1
+        ]
+      ],
+      [
+        95,
+        [
+          2,
+          6,
+          0
+        ]
+      ],
+      [
+        96,
+        [
+          6,
+          2,
+          1
+        ]
+      ],
+      [
+        97,
+        [
+          1,
+          0,
+          4
+        ]
+      ],
+      [
+        98,
+        [
+          6,
+          0,
+          1
+        ]
+      ],
+      [
+        99,
+        [
+          0,
+          1,
+          4
+        ]
+      ]
+    ],
+    [
+      [
+        0,
+        [
+          3,
+          4,
+          2
+        ]
+      ],
+      [
+        1,
+        [
+          9,
+          2,
+          4
+        ]
+      ],
+      [
+        2,
+        [
+          3,
+          6,
+          2
+        ]
+      ],
+      [
+        3,
+        [
+          9,
+          4,
+          6
+        ]
+      ],
+      [
+        4,
+        [
+          9,
+          2,
+          4
+        ]
+      ],
+      [
+        5,
+        [
+          6,
+          3,
+          9
+        ]
+      ],
+      [
+        6,
+        [
+          3,
+          4,
+          9
+        ]
+      ],
+      [
+        7,
+        [
+          4,
+          9,
+          2
+        ]
+      ],
+      [
+        8,
+        [
+          4,
+          6,
+          2
+        ]
+      ],
+      [
+        9,
+        [
+          3,
+          9,
+          2
+        ]
+      ],
+      [
+        10,
+        [
+          2,
+          3,
+          6
+        ]
+      ],
+      [
+        11,
+        [
+          2,
+          6,
+          9
+        ]
+      ],
+      [
+        12,
+        [
+          6,
+          9,
+          3
+        ]
+      ],
+      [
+        13,
+        [
+          2,
+          3,
+          6
+        ]
+      ],
+      [
+        14,
+        [
+          4,
+          6,
+          2
+        ]
+      ],
+      [
+        15,
+        [
+          4,
+          2,
+          6
+        ]
+      ],
+      [
+        16,
+        [
+          3,
+          6,
+          4
+        ]
+      ],
+      [
+        17,
+        [
+          3,
+          9,
+          6
+        ]
+      ],
+      [
+        18,
+        [
+          6,
+          4,
+          3
+        ]
+      ],
+      [
+        19,
+        [
+          6,
+          4,
+          9
+        ]
+      ],
+      [
+        20,
+        [
+          9,
+          2,
+          4
+        ]
+      ],
+      [
+        21,
+        [
+          2,
+          3,
+          4
+        ]
+      ],
+      [
+        22,
+        [
+          6,
+          3,
+          2
+        ]
+      ],
+      [
+        23,
+        [
+          9,
+          2,
+          6
+        ]
+      ],
+      [
+        24,
+        [
+          3,
+          2,
+          4
+        ]
+      ],
+      [
+        25,
+        [
+          4,
+          6,
+          2
+        ]
+      ],
+      [
+        26,
+        [
+          3,
+          2,
+          9
+        ]
+      ],
+      [
+        27,
+        [
+          6,
+          4,
+          3
+        ]
+      ],
+      [
+        28,
+        [
+          4,
+          3,
+          9
+        ]
+      ],
+      [
+        29,
+        [
+          3,
+          2,
+          6
+        ]
+      ],
+      [
+        30,
+        [
+          9,
+          2,
+          4
+        ]
+      ],
+      [
+        31,
+        [
+          6,
+          2,
+          3
+        ]
+      ],
+      [
+        32,
+        [
+          9,
+          4,
+          3
+        ]
+      ],
+      [
+        33,
+        [
+          6,
+          4,
+          3
+        ]
+      ],
+      [
+        34,
+        [
+          2,
+          4,
+          6
+        ]
+      ],
+      [
+        35,
+        [
+          2,
+          9,
+          6
+        ]
+      ],
+      [
+        36,
+        [
+          2,
+          6,
+          4
+        ]
+      ],
+      [
+        37,
+        [
+          6,
+          9,
+          4
+        ]
+      ],
+      [
+        38,
+        [
+          9,
+          2,
+          6
+        ]
+      ],
+      [
+        39,
+        [
+          6,
+          9,
+          4
+        ]
+      ],
+      [
+        40,
+        [
+          2,
+          9,
+          6
+        ]
+      ],
+      [
+        41,
+        [
+          4,
+          2,
+          9
+        ]
+      ],
+      [
+        42,
+        [
+          6,
+          4,
+          2
+        ]
+      ],
+      [
+        43,
+        [
+          2,
+          9,
+          6
+        ]
+      ],
+      [
+        44,
+        [
+          2,
+          9,
+          4
+        ]
+      ],
+      [
+        45,
+        [
+          3,
+          6,
+          4
+        ]
+      ],
+      [
+        46,
+        [
+          2,
+          6,
+          9
+        ]
+      ],
+      [
+        47,
+        [
+          6,
+          9,
+          3
+        ]
+      ],
+      [
+        48,
+        [
+          9,
+          4,
+          3
+        ]
+      ],
+      [
+        49,
+        [
+          6,
+          4,
+          9
+        ]
+      ],
+      [
+        50,
+        [
+          4,
+          9,
+          6
+        ]
+      ],
+      [
+        51,
+        [
+          6,
+          9,
+          3
+        ]
+      ],
+      [
+        52,
+        [
+          2,
+          3,
+          9
+        ]
+      ],
+      [
+        53,
+        [
+          9,
+          2,
+          3
+        ]
+      ],
+      [
+        54,
+        [
+          2,
+          9,
+          3
+        ]
+      ],
+      [
+        55,
+        [
+          9,
+          4,
+          3
+        ]
+      ],
+      [
+        56,
+        [
+          4,
+          3,
+          2
+        ]
+      ],
+      [
+        57,
+        [
+          6,
+          4,
+          3
+        ]
+      ],
+      [
+        58,
+        [
+          3,
+          4,
+          2
+        ]
+      ],
+      [
+        59,
+        [
+          6,
+          9,
+          2
+        ]
+      ],
+      [
+        60,
+        [
+          3,
+          9,
+          4
+        ]
+      ],
+      [
+        61,
+        [
+          4,
+          2,
+          3
+        ]
+      ],
+      [
+        62,
+        [
+          9,
+          2,
+          6
+        ]
+      ],
+      [
+        63,
+        [
+          4,
+          9,
+          6
+        ]
+      ],
+      [
+        64,
+        [
+          2,
+          9,
+          3
+        ]
+      ],
+      [
+        65,
+        [
+          3,
+          2,
+          4
+        ]
+      ],
+      [
+        66,
+        [
+          3,
+          9,
+          6
+        ]
+      ],
+      [
+        67,
+        [
+          6,
+          2,
+          9
+        ]
+      ],
+      [
+        68,
+        [
+          4,
+          3,
+          6
+        ]
+      ],
+      [
+        69,
+        [
+          2,
+          9,
+          4
+        ]
+      ],
+      [
+        70,
+        [
+          6,
+          4,
+          3
+        ]
+      ],
+      [
+        71,
+        [
+          6,
+          9,
+          2
+        ]
+      ],
+      [
+        72,
+        [
+          2,
+          6,
+          3
+        ]
+      ],
+      [
+        73,
+        [
+          4,
+          9,
+          6
+        ]
+      ],
+      [
+        74,
+        [
+          6,
+          4,
+          9
+        ]
+      ],
+      [
+        75,
+        [
+          4,
+          2,
+          6
+        ]
+      ],
+      [
+        76,
+        [
+          2,
+          4,
+          3
+        ]
+      ],
+      [
+        77,
+        [
+          2,
+          3,
+          9
+        ]
+      ],
+      [
+        78,
+        [
+          3,
+          2,
+          4
+        ]
+      ],
+      [
+        79,
+        [
+          6,
+          3,
+          4
+        ]
+      ],
+      [
+        80,
+        [
+          9,
+          6,
+          2
+        ]
+      ],
+      [
+        81,
+        [
+          6,
+          4,
+          9
+        ]
+      ],
+      [
+        82,
+        [
+          6,
+          2,
+          3
+        ]
+      ],
+      [
+        83,
+        [
+          2,
+          4,
+          3
+        ]
+      ],
+      [
+        84,
+        [
+          9,
+          2,
+          6
+        ]
+      ],
+      [
+        85,
+        [
+          9,
+          2,
+          3
+        ]
+      ],
+      [
+        86,
+        [
+          6,
+          9,
+          3
+        ]
+      ],
+      [
+        87,
+        [
+          9,
+          6,
+          3
+        ]
+      ],
+      [
+        88,
+        [
+          3,
+          2,
+          4
+        ]
+      ],
+      [
+        89,
+        [
+          9,
+          4,
+          3
+        ]
+      ],
+      [
+        90,
+        [
+          6,
+          3,
+          9
+        ]
+      ],
+      [
+        91,
+        [
+          2,
+          4,
+          3
+        ]
+      ],
+      [
+        92,
+        [
+          3,
+          2,
+          9
+        ]
+      ],
+      [
+        93,
+        [
+          2,
+          4,
+          3
+        ]
+      ],
+      [
+        94,
+        [
+          2,
+          6,
+          4
+        ]
+      ],
+      [
+        95,
+        [
+          2,
+          4,
+          3
+        ]
+      ],
+      [
+        96,
+        [
+          4,
+          6,
+          2
+        ]
+      ],
+      [
+        97,
+        [
+          2,
+          3,
+          9
+        ]
+      ],
+      [
+        98,
+        [
+          4,
+          6,
+          3
+        ]
+      ],
+      [
+        99,
+        [
+          4,
+          3,
+          9
+        ]
+      ]
+    ],
+    [
+      [
+        0,
+        [
+          1,
+          3,
+          2
+        ]
+      ],
+      [
+        1,
+        [
+          1,
+          8,
+          3
+        ]
+      ],
+      [
+        2,
+        [
+          1,
+          5,
+          3
+        ]
+      ],
+      [
+        3,
+        [
+          1,
+          5,
+          8
+        ]
+      ],
+      [
+        4,
+        [
+          2,
+          3,
+          8
+        ]
+      ],
+      [
+        5,
+        [
+          2,
+          5,
+          3
+        ]
+      ],
+      [
+        6,
+        [
+          1,
+          8,
+          3
+        ]
+      ],
+      [
+        7,
+        [
+          8,
+          2,
+          5
+        ]
+      ],
+      [
+        8,
+        [
+          8,
+          1,
+          5
+        ]
+      ],
+      [
+        9,
+        [
+          2,
+          5,
+          8
+        ]
+      ],
+      [
+        10,
+        [
+          1,
+          3,
+          5
+        ]
+      ],
+      [
+        11,
+        [
+          2,
+          1,
+          8
+        ]
+      ],
+      [
+        12,
+        [
+          1,
+          8,
+          3
+        ]
+      ],
+      [
+        13,
+        [
+          2,
+          5,
+          8
+        ]
+      ],
+      [
+        14,
+        [
+          1,
+          8,
+          2
+        ]
+      ],
+      [
+        15,
+        [
+          2,
+          3,
+          8
+        ]
+      ],
+      [
+        16,
+        [
+          5,
+          2,
+          8
+        ]
+      ],
+      [
+        17,
+        [
+          1,
+          5,
+          3
+        ]
+      ],
+      [
+        18,
+        [
+          8,
+          5,
+          3
+        ]
+      ],
+      [
+        19,
+        [
+          8,
+          2,
+          5
+        ]
+      ],
+      [
+        20,
+        [
+          5,
+          1,
+          2
+        ]
+      ],
+      [
+        21,
+        [
+          3,
+          1,
+          5
+        ]
+      ],
+      [
+        22,
+        [
+          2,
+          3,
+          1
+        ]
+      ],
+      [
+        23,
+        [
+          3,
+          8,
+          5
+        ]
+      ],
+      [
+        24,
+        [
+          2,
+          1,
+          8
+        ]
+      ],
+      [
+        25,
+        [
+          2,
+          5,
+          8
+        ]
+      ],
+      [
+        26,
+        [
+          2,
+          1,
+          5
+        ]
+      ],
+      [
+        27,
+        [
+          2,
+          3,
+          8
+        ]
+      ],
+      [
+        28,
+        [
+          3,
+          8,
+          2
+        ]
+      ],
+      [
+        29,
+        [
+          5,
+          2,
+          8
+        ]
+      ],
+      [
+        30,
+        [
+          8,
+          2,
+          3
+        ]
+      ],
+      [
+        31,
+        [
+          3,
+          2,
+          1
+        ]
+      ],
+      [
+        32,
+        [
+          3,
+          5,
+          8
+        ]
+      ],
+      [
+        33,
+        [
+          3,
+          2,
+          1
+        ]
+      ],
+      [
+        34,
+        [
+          3,
+          8,
+          5
+        ]
+      ],
+      [
+        35,
+        [
+          3,
+          5,
+          2
+        ]
+      ],
+      [
+        36,
+        [
+          2,
+          5,
+          1
+        ]
+      ],
+      [
+        37,
+        [
+          2,
+          8,
+          5
+        ]
+      ],
+      [
+        38,
+        [
+          3,
+          2,
+          8
+        ]
+      ],
+      [
+        39,
+        [
+          1,
+          5,
+          8
+        ]
+      ],
+      [
+        40,
+        [
+          5,
+          8,
+          2
+        ]
+      ],
+      [
+        41,
+        [
+          2,
+          3,
+          8
+        ]
+      ],
+      [
+        42,
+        [
+          8,
+          5,
+          3
+        ]
+      ],
+      [
+        43,
+        [
+          3,
+          8,
+          1
+        ]
+      ],
+      [
+        44,
+        [
+          1,
+          3,
+          2
+        ]
+      ],
+      [
+        45,
+        [
+          1,
+          8,
+          2
+        ]
+      ],
+      [
+        46,
+        [
+          2,
+          3,
+          1
+        ]
+      ],
+      [
+        47,
+        [
+          8,
+          2,
+          5
+        ]
+      ],
+      [
+        48,
+        [
+          5,
+          8,
+          1
+        ]
+      ],
+      [
+        49,
+        [
+          1,
+          5,
+          3
+        ]
+      ],
+      [
+        50,
+        [
+          2,
+          1,
+          8
+        ]
+      ],
+      [
+        51,
+        [
+          3,
+          2,
+          5
+        ]
+      ],
+      [
+        52,
+        [
+          1,
+          3,
+          5
+        ]
+      ],
+      [
+        53,
+        [
+          2,
+          3,
+          1
+        ]
+      ],
+      [
+        54,
+        [
+          8,
+          3,
+          1
+        ]
+      ],
+      [
+        55,
+        [
+          5,
+          8,
+          3
+        ]
+      ],
+      [
+        56,
+        [
+          8,
+          2,
+          3
+        ]
+      ],
+      [
+        57,
+        [
+          1,
+          3,
+          2
+        ]
+      ],
+      [
+        58,
+        [
+          5,
+          8,
+          2
+        ]
+      ],
+      [
+        59,
+        [
+          2,
+          1,
+          3
+        ]
+      ],
+      [
+        60,
+        [
+          1,
+          2,
+          5
+        ]
+      ],
+      [
+        61,
+        [
+          5,
+          2,
+          3
+        ]
+      ],
+      [
+        62,
+        [
+          3,
+          8,
+          2
+        ]
+      ],
+      [
+        63,
+        [
+          8,
+          5,
+          1
+        ]
+      ],
+      [
+        64,
+        [
+          1,
+          3,
+          2
+        ]
+      ],
+      [
+        65,
+        [
+          3,
+          5,
+          1
+        ]
+      ],
+      [
+        66,
+        [
+          5,
+          8,
+          2
+        ]
+      ],
+      [
+        67,
+        [
+          1,
+          3,
+          5
+        ]
+      ],
+      [
+        68,
+        [
+          1,
+          5,
+          3
+        ]
+      ],
+      [
+        69,
+        [
+          3,
+          1,
+          8
+        ]
+      ],
+      [
+        70,
+        [
+          8,
+          2,
+          5
+        ]
+      ],
+      [
+        71,
+        [
+          1,
+          5,
+          3
+        ]
+      ],
+      [
+        72,
+        [
+          2,
+          5,
+          8
+        ]
+      ],
+      [
+        73,
+        [
+          5,
+          8,
+          3
+        ]
+      ],
+      [
+        74,
+        [
+          2,
+          5,
+          3
+        ]
+      ],
+      [
+        75,
+        [
+          1,
+          3,
+          8
+        ]
+      ],
+      [
+        76,
+        [
+          1,
+          3,
+          2
+        ]
+      ],
+      [
+        77,
+        [
+          3,
+          1,
+          8
+        ]
+      ],
+      [
+        78,
+        [
+          3,
+          2,
+          8
+        ]
+      ],
+      [
+        79,
+        [
+          8,
+          2,
+          3
+        ]
+      ],
+      [
+        80,
+        [
+          8,
+          5,
+          2
+        ]
+      ],
+      [
+        81,
+        [
+          3,
+          2,
+          1
+        ]
+      ],
+      [
+        82,
+        [
+          5,
+          1,
+          8
+        ]
+      ],
+      [
+        83,
+        [
+          8,
+          2,
+          3
+        ]
+      ],
+      [
+        84,
+        [
+          2,
+          1,
+          8
+        ]
+      ],
+      [
+        85,
+        [
+          3,
+          8,
+          1
+        ]
+      ],
+      [
+        86,
+        [
+          8,
+          1,
+          3
+        ]
+      ],
+      [
+        87,
+        [
+          3,
+          2,
+          8
+        ]
+      ],
+      [
+        88,
+        [
+          2,
+          5,
+          8
+        ]
+      ],
+      [
+        89,
+        [
+          1,
+          8,
+          3
+        ]
+      ],
+      [
+        90,
+        [
+          3,
+          5,
+          8
+        ]
+      ],
+      [
+        91,
+        [
+          2,
+          8,
+          3
+        ]
+      ],
+      [
+        92,
+        [
+          3,
+          1,
+          8
+        ]
+      ],
+      [
+        93,
+        [
+          8,
+          5,
+          2
+        ]
+      ],
+      [
+        94,
+        [
+          1,
+          5,
+          2
+        ]
+      ],
+      [
+        95,
+        [
+          8,
+          3,
+          2
+        ]
+      ],
+      [
+        96,
+        [
+          3,
+          2,
+          5
+        ]
+      ],
+      [
+        97,
+        [
+          2,
+          5,
+          8
+        ]
+      ],
+      [
+        98,
+        [
+          1,
+          5,
+          8
+        ]
+      ],
+      [
+        99,
+        [
+          3,
+          1,
+          5
+        ]
+      ]
+    ]
+  ],
+  "neighbor_schedule_sha256_first_100": "747ce78fb669cb6acfa0b4f4e742171dd72e79211058a97a0e1ce4aaa993d610",
+  "dataset": "a9a",
+  "train_samples": 32561,
+  "test_samples": 16281,
+  "features": 123,
+  "threads": 3,
+  "stopping": {
+    "patience": 50,
+    "window": 10,
+    "rtol": 0.001,
+    "rule": "adjacent_windows",
+    "stability_window": 50,
+    "consecutive_checks": 2
+  },
+  "config": {
+    "TOPOLOGY": "random_kout",
+    "EPOCHS": 1,
+    "BASE_PORT": 6000,
+    "LAMBDA": 0.0001,
+    "T0_FRACTION": 0.5,
+    "SDCA_LOCAL_STEPS": 4096,
+    "SDCA_STEP_SCALE": 1.0,
+    "SEED": 42,
+    "TRAIN_PATH": "C:\\Users\\remote\\GadgetSVM-Lincoln\\data\\processed\\rcv1_train.binary",
+    "TEST_PATH": "C:\\Users\\remote\\GadgetSVM-Lincoln\\data\\processed\\rcv1_test.binary",
+    "GAP_THRESHOLD": 0.0001,
+    "STOP_ON_THRESHOLD": true,
+    "EVAL_EVERY": 10,
+    "ACTIVATION": "shuffle",
+    "DATASET": "a9a",
+    "COVTYPE_PATH": "C:\\Users\\remote\\GadgetSVM-Lincoln\\data\\processed\\covtype.uci.binary.scale",
+    "GISETTE_PATH": "C:\\Users\\remote\\GadgetSVM-Lincoln\\data\\processed\\gisette.binary.scale",
+    "REALSIM_PATH": "C:\\Users\\remote\\GadgetSVM-Lincoln\\data\\processed\\real-sim",
+    "TEST_FRACTION": 0.2,
+    "NUM_WORKERS": 10,
+    "WARM_START": false,
+    "GOSSIP_K": 3,
+    "ROUNDS": 5000,
+    "W8A_TRAIN_PATH": "C:\\Users\\remote\\GadgetSVM-Lincoln\\data\\processed\\w8a",
+    "W8A_TEST_PATH": "C:\\Users\\remote\\GadgetSVM-Lincoln\\data\\processed\\w8a.t",
+    "IJCNN_TRAIN_PATH": "C:\\Users\\remote\\GadgetSVM-Lincoln\\data\\processed\\ijcnn1",
+    "IJCNN_TEST_PATH": "C:\\Users\\remote\\GadgetSVM-Lincoln\\data\\processed\\ijcnn1.t",
+    "A9A_TRAIN_PATH": "C:\\Users\\remote\\GadgetSVM-Lincoln\\data\\processed\\a9a",
+    "A9A_TEST_PATH": "C:\\Users\\remote\\GadgetSVM-Lincoln\\data\\processed\\a9a.t",
+    "WEBSPAM_PATH": "C:\\Users\\remote\\GadgetSVM-Lincoln\\data\\processed\\webspam_unigram.svm",
+    "CONVERGENCE_PATIENCE": 50,
+    "CONVERGENCE_WINDOW": 10,
+    "CONVERGENCE_RTOL": 0.001,
+    "CONVERGENCE_RULE": "adjacent_windows",
+    "CONVERGENCE_STABILITY_WINDOW": 50
+  },
+  "source_data": [
+    {
+      "name": "a9a",
+      "bytes": 2329875,
+      "sha256": "f5d5ffd8d865ff41328e7ee043e4b020816914ff6843ff15b98905ddbedce906"
+    },
+    {
+      "name": "a9a.t",
+      "bytes": 1164628,
+      "sha256": "1f448a153f0320399a7e40836eb207655b0bde0f21fc941cc472193daa9f5de9"
+    }
+  ],
+  "test_evaluations": 10,
+  "isolated_training_seconds": null,
+  "timing_protocol": "overlapped with other algorithms; not an isolated timing measurement",
+  "runtime_ratio_at_stop": null,
+  "speedup_vs_centralized": null
+}

@@ -1,0 +1,7 @@
+# Versions used on the Windows validation host (Python 3.13).
+numpy==2.4.6
+scipy==1.18.0
+scikit-learn==1.6.1
+cvxpy==1.9.3
+clarabel==0.11.1
+torch==2.14.1

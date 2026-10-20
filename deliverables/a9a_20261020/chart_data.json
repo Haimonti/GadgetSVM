@@ -1,0 +1,1681 @@
+[
+  {
+    "method": "centralized",
+    "converged": true,
+    "stop_reason": "solver_tolerance",
+    "rounds": null,
+    "average_accuracy": 0.8497021067501996,
+    "final_train_hinge": 0.3509586176160721,
+    "total_comm_bytes": 0,
+    "training_seconds": 0.20546199998352677,
+    "isolated_training_seconds": 0.20546199998352677,
+    "runtime_ratio_at_stop": 1.0,
+    "timing_protocol": "sequential; equal thread budget; single-host simulation",
+    "history": []
+  },
+  {
+    "method": "sdca",
+    "converged": true,
+    "stop_reason": "train_objective_plateau",
+    "rounds": 252,
+    "average_accuracy": 0.8498740863583318,
+    "final_train_hinge": 0.35114227963045336,
+    "total_comm_bytes": 75953808,
+    "training_seconds": 108.4772682999901,
+    "isolated_training_seconds": 108.4772682999901,
+    "runtime_ratio_at_stop": 0.001894055807298989,
+    "timing_protocol": "sequential; equal thread budget; single-host simulation",
+    "history": [
+      {
+        "round": 1,
+        "train_hinge": 0.44721665793140747
+      },
+      {
+        "round": 10,
+        "train_hinge": 0.35940310407130716
+      },
+      {
+        "round": 20,
+        "train_hinge": 0.35542461129860836
+      },
+      {
+        "round": 30,
+        "train_hinge": 0.35363065610192906
+      },
+      {
+        "round": 40,
+        "train_hinge": 0.35286374374502805
+      },
+      {
+        "round": 50,
+        "train_hinge": 0.3522885240764054
+      },
+      {
+        "round": 60,
+        "train_hinge": 0.3519320594642689
+      },
+      {
+        "round": 70,
+        "train_hinge": 0.3525944428554642
+      },
+      {
+        "round": 80,
+        "train_hinge": 0.3518188530030702
+      },
+      {
+        "round": 90,
+        "train_hinge": 0.3517740105295473
+      },
+      {
+        "round": 100,
+        "train_hinge": 0.3515792163319326
+      },
+      {
+        "round": 110,
+        "train_hinge": 0.35149778607014687
+      },
+      {
+        "round": 120,
+        "train_hinge": 0.35153880612440636
+      },
+      {
+        "round": 130,
+        "train_hinge": 0.351373679965544
+      },
+      {
+        "round": 140,
+        "train_hinge": 0.35129181983620844
+      },
+      {
+        "round": 150,
+        "train_hinge": 0.35128657431369253
+      },
+      {
+        "round": 160,
+        "train_hinge": 0.35127969420665467
+      },
+      {
+        "round": 170,
+        "train_hinge": 0.3512536115671969
+      },
+      {
+        "round": 180,
+        "train_hinge": 0.3512122356727893
+      },
+      {
+        "round": 190,
+        "train_hinge": 0.3512375126499662
+      },
+      {
+        "round": 200,
+        "train_hinge": 0.35119331763011885
+      },
+      {
+        "round": 210,
+        "train_hinge": 0.3512317287233241
+      },
+      {
+        "round": 220,
+        "train_hinge": 0.3511593310454978
+      },
+      {
+        "round": 230,
+        "train_hinge": 0.3511300356345316
+      },
+      {
+        "round": 240,
+        "train_hinge": 0.3511841403023061
+      },
+      {
+        "round": 250,
+        "train_hinge": 0.35119514822547665
+      },
+      {
+        "round": 252,
+        "train_hinge": 0.35114227963045336
+      }
+    ]
+  },
+  {
+    "method": "bdsvm",
+    "converged": true,
+    "stop_reason": "train_objective_plateau",
+    "rounds": 202,
+    "average_accuracy": 0.8497021067501997,
+    "final_train_hinge": 0.3509200753884726,
+    "total_comm_bytes": 4975336440,
+    "training_seconds": 6.410816599993268,
+    "isolated_training_seconds": 6.410816599993268,
+    "runtime_ratio_at_stop": 0.03204927122447124,
+    "timing_protocol": "sequential; equal thread budget; single-host simulation",
+    "history": [
+      {
+        "round": 1,
+        "train_hinge": 1.0
+      },
+      {
+        "round": 10,
+        "train_hinge": 0.449199834452324
+      },
+      {
+        "round": 20,
+        "train_hinge": 0.38259833344269933
+      },
+      {
+        "round": 30,
+        "train_hinge": 0.357843146428396
+      },
+      {
+        "round": 40,
+        "train_hinge": 0.35215697944446156
+      },
+      {
+        "round": 50,
+        "train_hinge": 0.35113774030678896
+      },
+      {
+        "round": 60,
+        "train_hinge": 0.3509736048286499
+      },
+      {
+        "round": 70,
+        "train_hinge": 0.3509352871170607
+      },
+      {
+        "round": 80,
+        "train_hinge": 0.35092549571173565
+      },
+      {
+        "round": 90,
+        "train_hinge": 0.35092233999251365
+      },
+      {
+        "round": 100,
+        "train_hinge": 0.35092108326886395
+      },
+      {
+        "round": 110,
+        "train_hinge": 0.3509205594521204
+      },
+      {
+        "round": 120,
+        "train_hinge": 0.3509202979561573
+      },
+      {
+        "round": 130,
+        "train_hinge": 0.35092015698664686
+      },
+      {
+        "round": 140,
+        "train_hinge": 0.35092012868268607
+      },
+      {
+        "round": 150,
+        "train_hinge": 0.35092011863018086
+      },
+      {
+        "round": 160,
+        "train_hinge": 0.35092010112085203
+      },
+      {
+        "round": 170,
+        "train_hinge": 0.3509200891594034
+      },
+      {
+        "round": 180,
+        "train_hinge": 0.35092008176021244
+      },
+      {
+        "round": 190,
+        "train_hinge": 0.3509200773850135
+      },
+      {
+        "round": 200,
+        "train_hinge": 0.3509200756891859
+      },
+      {
+        "round": 202,
+        "train_hinge": 0.3509200753884726
+      }
+    ]
+  },
+  {
+    "method": "fedavg",
+    "converged": true,
+    "stop_reason": "train_objective_plateau",
+    "rounds": 2900,
+    "average_accuracy": 0.848246422209938,
+    "final_train_hinge": 0.3536340155702454,
+    "total_comm_bytes": 86304000,
+    "training_seconds": 1088.2929004000034,
+    "isolated_training_seconds": null,
+    "runtime_ratio_at_stop": null,
+    "timing_protocol": "overlapped with other algorithms; not an isolated timing measurement",
+    "history": [
+      {
+        "round": 1,
+        "train_hinge": 3.3543880740187646
+      },
+      {
+        "round": 10,
+        "train_hinge": 0.626988180460422
+      },
+      {
+        "round": 20,
+        "train_hinge": 0.5416256602301164
+      },
+      {
+        "round": 30,
+        "train_hinge": 0.4400661059320516
+      },
+      {
+        "round": 40,
+        "train_hinge": 0.4399097330546796
+      },
+      {
+        "round": 50,
+        "train_hinge": 0.4248107916765734
+      },
+      {
+        "round": 60,
+        "train_hinge": 0.40484154299908875
+      },
+      {
+        "round": 70,
+        "train_hinge": 0.40528956085211665
+      },
+      {
+        "round": 80,
+        "train_hinge": 0.39210027533108016
+      },
+      {
+        "round": 90,
+        "train_hinge": 0.3855455964840096
+      },
+      {
+        "round": 100,
+        "train_hinge": 0.3887813888230523
+      },
+      {
+        "round": 110,
+        "train_hinge": 0.37853186119183174
+      },
+      {
+        "round": 120,
+        "train_hinge": 0.38549289776503814
+      },
+      {
+        "round": 130,
+        "train_hinge": 0.3892762534178359
+      },
+      {
+        "round": 140,
+        "train_hinge": 0.3726162413757465
+      },
+      {
+        "round": 150,
+        "train_hinge": 0.37838409805233925
+      },
+      {
+        "round": 160,
+        "train_hinge": 0.36976343035875464
+      },
+      {
+        "round": 170,
+        "train_hinge": 0.36979511458938885
+      },
+      {
+        "round": 180,
+        "train_hinge": 0.37256592973858316
+      },
+      {
+        "round": 190,
+        "train_hinge": 0.36770874622713734
+      },
+      {
+        "round": 200,
+        "train_hinge": 0.36827955751480557
+      },
+      {
+        "round": 210,
+        "train_hinge": 0.3725264109284499
+      },
+      {
+        "round": 220,
+        "train_hinge": 0.3740522592457361
+      },
+      {
+        "round": 230,
+        "train_hinge": 0.36580052053469597
+      },
+      {
+        "round": 240,
+        "train_hinge": 0.367486585529874
+      },
+      {
+        "round": 250,
+        "train_hinge": 0.36866697312021823
+      },
+      {
+        "round": 260,
+        "train_hinge": 0.36304852373110236
+      },
+      {
+        "round": 270,
+        "train_hinge": 0.36485716205243823
+      },
+      {
+        "round": 280,
+        "train_hinge": 0.3650103841952388
+      },
+      {
+        "round": 290,
+        "train_hinge": 0.3605271555548398
+      },
+      {
+        "round": 300,
+        "train_hinge": 0.3702466346596781
+      },
+      {
+        "round": 310,
+        "train_hinge": 0.3620599668226966
+      },
+      {
+        "round": 320,
+        "train_hinge": 0.3629125189577297
+      },
+      {
+        "round": 330,
+        "train_hinge": 0.3613806757859401
+      },
+      {
+        "round": 340,
+        "train_hinge": 0.36545523481957526
+      },
+      {
+        "round": 350,
+        "train_hinge": 0.3603384181757868
+      },
+      {
+        "round": 360,
+        "train_hinge": 0.35958357989978307
+      },
+      {
+        "round": 370,
+        "train_hinge": 0.36514322511476627
+      },
+      {
+        "round": 380,
+        "train_hinge": 0.35979485591175053
+      },
+      {
+        "round": 390,
+        "train_hinge": 0.3613882675545778
+      },
+      {
+        "round": 400,
+        "train_hinge": 0.3596033764125495
+      },
+      {
+        "round": 410,
+        "train_hinge": 0.3594870933353638
+      },
+      {
+        "round": 420,
+        "train_hinge": 0.3608332184947434
+      },
+      {
+        "round": 430,
+        "train_hinge": 0.3606793276704905
+      },
+      {
+        "round": 440,
+        "train_hinge": 0.3598049019156629
+      },
+      {
+        "round": 450,
+        "train_hinge": 0.3631793874728083
+      },
+      {
+        "round": 460,
+        "train_hinge": 0.3592113408054145
+      },
+      {
+        "round": 470,
+        "train_hinge": 0.35859516679724035
+      },
+      {
+        "round": 480,
+        "train_hinge": 0.35698806784181925
+      },
+      {
+        "round": 490,
+        "train_hinge": 0.3635328000275847
+      },
+      {
+        "round": 500,
+        "train_hinge": 0.36008178608444796
+      },
+      {
+        "round": 510,
+        "train_hinge": 0.3600709376900354
+      },
+      {
+        "round": 520,
+        "train_hinge": 0.3578938425033336
+      },
+      {
+        "round": 530,
+        "train_hinge": 0.3576221763610462
+      },
+      {
+        "round": 540,
+        "train_hinge": 0.35913318340047423
+      },
+      {
+        "round": 550,
+        "train_hinge": 0.3586626732373166
+      },
+      {
+        "round": 560,
+        "train_hinge": 0.35906643999165955
+      },
+      {
+        "round": 570,
+        "train_hinge": 0.361790062529213
+      },
+      {
+        "round": 580,
+        "train_hinge": 0.35686429671856507
+      },
+      {
+        "round": 590,
+        "train_hinge": 0.35606088007056996
+      },
+      {
+        "round": 600,
+        "train_hinge": 0.357036350349118
+      },
+      {
+        "round": 610,
+        "train_hinge": 0.3565224775695405
+      },
+      {
+        "round": 620,
+        "train_hinge": 0.3571435052790161
+      },
+      {
+        "round": 630,
+        "train_hinge": 0.35875228551082994
+      },
+      {
+        "round": 640,
+        "train_hinge": 0.3556244694945291
+      },
+      {
+        "round": 650,
+        "train_hinge": 0.35664208152272653
+      },
+      {
+        "round": 660,
+        "train_hinge": 0.3562657603541756
+      },
+      {
+        "round": 670,
+        "train_hinge": 0.35603070666069825
+      },
+      {
+        "round": 680,
+        "train_hinge": 0.3592324228476708
+      },
+      {
+        "round": 690,
+        "train_hinge": 0.3560192804085147
+      },
+      {
+        "round": 700,
+        "train_hinge": 0.35634301234234034
+      },
+      {
+        "round": 710,
+        "train_hinge": 0.3568800653753596
+      },
+      {
+        "round": 720,
+        "train_hinge": 0.3573945382782056
+      },
+      {
+        "round": 730,
+        "train_hinge": 0.35600300390835943
+      },
+      {
+        "round": 740,
+        "train_hinge": 0.35513058273700154
+      },
+      {
+        "round": 750,
+        "train_hinge": 0.35550063267535575
+      },
+      {
+        "round": 760,
+        "train_hinge": 0.35641947492194453
+      },
+      {
+        "round": 770,
+        "train_hinge": 0.3547843995675143
+      },
+      {
+        "round": 780,
+        "train_hinge": 0.35565588113476376
+      },
+      {
+        "round": 790,
+        "train_hinge": 0.35669688451939
+      },
+      {
+        "round": 800,
+        "train_hinge": 0.35568096780465513
+      },
+      {
+        "round": 810,
+        "train_hinge": 0.3551407096856834
+      },
+      {
+        "round": 820,
+        "train_hinge": 0.3554205647419191
+      },
+      {
+        "round": 830,
+        "train_hinge": 0.3548900268230576
+      },
+      {
+        "round": 840,
+        "train_hinge": 0.35468332701489136
+      },
+      {
+        "round": 850,
+        "train_hinge": 0.3560652411027551
+      },
+      {
+        "round": 860,
+        "train_hinge": 0.35524002235971314
+      },
+      {
+        "round": 870,
+        "train_hinge": 0.3549299131979871
+      },
+      {
+        "round": 880,
+        "train_hinge": 0.35524992289792845
+      },
+      {
+        "round": 890,
+        "train_hinge": 0.3558549806709978
+      },
+      {
+        "round": 900,
+        "train_hinge": 0.3547296618220206
+      },
+      {
+        "round": 910,
+        "train_hinge": 0.3550637799205054
+      },
+      {
+        "round": 920,
+        "train_hinge": 0.35516325139046195
+      },
+      {
+        "round": 930,
+        "train_hinge": 0.3566979313451382
+      },
+      {
+        "round": 940,
+        "train_hinge": 0.35554204060742756
+      },
+      {
+        "round": 950,
+        "train_hinge": 0.3546193707828014
+      },
+      {
+        "round": 960,
+        "train_hinge": 0.35579962721308156
+      },
+      {
+        "round": 970,
+        "train_hinge": 0.3541135289444701
+      },
+      {
+        "round": 980,
+        "train_hinge": 0.3558800824327998
+      },
+      {
+        "round": 990,
+        "train_hinge": 0.35418257723465985
+      },
+      {
+        "round": 1000,
+        "train_hinge": 0.3547058249620499
+      },
+      {
+        "round": 1010,
+        "train_hinge": 0.3550769975727979
+      },
+      {
+        "round": 1020,
+        "train_hinge": 0.3553774838576626
+      },
+      {
+        "round": 1030,
+        "train_hinge": 0.3558737952868389
+      },
+      {
+        "round": 1040,
+        "train_hinge": 0.35492938536493107
+      },
+      {
+        "round": 1050,
+        "train_hinge": 0.3542680539594848
+      },
+      {
+        "round": 1060,
+        "train_hinge": 0.3542553575781607
+      },
+      {
+        "round": 1070,
+        "train_hinge": 0.3538705026544636
+      },
+      {
+        "round": 1080,
+        "train_hinge": 0.3548231257632152
+      },
+      {
+        "round": 1090,
+        "train_hinge": 0.3547995719424402
+      },
+      {
+        "round": 1100,
+        "train_hinge": 0.3539542218822178
+      },
+      {
+        "round": 1110,
+        "train_hinge": 0.35401443431421187
+      },
+      {
+        "round": 1120,
+        "train_hinge": 0.3540845546319494
+      },
+      {
+        "round": 1130,
+        "train_hinge": 0.35429077132559617
+      },
+      {
+        "round": 1140,
+        "train_hinge": 0.35441048522489227
+      },
+      {
+        "round": 1150,
+        "train_hinge": 0.3545662945103766
+      },
+      {
+        "round": 1160,
+        "train_hinge": 0.3544701928973112
+      },
+      {
+        "round": 1170,
+        "train_hinge": 0.3543926905375246
+      },
+      {
+        "round": 1180,
+        "train_hinge": 0.35455314000749116
+      },
+      {
+        "round": 1190,
+        "train_hinge": 0.3552143805530345
+      },
+      {
+        "round": 1200,
+        "train_hinge": 0.3535078014176023
+      },
+      {
+        "round": 1210,
+        "train_hinge": 0.354382726669566
+      },
+      {
+        "round": 1220,
+        "train_hinge": 0.3535399004904581
+      },
+      {
+        "round": 1230,
+        "train_hinge": 0.35389985035165594
+      },
+      {
+        "round": 1240,
+        "train_hinge": 0.3542529137594777
+      },
+      {
+        "round": 1250,
+        "train_hinge": 0.3544766137878096
+      },
+      {
+        "round": 1260,
+        "train_hinge": 0.35330389597279976
+      },
+      {
+        "round": 1270,
+        "train_hinge": 0.3541338652332768
+      },
+      {
+        "round": 1280,
+        "train_hinge": 0.3538954202762725
+      },
+      {
+        "round": 1290,
+        "train_hinge": 0.35533523995927496
+      },
+      {
+        "round": 1300,
+        "train_hinge": 0.3532155982462295
+      },
+      {
+        "round": 1310,
+        "train_hinge": 0.3541075171948124
+      },
+      {
+        "round": 1320,
+        "train_hinge": 0.3536976535328618
+      },
+      {
+        "round": 1330,
+        "train_hinge": 0.3537331521138361
+      },
+      {
+        "round": 1340,
+        "train_hinge": 0.35340836337742465
+      },
+      {
+        "round": 1350,
+        "train_hinge": 0.35429009524053573
+      },
+      {
+        "round": 1360,
+        "train_hinge": 0.35589105875977217
+      },
+      {
+        "round": 1370,
+        "train_hinge": 0.35394142337625534
+      },
+      {
+        "round": 1380,
+        "train_hinge": 0.3531180893238826
+      },
+      {
+        "round": 1390,
+        "train_hinge": 0.3535014576722503
+      },
+      {
+        "round": 1400,
+        "train_hinge": 0.3535495317404615
+      },
+      {
+        "round": 1410,
+        "train_hinge": 0.3539783481575772
+      },
+      {
+        "round": 1420,
+        "train_hinge": 0.35339114187453424
+      },
+      {
+        "round": 1430,
+        "train_hinge": 0.353920278178718
+      },
+      {
+        "round": 1440,
+        "train_hinge": 0.3529707853156553
+      },
+      {
+        "round": 1450,
+        "train_hinge": 0.3533100549012266
+      },
+      {
+        "round": 1460,
+        "train_hinge": 0.35366622557332433
+      },
+      {
+        "round": 1470,
+        "train_hinge": 0.35337892263103116
+      },
+      {
+        "round": 1480,
+        "train_hinge": 0.35377393835266213
+      },
+      {
+        "round": 1490,
+        "train_hinge": 0.35370474349494135
+      },
+      {
+        "round": 1500,
+        "train_hinge": 0.35292634899955605
+      },
+      {
+        "round": 1510,
+        "train_hinge": 0.3539624579309063
+      },
+      {
+        "round": 1520,
+        "train_hinge": 0.3545350229670093
+      },
+      {
+        "round": 1530,
+        "train_hinge": 0.35321490692737323
+      },
+      {
+        "round": 1540,
+        "train_hinge": 0.35374926153849257
+      },
+      {
+        "round": 1550,
+        "train_hinge": 0.3544871997724488
+      },
+      {
+        "round": 1560,
+        "train_hinge": 0.35316742953295477
+      },
+      {
+        "round": 1570,
+        "train_hinge": 0.35319617085170013
+      },
+      {
+        "round": 1580,
+        "train_hinge": 0.3539422266492853
+      },
+      {
+        "round": 1590,
+        "train_hinge": 0.35384915048885623
+      },
+      {
+        "round": 1600,
+        "train_hinge": 0.3534368090189045
+      },
+      {
+        "round": 1610,
+        "train_hinge": 0.3534871406429435
+      },
+      {
+        "round": 1620,
+        "train_hinge": 0.3530992169641883
+      },
+      {
+        "round": 1630,
+        "train_hinge": 0.3537589181127146
+      },
+      {
+        "round": 1640,
+        "train_hinge": 0.35357083210301826
+      },
+      {
+        "round": 1650,
+        "train_hinge": 0.35330008431031035
+      },
+      {
+        "round": 1660,
+        "train_hinge": 0.3532115554905208
+      },
+      {
+        "round": 1670,
+        "train_hinge": 0.353107220014688
+      },
+      {
+        "round": 1680,
+        "train_hinge": 0.3529835587668456
+      },
+      {
+        "round": 1690,
+        "train_hinge": 0.35272913574920395
+      },
+      {
+        "round": 1700,
+        "train_hinge": 0.3527572603650818
+      },
+      {
+        "round": 1710,
+        "train_hinge": 0.35307596438570454
+      },
+      {
+        "round": 1720,
+        "train_hinge": 0.35265370904965515
+      },
+      {
+        "round": 1730,
+        "train_hinge": 0.35338504961335826
+      },
+      {
+        "round": 1740,
+        "train_hinge": 0.3532457041563875
+      },
+      {
+        "round": 1750,
+        "train_hinge": 0.35362611079306683
+      },
+      {
+        "round": 1760,
+        "train_hinge": 0.35260365989103126
+      },
+      {
+        "round": 1770,
+        "train_hinge": 0.353889463625989
+      },
+      {
+        "round": 1780,
+        "train_hinge": 0.35277721512743604
+      },
+      {
+        "round": 1790,
+        "train_hinge": 0.3525455963190448
+      },
+      {
+        "round": 1800,
+        "train_hinge": 0.35293591763872595
+      },
+      {
+        "round": 1810,
+        "train_hinge": 0.3529740213149609
+      },
+      {
+        "round": 1820,
+        "train_hinge": 0.3529830744762586
+      },
+      {
+        "round": 1830,
+        "train_hinge": 0.35339854447924096
+      },
+      {
+        "round": 1840,
+        "train_hinge": 0.3525156715608092
+      },
+      {
+        "round": 1850,
+        "train_hinge": 0.3526174755389144
+      },
+      {
+        "round": 1860,
+        "train_hinge": 0.35350262197305005
+      },
+      {
+        "round": 1870,
+        "train_hinge": 0.3529135861135869
+      },
+      {
+        "round": 1880,
+        "train_hinge": 0.3537304780961388
+      },
+      {
+        "round": 1890,
+        "train_hinge": 0.3526024844020564
+      },
+      {
+        "round": 1900,
+        "train_hinge": 0.35303205075192357
+      },
+      {
+        "round": 1910,
+        "train_hinge": 0.3531487987111228
+      },
+      {
+        "round": 1920,
+        "train_hinge": 0.3524614859449484
+      },
+      {
+        "round": 1930,
+        "train_hinge": 0.3525265498266452
+      },
+      {
+        "round": 1940,
+        "train_hinge": 0.35297735962914845
+      },
+      {
+        "round": 1950,
+        "train_hinge": 0.353886842336393
+      },
+      {
+        "round": 1960,
+        "train_hinge": 0.35254760044455546
+      },
+      {
+        "round": 1970,
+        "train_hinge": 0.3534516918253002
+      },
+      {
+        "round": 1980,
+        "train_hinge": 0.35302954225913985
+      },
+      {
+        "round": 1990,
+        "train_hinge": 0.35307635774860857
+      },
+      {
+        "round": 2000,
+        "train_hinge": 0.35287909705528847
+      },
+      {
+        "round": 2010,
+        "train_hinge": 0.3532709590933865
+      },
+      {
+        "round": 2020,
+        "train_hinge": 0.35285768571029075
+      },
+      {
+        "round": 2030,
+        "train_hinge": 0.353621373031768
+      },
+      {
+        "round": 2040,
+        "train_hinge": 0.3534612716245162
+      },
+      {
+        "round": 2050,
+        "train_hinge": 0.3524590849535122
+      },
+      {
+        "round": 2060,
+        "train_hinge": 0.35361629438693554
+      },
+      {
+        "round": 2070,
+        "train_hinge": 0.3529232565904603
+      },
+      {
+        "round": 2080,
+        "train_hinge": 0.35319849578392426
+      },
+      {
+        "round": 2090,
+        "train_hinge": 0.35253599519910056
+      },
+      {
+        "round": 2100,
+        "train_hinge": 0.3536050300003738
+      },
+      {
+        "round": 2110,
+        "train_hinge": 0.3526159573500888
+      },
+      {
+        "round": 2120,
+        "train_hinge": 0.352894551949382
+      },
+      {
+        "round": 2130,
+        "train_hinge": 0.3532677917763309
+      },
+      {
+        "round": 2140,
+        "train_hinge": 0.3530933815445244
+      },
+      {
+        "round": 2150,
+        "train_hinge": 0.3522151611665031
+      },
+      {
+        "round": 2160,
+        "train_hinge": 0.3532549671854201
+      },
+      {
+        "round": 2170,
+        "train_hinge": 0.3524854443437809
+      },
+      {
+        "round": 2180,
+        "train_hinge": 0.3523765060267745
+      },
+      {
+        "round": 2190,
+        "train_hinge": 0.3524039244464049
+      },
+      {
+        "round": 2200,
+        "train_hinge": 0.35252468806959136
+      },
+      {
+        "round": 2210,
+        "train_hinge": 0.35226741570708475
+      },
+      {
+        "round": 2220,
+        "train_hinge": 0.3529220827898545
+      },
+      {
+        "round": 2230,
+        "train_hinge": 0.3528392870281923
+      },
+      {
+        "round": 2240,
+        "train_hinge": 0.35285749034036534
+      },
+      {
+        "round": 2250,
+        "train_hinge": 0.35253104020910125
+      },
+      {
+        "round": 2260,
+        "train_hinge": 0.35259164223351824
+      },
+      {
+        "round": 2270,
+        "train_hinge": 0.3532507702479015
+      },
+      {
+        "round": 2280,
+        "train_hinge": 0.35265895200658887
+      },
+      {
+        "round": 2290,
+        "train_hinge": 0.352845328027625
+      },
+      {
+        "round": 2300,
+        "train_hinge": 0.3527005174492201
+      },
+      {
+        "round": 2310,
+        "train_hinge": 0.35227470734491223
+      },
+      {
+        "round": 2320,
+        "train_hinge": 0.3529076696174502
+      },
+      {
+        "round": 2330,
+        "train_hinge": 0.35303245396870203
+      },
+      {
+        "round": 2340,
+        "train_hinge": 0.35245788094790054
+      },
+      {
+        "round": 2350,
+        "train_hinge": 0.3529128221791341
+      },
+      {
+        "round": 2360,
+        "train_hinge": 0.35233891288251507
+      },
+      {
+        "round": 2370,
+        "train_hinge": 0.35227110282685586
+      },
+      {
+        "round": 2380,
+        "train_hinge": 0.35288491406923483
+      },
+      {
+        "round": 2390,
+        "train_hinge": 0.35200287734371766
+      },
+      {
+        "round": 2400,
+        "train_hinge": 0.35312863748578877
+      },
+      {
+        "round": 2410,
+        "train_hinge": 0.35247750159663627
+      },
+      {
+        "round": 2420,
+        "train_hinge": 0.3527405995380871
+      },
+      {
+        "round": 2430,
+        "train_hinge": 0.35250675085655564
+      },
+      {
+        "round": 2440,
+        "train_hinge": 0.35312946607714274
+      },
+      {
+        "round": 2450,
+        "train_hinge": 0.35254445701546094
+      },
+      {
+        "round": 2460,
+        "train_hinge": 0.35261567454250614
+      },
+      {
+        "round": 2470,
+        "train_hinge": 0.3525735430470775
+      },
+      {
+        "round": 2480,
+        "train_hinge": 0.3522557649663466
+      },
+      {
+        "round": 2490,
+        "train_hinge": 0.3527899056074848
+      },
+      {
+        "round": 2500,
+        "train_hinge": 0.35285869905427425
+      },
+      {
+        "round": 2510,
+        "train_hinge": 0.35227376693528833
+      },
+      {
+        "round": 2520,
+        "train_hinge": 0.35270393909769615
+      },
+      {
+        "round": 2530,
+        "train_hinge": 0.35287830083724825
+      },
+      {
+        "round": 2540,
+        "train_hinge": 0.3525345727393432
+      },
+      {
+        "round": 2550,
+        "train_hinge": 0.3528499179158181
+      },
+      {
+        "round": 2560,
+        "train_hinge": 0.3523770759038448
+      },
+      {
+        "round": 2570,
+        "train_hinge": 0.35270592915037585
+      },
+      {
+        "round": 2580,
+        "train_hinge": 0.35270418677234633
+      },
+      {
+        "round": 2590,
+        "train_hinge": 0.35252843595796235
+      },
+      {
+        "round": 2600,
+        "train_hinge": 0.3518965796487578
+      },
+      {
+        "round": 2610,
+        "train_hinge": 0.3521287569558695
+      },
+      {
+        "round": 2620,
+        "train_hinge": 0.3520599726626369
+      },
+      {
+        "round": 2630,
+        "train_hinge": 0.3522430397978962
+      },
+      {
+        "round": 2640,
+        "train_hinge": 0.35206934946117874
+      },
+      {
+        "round": 2650,
+        "train_hinge": 0.35229232536012045
+      },
+      {
+        "round": 2660,
+        "train_hinge": 0.35250250784366033
+      },
+      {
+        "round": 2670,
+        "train_hinge": 0.3523793979528366
+      },
+      {
+        "round": 2680,
+        "train_hinge": 0.3526246077954099
+      },
+      {
+        "round": 2690,
+        "train_hinge": 0.35250952434951677
+      },
+      {
+        "round": 2700,
+        "train_hinge": 0.3520200729957576
+      },
+      {
+        "round": 2710,
+        "train_hinge": 0.35218583261186903
+      },
+      {
+        "round": 2720,
+        "train_hinge": 0.3525947054164499
+      },
+      {
+        "round": 2730,
+        "train_hinge": 0.35267760298487283
+      },
+      {
+        "round": 2740,
+        "train_hinge": 0.352783181411572
+      },
+      {
+        "round": 2750,
+        "train_hinge": 0.35239067882528136
+      },
+      {
+        "round": 2760,
+        "train_hinge": 0.35236988424433247
+      },
+      {
+        "round": 2770,
+        "train_hinge": 0.3525990387716188
+      },
+      {
+        "round": 2780,
+        "train_hinge": 0.3529921424788192
+      },
+      {
+        "round": 2790,
+        "train_hinge": 0.35201325553014357
+      },
+      {
+        "round": 2800,
+        "train_hinge": 0.3521662742407094
+      },
+      {
+        "round": 2810,
+        "train_hinge": 0.35200011098841566
+      },
+      {
+        "round": 2820,
+        "train_hinge": 0.35243967647220953
+      },
+      {
+        "round": 2830,
+        "train_hinge": 0.3520192490435896
+      },
+      {
+        "round": 2840,
+        "train_hinge": 0.3525377536095403
+      },
+      {
+        "round": 2850,
+        "train_hinge": 0.3521641141233022
+      },
+      {
+        "round": 2860,
+        "train_hinge": 0.35223825572530043
+      },
+      {
+        "round": 2870,
+        "train_hinge": 0.3520234536676922
+      },
+      {
+        "round": 2880,
+        "train_hinge": 0.3523986261963138
+      },
+      {
+        "round": 2890,
+        "train_hinge": 0.3518411209560907
+      },
+      {
+        "round": 2900,
+        "train_hinge": 0.3536340155702454
+      }
+    ]
+  },
+  {
+    "method": "cocoa",
+    "converged": true,
+    "stop_reason": "train_objective_plateau",
+    "rounds": 252,
+    "average_accuracy": 0.8495178428843438,
+    "final_train_hinge": 0.3512821887027281,
+    "total_comm_bytes": 75953808,
+    "training_seconds": 71.78232430000207,
+    "isolated_training_seconds": null,
+    "runtime_ratio_at_stop": null,
+    "timing_protocol": "overlapped with other algorithms; not an isolated timing measurement",
+    "history": [
+      {
+        "round": 1,
+        "train_hinge": 0.6946945104761083
+      },
+      {
+        "round": 10,
+        "train_hinge": 0.36676415998504763
+      },
+      {
+        "round": 20,
+        "train_hinge": 0.3628242615003498
+      },
+      {
+        "round": 30,
+        "train_hinge": 0.35720056651975246
+      },
+      {
+        "round": 40,
+        "train_hinge": 0.3556362146022992
+      },
+      {
+        "round": 50,
+        "train_hinge": 0.3532381843877438
+      },
+      {
+        "round": 60,
+        "train_hinge": 0.3524074765300894
+      },
+      {
+        "round": 70,
+        "train_hinge": 0.3520905671774901
+      },
+      {
+        "round": 80,
+        "train_hinge": 0.35169084145242263
+      },
+      {
+        "round": 90,
+        "train_hinge": 0.35156201610707516
+      },
+      {
+        "round": 100,
+        "train_hinge": 0.3514736203422272
+      },
+      {
+        "round": 110,
+        "train_hinge": 0.35139073935494913
+      },
+      {
+        "round": 120,
+        "train_hinge": 0.3514327637543887
+      },
+      {
+        "round": 130,
+        "train_hinge": 0.35134525767148617
+      },
+      {
+        "round": 140,
+        "train_hinge": 0.35134191213524013
+      },
+      {
+        "round": 150,
+        "train_hinge": 0.3513553949371564
+      },
+      {
+        "round": 160,
+        "train_hinge": 0.3513398215875107
+      },
+      {
+        "round": 170,
+        "train_hinge": 0.3512783294231845
+      },
+      {
+        "round": 180,
+        "train_hinge": 0.3512498102989142
+      },
+      {
+        "round": 190,
+        "train_hinge": 0.35127251066313925
+      },
+      {
+        "round": 200,
+        "train_hinge": 0.35126631380049544
+      },
+      {
+        "round": 210,
+        "train_hinge": 0.3512534558948083
+      },
+      {
+        "round": 220,
+        "train_hinge": 0.3512830143727044
+      },
+      {
+        "round": 230,
+        "train_hinge": 0.3512308453694453
+      },
+      {
+        "round": 240,
+        "train_hinge": 0.3512303709521597
+      },
+      {
+        "round": 250,
+        "train_hinge": 0.35124000252114673
+      },
+      {
+        "round": 252,
+        "train_hinge": 0.3512821887027281
+      }
+    ]
+  },
+  {
+    "method": "cocoa_plus",
+    "converged": true,
+    "stop_reason": "train_objective_plateau",
+    "rounds": 252,
+    "average_accuracy": 0.8495976905595478,
+    "final_train_hinge": 0.3512864418805999,
+    "total_comm_bytes": 75953808,
+    "training_seconds": 60.264655700011645,
+    "isolated_training_seconds": null,
+    "runtime_ratio_at_stop": null,
+    "timing_protocol": "overlapped with other algorithms; not an isolated timing measurement",
+    "history": [
+      {
+        "round": 1,
+        "train_hinge": 0.7192220141054557
+      },
+      {
+        "round": 10,
+        "train_hinge": 0.4022467178095116
+      },
+      {
+        "round": 20,
+        "train_hinge": 0.38686391021587246
+      },
+      {
+        "round": 30,
+        "train_hinge": 0.36146042847954946
+      },
+      {
+        "round": 40,
+        "train_hinge": 0.3543158621680279
+      },
+      {
+        "round": 50,
+        "train_hinge": 0.35249182812099017
+      },
+      {
+        "round": 60,
+        "train_hinge": 0.3519190244739392
+      },
+      {
+        "round": 70,
+        "train_hinge": 0.35174335653922
+      },
+      {
+        "round": 80,
+        "train_hinge": 0.3515983780394449
+      },
+      {
+        "round": 90,
+        "train_hinge": 0.35158870772626705
+      },
+      {
+        "round": 100,
+        "train_hinge": 0.3513971379701771
+      },
+      {
+        "round": 110,
+        "train_hinge": 0.3514122936079048
+      },
+      {
+        "round": 120,
+        "train_hinge": 0.3513644754387555
+      },
+      {
+        "round": 130,
+        "train_hinge": 0.3514085744733281
+      },
+      {
+        "round": 140,
+        "train_hinge": 0.3513351090632203
+      },
+      {
+        "round": 150,
+        "train_hinge": 0.35142988655987034
+      },
+      {
+        "round": 160,
+        "train_hinge": 0.3513184638951032
+      },
+      {
+        "round": 170,
+        "train_hinge": 0.35130092621554987
+      },
+      {
+        "round": 180,
+        "train_hinge": 0.35125401059080263
+      },
+      {
+        "round": 190,
+        "train_hinge": 0.35129278384078
+      },
+      {
+        "round": 200,
+        "train_hinge": 0.35128097540418735
+      },
+      {
+        "round": 210,
+        "train_hinge": 0.35125800838172583
+      },
+      {
+        "round": 220,
+        "train_hinge": 0.3513137140004325
+      },
+      {
+        "round": 230,
+        "train_hinge": 0.3512436861562685
+      },
+      {
+        "round": 240,
+        "train_hinge": 0.35125709985130266
+      },
+      {
+        "round": 250,
+        "train_hinge": 0.35125231512661276
+      },
+      {
+        "round": 252,
+        "train_hinge": 0.3512864418805999
+      }
+    ]
+  },
+  {
+    "method": "fedssl_tabular",
+    "converged": false,
+    "stop_reason": "max_training_rounds",
+    "rounds": 5000,
+    "average_accuracy": null,
+    "final_train_hinge": 0.737889013185773,
+    "total_comm_bytes": 28954800000,
+    "training_seconds": 2946.2455093000026,
+    "isolated_training_seconds": 2946.2455093000026,
+    "runtime_ratio_at_stop": 6.973689033550446e-05,
+    "timing_protocol": "sequential; 3 threads; single-host simulation; shared controlled gossip schedule",
+    "history": []
+  }
+]

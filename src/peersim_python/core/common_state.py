@@ -62,3 +62,4 @@ class CommonState:
         if cls.r is None:
             cls.r = _random.Random()
         cls.r.seed(seed)
+        cls.experiment_seed=int(seed)

@@ -1,0 +1,17 @@
+{
+  "remote_tests_passed": 38,
+  "checks": [
+    "source data hashes",
+    "same adjacency",
+    "same independently reconstructed first-100 neighbor schedule",
+    "shared numeric-v1 byte policy",
+    "30 sends/round",
+    "SSL exact payload arithmetic",
+    "independent all-peer stopping-window arithmetic",
+    "test evaluation gating",
+    "nonconstant embeddings",
+    "linear BDSVM",
+    "runtime ratios"
+  ],
+  "ssl_first_operational_stop": null
+}

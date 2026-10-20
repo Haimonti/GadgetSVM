@@ -1,36 +1,8 @@
-"""Decentralised consensus ADMM — shared core of the BDSVM and FDR-SVM protocols.
+"""Retired neighborhood ADMM heuristic from the early approximation.
 
-`methods/bdsvm.py` and `methods/fdr_svm.py` run the *same* global-consensus
-ADMM; only their local subproblem differs (a budget set vs. a Wasserstein-
-inflated regulariser). So the decentralisation is written once, here, and each
-subclass supplies just `_solve_local`.
-
-Server, per round:
-    w_k <- argmin  f_k(w) + (rho/2)||w - (z - u_k)||^2      every client k
-    z   <- sum_k (n_k/n) (w_k + u_k)                        the server's job
-    u_k <- u_k + w_k - z
-
-P2P, per cycle at node i:
-    z_i <- sum over N(i) u {i} of (n_j / sum n) (w_j + u_j)  neighbourhood only
-    u_i <- u_i + w_i - z_i
-    w_i <- argmin  f_i(w) + (rho/2)||w - (z_i - u_i)||^2
-
-The single global consensus variable z becomes one local estimate z_i per node,
-formed from whichever neighbours it heard from. This is Jacobi consensus-ADMM;
-on a connected graph the z_i agree in the limit, so the fixed point is the one
-the server version converges to. The local subproblem is untouched -- neither
-the budget set nor the ambiguity radius ever needed a server, both being
-functions of local data only.
-
-What travels is (w_i + u_i) together with the shard size n_i: exactly the
-quantity the server was summing, so per-round communication volume matches the
-baseline.
-
-Reported loss and accuracy use the node's own primal iterate w_i rather than the
-auxiliary z_i, so every protocol in this package is scored on the same object
-and the consensus error ||w_i - mean(w)|| means the same thing throughout.
-An isolated node degenerates gracefully: z_i = w_i + u_i drives u_i to zero and
-the method falls back to purely local training.
+This code does not establish equivalence to paper ADMM. One-hop averaging
+cannot replace its global update without further analysis. Kept only for
+historical inspection; current references use paper_reference.transport.
 """
 
 import time

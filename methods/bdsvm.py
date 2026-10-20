@@ -220,7 +220,7 @@ def _worker_contribution(K_m, y_m, beta, C, ey_floor=1e-12):
 
 def run(X_train, y_train, X_test, y_test, client_idx,
         n_rounds=50, P=100, C=30.0, lam=0.5, eta=5e-3,
-        gamma=None, preimage="uniform", seed=0):
+        gamma=None, preimage="uniform", seed=0, kernel="linear"):
     """Train BDSVM federated over `client_idx` and return metrics.
 
     Args:
@@ -236,12 +236,18 @@ def run(X_train, y_train, X_test, y_test, client_idx,
         preimage:   "uniform", "unit" or "sparse" — see _make_preimages
     """
     n_features = X_train.shape[1]
+    if kernel not in ('linear','rbf'):
+        raise ValueError('BDSVM kernel must be linear or rbf')
+    if kernel=='linear':
+        P=min(P,n_features)
+        preimage='unit'
+    kernel_fn=(lambda A,B:_linear(A,B)) if kernel=='linear' else (lambda A,B:_rbf(A,B,gamma))
 
     # --- architecture, shared by construction (Algorithm 2, steps 2-3) ------
     p = _make_preimages(P, n_features, seed, kind=preimage)
-    if gamma is None:
+    if kernel=='rbf' and gamma is None:
         gamma = _median_gamma(X_train, p)
-    K_p = _rbf(p, p, gamma)
+    K_p = kernel_fn(p,p)
     Kpp = np.zeros((P + 1, P + 1))
     Kpp[:P, :P] = K_p                                      # K''_p
 
@@ -250,7 +256,7 @@ def run(X_train, y_train, X_test, y_test, client_idx,
     for ci in client_idx:
         if len(ci) == 0:
             continue
-        Km = _rbf(X_train[ci], p, gamma)
+        Km = kernel_fn(X_train[ci],p)
         workers.append((np.hstack([Km, np.ones((Km.shape[0], 1))]),
                         np.asarray(y_train[ci], dtype=np.float64)))
     if not workers:
@@ -286,9 +292,9 @@ def run(X_train, y_train, X_test, y_test, client_idx,
         if denom > 0 and np.linalg.norm(beta - beta_prev) / denom < eta:
             break
 
-    K_te = _rbf(X_test, p, gamma)
+    K_te = kernel_fn(X_test,p)
     scores = np.hstack([K_te, np.ones((K_te.shape[0], 1))]) @ beta
     preds = np.where(scores >= 0, 1.0, -1.0)
     acc = float(np.mean(preds == y_test))
-    return {"test_acc": acc, "beta": beta, "preimages": p,
+    return {"test_acc": acc, "beta": beta, "preimages": p, "kernel":kernel,
             "gamma": gamma, "epochs": n_epochs}

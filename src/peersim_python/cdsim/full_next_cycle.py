@@ -25,19 +25,10 @@ class FullNextCycle(Control):
     def execute(self):
         cycle = CDState.getCycle()
         size = Network.size()
-        order = None
-        if self.activation == "shuffle":
-            order = list(range(size))
-            CommonState.r.shuffle(order)
-
-        for j in range(size):
-            if self.activation == "getpair_rand":
-                node = Network.get(CommonState.r.randint(0, size - 1))
-            elif self.activation == "shuffle":
-                node = Network.get(order[j])
-            else:
-                node = Network.get(j)
-
+        from src.peersim_python.communication import activation_order
+        order=activation_order(size,getattr(CommonState,'experiment_seed',0),cycle,self.activation)
+        for j,index in enumerate(order):
+            node=Network.get(index)
             if not node.isUp():
                 continue
             CommonState.setNode(node)

@@ -1,0 +1,8 @@
+method,converged,rounds,average_accuracy,final_train_hinge,total_comm_bytes,training_seconds,timing_protocol,speedup_vs_centralized
+centralized,True,,0.8497021067501996,0.3509586176160721,0,0.20546199998352677,sequential; equal thread budget; single-host simulation,1.0
+sdca,True,252,0.8498740863583318,0.35114227963045336,75953808,108.4772682999901,sequential; equal thread budget; single-host simulation,0.001894055807298989
+bdsvm,True,202,0.8497021067501997,0.3509200753884726,4975336440,6.410816599993268,sequential; equal thread budget; single-host simulation,0.03204927122447124
+fedavg,True,2900,0.848246422209938,0.3536340155702454,86304000,1088.2929004000034,overlapped with other algorithms; not an isolated timing measurement,
+cocoa,True,252,0.8495178428843438,0.3512821887027281,75953808,71.78232430000207,overlapped with other algorithms; not an isolated timing measurement,
+cocoa_plus,True,252,0.8495976905595478,0.3512864418805999,75953808,60.264655700011645,overlapped with other algorithms; not an isolated timing measurement,
+fedssl_tabular,False,5000,,0.737889013185773,28954800000,2946.2455093000026,sequential; 3 threads; single-host simulation; shared controlled gossip schedule,

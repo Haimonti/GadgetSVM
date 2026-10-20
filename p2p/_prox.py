@@ -1,31 +1,9 @@
-"""Proximal Pegasos — the local solver shared by the ADMM protocols.
+"""Sparse proximal Pegasos helper used by historical quadratic approximations.
 
-Same recursion as `methods/bdsvm.py::_local_admm_update` and
-`methods/fdr_svm.py::_local_robust_update`, which are the same update written
-two ways:
-
-    bdsvm    w <- w - eta*(A*w - rho*v)              A = lambda + rho
-    fdr_svm  w <- w - eta*((lambda+eps)*w + rho*(w - v))
-                                                     A = lambda + eps + rho
-
-Both expand to
-
-    eta_t = 1 / (A * t)
-    w    <- (1 - eta*A) * w  +  eta*rho*v      (+ eta*y_i*x_i if margin < 1)
-
-so one helper covers both; only A differs. rho=0 with v=None degenerates to
-plain Pegasos.
-
-The server versions touch the whole d-vector twice per step (the shrink and the
-pull toward v), which is fine at d=54 and ruinous at d=47k inside a simulation.
-Since v is constant through a local solve, w stays inside the two-dimensional
-family
-
-    w = s * u  +  c * v
-
-with scalars s, c and a sparsely-updated u, so both dense operations become
-scalar updates and only the hinge term touches memory: O(nnz of one row) per
-step instead of O(d).
+This is not the FDR paper local solver. Its quadratic recursion is retained
+for legacy code; the exact robust constraints are in paper_reference.fdr.
+The step counter restarts on every call, so finite local solves can retain
+sampling noise. rho=0 with v=None gives plain Pegasos.
 """
 import numpy as np
 

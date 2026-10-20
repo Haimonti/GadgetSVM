@@ -1,16 +1,7 @@
-"""P2P FDR-SVM — decentralised counterpart of `methods/fdr_svm.py`.
+"""Retired quadratic-penalty FDR approximation (old engine layout).
 
-Distributionally robust SVM over per-node Wasserstein balls. The robust local
-objective is unchanged: by Kantorovich duality the worst case over an eps_i-ball
-adds eps_i*||w||, so for the L2 case the local problem is ordinary SVM with
-regularisation (lambda + eps_i).
-
-This method decentralises more cleanly than it federates. In the server version
-eps_k = eps_scale / sqrt(n_k) is derived from client sizes the server collects;
-here every node already knows its own n_i, so eps_i is computed locally at
-set-up and never communicated at all. The consensus machinery is inherited whole
-from p2p/admm_protocol.py — structurally identical to BDSVM, which is why
-the two server implementations share a shape too.
+Its local objective drops the paper's label-flip epigraph constraints and is
+not a Wasserstein FDR-SVM reproduction. Current code: paper_reference.fdr.
 """
 import numpy as np
 
