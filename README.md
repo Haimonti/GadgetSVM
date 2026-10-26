@@ -2,9 +2,10 @@ svmrs/
 
 ├── config.py                     # central CONFIG (dataset, SDCA/gossip hyperparams, thresholds)
 
-├── main.py                       # p2pfl entry point (real gRPC gossip run)
+├── main.py                       # unified PeerSim entry point: python src/scripts/main.py -m <model> -d <dataset>
+│                                 #   model = sdca | gadget | nonlinear | ndsvm (in-process simulation)
 
-├── peersim_run.py                # PeerSim-Python entry point (in-process simulation)
+├── model_picker.py               # training worker: run one (model, dataset) leg -> results/json/
 
 ├── requirements.txt
 

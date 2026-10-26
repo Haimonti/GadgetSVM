@@ -18,7 +18,7 @@ Source: LIBSVM datasets — https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datas
 
 Setup steps:
   1. Place the .bz2 files inside  data/raw/
-  2. Run:  python data/extract_data.py
+  2. Run:  python src/scripts/extract_data.py
      → extracts to data/processed/rcv1_train/rcv1_train.binary
                    data/processed/rcv1_test/rcv1_test.binary
   3. Run:  python main.py

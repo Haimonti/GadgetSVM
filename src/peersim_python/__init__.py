@@ -7,12 +7,15 @@ WireKOut, ...). It is a *simulator*: all nodes live in one process and take
 turns in a single loop, exactly like real PeerSim — the decentralisation is in
 the protocol logic, not the runtime.
 
-This package lets the project's gossip-SDCA setup run as a PeerSim-style P2P
-network simulation (driven by `src/peersim_run.py` via the `Simulation`
-orchestrator), independently of the p2pfl runtime used by `src/own_network/`.
+This package is the shared, learner-agnostic distribution engine. The models
+that ride on it are separate tenant packages — `src/linear_sdca/`,
+`src/baselines/gadget/`, `src/nonlinear_sdca/` and `src/baselines/mom_ndsvm/` — each with its own protocol, observers
+and `Simulation`, all run from the shared entry point `src/scripts/main.py`.
 
 Layout: `core/` and `cdsim/` are the ported PeerSim engine (one class per file);
-`gossip_protocol.py` + `aggregator.py` are the reusable, learner-agnostic gossip
-substrate; `sdca_protocol.py` is one tenant of it; `simulation.py` is the
-orchestrator that wires everything together.
+`gossip_protocol.py` + `aggregator.py` are the reusable gossip substrate (the
+base `Aggregator` and the concrete merge strategies every tenant draws from);
+`idle_protocol.py`, `dynamics.py`, `graph.py` and `logger.py` round out the
+engine. The learner protocols and their orchestrators live in the tenant
+packages, not here.
 """

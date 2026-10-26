@@ -1,0 +1,30 @@
+{
+  "total_comm_bytes": 3623289696,
+  "mean_comm_bytes_per_node": 362328969.6,
+  "std_comm_bytes_per_node": 30024.572080880687,
+  "num_nodes": 10,
+  "per_node_comm_bytes": [
+    362349264,
+    362356512,
+    362371008,
+    362298528,
+    362313024,
+    362342016,
+    362334768,
+    362342016,
+    362262288,
+    362320272
+  ],
+  "per_node_stop_cycle": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ]
+}

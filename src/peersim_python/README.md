@@ -1,16 +1,24 @@
 # peersim_python
 
-A faithful Python port of PeerSim 1.0.5's cycle-driven engine, with a reusable
-gossip layer and the gossip-SDCA learner as one tenant on top. Everything runs
-in one process: all nodes take turns in a single loop (a *simulator*), so the
-decentralisation lives in the protocol logic, not the runtime. Driven by
-`src/peersim_run.py` via the `Simulation` orchestrator.
+A faithful Python port of PeerSim 1.0.5's cycle-driven engine, plus a reusable
+gossip layer. This package is **the shared distribution engine only** — it is
+learner-agnostic. Each model is a separate tenant package that rides on this
+engine: `src/linear_sdca/` (gossip-SDCA), `src/baselines/gadget/` (the GADGET SVM
+baseline), `src/nonlinear_sdca/` (RBF-kernel SDCA) and `src/baselines/mom_ndsvm/`
+(Forero et al.'s MoM-NDSVM, a synchronous ADMM `CDProtocol` rather than a gossip
+tenant). Each tenant owns its own
+protocol, observers and `Simulation`. All of them are run from the shared entry
+point `src/scripts/main.py` (`python src/scripts/main.py -m <model> -d <dataset>`).
+Everything runs in one process: all nodes take turns in a single loop (a
+*simulator*), so the decentralisation lives in the protocol logic, not the
+runtime.
 
 ## Layout
 
 The ported PeerSim engine is split one-class-per-file into two subpackages that
 mirror the Java packages `peersim.core` and `peersim.cdsim`. The reusable gossip
-substrate and the SDCA tenant sit at the package root.
+substrate sits at the package root. The learner protocols and their `Simulation`
+orchestrators are **not** here — they live in the tenant packages above.
 
 ### `core/` — PeerSim core (== `peersim.core`)
 | File | Class | Use case |
@@ -37,16 +45,18 @@ substrate and the SDCA tenant sit at the package root.
 ### Package root
 | File | Use case |
 |------|----------|
-| `simulation.py` | **`Simulation`** — the orchestrator. Seeds RNG, builds the network, wires topology, assigns shards, sets up observers, and drives `CDSimulator`. Public API: `Simulation(config, worker_data).run(cycles)`. |
 | `gossip_protocol.py` | **`GossipProtocol`** — the reusable, learner-agnostic gossip loop: inbox + send (via `Linkable`) + merge (via an `Aggregator`). A tenant supplies `current_state`/`set_state`/`outgoing_payload`/`local_update`/`payload_nbytes`; neighbours are drawn without replacement. |
-| `aggregator.py` | `Aggregator` interface + `PlainAverageAggregator`, `IncrementAggregator`, and `VersionedContributionAggregator` — the last is the only one that keeps SDCA's primal and dual describing the same model. |
-| `sdca_protocol.py` | `SDCAProtocol(GossipProtocol)` — the learner tenant. Each node owns a disjoint block of the global dual and publishes a versioned contribution `X_k.T @ alpha_k / (lambda * n_global)`; `w` is the sum of the contributions it knows, rebuilt after each merge rather than accumulated. Includes `warm_start()`. |
+| `aggregator.py` | `Aggregator` interface + `PlainAverageAggregator`, `IncrementAggregator`, and `VersionedContributionAggregator` — the merge strategies tenants draw from (e.g. linear SDCA uses the versioned one; GADGET uses plain-average). |
 | `idle_protocol.py` | `IdleProtocol` — the reference `Linkable`: stores a node's neighbour list (protocol id 0). |
 | `graph.py` | `OverlayGraph` + `wireKOut` (PeerSim's exact k-random-out wiring). |
 | `dynamics.py` | Topology-wiring controls: `WireKOut` (`random_kout`), `WireRing`, `WireFull`, `WireStar`, `WireMesh`. |
-| `observers.py` | `DataInitializer` (shard + global constants) + `GlobalEvaluator` — the single place the *global* duality gap is measured. Early stopping is opt-in (`STOP_ON_THRESHOLD`), off by default so a run completes its full budget. |
 | `logger.py` | Tiny p2pfl-free stdout logger. |
 | `__init__.py` | Package docstring / design contract. |
+
+The learner protocol, the `DataInitializer`/evaluator observers and the
+`Simulation` orchestrator for each model live in that model's tenant package
+(`src/linear_sdca/`, `src/baselines/gadget/`, `src/nonlinear_sdca/`,
+`src/baselines/mom_ndsvm/`), not here.
 
 ## Per-cycle flow
 

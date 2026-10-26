@@ -69,7 +69,7 @@ class GossipProtocol(CDProtocol):
             peer_proto = link.getNeighbor(peer_index).getProtocol(pid)
             if peer_proto.stopped:
                 continue
-            peer_proto.inbox.append(dict(payload))
+            peer_proto.inbox.append(self._copy_payload(payload))
             self.comm_bytes += self.payload_nbytes()
 
     # ---- hooks a concrete learner MUST implement ----------------------------
@@ -108,3 +108,10 @@ class GossipProtocol(CDProtocol):
     def payload_nbytes(self):
         """Bytes counted per gossip send (for comm-cost accounting)."""
         raise NotImplementedError
+
+    def _copy_payload(self, payload):
+        """Return an independent copy of the outgoing payload before it is placed
+        in a peer's inbox. Default handles a dict state (SDCA's contribution
+        table); a learner whose payload is a plain vector (e.g. model-averaging a
+        weight array) overrides this to ``payload.copy()``."""
+        return dict(payload)

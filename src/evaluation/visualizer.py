@@ -10,19 +10,26 @@ simulator artifact (nodes run sequentially, so their timestamps are staggered).
 import matplotlib.pyplot as plt
 from pathlib import Path
 import numpy as np
+from src.config import CONFIG
 
 
 def _plot_series(metrics_per_worker, out_path, y_key, title, ylabel,
                  marker="o", log_y=False, x_key="wall_time",
                  x_label="Wall time (s)"):
-    """Draw one metric for every worker on a single graph (shared helper)."""
+    """Draw one metric for every worker on a single graph (shared helper).
+
+    The current dataset (CONFIG["DATASET"]) is stamped into the title so each
+    saved image says which dataset it came from.
+    """
+    dataset = CONFIG.get("DATASET", "")
+    full_title = f"{title}  [dataset: {dataset}]" if dataset else title
     fig, ax = plt.subplots(figsize=(8, 5))
     for i, m in enumerate(metrics_per_worker):
         if not m:
             continue
         ax.plot([r[x_key] for r in m], [r[y_key] for r in m],
                 marker=marker, markersize=3, label=f"Worker {i}")
-    ax.set(title=title, xlabel=x_label, ylabel=ylabel)
+    ax.set(title=full_title, xlabel=x_label, ylabel=ylabel)
     ax.legend(fontsize=8)
     ax.grid(True, alpha=0.3)
     if log_y:
@@ -102,11 +109,14 @@ def plot_std_band(metrics_per_worker: list, out_path: Path, y_key: str,
 
     Shows how tightly the individual workers track the swarm average: the solid
     line is the per-cycle mean, the shaded band is ±1 standard deviation, and
-    (optionally) the faint lines behind it are the individual workers.
+    (optionally) the faint lines behind it are the individual workers. The
+    current dataset (CONFIG["DATASET"]) is stamped into the title.
     """
     xk, xl, _ = _axis(x_key)
     x, mean, std = _aggregate_by_round(metrics_per_worker, y_key, xk)
 
+    dataset = CONFIG.get("DATASET", "")
+    full_title = f"{title}  [dataset: {dataset}]" if dataset else title
     fig, ax = plt.subplots(figsize=(8, 5))
     if show_workers:
         for m in metrics_per_worker:
@@ -118,7 +128,7 @@ def plot_std_band(metrics_per_worker: list, out_path: Path, y_key: str,
                     label="±1 std (worker spread)", zorder=2)
     ax.plot(x, mean, color="C0", linewidth=2.0, marker="o", markersize=3,
             label="Mean across workers", zorder=3)
-    ax.set(title=title, xlabel=xl, ylabel=ylabel)
+    ax.set(title=full_title, xlabel=xl, ylabel=ylabel)
     ax.legend(fontsize=8)
     ax.grid(True, alpha=0.3)
     if log_y:

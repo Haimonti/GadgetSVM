@@ -1,0 +1,321 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage{booktabs}
+\usepackage{bm}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\ip}[2]{\langle #1,\, #2\rangle}
+\DeclareMathOperator{\clip}{clip}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\RandMat}{RandMat}
+
+\title{Kernelised Gossip--SDCA with Randomized Reduction (DSRR)\\
+\large Algorithm and Mathematical Description}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+%====================================================================
+\section{Setup and notation}
+
+$K$ nodes cooperate over a gossip overlay. Node $k$ owns a disjoint shard
+$\mathcal{S}_k$ of labelled points $(x_i,y_i)$, $x_i\in\R^{d}$, $y_i\in\{-1,+1\}$;
+the global count is $n=\sum_k|\mathcal{S}_k|$. We train an $L_2$-regularised SVM
+(hinge loss, regularisation $\lambda>0$) \emph{in a randomly reduced space} and
+gossip only compressed, dual-weighted points.
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Symbol & Meaning \\
+\midrule
+$\sigma$                 & the shared \emph{seed} (a single integer) \\
+$A\in\R^{m\times d}$     & random projection matrix, $m\ll d$ (built from $\sigma$) \\
+$\hat x_i = A x_i\in\R^{m}$ & projected (reduced) point \\
+$\hat K(\cdot,\cdot)$    & reduced kernel, $\hat K(\hat x_i,\hat x_j)=K(Ax_i,Ax_j)$ \\
+$\alpha_i$               & dual variable of point $i$; $a_i=y_i\alpha_i\in[0,1]$ \\
+$s_i$                    & score cache of point $i$ (see \eqref{eq:score}) \\
+$m_i=s_i/(\lambda n)$    & margin of point $i$ \\
+$T_k$                    & node $k$'s table of known projected support vectors \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%====================================================================
+\section{The shared seed and the random projection}
+
+\paragraph{Seed broadcast (once).} A single integer $\sigma$ is broadcast to every
+node. Nothing else about the projection is transmitted.
+
+\paragraph{Local regeneration of $A$.} Each node feeds $\sigma$ to the \emph{same}
+deterministic pseudo-random generator and builds the \emph{identical} matrix
+\begin{equation}\label{eq:seed}
+  A \;=\; \RandMat(\sigma)\in\R^{m\times d},
+  \qquad
+  A_{rc}\ \overset{\text{iid}}{\sim}\ \mathcal N\!\big(0,\tfrac1m\big)
+  \ \ \text{or}\ \
+  A_{rc}=\pm\tfrac{1}{\sqrt m}\ \text{(Rademacher)} .
+\end{equation}
+Because the generator is deterministic, $\RandMat(\sigma)$ returns the same entries
+on every node, so all nodes hold one common $A$ without ever sending it.
+
+\paragraph{Why the projection is faithful (Johnson--Lindenstrauss).} With the
+scaling in \eqref{eq:seed}, inner products---hence the kernel---are preserved in
+expectation,
+\begin{equation}\label{eq:jl}
+  \E\!\big[\ip{A x}{A x'}\big]=\ip{x}{x'},
+  \qquad
+  (1-\varepsilon)\|x-x'\|^2\le\|Ax-Ax'\|^2\le(1+\varepsilon)\|x-x'\|^2 ,
+\end{equation}
+for $m=O(\varepsilon^{-2}\log n)$ with high probability. Thus $\hat K(\hat
+x_i,\hat x_j)\approx K(x_i,x_j)$ within $(1\pm\varepsilon)$.
+
+%====================================================================
+\section{Projected support vectors}
+
+Each node projects \emph{every} point of its shard once (local operation):
+\begin{equation}\label{eq:proj}
+  \hat x_i \;=\; A\,x_i \in\R^{m}, \qquad i\in\mathcal{S}_k .
+\end{equation}
+A \emph{support vector} is a point with $\alpha_i\neq0$; its \emph{projected}
+form---the object that will be communicated---is the pair
+\begin{equation}\label{eq:psv}
+  \big(\alpha_i,\ \hat x_i\big)\in\R\times\R^{m},
+\end{equation}
+i.e.\ a scalar coefficient plus the compressed ($d\!\to\!m$) point.
+
+%====================================================================
+\section{The reduced kernel: Gaussian RBF}
+
+DSRR itself is a \emph{linear} reduction and prescribes no kernel, so the
+non-linearity is supplied by applying a kernel \emph{in the reduced space}. We use
+the Gaussian radial basis function (RBF) kernel, evaluated on the projected points:
+\begin{equation}\label{eq:rbf}
+  \hat K(\hat x_i,\hat x_j)
+  \;=\; \exp\!\big(-\gamma\,\|\hat x_i-\hat x_j\|^2\big),
+  \qquad \gamma>0,\qquad \hat x=Ax .
+\end{equation}
+
+\paragraph{How it behaves.} The RBF is a similarity that is $1$ when two points
+coincide and decays smoothly towards $0$ as they separate:
+\begin{itemize}
+  \item $\hat K(\hat x_i,\hat x_i)=\exp(0)=1$ — the kernel has a \emph{unit diagonal};
+    this is exactly why the step denominator $\hat K(\hat x_i,\hat x_i)$ in
+    \eqref{eq:clip} is $1$ for the RBF, so the coordinate update reduces to
+    $a_i^{\text{new}}=\clip_{[0,1]}\!\big(y_i\alpha_i+\big((1-\tau)-y_i m_i\big)\,\lambda n\big)$.
+  \item $0<\hat K(\hat x_i,\hat x_j)\le 1$ — bounded similarity, largest for nearby
+    points.
+  \item $\gamma$ is the \emph{width}: large $\gamma$ gives a narrow kernel (only very
+    close points interact; in a high-dimensional reduced space the Gram tends to the
+    identity and the model memorises every point as a support vector), while small
+    $\gamma$ gives a wide kernel (distant points still interact; a smoother decision
+    boundary and sparser support). Equivalently $\gamma=1/(2\sigma^2)$ for a kernel
+    bandwidth $\sigma$.
+\end{itemize}
+
+\paragraph{Why it is faithful under the projection.} By Johnson--Lindenstrauss
+\eqref{eq:jl} the projection preserves pairwise distances, so
+\begin{equation}
+  \hat K(\hat x_i,\hat x_j)
+  = \exp\!\big(-\gamma\|Ax_i-Ax_j\|^2\big)
+  \approx \exp\!\big(-\gamma\|x_i-x_j\|^2\big)
+  = K(x_i,x_j) ,
+\end{equation}
+i.e.\ the RBF computed on the \emph{compressed} support vectors approximates the RBF
+on the original data within $(1\pm\varepsilon)$ --- which is precisely what makes the
+reduced-space kernel model recoverable.
+
+\paragraph{Where it is used.} Every kernel evaluation in the algorithm is this RBF on
+a pair of projected vectors: the score cache $s_i$ \eqref{eq:score}, the coordinate
+step \eqref{eq:clip}, the cache update \eqref{eq:cacheupd}, the
+merge/reconstruction \eqref{eq:recon}, and the prediction \eqref{eq:predict}. In
+particular the local Gram matrix $\hat K(\hat x_i,\hat x_j)$ over a node's shard is an
+RBF kernel matrix with unit diagonal.
+
+%====================================================================
+\section{Reduced-kernel dual problem (DSRR)}
+
+Training solves the sparse-regularised dual of the SVM \emph{in the reduced space}
+(the reduced kernel matrix $\hat K$ with $\hat K_{ij}=K(Ax_i,Ax_j)$ replaces the
+Gram $X^{\top}X$):
+\begin{equation}\label{eq:dual}
+  \tilde\alpha \;=\; \arg\max_{\alpha\in\R^{n}}\;
+  -\frac1n\sum_{i=1}^{n}\ell_i^{*}(\alpha_i)
+  \;-\;\frac{1}{2\lambda n^{2}}\,\alpha^{\top}\hat K\,\alpha
+  \;-\;\frac{\tau}{n}\,\|\alpha\|_{1}.
+\end{equation}
+The implied (feature-space) model and its norm are
+\begin{equation}\label{eq:w}
+  w=\frac{1}{\lambda n}\sum_i \alpha_i\,\Phi(\hat x_i),
+  \qquad
+  \|w\|^{2}=\frac{\alpha^{\top}\hat K\,\alpha}{(\lambda n)^{2}} .
+\end{equation}
+
+%====================================================================
+\section{Local coordinate update (kernel SDCA)}
+
+Node $k$ maintains a \emph{score cache} over all support vectors it currently knows
+(its own and those gossiped to it, stored in $T_k$):
+\begin{equation}\label{eq:score}
+  s_i \;=\; \sum_{(\alpha_j,\hat x_j)\in T_k}\alpha_j\,\hat K(\hat x_j,\hat x_i),
+  \qquad
+  m_i=\frac{s_i}{\lambda n}.
+\end{equation}
+For a picked local coordinate $i$, the hinge update is closed form:
+\begin{align}
+  a_i^{\text{new}} &= \clip_{[0,1]}\!\Big(y_i\alpha_i
+      + \big((1-\tau)-y_i m_i\big)\,\frac{\lambda n}{\hat K(\hat x_i,\hat x_i)}\Big),
+      \label{eq:clip}\\
+  \Delta &= \eta\,\big(y_i\,a_i^{\text{new}}-\alpha_i\big), \qquad \alpha_i\leftarrow\alpha_i+\Delta,
+      \label{eq:delta}
+\end{align}
+where $\eta\in(0,1]$ is the CoCoA$^+$ step scale (Sec.~\ref{sec:impl}) and the
+reduced margin is $(1-\tau)$ (the DSRR dual-sparse regulariser of
+\eqref{eq:dual}; $\tau=0$ recovers the plain reduced kernel SVM). The cache is kept
+consistent by one kernel column:
+\begin{equation}\label{eq:cacheupd}
+  s_j \;\leftarrow\; s_j + \Delta\,\hat K(\hat x_i,\hat x_j)\qquad\forall j .
+\end{equation}
+
+%====================================================================
+\section{Communication: what is sent}
+
+After its local updates, node $k$ transmits its projected support vectors
+(coefficient $+$ compressed point, tagged by origin and a version counter for
+idempotent merging):
+\begin{equation}\label{eq:msg}
+  \text{message}_k=\Big\{\,\big(\text{origin}=i,\ v_i,\ \alpha_i,\ \hat x_i\big)
+  \ :\ i\in\mathcal{S}_k,\ \alpha_i\neq0\,\Big\}.
+\end{equation}
+Neither the seed-generated $A$ nor the raw $x_i$ is ever sent; only
+$(\alpha_i,\hat x_i)$ travels, with $\hat x_i\in\R^{m}$ the compressed point.
+
+%====================================================================
+\section{Merge (accumulation) and reconstruction}
+
+\paragraph{Merge.} On receiving messages, node $k$ \emph{accumulates} the entries
+into its table, keyed by origin, keeping the freshest version per origin (so
+duplicate or out-of-order delivery cannot double-count):
+\begin{equation}\label{eq:merge}
+  T_k[i]\ \leftarrow\ \arg\max_{(v,\alpha,\hat x)\,\in\,\{T_k[i]\}\cup\{\text{received }i\}} v .
+\end{equation}
+(There is no numerical averaging: a kernel model has no single weight vector, so
+the per-origin support vectors are accumulated, not averaged.)
+
+\paragraph{Reconstruction.} The working model/score is rebuilt from the merged
+table via the reduced-kernel expansion---this is what feeds the next iteration:
+\begin{equation}\label{eq:recon}
+  s_i \;=\; \sum_{(\alpha_j,\hat x_j)\in T_k}\alpha_j\,\hat K(\hat x_j,\hat x_i).
+\end{equation}
+
+%====================================================================
+\section{Termination: duality gap}
+
+Computed from $\alpha$ and the score cache alone (no $w$, no raw data):
+\begin{align}
+  P &= \frac1n\sum_i\max\!\big(0,\,1-y_i m_i\big)+\frac{\lambda}{2}\|w\|^{2},
+  \qquad
+  \|w\|^{2}=\frac{\alpha\cdot s}{(\lambda n)^{2}}, \label{eq:primal}\\
+  D &= \frac1n\sum_i a_i-\frac{\lambda}{2}\|w\|^{2},
+  \qquad
+  g = P-D. \label{eq:gap}
+\end{align}
+A node stops once $g<\varepsilon$; the run ends once all nodes have stopped (or once
+the global mean gap stops improving --- the plateau guard of Sec.~\ref{sec:impl}).
+
+%====================================================================
+\section{Prediction}
+
+With the accumulated table, a new point $x$ is scored by projecting it and summing
+the reduced kernel over known support vectors:
+\begin{equation}\label{eq:predict}
+  F(x)=\sum_{(\alpha_j,\hat x_j)\in T_k}\alpha_j\,\hat K\big(\hat x_j,\ A x\big),
+  \qquad \hat y(x)=\sign F(x).
+\end{equation}
+
+%====================================================================
+\section{Full per-node algorithm}
+
+\begin{algorithm}[h]
+\caption{Kernelised Gossip--SDCA with randomized reduction, at node $k$}
+\label{alg:dsrr}
+\DontPrintSemicolon
+\KwIn{shard $\mathcal{S}_k$, shared seed $\sigma$, $\lambda$, kernel $K$, threshold $\varepsilon$}
+\KwOut{dual coefficients $\{\alpha_i\}$ and table $T_k$ (the model)}
+$A\leftarrow\RandMat(\sigma)$ \tcp*{identical at every node, Eq.~\eqref{eq:seed}}
+\lForEach{$i\in\mathcal{S}_k$}{$\hat x_i\leftarrow A x_i$;\ \ $\alpha_i\leftarrow0$}
+$T_k\leftarrow\{\,i:(v_i{=}0,\alpha_i,\hat x_i)\ :\ i\in\mathcal{S}_k\,\}$\;
+\Repeat{$g<\varepsilon$ \emph{(or global plateau)}}{
+  \tcp{1. local kernel-SDCA on own points (H random coordinates)}
+  \ForEach{$i\in\mathcal{S}_k$}{
+    $s_i\leftarrow\sum_{(\alpha_j,\hat x_j)\in T_k}\alpha_j\hat K(\hat x_j,\hat x_i)$;\quad
+    $m_i\leftarrow s_i/(\lambda n)$\;
+    $a\leftarrow\clip_{[0,1]}\!\big(y_i\alpha_i+((1-\tau)-y_i m_i)\,\lambda n/\hat K(\hat x_i,\hat x_i)\big)$\;
+    $\alpha_i\leftarrow\alpha_i+\eta(y_i a-\alpha_i)$;\quad bump $v_k$;\quad update $T_k[k]$\;
+  }
+  \tcp{2. communicate: relay the freshest blocks neighbours lack (versioned delta)}
+  send $\{(o,v_o,\alpha_o,\hat x_o)\in T_k : v_o>\text{seen}\}$ to $\kappa$ random neighbours\;
+  \tcp{3. merge (accumulate) received SVs, keep freshest per origin}
+  \ForEach{received $(o,v,\alpha,\hat x)$}{
+    \lIf{$o\notin T_k$ \textbf{or} $v>v_o$}{$T_k[o]\leftarrow(v,\alpha,\hat x)$}
+  }
+  recompute gap $g$ via Eq.~\eqref{eq:gap}\;
+}
+\Return $\{\alpha_i\}$, $T_k$ \tcp*{predict with Eq.~\eqref{eq:predict}}
+\end{algorithm}
+
+%====================================================================
+\section{Implementation realization (this codebase)}\label{sec:impl}
+
+The algorithm above is realised as a third tenant of the single-process PeerSim
+engine (\texttt{src/peersim\_python/}), beside the linear gossip-SDCA learner and
+the GADGET baseline; the package \texttt{src/nonlinear/} is model-only and the
+driver \texttt{src/nonlinear\_run.py} does the data/output wiring. The following
+concrete choices refine the idealised pseudocode:
+
+\begin{itemize}
+\item \textbf{Projection (Eq.~\eqref{eq:seed}).} $A$ is drawn with
+  scikit-learn's \texttt{GaussianRandomProjection} ($A_{rc}\sim\mathcal N(0,1/m)$) or
+  \texttt{SparseRandomProjection} (the paper's efficient hashing form, essential for
+  large $d$), both seeded by \texttt{random\_state=}$\sigma$ so every node builds the
+  identical $A$. Defaults: $m=512$ (\texttt{PROJECTION\_DIM}),
+  \texttt{PROJECTION\_DIST=sparse}.
+\item \textbf{Kernel.} DSRR prescribes no kernel, so the reduced kernel is the RBF
+  $\hat K(\hat x_i,\hat x_j)=\exp(-\gamma\|\hat x_i-\hat x_j\|^2)$, with
+  $\hat K(\hat x_i,\hat x_i)=1$; $\gamma=$\texttt{RBF\_GAMMA} (default $0.1$).
+\item \textbf{Score cache split.} The cache $s$ is kept as a local part (this node's
+  own duals, maintained incrementally by Eq.~\eqref{eq:cacheupd} during the sweep)
+  plus an external part (recomputed from the accumulated blocks on every merge, the
+  kernel analogue of rebuilding $w$), so the two never double-count this node.
+\item \textbf{Local step budget.} Step~1 performs $H$ \emph{random} coordinate
+  updates per cycle (\texttt{SDCA\_LOCAL\_STEPS}, default $4096$), not one full
+  deterministic sweep; $\eta$ is the CoCoA$^+$ damping (\texttt{SDCA\_STEP\_SCALE},
+  default $1$; conservative $1/K$).
+\item \textbf{Table keying.} $T_k$ is keyed by \emph{origin node} and stores that
+  node's block of support vectors with a single version counter $v_o$ (an equivalent,
+  more compact encoding of the per-point table of Eq.~\eqref{eq:msg}).
+\item \textbf{Relaying for consensus.} On a static sparse $\kappa$-out mesh a node
+  must forward \emph{any} origin's freshest block, not only its own, or a shard's
+  support vectors would never travel beyond its direct neighbours. The transport
+  therefore relays the accumulated table; to keep the communication metric honest it
+  sends (and charges for) only the per-origin blocks whose version a given neighbour
+  has not yet seen (\emph{versioned delta-send}), rather than the whole growing table
+  every cycle.
+\item \textbf{Termination.} Besides the per-node gap stop $g<\varepsilon$
+  (\texttt{GAP\_THRESHOLD}$=10^{-4}$), a global \emph{plateau} guard ends the run once
+  the mean gap stops improving for a patience window, so a run never grinds to the
+  cycle cap. The duality gap of Eqs.~\eqref{eq:primal}--\eqref{eq:gap} is evaluated
+  over \emph{all} shards (not just the local one) for each node's current model.
+\item \textbf{Cost.} Local work is $O(|\mathcal{S}_k|^2)$ for the local Gram plus
+  $O(|\mathcal{S}_k|\cdot|T_k|)$ for cross-node scoring per sweep; a message costs
+  $O(|\mathrm{SV}|\cdot m)$. Support-vector sparsity (hence $\gamma$) therefore sets
+  the communication cost, which is the knob studied in the comparison.
+\end{itemize}
+
+\end{document}
