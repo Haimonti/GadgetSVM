@@ -1,11 +1,11 @@
-"""Validator for the MoM-NDSVM baseline (Forero, Cano & Giannakis, JMLR 2010).
+"""Validator for the Forero MoM-NDSVM baseline (Forero, Cano & Giannakis, JMLR 2010).
 
 Standalone (the repo has no test framework): prints PASS/FAIL per check and exits
 non-zero if any fails.
 
-    python src/baselines/mom_ndsvm/validate_ndsvm.py            # all checks
-    python src/baselines/mom_ndsvm/validate_ndsvm.py V3 V4      # selected checks
-    python src/baselines/mom_ndsvm/validate_ndsvm.py report gis # paper Table-3 report
+    python src/baselines/forero/validate_ndsvm.py            # all checks
+    python src/baselines/forero/validate_ndsvm.py V3 V4      # selected checks
+    python src/baselines/forero/validate_ndsvm.py report gis # paper Table-3 report
 
 Checks
 ------
@@ -17,12 +17,10 @@ V3  linear kernel + full-rank Gamma: (23) == (1) (paper Sec. 4.1), so the run mu
     reach sklearn SVC(kernel="linear"); the printed-sign variant of (35) must not
 V4  exact RBF oracles: Gamma containing every training point makes (23) == (2), so the
     run must reach SVC(kernel="rbf"); for L < N, (23) solved centrally with SLSQP
-V5  identical setup: all four tenants wire the same graph from CONFIG; shards are
-    deterministic
-V7  the engine is Algorithm 3: shuffle vs ordered activation and the plain loop give
-    bit-identical iterates; anchors and communication bytes are exactly accounted
 V8  E2 in the transient: the readout built with f~(t) satisfies the anchor identity,
     the one built with f~(t+1) does not, and the two agree at the fixed point
+V9  the standalone run in the paper's setup (`algorithm.ForeroRun`) is bit-identical to
+    the plain Algorithm 3 loop; broadcast and p2p communication bytes are exact
 report  paper Table 3: centralised SVC vs local-only SVCs vs the saved MoM-NDSVM run
 """
 
@@ -35,8 +33,8 @@ from sklearn.svm import SVC
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent))
 
-from src.baselines.mom_ndsvm.core import LocalProblem, f_tilde, h_scalar, dual_ascent
-from src.baselines.mom_ndsvm.qp import BoxQPSolver, kkt_violation
+from src.baselines.forero.core import LocalProblem, f_tilde, h_scalar, dual_ascent
+from src.baselines.forero.qp import BoxQPSolver, kkt_violation
 from src.nonlinear_sdca.kernel import rbf_gram
 
 
@@ -387,106 +385,47 @@ def check_v8():
 
 
 # --------------------------------------------------------------------------- #
-# V5 / V7 — the engine
+# V9 — the standalone run (paper setup) is Algorithm 3, with exact accounting
 # --------------------------------------------------------------------------- #
-def _engine_run(activation, iters, seed=11):
-    """Run NDSVMSimulation on a small synthetic network; return its protocols."""
+def check_v9():
     import scipy.sparse as sp
     from src.config import CONFIG
-    from src.peersim_python.core import Network
-    from src.baselines.mom_ndsvm.simulation import NDSVMSimulation
-    J = 6
+    from src.baselines.forero.algorithm import ForeroRun
+    from src.baselines.forero.anchors import check_graph
+    J, iters, seed = 6, 40, 11
     shards, (X_te, y_te) = toy_data(J, 20, 3, seed=12, nonlinear=True)
     worker_data = [dict(X_csr=sp.csr_matrix(X), y=y, X_test=sp.csr_matrix(X_te),
                         y_test=y_te, n_local=len(y)) for X, y in shards]
-    cfg = dict(CONFIG)
-    cfg.update(NUM_WORKERS=J, TOPOLOGY="random_kout", GOSSIP_K=2, SEED=seed,
-               LAMBDA=0.01, RBF_GAMMA=0.5, NDSVM_L=7, NDSVM_ETA=1.0,
-               NDSVM_QP_TOL=1e-12, NDSVM_QP_MAX_SWEEPS=200000, NDSVM_FEATURES="raw",
-               ACTIVATION=activation, EVAL_EVERY=1,
-               STOP_ON_THRESHOLD=False, STOP_ON_PLATEAU=False)
-    NDSVMSimulation(cfg, worker_data).run(iters)
-    protos = [Network.get(i).getProtocol(NDSVMSimulation.NDSVM_PID) for i in range(J)]
-    return protos, shards, cfg
-
-
-def check_v7():
-    iters = 40
-    shuf, shards, cfg = _engine_run("shuffle", iters)
-    snap = [(p.a.copy(), p.c.copy(), p.b_read, p.w_tilde.copy(), p.alpha.copy(), p.beta)
-            for p in shuf]
-    adj = [list(p.neighbours) for p in shuf]
-    Gamma = shuf[0].Gamma.copy()
-    comm = [p.comm_bytes for p in shuf]
-    ordered, _, _ = _engine_run("ordered", iters)
-    diff_order = max(max(np.abs(s[0] - p.a).max(), np.abs(s[1] - p.c).max(),
-                         abs(s[2] - p.b_read), np.abs(s[3] - p.w_tilde).max(),
-                         np.abs(s[4] - p.alpha).max(), abs(s[5] - p.beta))
-                     for s, p in zip(snap, ordered))
-    report("V7 activation order irrelevant", diff_order == 0.0,
-           f"shuffle vs ordered: max |difference| = {diff_order:.1e} (must be exactly 0)")
-
-    # The engine must be Algorithm 3: replay it in the plain loop from the same start.
-    J, L, gamma = len(shards), Gamma.shape[0], cfg["RBF_GAMMA"]
+    cfg = dict(CONFIG, NUM_WORKERS=J, SEED=seed, LAMBDA=0.01, KERNEL="rbf", RBF_GAMMA=0.5,
+               NDSVM_L=7, NDSVM_ETA=1.0, NDSVM_QP_TOL=1e-12, NDSVM_QP_MAX_SWEEPS=200000,
+               NDSVM_FEATURES="raw", FORERO_J=J, FORERO_NETWORK="random", FORERO_PARTITION="given",
+               FORERO_REFERENCES=False, EVAL_EVERY=1, STOP_ON_THRESHOLD=False, STOP_ON_PLATEAU=False)
+    run = ForeroRun(cfg, worker_data).build()
+    nodes = run.nodes
+    adj = [list(nd.neighbours) for nd in nodes]
+    Gamma = nodes[0].Gamma.copy()
+    init = [(nd.w_tilde.copy(), nd.b) for nd in nodes]
+    run.run(iters)
     n_global = sum(len(y) for _, y in shards)
     JC = J / (cfg["LAMBDA"] * n_global)
-    init = []
-    for j in range(J):
-        rng = np.random.default_rng([cfg["SEED"], 1, j])
-        init.append((rng.standard_normal(L), float(rng.standard_normal())))
-    out = run_algorithm3(shards, adj, Gamma, rbf(gamma), eta=cfg["NDSVM_ETA"], JC=JC,
-                         iters=iters, qp_tol=cfg["NDSVM_QP_TOL"], init=init)
-    diff_plain = max(max(np.abs(out["readout"][j][0] - snap[j][0]).max(),
-                         np.abs(out["readout"][j][1] - snap[j][1]).max(),
-                         abs(out["readout"][j][2] - snap[j][2]),
-                         np.abs(out["alpha"][j] - snap[j][4]).max())
-                     for j in range(J))
-    report("V7 engine == Algorithm 3", diff_plain == 0.0,
-           f"PeerSim run vs plain synchronous loop: max |difference| = {diff_plain:.1e}")
+    out = run_algorithm3([(nd.X, nd.y) for nd in nodes], adj, Gamma, rbf(cfg["RBF_GAMMA"]),
+                         eta=cfg["NDSVM_ETA"], JC=JC, iters=iters, qp_tol=cfg["NDSVM_QP_TOL"],
+                         init=init)
+    diff = max(max(np.abs(out["readout"][j][0] - nd.a).max(),
+                   np.abs(out["readout"][j][1] - nd.c).max(),
+                   abs(out["readout"][j][2] - nd.b_read),
+                   np.abs(out["alpha"][j] - nd.alpha).max()) for j, nd in enumerate(nodes))
+    report("V9 standalone run == Algorithm 3", diff == 0.0,
+           f"ForeroRun vs plain synchronous loop: max |difference| = {diff:.1e} (must be 0)")
+    diam, p_dim, L = check_graph(adj), shards[0][0].shape[1], Gamma.shape[0]
+    p2p = [diam * len(adj[j]) * 2 * p_dim * 8 + (iters + 1) * len(adj[j]) * (L + 1) * 8
+           for j in range(J)]
+    bc = [diam * 2 * p_dim * 8 + (iters + 1) * (L + 1) * 8] * J
+    ok = [nd.comm_bytes_p2p for nd in nodes] == p2p and [nd.comm_bytes for nd in nodes] == bc
+    report("V9 communication accounting", ok,
+           f"broadcast bytes == diameter({diam}) floods + {iters + 1} broadcasts of (L+1) floats; "
+           f"p2p bytes == the same x degree: {ok}")
 
-    # Anchors: max/min consensus + shared seed reproduce the global box draw.
-    from src.baselines.mom_ndsvm.anchors import draw_anchors, check_graph
-    X_all = np.vstack([X for X, _ in shards])
-    ref = draw_anchors(X_all.min(0), X_all.max(0), L, cfg["SEED"])
-    diam = check_graph(adj)
-    p_dim = X_all.shape[1]
-    expected = [diam * len(adj[j]) * 2 * p_dim * 8 + (iters + 1) * len(adj[j]) * (L + 1) * 8
-                for j in range(J)]
-    ok = np.array_equal(ref, Gamma) and comm == expected
-    report("V7 anchors + communication accounting", ok,
-           f"Gamma == global-box draw: {np.array_equal(ref, Gamma)}; comm_bytes == "
-           f"flood(diameter={diam}) + (1 init + {iters}) broadcasts of (L+1) floats: {comm == expected}")
-
-
-def check_v5():
-    """All four tenants wire the identical graph from the real CONFIG, and the shard
-    loader is deterministic."""
-    from src.config import CONFIG
-    from src.peersim_python.core import Network
-    from src.linear_sdca.simulation import Simulation
-    from src.baselines.gadget.simulation import GadgetSimulation
-    from src.nonlinear_sdca.simulation import KernelSDCASimulation
-    from src.baselines.mom_ndsvm.simulation import NDSVMSimulation
-    graphs = {}
-    for name, cls in (("sdca", Simulation), ("gadget", GadgetSimulation),
-                      ("nonlinear", KernelSDCASimulation), ("ndsvm", NDSVMSimulation)):
-        sim = cls(dict(CONFIG), []).build()
-        sim.sim.initializers[0].execute()                       # the topology control
-        graphs[name] = [sorted(peer.getIndex() for peer in Network.get(i).getProtocol(0).neighbors)
-                        for i in range(Network.size())]
-    same = all(g == graphs["sdca"] for g in graphs.values())
-    degrees = [len(n) for n in graphs["ndsvm"]]
-    report("V5 identical graph", same,
-           f"sdca/gadget/nonlinear/ndsvm adjacency identical: {same}; degrees {degrees}")
-
-    from src.scripts.data_sharding import load_shards
-    cfg = dict(CONFIG, DATASET="a9a")
-    if Path(cfg["A9A_TRAIN_PATH"]).exists():
-        s1, s2 = load_shards(cfg), load_shards(cfg)
-        same_shards = all((a["X_csr"] != b["X_csr"]).nnz == 0 and np.array_equal(a["y"], b["y"])
-                          for a, b in zip(s1, s2))
-        report("V5 deterministic shards", same_shards,
-               f"two load_shards(a9a) calls give identical shards: {same_shards}")
 
 # --------------------------------------------------------------------------- #
 # V6 report — paper Table 3: centralised vs local-only vs MoM-NDSVM
@@ -522,7 +461,7 @@ def table3_report(keyword):
     obj_central = normalised_objective(central)
     acc_local = [float(np.mean(SVC(kernel="rbf", gamma=gamma, C=C, tol=1e-6)
                                .fit(Xj, yj).predict(X_te) == y_te)) for Xj, yj in zip(X, y)]
-    path = CODE_DIR / "results" / "json" / f"ndsvm_{CONFIG['DATASET']}.json"
+    path = CODE_DIR / "results" / "json" / f"ndsvm_{CONFIG['DATASET']}_seed{CONFIG['SEED']}.json"
     print(f"\nTable-3-style report — {CONFIG['DATASET']} (C={C:.4g}, gamma={gamma}, "
           f"{len(shards)} nodes)")
     print(f"  centralised SVC (rbf):      accuracy {acc_central:.4f}   objective {obj_central:.5f}")
@@ -539,8 +478,7 @@ def table3_report(keyword):
         print(f"  MoM-NDSVM: no {path.name} yet — run src/scripts/main.py -m ndsvm -d {keyword}")
 
 CHECKS = {"V1": check_v1, "V2": check_v2, "V3": check_v3, "V4": check_v4, "V8": check_v8,
-"V5": check_v5,
-"V7": check_v7}
+          "V9": check_v9}
 
 
 def main():
