@@ -73,8 +73,10 @@ expectation,
   \qquad
   (1-\varepsilon)\|x-x'\|^2\le\|Ax-Ax'\|^2\le(1+\varepsilon)\|x-x'\|^2 ,
 \end{equation}
-for $m=O(\varepsilon^{-2}\log n)$ with high probability. Thus $\hat K(\hat
-x_i,\hat x_j)\approx K(x_i,x_j)$ within $(1\pm\varepsilon)$.
+for $m=O(\varepsilon^{-2}\log n)$ with high probability. What is preserved to
+within $(1\pm\varepsilon)$ is the \emph{squared distance}, not the kernel value: the
+kernel error this induces is derived in Sec.~\ref{sec:kernel} (for the RBF it is
+multiplicative in the exponent).
 
 %====================================================================
 \section{Projected support vectors}
@@ -91,11 +93,13 @@ form---the object that will be communicated---is the pair
 i.e.\ a scalar coefficient plus the compressed ($d\!\to\!m$) point.
 
 %====================================================================
-\section{The reduced kernel: Gaussian RBF}
+\section{The reduced kernel: RBF or polynomial}\label{sec:kernel}
 
 DSRR itself is a \emph{linear} reduction and prescribes no kernel, so the
-non-linearity is supplied by applying a kernel \emph{in the reduced space}. We use
-the Gaussian radial basis function (RBF) kernel, evaluated on the projected points:
+non-linearity is supplied by applying a kernel \emph{in the reduced space}. The
+scope is kernel SVMs with exactly two kernels: the Gaussian radial basis function
+(RBF, the default) and the polynomial kernel. The RBF, evaluated on the projected
+points, is
 \begin{equation}\label{eq:rbf}
   \hat K(\hat x_i,\hat x_j)
   \;=\; \exp\!\big(-\gamma\,\|\hat x_i-\hat x_j\|^2\big),
@@ -119,17 +123,33 @@ coincide and decays smoothly towards $0$ as they separate:
     bandwidth $\sigma$.
 \end{itemize}
 
-\paragraph{Why it is faithful under the projection.} By Johnson--Lindenstrauss
-\eqref{eq:jl} the projection preserves pairwise distances, so
-\begin{equation}
+\paragraph{How faithful it is under the projection.} Johnson--Lindenstrauss
+\eqref{eq:jl} gives $\|Ax_i-Ax_j\|^2=D_{ij}^2(1\pm\varepsilon)$ with
+$D_{ij}=\|x_i-x_j\|$. The $\varepsilon$ therefore enters \emph{inside the exponent}:
+\begin{equation}\label{eq:kernelerr}
   \hat K(\hat x_i,\hat x_j)
-  = \exp\!\big(-\gamma\|Ax_i-Ax_j\|^2\big)
-  \approx \exp\!\big(-\gamma\|x_i-x_j\|^2\big)
-  = K(x_i,x_j) ,
+  = \exp\!\big(-\gamma D_{ij}^2(1\pm\varepsilon)\big)
+  = K(x_i,x_j)^{\,1\pm\varepsilon},
+  \qquad
+  K^{1+\varepsilon}\le\hat K\le K^{1-\varepsilon},
 \end{equation}
-i.e.\ the RBF computed on the \emph{compressed} support vectors approximates the RBF
-on the original data within $(1\pm\varepsilon)$ --- which is precisely what makes the
-reduced-space kernel model recoverable.
+so the error is \emph{multiplicative},
+$\hat K/K\in\big[e^{-\gamma\varepsilon D_{ij}^2},\,e^{\gamma\varepsilon D_{ij}^2}\big]$,
+and not an additive (or $1\pm\varepsilon$) error on $K$. It is small exactly when
+$\gamma\varepsilon D_{ij}^2\ll1$, i.e.\ for the nearby pairs that dominate the
+kernel and for a moderate width $\gamma$; far-apart pairs have $K\approx\hat K\approx0$
+anyway. The reduced-space duals are then re-used with the original kernel by the
+recovery step (Sec.~\ref{sec:recovery}).
+
+\paragraph{The polynomial kernel.} The second kernel in scope is
+\begin{equation}\label{eq:poly}
+  \hat K(\hat x_i,\hat x_j)=\big(g\,\ip{\hat x_i}{\hat x_j}+c_0\big)^{p},
+\end{equation}
+($p=$\texttt{POLY\_DEGREE}, $c_0=$\texttt{POLY\_COEF0}, $g=$\texttt{POLY\_GAMMA},
+default $1/d$). The projection preserves inner products in expectation
+(Eq.~\eqref{eq:jl}), so the same $g$ is used in the reduced and the original space.
+Its diagonal is not $1$, so the general step denominator $\hat K(\hat x_i,\hat x_i)$
+of \eqref{eq:clip} applies.
 
 \paragraph{Where it is used.} Every kernel evaluation in the algorithm is this RBF on
 a pair of projected vectors: the score cache $s_i$ \eqref{eq:score}, the coordinate
@@ -157,6 +177,21 @@ The implied (feature-space) model and its norm are
   \|w\|^{2}=\frac{\alpha^{\top}\hat K\,\alpha}{(\lambda n)^{2}} .
 \end{equation}
 
+\paragraph{What $\tau$ does.} For the hinge loss $\ell_i^{*}(\alpha_i)=-a_i$ with
+$a_i=y_i\alpha_i\in[0,1]$, and $|\alpha_i|=a_i$, so the dual-sparse term merges with
+the linear term:
+\begin{equation}\label{eq:taudual}
+  -\frac1n\sum_i\ell_i^{*}(\alpha_i)-\frac{\tau}{n}\|\alpha\|_1
+  =\frac{1}{n}\sum_i(1-\tau)\,a_i .
+\end{equation}
+This is the dual of an SVM whose hinge has the \emph{smaller margin} $1-\tau$,
+$\ell_{1-\tau}(z)=\max(0,\,1-\tau-z)$ (Yang et al., 2015, Eq.~6). Two consequences:
+(i) points are only asked to clear a margin of $1-\tau$, which is appropriate because
+examples become harder to separate after the reduction; (ii) the $\ell_1$ penalty
+pushes small duals to exactly zero, so fewer points become support vectors --- fewer
+points to communicate, and a smaller recovery error. $\tau=0$ is the plain reduced
+kernel SVM.
+
 %====================================================================
 \section{Local coordinate update (kernel SDCA)}
 
@@ -176,8 +211,8 @@ For a picked local coordinate $i$, the hinge update is closed form:
       \label{eq:delta}
 \end{align}
 where $\eta\in(0,1]$ is the CoCoA$^+$ step scale (Sec.~\ref{sec:impl}) and the
-reduced margin is $(1-\tau)$ (the DSRR dual-sparse regulariser of
-\eqref{eq:dual}; $\tau=0$ recovers the plain reduced kernel SVM). The cache is kept
+target $1-\tau$ is the reduced margin of \eqref{eq:taudual}: the closed-form
+maximiser of the coordinate's $(1-\tau)a_i$ term against the quadratic term. The cache is kept
 consistent by one kernel column:
 \begin{equation}\label{eq:cacheupd}
   s_j \;\leftarrow\; s_j + \Delta\,\hat K(\hat x_i,\hat x_j)\qquad\forall j .
@@ -219,25 +254,46 @@ table via the reduced-kernel expansion---this is what feeds the next iteration:
 
 Computed from $\alpha$ and the score cache alone (no $w$, no raw data):
 \begin{align}
-  P &= \frac1n\sum_i\max\!\big(0,\,1-y_i m_i\big)+\frac{\lambda}{2}\|w\|^{2},
+  P &= \frac1n\sum_i\max\!\big(0,\,(1-\tau)-y_i m_i\big)+\frac{\lambda}{2}\|w\|^{2},
   \qquad
   \|w\|^{2}=\frac{\alpha\cdot s}{(\lambda n)^{2}}, \label{eq:primal}\\
-  D &= \frac1n\sum_i a_i-\frac{\lambda}{2}\|w\|^{2},
+  D &= \frac{1-\tau}{n}\sum_i a_i-\frac{\lambda}{2}\|w\|^{2},
   \qquad
   g = P-D. \label{eq:gap}
 \end{align}
+Both carry the reduced margin $1-\tau$ of \eqref{eq:taudual}, so $g\ge0$ is a valid
+certificate for every $\tau$ (for $\tau=0$ this is the usual SVM gap).
 A node stops once $g<\varepsilon$; the run ends once all nodes have stopped (or once
 the global mean gap stops improving --- the plateau guard of Sec.~\ref{sec:impl}).
 
 %====================================================================
+\section{Recovery (DSRR)}\label{sec:recovery}
+
+DSRR is \emph{reduce, then recover}: the dual is solved cheaply in the reduced
+space, and the model is then rebuilt in the \emph{original} space from those duals
+(Yang et al., 2015: $\tilde w=\frac{1}{\lambda n}X\tilde\alpha$; their Theorems bound
+$\|\tilde\alpha-\alpha^{*}\|$, i.e.\ the reduced-space duals are close to the optimal
+original-space ones). In kernel form the recovered decision function is
+\begin{equation}\label{eq:recover}
+  F_{\mathrm{rec}}(x)=\frac{1}{\lambda n}\sum_{j}\alpha_j\,K(x_j,\,x),
+  \qquad x_j,\ x\ \text{raw (unprojected)} .
+\end{equation}
+\paragraph{Decentralised recovery by partial scores.} Raw points never leave their
+node, so node $o$ evaluates its own part
+$p_o(x)=\sum_{j\in\mathrm{SV}_o}\alpha_j K(x_j,x)$ on its raw support vectors, and
+$F_{\mathrm{rec}}(x)=\frac{1}{\lambda n}\sum_o p_o(x)$ is the sum of the parts. Scoring
+one query costs one query broadcast to the other $K-1$ nodes and $K-1$ returned
+scalars; training traffic is unchanged.
+
 \section{Prediction}
 
-With the accumulated table, a new point $x$ is scored by projecting it and summing
-the reduced kernel over known support vectors:
+Two readouts are reported side by side. The reduced-space readout projects the point
+and sums the reduced kernel over the known support vectors,
 \begin{equation}\label{eq:predict}
   F(x)=\sum_{(\alpha_j,\hat x_j)\in T_k}\alpha_j\,\hat K\big(\hat x_j,\ A x\big),
-  \qquad \hat y(x)=\sign F(x).
+  \qquad \hat y(x)=\sign F(x),
 \end{equation}
+and the recovered readout is $\sign F_{\mathrm{rec}}(x)$ from \eqref{eq:recover}.
 
 %====================================================================
 \section{Full per-node algorithm}
@@ -267,7 +323,7 @@ $T_k\leftarrow\{\,i:(v_i{=}0,\alpha_i,\hat x_i)\ :\ i\in\mathcal{S}_k\,\}$\;
   }
   recompute gap $g$ via Eq.~\eqref{eq:gap}\;
 }
-\Return $\{\alpha_i\}$, $T_k$ \tcp*{predict with Eq.~\eqref{eq:predict}}
+\Return $\{\alpha_i\}$, $T_k$ \tcp*{predict with Eq.~\eqref{eq:predict}; recover with Eq.~\eqref{eq:recover}}
 \end{algorithm}
 
 %====================================================================
@@ -275,8 +331,9 @@ $T_k\leftarrow\{\,i:(v_i{=}0,\alpha_i,\hat x_i)\ :\ i\in\mathcal{S}_k\,\}$\;
 
 The algorithm above is realised as a third tenant of the single-process PeerSim
 engine (\texttt{src/peersim\_python/}), beside the linear gossip-SDCA learner and
-the GADGET baseline; the package \texttt{src/nonlinear/} is model-only and the
-driver \texttt{src/nonlinear\_run.py} does the data/output wiring. The following
+the GADGET baseline; the package \texttt{src/nonlinear\_sdca/} is model-only and
+the shared entry point \texttt{src/scripts/main.py -m nonlinear} does the data/output
+wiring. The following
 concrete choices refine the idealised pseudocode:
 
 \begin{itemize}
@@ -286,9 +343,15 @@ concrete choices refine the idealised pseudocode:
   large $d$), both seeded by \texttt{random\_state=}$\sigma$ so every node builds the
   identical $A$. Defaults: $m=512$ (\texttt{PROJECTION\_DIM}),
   \texttt{PROJECTION\_DIST=sparse}.
-\item \textbf{Kernel.} DSRR prescribes no kernel, so the reduced kernel is the RBF
-  $\hat K(\hat x_i,\hat x_j)=\exp(-\gamma\|\hat x_i-\hat x_j\|^2)$, with
-  $\hat K(\hat x_i,\hat x_i)=1$; $\gamma=$\texttt{RBF\_GAMMA} (default $0.1$).
+\item \textbf{Kernel.} \texttt{KERNEL} $\in\{$\texttt{rbf}, \texttt{poly}$\}$. The RBF
+  $\hat K(\hat x_i,\hat x_j)=\exp(-\gamma\|\hat x_i-\hat x_j\|^2)$ has
+  $\hat K(\hat x_i,\hat x_i)=1$; $\gamma=$\texttt{RBF\_GAMMA} (default $0.005$; on
+  gisette $0.1$ made every point a support vector). The polynomial kernel is
+  Eq.~\eqref{eq:poly}.
+\item \textbf{Recovery.} With \texttt{DSRR\_RECOVERY} on, every evaluation also
+  reports the recovered model's test accuracy (\texttt{accuracy\_recovered},
+  Eq.~\eqref{eq:recover}, by partial scores) next to the reduced-space accuracy,
+  and the per-query recovery cost (\texttt{recovery\_bytes\_per\_query}).
 \item \textbf{Score cache split.} The cache $s$ is kept as a local part (this node's
   own duals, maintained incrementally by Eq.~\eqref{eq:cacheupd} during the sweep)
   plus an external part (recomputed from the accumulated blocks on every merge, the

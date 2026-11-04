@@ -4,9 +4,12 @@ p2pfl[tensorflow]
 p2pfl[ray]
 
 numpy
+scipy
+scikit-learn
+matplotlib
+pandas
 opendp
 datasets>=4.0.0
-scikit-learn
 
 ipykernel
 wandb
