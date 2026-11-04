@@ -62,7 +62,7 @@ def _resolve(model: str):
     `pid_attr`     : the attribute on the simulation class holding the protocol id
                      whose per-node `metrics` we collect, or None for a
                      standalone (non-PeerSim) model whose `run()` returns the
-                     per-node results itself (centralized SDCA, Forero, Fed-KSVM).
+                     per-node results itself (Forero, Fed-KSVM).
     `extra_json_fn(CONFIG) -> dict` : model-specific fields to fold into the JSON
                      (e.g. the non-linear tenant's projection dim/dist + gamma),
                      or None. Simulation classes are imported lazily so running
@@ -72,8 +72,8 @@ def _resolve(model: str):
         from src.linear_sdca.simulation import Simulation
         return Simulation, "SDCA_PID", None
     if model == "central_sdca":
-        from src.linear_sdca.centralized import CentralizedSDCA
-        return CentralizedSDCA, None, None
+        from src.baselines.central_sdca.simulation import CentralSDCASimulation
+        return CentralSDCASimulation, "CENTRAL_PID", None
     if model == "gadget":
         from src.baselines.gadget.simulation import GadgetSimulation
         return GadgetSimulation, "PEGASOS_PID", None
@@ -162,7 +162,9 @@ def _stop_reason(model, cfg, all_metrics, budget):
     early = budget is not None and rounds < budget
     all_stopped = bool(last) and all(r.get("stopped") for r in last)
     gaps = [r["duality_gap"] for r in last if r.get("duality_gap") is not None]
-    met_gap = bool(gaps) and max(gaps) < cfg["GAP_THRESHOLD"]
+    # each model is judged by the threshold it actually stops on (central SDCA: CENTRAL_GAP_TOL)
+    thr = cfg.get("CENTRAL_GAP_TOL", 1e-6) if model == "central_sdca" else cfg["GAP_THRESHOLD"]
+    met_gap = bool(gaps) and max(gaps) < thr
     latched = bool(last) and all(r.get("latched", False) for r in last)
     # gossip models latch per node on their own criterion; all latched = converged
     if early and (met_gap or latched or (all_stopped and model in ("sdca", "nonlinear", "gadget"))):
@@ -209,7 +211,7 @@ def run_model(model: str, dataset: str = None, cycles: int = None,
     else:
         runner_obj.run(cycles)
         pid = getattr(runner, pid_attr)
-        protos = [Network.get(i).getProtocol(pid) for i in range(cfg["NUM_WORKERS"])]
+        protos = [Network.get(i).getProtocol(pid) for i in range(Network.size())]
     run_extra = runner_obj.extra_json() if hasattr(runner_obj, "extra_json") else {}
     all_metrics = [p.metrics for p in protos]
     run_extra.update(_stop_reason(model, cfg, all_metrics, getattr(runner_obj, "budget", None)))

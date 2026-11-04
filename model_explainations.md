@@ -35,10 +35,10 @@ P(w) = λ/2 ‖w‖²  +  (1/n) Σ_i max(0, 1 − y_i · f(x_i))
 - **Synchronous rounds:** cola, choco.
   - Every node computes, then everyone exchanges with **all** neighbours at once, mixing with a fixed weight matrix `W` (Metropolis weights).
   - It's like a meeting where everybody speaks once per round.
+- **Single node on PeerSim:** central_sdca, the whole dataset on one node with no links.
 - **Standalone (their own paper's setup, no PeerSim):**
   - ndsvm (Forero): synchronous neighbours on the paper's own random graph.
   - fed_ksvm: a server plus devices.
-  - central_sdca: one machine, all the data.
 
 **Stopping (what the summary's `stop_reason` means).**
 
@@ -90,9 +90,9 @@ Think of a group building one sum together. Everyone writes their own number on 
 
 **Cost:** 10 nodes × 4096 Python-level steps per cycle, about 0.3 s per cycle. Measured: a9a 1,661 cycles in about 7 min; gisette 1,101 cycles in about 8 min.
 
-### 1.2 `central_sdca`: single machine, all data (the reference)
+### 1.2 `central_sdca`: centralized SDCA baseline (one PeerSim node, all data)
 
-**Idea.** The same SDCA coordinate rule on the full dataset, with step scale 1 and no communication. This is "what if one computer had all the data".
+**Idea.** The linear baseline for our SDCA. It is the same SDCA coordinate rule with step scale 1, run on your PeerSim engine as a 1-node network that holds every shard and has no links, so it never communicates. This is "what if one computer had all the data". Code: `src/baselines/central_sdca/`.
 
 - **One round** = `NUM_WORKERS × SDCA_LOCAL_STEPS` = 40,960 steps, so its x-axis lines up with the distributed models.
 - **Stops:** at gap < `CENTRAL_GAP_TOL = 1e-6`, or on a plateau.

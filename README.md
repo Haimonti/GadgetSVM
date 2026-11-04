@@ -104,11 +104,11 @@ The single `CONFIG` dict:
 | `src/linear_sdca/` | Gossip SDCA (linear) | Versioned per-origin dual contributions, accumulated | Duality gap |
 | `src/nonlinear_sdca/` | Kernel SDCA (RBF / polynomial) over a DSRR projection | Projected support vectors + duals | Duality gap (τ-consistent) |
 
-**Centralized baseline (no network)**
+**Centralized baseline on PeerSim (one node)**
 
 | Package | Model | Sends | Convergence |
 |---|---|---|---|
-| `src/linear_sdca/centralized.py` | Centralized SDCA: all data on one machine; also gives the reference optimum P* (liblinear) | — | Duality gap |
+| `src/baselines/central_sdca/` | Centralized SDCA: the linear baseline for our SDCA — same SDCA step, all data on a single PeerSim node (no links); also stores the reference optimum P* (liblinear) | — | Duality gap |
 
 **Baselines on PeerSim (same setup as ours)**
 
@@ -126,7 +126,8 @@ The single `CONFIG` dict:
 | `src/baselines/fed_ksvm/` | Fed-KSVM (Zhou & Wang 2024): RFF + block boosting | 1 server + M devices | Objective |
 
 **Inside the packages**
-- `linear_sdca/`: `sdca_protocol.py`, `observers.py` (gap, `STOP_RULE`), `simulation.py`, `centralized.py`.
+- `linear_sdca/`: `sdca_protocol.py`, `observers.py` (gap, `STOP_RULE`), `simulation.py`.
+- `central_sdca/`: `central_protocol.py` (1-node SDCA learner), `observers.py` (data stacking, gap evaluator, liblinear P*), `simulation.py`.
 - `nonlinear_sdca/`: `kernel.py` (`make_kernel`: RBF + polynomial), `projection.py` (DSRR), `kernel_sdca_protocol.py`, `aggregator.py`, `observers.py` (gap + DSRR **recovery** → `accuracy_recovered`), `reference_kernel_sdca.py` (single-machine oracle). Efficiency, same numbers: `kernel_scores` builds the Gram in ≤256 MB row chunks (`MAX_KERNEL_ENTRIES`); each node keeps a private per-origin table of external score parts and re-scores only origins whose version changed; the evaluator scores each (origin, version) block once and reuses it for every node holding that version, and reads ‖f‖² off the training scores.
 - `gadget/`: `pegasos_protocol.py`, `observers.py`, `simulation.py`.
 - `cola/`, `choco/`: protocol, observers, simulation; `local_solver.py` (COLA's `svm.pyx` port); `validate_*.py` vs the official epfml code.
@@ -171,9 +172,9 @@ svmrs/
 │   ├── config.py
 │   ├── scripts/         orchestration, ablations, data
 │   ├── peersim_python/  engine
-│   ├── linear_sdca/     ours (linear) + centralized SDCA baseline
+│   ├── linear_sdca/     ours (linear)
 │   ├── nonlinear_sdca/  ours (kernel)
-│   ├── baselines/       gadget/, cola/, choco/ (PeerSim) · forero/, fed_ksvm/ (standalone)
+│   ├── baselines/       central_sdca/, gadget/, cola/, choco/ (PeerSim) · forero/, fed_ksvm/ (standalone)
 │   ├── evaluation/      plot helpers
 │   ├── own_network/     legacy p2pfl runtime
 │   └── model.py         legacy p2pfl model
