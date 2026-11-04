@@ -102,8 +102,13 @@ The single `CONFIG` dict:
 | Package | Model | Sends | Convergence |
 |---|---|---|---|
 | `src/linear_sdca/` | Gossip SDCA (linear) | Versioned per-origin dual contributions, accumulated | Duality gap |
-| `src/linear_sdca/centralized.py` | Centralized SDCA (all data, one machine) → reference optimum P* | — | Duality gap |
 | `src/nonlinear_sdca/` | Kernel SDCA (RBF / polynomial) over a DSRR projection | Projected support vectors + duals | Duality gap (τ-consistent) |
+
+**Centralized baseline (no network)**
+
+| Package | Model | Sends | Convergence |
+|---|---|---|---|
+| `src/linear_sdca/centralized.py` | Centralized SDCA: all data on one machine; also gives the reference optimum P* (liblinear) | — | Duality gap |
 
 **Baselines on PeerSim (same setup as ours)**
 
@@ -166,7 +171,7 @@ svmrs/
 │   ├── config.py
 │   ├── scripts/         orchestration, ablations, data
 │   ├── peersim_python/  engine
-│   ├── linear_sdca/     ours (linear) + centralized reference
+│   ├── linear_sdca/     ours (linear) + centralized SDCA baseline
 │   ├── nonlinear_sdca/  ours (kernel)
 │   ├── baselines/       gadget/, cola/, choco/ (PeerSim) · forero/, fed_ksvm/ (standalone)
 │   ├── evaluation/      plot helpers
