@@ -1,0 +1,176 @@
+"""Retired neighborhood ADMM heuristic from the early approximation.
+
+This code does not establish equivalence to paper ADMM. One-hop averaging
+cannot replace its global update without further analysis. Kept only for
+historical inspection; current references use paper_reference.transport.
+"""
+
+import time
+
+import numpy as np
+
+from src.peersim_python.cdsim import CDProtocol
+from src.peersim_python.core import CommonState
+
+from p2p._prox import prox_pegasos
+
+
+class ConsensusADMMProtocol(CDProtocol):
+    LINKABLE_PID = 0  # protocol id of the IdleProtocol holding neighbours
+
+    def __init__(self):
+        # State is empty on the prototype; a DataInitializer fills each node's
+        # shard after the network is cloned (PeerSim NodeInitializer pattern).
+        self.data_ready = False
+        self.gossip_k = 1
+        self.n_local_steps = 100
+        self.rho = 1.0
+        self.inbox: list = []      # received (w+u, n) pairs — the async mailbox
+        self.metrics: list = []
+        self.comm_bytes = 0
+        self.start = None
+
+    def clone(self):
+        # Fresh, empty protocol per node — never deep-copy the (large) shard.
+        c = type(self)()
+        c.gossip_k = self.gossip_k
+        c.n_local_steps = self.n_local_steps
+        c.rho = self.rho
+        self._clone_extra(c)
+        return c
+
+    def _clone_extra(self, c):
+        """Subclass hook: copy any extra hyperparameters onto the clone."""
+
+    # ---- set-up (called once per node by DataInitializer) -------------------
+    def set_data(self, X_csr, y, X_test, y_test, lambda_reg, t0_fraction=None):
+        # Same signature as SDCAProtocol.set_data so the existing
+        # DataInitializer drives this protocol unchanged. ADMM has no primal
+        # averaging, so t0_fraction is accepted and ignored.
+        self.X = X_csr.tocsr()
+        self.y = np.asarray(y, dtype=np.float32)
+        self.X_test = X_test
+        self.y_test = np.asarray(y_test, dtype=np.float32)
+        self.n, self.d = self.X.shape
+        self.lambda_reg = lambda_reg
+
+        self.w = np.zeros(self.d, dtype=np.float32)   # local primal iterate
+        self.z = np.zeros(self.d, dtype=np.float32)   # local consensus estimate
+        self.u = np.zeros(self.d, dtype=np.float32)   # scaled dual variable
+        # Per-node RNG drawn from the one shared PeerSim RNG, so a whole run is
+        # reproducible from the single seed passed to CommonState.
+        self.rng = np.random.default_rng(CommonState.r.randrange(2 ** 31))
+        self.start = time.time()
+        self._setup_extra()
+        self.data_ready = True
+
+    def configure_network(self, node_id, n_global, n_workers, local_steps, step_scale):
+        self.node_id = node_id
+        if local_steps is not None:
+            self.n_local_steps = int(local_steps)
+
+    def _setup_extra(self):
+        """Subclass hook: allocate anything derived from the shard."""
+
+    # ---- one cycle ----------------------------------------------------------
+    def nextCycle(self, node, pid):
+        if not self.data_ready:
+            return
+        self._merge_inbox()           # 1. neighbourhood consensus + dual update
+        self._local_epoch()           # 2. local proximal solve
+        self._gossip_push(node, pid)  # 3. send to random neighbour(s)
+        self._record()                # 4. log per-round metrics
+
+    # ---- (1) consensus step — replaces the server's aggregate ---------------
+    def _merge_inbox(self):
+        # Runs even on an empty mailbox: with no neighbours z_i = w_i + u_i,
+        # which drives u_i to zero and reduces the node to local training.
+        total = float(self.n)
+        accum = (self.w + self.u).astype(np.float64) * self.n
+        for peer_wu, peer_n in self.inbox:
+            accum += peer_wu.astype(np.float64) * peer_n
+            total += peer_n
+        if total > 0:
+            self.z = (accum / total).astype(np.float32)
+        self.u = self.u + self.w - self.z      # dual update
+        self.inbox = []
+
+    # ---- (2) local proximal solve ------------------------------------------
+    def _local_epoch(self):
+        if self.n == 0:
+            return
+        self.w = self._solve_local(self.z - self.u)
+
+    def _solve_local(self, v):
+        """The algorithm-specific local subproblem. Subclasses must override."""
+        raise NotImplementedError
+
+    def _prox(self, X, y, v, A):
+        return prox_pegasos(X, y, v, A, self.rho, self.n_local_steps, self.rng)
+
+    # ---- (3) gossip push through the Linkable interface ---------------------
+    def _gossip_push(self, node, pid):
+        """Deliver to EVERY neighbour exactly once — not a random sample.
+
+        The other protocols sample peers with replacement, matching
+        SDCAProtocol. ADMM cannot: its z-update has to be a genuine weighted
+        mean over the neighbourhood, because that is what makes the dual update
+        stabilising. In the server version
+
+            z = sum_k (n_k/n)(w_k + u_k)   =>   sum_k n_k (w_k - z) = -sum_k n_k u_k
+
+        so the weighted sum of duals is driven to zero every round. A z_i built
+        from a random multiset of neighbours — some drawn twice, some missed —
+        does not give that cancellation even locally, and u integrates a
+        persistent bias instead.
+
+        Measured on covtype, 10 nodes, 60 cycles, against FDR-SVM's own server
+        baseline (accuracy, gap to server):
+
+            label_skew    full   sampled 0.5618 (-0.131)   all 0.6535 (-0.039)
+            dirichlet 0.1 full   sampled 0.5504 (-0.138)   all 0.6076 (-0.080)
+            iid           ring   sampled 0.6747 (-0.009)   all 0.6768 (-0.007)
+
+        Cost is deg messages per cycle instead of gossip_k, so gossip_k no
+        longer applies to this protocol. Note this does not fully fix the dual:
+        ||u|| still grows under skew (20.8 at cycle 60), so the gap closes
+        rather than vanishing — see the FDR-SVM note in the results report.
+        """
+        link = node.getProtocol(self.LINKABLE_PID)
+        for j in range(link.degree()):
+            peer = link.getNeighbor(j)
+            peer.getProtocol(pid).inbox.append(
+                ((self.w + self.u).astype(np.float32), self.n))
+            self.comm_bytes += self.d * 4  # one float32 vector sent
+
+    # ---- (4) per-round metrics ----------------------------------------------
+    def _record(self):
+        w = self.w
+        if self.n > 0:
+            scores = self.X.dot(w)
+            hinge = float(np.mean(np.maximum(0.0, 1.0 - self.y * scores)))
+        else:
+            hinge = float("nan")
+        reg = float((self.lambda_reg / 2.0) * np.dot(w, w))
+        # Primal-only method: no dual variables, hence no duality gap. The keys
+        # are still present so observers written against SDCAProtocol work.
+        self.metrics.append({
+            "round":       len(self.metrics) + 1,
+            "primal":      hinge + reg,
+            "dual":        float("nan"),
+            "duality_gap": float("nan"),
+            "hinge_loss":  hinge,
+            "wall_time":   time.time() - self.start,
+            "comm_bytes":  self.comm_bytes,
+            # ADMM's own convergence signal: how far this node's iterate sits
+            # from the consensus it last computed.
+            "primal_residual": float(np.linalg.norm(self.w - self.z)),
+        })
+
+    # ---- evaluation ---------------------------------------------------------
+    def accuracy(self):
+        if self.X_test.shape[0] == 0:
+            return float("nan")
+        preds = np.sign(self.X_test.dot(self.w))
+        preds[preds == 0] = 1.0
+        return float(np.mean(preds == self.y_test))

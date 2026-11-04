@@ -29,6 +29,7 @@ observer's; the protocol only measures `rel_change`.
 """
 
 import time
+import os
 
 import numpy as np
 
@@ -137,6 +138,16 @@ class FedAvgGossipProtocol(GossipProtocol):
             self.rel_change = 0.0
             return
         w_prev = self.w.copy()
+        if os.environ.get('SVM_COMPILED_LOCAL') == '1':
+            from p2p._linear_fast import pegasos_steps
+            draws=self.rng.integers(self.n,size=self.local_steps)
+            base=self.steps_done if self.t_global else 0
+            self.w=pegasos_steps(self.X.indptr,self.X.indices,self.X.data,
+                                self.y,self.w,draws,self.lambda_reg,base)
+            self.steps_done+=self.local_steps
+            denom=float(np.linalg.norm(w_prev))
+            self.rel_change=float(np.linalg.norm(self.w-w_prev))/denom if denom else float('inf')
+            return
         X, y, lam = self.X, self.y, self.lambda_reg
         indptr, indices, data = X.indptr, X.indices, X.data
         u = self.w.astype(np.float64, copy=True)
@@ -147,8 +158,6 @@ class FedAvgGossipProtocol(GossipProtocol):
             i = int(self.rng.integers(self.n))
             st, e = indptr[i], indptr[i + 1]
             cols, vals = indices[st:e], data[st:e]
-            if len(cols) == 0:
-                continue
             margin = float(y[i]) * float(np.dot(s * u[cols], vals))
             s *= (1.0 - eta * lam)
             if abs(s) < 1e-12:      # exact: at t=1, eta*lambda == 1 kills s*u

@@ -1,0 +1,278 @@
+"""
+CoCoA: Communication-Efficient Distributed SVM
+===============================================
+Pure-Python translation of the Scala/Apache Spark reference implementation at
+https://github.com/gingsmith/cocoa (Apache-2.0).
+
+Primary reference
+-----------------
+Smith, V., Forte, S., Ma, C., Takáč, M., Jordan, M. I., & Jaggi, M.
+"CoCoA: A General Framework for Communication-Efficient Distributed
+Optimization." Journal of Machine Learning Research (JMLR), 2018.
+https://arxiv.org/abs/1611.02189
+
+Algorithm
+---------
+Trains an L2-regularised SVM (hinge loss) via distributed dual coordinate
+ascent.  Data are horizontally partitioned across K workers.
+
+Each communication round t = 1 … T:
+  1. Broadcast the current primal vector ``w`` to all K workers.
+  2. Each worker k independently runs H steps of local SDCA on its shard,
+     starting from the current dual variables ``alpha_k`` and the received
+     ``w``.  It returns (Δα_k, Δw_k).
+  3. The server aggregates with **averaging**:
+       w ← w + (β/K) · Σ_k Δw_k        (β = 1 in standard CoCoA)
+       α_k ← α_k_old + (β/K) · Δα_k
+
+Scala correspondence
+--------------------
+``run()``          ↔  ``CoCoA.runCoCoA(..., plus=False)``
+``_local_sdca()``  ↔  ``CoCoA.localSDCA()``
+``_partition_update()`` ↔``CoCoA.partitionUpdate()``
+"""
+
+from __future__ import annotations
+
+import numpy as np
+from numpy.typing import NDArray
+
+
+# ---------------------------------------------------------------------------
+# Public entry point
+# ---------------------------------------------------------------------------
+
+def run(
+    X_train: NDArray,
+    y_train: NDArray,
+    X_test: NDArray,
+    y_test: NDArray,
+    client_idx: list[NDArray],
+    n_rounds: int = 50,
+    n_local_steps: int = 10,
+    lambda_reg: float = 0.01,
+    sigma_prime: float = 1.0,   # accepted for interface parity; unused in CoCoA
+    seed: int = 0,
+) -> dict:
+    """Run CoCoA distributed SVM and return a metrics dictionary.
+
+    Parameters
+    ----------
+    X_train : array of shape (n, d)
+        Full training feature matrix.
+    y_train : array of shape (n,)
+        Training labels in {-1, +1}.
+    X_test : array of shape (m, d)
+        Test feature matrix.
+    y_test : array of shape (m,)
+        Test labels in {-1, +1}.
+    client_idx : list of K integer arrays
+        ``client_idx[k]`` holds the row indices in ``X_train`` belonging to
+        worker k.  Corresponds to the K Spark partitions in the Scala code.
+    n_rounds : int
+        Number of communication rounds T.
+        Scala: ``params.numRounds``
+    n_local_steps : int
+        Number of local SDCA iterations per round H.
+        Scala: ``params.localIters``
+    lambda_reg : float
+        L2 regularisation parameter λ.
+        Scala: ``params.lambda``
+    sigma_prime : float
+        Accepted for signature compatibility with CoCoA+; not used here.
+    seed : int
+        Base random seed.  Scala: ``debug.seed``
+
+    Returns
+    -------
+    dict
+        At minimum ``{'test_acc': float}``.
+    """
+    X_train = np.asarray(X_train, dtype=float)
+    y_train = np.asarray(y_train, dtype=float)
+    X_test  = np.asarray(X_test,  dtype=float)
+    y_test  = np.asarray(y_test,  dtype=float)
+
+    n, d = X_train.shape
+    K = len(client_idx)
+
+    # Initialise primal weight vector and per-example dual variables.
+    # Scala: var w = params.wInit.copy ; var alphaVars = data.map(x => 0.0)
+    w     = np.zeros(d, dtype=float)
+    alpha = np.zeros(n, dtype=float)
+
+    # CoCoA averaging scaling: β / K  (β = 1 by default)
+    # Scala: var scaling = params.beta / parts
+    beta    = 1.0
+    scaling = beta / K
+
+    # ---------- outer communication rounds ------------------------------------
+    for t in range(n_rounds):
+        # Scala: val primalUpdates = updates.map(kv => kv._1).reduce(_ + _)
+        delta_w_total = np.zeros(d, dtype=float)
+
+        for k, indices in enumerate(client_idx):
+            indices = np.asarray(indices)
+            X_k   = X_train[indices]
+            y_k   = y_train[indices]
+            alpha_k_old = alpha[indices].copy()
+
+            # Scala: partitionUpdate (plus=False)
+            delta_alpha_k, delta_w_k = _partition_update(
+                X_k, y_k, w, alpha[indices].copy(),
+                n_local_steps, lambda_reg, n,
+                seed=seed + t,   # Scala: debug.seed + t
+                plus=False,
+                sigma=K * 1.0,   # sigma = K·γ, γ=1 (unused for CoCoA)
+            )
+
+            # Scala: alpha = alphaOld + (deltaAlpha * scaling)
+            alpha[indices] = alpha_k_old + delta_alpha_k * scaling
+            delta_w_total += delta_w_k
+
+        # Scala: w += (primalUpdates * scaling)
+        w += delta_w_total * scaling
+
+    # ------ evaluation -------------------------------------------------------
+    # Scala: OptUtils.computeClassificationError
+    # error = fraction where sign(w·x) ≠y
+    raw = X_test @ w
+    preds = np.where(raw >= 0, 1.0, -1.0)
+    test_acc = float(np.mean(preds == y_test))
+
+    return {"test_acc": test_acc}
+
+
+# ---------------------------------------------------------------------------
+# Internal helpers  (mirror Scala private methods)
+# ---------------------------------------------------------------------------
+
+def _partition_update(
+    X_local: NDArray,
+    y_local: NDArray,
+    w_init: NDArray,
+    alpha: NDArray,
+    n_local_iters: int,
+    lambda_reg: float,
+    n: int,
+    seed: int,
+    plus: bool,
+    sigma: float,
+) -> tuple[NDArray, NDArray]:
+    """One round of local updates for a single worker partition.
+
+    Scala: ``CoCoA.partitionUpdate``
+
+    Parameters
+    ----------
+    X_local, y_local : local shard of training data for this worker.
+    w_init : broadcast primal vector from the server.
+    alpha : current dual variables for this partition's examples.
+    n_local_iters : H, number of local SDCA steps.
+    lambda_reg : λ regularisation parameter.
+    n : *global* number of training examples (needed for primal ↔ dual scaling).
+    seed : random seed for this round.
+    plus : False → CoCoA, True → CoCoA+.
+    sigma : K·γ passed through to localSDCA.
+
+    Returns
+    -------
+    (delta_alpha, delta_w) : dual increment and primal increment for this worker.
+    """
+    alpha_old = alpha.copy()
+    delta_alpha, delta_w = _local_sdca(
+        X_local, y_local, w_init, alpha,
+        n_local_iters, lambda_reg, n, seed, plus, sigma,
+    )
+    # Note: alpha is modified in-place inside _local_sdca; delta_alpha is
+    # returned separately so the caller can apply the scaling before committing.
+    return delta_alpha, delta_w
+
+
+def _local_sdca(
+    X_local: NDArray,
+    y_local: NDArray,
+    w_init: NDArray,
+    alpha: NDArray,
+    n_local_iters: int,
+    lambda_reg: float,
+    n: int,
+    seed: int,
+    plus: bool,
+    sigma: float,
+) -> tuple[NDArray, NDArray]:
+    """LocalSDCA: stochastic dual coordinate ascent on one worker's data shard.
+
+    Scala: ``CoCoA.localSDCA``
+
+    For CoCoA (``plus=False``):
+      - The local primal vector ``w`` is updated after each coordinate step,
+        giving the solver the benefit of within-round primal progress.
+        Scala: ``if (!plus) { w += update }``
+      - Gradient: ``(y · w·x  −1) · λn``
+      - Curvature:  ``qii = ‖x‖²`
+
+    For CoCoA+ (``plus=True``) — not used here but kept for completeness:
+      - ``w`` is frozen at ``w_init``; local progress is tracked via ``delta_w``.
+      - Gradient: ``(y · (w·x + σ · delta_w·x) −1) · λn``
+      - Curvature: ``qii = ‖x‖²· σ``
+
+    Returns
+    -------
+    (delta_alpha, delta_w)
+        ``delta_alpha[i] = alpha_new[i] −alpha_old[i]`` for each local example.
+        ``delta_w`` is the accumulated primal update.
+    """
+    n_local = len(y_local)
+    rng = np.random.RandomState(seed % (2 ** 31))
+
+    alpha_old = alpha.copy()
+    delta_w   = np.zeros(w_init.shape[0], dtype=float)
+    w         = w_init.copy()   # local copy; only mutated when plus=False
+
+    for _ in range(n_local_iters):
+        # Scala: val idx = r.nextInt(nLocal)
+        idx = rng.randint(n_local)
+        x   = X_local[idx]
+        y   = y_local[idx]
+
+        # Hinge-loss dual gradient
+        # Scala: val grad = (y * (x.dot(w) ...) - 1.0) * (lambda * n)
+        if plus:
+            grad = (y * (float(x @ w_init) + sigma * float(x @ delta_w)) - 1.0) * (lambda_reg * n)
+        else:
+            grad = (y * float(x @ w) - 1.0) * (lambda_reg * n)
+
+        # Projected gradient (alpha is constrained to [0, 1])
+        # Scala: var proj_grad = grad; if (alpha(idx) <= 0.0) proj_grad = min(grad,0) ...
+        if alpha[idx] <= 0.0:
+            proj_grad = min(grad, 0.0)
+        elif alpha[idx] >= 1.0:
+            proj_grad = max(grad, 0.0)
+        else:
+            proj_grad = grad
+
+        if proj_grad != 0.0:
+            x_norm_sq = float(x @ x)
+            # Scala: val qii = if (plus) xnorm * sigma else xnorm
+            qii = x_norm_sq * sigma if plus else x_norm_sq
+
+            if qii != 0.0:
+                # Scala: newAlpha = min(max(alpha(idx) - grad/qii, 0.0), 1.0)
+                new_alpha = float(np.clip(alpha[idx] - grad / qii, 0.0, 1.0))
+            else:
+                new_alpha = 1.0
+
+            # Primal update from dual step
+            # Scala: val update = x * (y * (newAlpha - alpha(idx)) / (lambda * n))
+            update = x * (y * (new_alpha - alpha[idx]) / (lambda_reg * n))
+
+            # Scala: if (!plus) { w += update }
+            if not plus:
+                w += update     # update local primal for gradient computation
+
+            delta_w    += update
+            alpha[idx]  = new_alpha
+
+    # Scala: val deltaAlpha = alpha - alphaOld; return (deltaAlpha, deltaW)
+    return alpha - alpha_old, delta_w

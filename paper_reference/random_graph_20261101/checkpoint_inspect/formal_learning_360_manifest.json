@@ -1,0 +1,2524 @@
+{
+  "records": [
+    {
+      "dataset": "webspam",
+      "seed": 42,
+      "method": "bdsvm",
+      "metric_sha256": "4675be8b925f3a6969c20a5530f9d5cfd77d4ca10edeef96128f5f179ca7b5d7",
+      "weights_sha256": "feb08b8347579d39813d64decba6fa1350ba3e425ad4eaf1e078c950574b2c89"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 42,
+      "method": "centralized",
+      "metric_sha256": "1fb9247680c2a41d5962ebf1bfbad6b8951a5bfcd2b33dff7517fa69cd59828f",
+      "weights_sha256": "4d5ffc7e843867af64d323726300681a75c9dd204e4f596b8100778de3b20da1"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 42,
+      "method": "choco",
+      "metric_sha256": "8b25b320e2ef679666e93ab8440442c4381f74ffaeb1ccb3bfb09e6db74a568d",
+      "weights_sha256": "d8f76bae5dbf9b598ea3fd844591ca53b9969414bfeded100156c32ad8761b76"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 42,
+      "method": "cocoa",
+      "metric_sha256": "78ce797428efa104c5d850cc89785f4526fafbd3f7069f7a8054673617afffb3",
+      "weights_sha256": "2d86550ffbef6076503196959e202dc80ed169932c4c80e1fa3c4cdb69168ac2"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 42,
+      "method": "cocoa_plus",
+      "metric_sha256": "8991e930b5bd8b8c1591a6caef10d8fde6cf3679f00bd15b20e2446c4c86df43",
+      "weights_sha256": "790d4e7e55c4398d836e89c5402ae23c46dc53587110e2337d122b38417c9a84"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 42,
+      "method": "cola",
+      "metric_sha256": "5c60a6312d4cd6b0f73ec470c43798376a0a105e4e5254ed9c889b05a9a44295",
+      "weights_sha256": "59fe82b572dbc145a1397800d39041ba7700dd8fdcf7b631669283981d15bdeb"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 42,
+      "method": "fedavg",
+      "metric_sha256": "265d32d1c0d8c8074b5b55ddb0e65ca55df9d07d9882ad3b5e8289f203a5adc5",
+      "weights_sha256": "dab5d116448095019e84b540e9a15d66cd2a8a6474afb7c7077b9e6bcd31e9d3"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 42,
+      "method": "gadget",
+      "metric_sha256": "a0ff9d6a8407f7c94a55d14b00815117f52fe81c7507d8090a50394bf8ec9f6f",
+      "weights_sha256": "8bf34d90ef96251cf9577a01ca9e18080cdec76d8461c77237d0801dadd2edfc"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 42,
+      "method": "sdca",
+      "metric_sha256": "344c37d6584b4f676ac71fca6ac3d6aa748aa4a9d29d3c2149fe84055e8a4c1a",
+      "weights_sha256": "05ef6a5954de46bcd28cf848a7193d817963f815ac6dce4d65e4a279003f1d11"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 43,
+      "method": "bdsvm",
+      "metric_sha256": "e666747959d9a3cb6892d2f24cebf6ede29225f406c164c696bb5a61a84626a3",
+      "weights_sha256": "c51ece69398d2fdf432e7cc39109f215898add37a6dd56eb1955f00d69ceb4ef"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 43,
+      "method": "centralized",
+      "metric_sha256": "c5b2a000e0dafcbe8230fe190a21ed30d536f589a5a5cab94e9b9d9574cfed46",
+      "weights_sha256": "eaccc4cbdf3887e60bb5549c8db1873bcac4ad7aba79984ebcea338ef53cf846"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 43,
+      "method": "choco",
+      "metric_sha256": "f9b0fa967dac48a1f327cd50a34d71749f053bb71e413bf8b7abeaf835c3f040",
+      "weights_sha256": "736d4d004fca82609b4a9cf82ffc88d09e13b34203de1d64f502c48ce728a7f6"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 43,
+      "method": "cocoa",
+      "metric_sha256": "eca41758a21c964237788f10b27d6f27462e2aa7b20ca60ecadb42b8cc65f542",
+      "weights_sha256": "785f469f7a2d4abb673f10cd37f3059d5d83d80ae563f537a85949a14fb710e8"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 43,
+      "method": "cocoa_plus",
+      "metric_sha256": "efe36da468d3436d2acd77a0ec5907f94396626a5e6b7c8903571dd82896c5b0",
+      "weights_sha256": "4af40c582fecf2d4ec54cff179ba5b9033cba68fef21360cad73cbd70be7e72b"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 43,
+      "method": "cola",
+      "metric_sha256": "b9e98dcabc05d7564b2f9f888463ee02f16a52280f0420c7a7bfa1168494e065",
+      "weights_sha256": "5b67f6dd3bbf10b576bc24baff05d4d93521ca84e78d185b82bfcc4224bab9b5"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 43,
+      "method": "fedavg",
+      "metric_sha256": "3f2fc1deadf171627253035393d200d3ff4935211ec55099bdf24cea9b2112ab",
+      "weights_sha256": "0933e77540346ec7e04c41e25312d8dd0a1a3e5fe269b4d136c36c3d1da7b0ec"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 43,
+      "method": "gadget",
+      "metric_sha256": "57a523e3a97d7551bb80c49454979a189df5044e6255f5e793d3a1e537f5ac85",
+      "weights_sha256": "2edcd12a52281f0e2b8c97f13ac653d87499d616d909e5cbd2b0e9a7bcaa0c00"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 43,
+      "method": "sdca",
+      "metric_sha256": "240350a119590092fdd410d51ab9605182f8a5729564c94c7ad5527ac96bd0ef",
+      "weights_sha256": "13a5a4b99fd078801b49f2688ed68bd7e7d7d26b215dd109d3e5ce095704025e"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 44,
+      "method": "bdsvm",
+      "metric_sha256": "db16f0d45305330d59a1c573547db38b8f5041895a73dfef748cc989ee8bcceb",
+      "weights_sha256": "853c1bbbe1b49d77cee405b332a0b3bf05a3179ab5ce47a137beb0848fbf8ca3"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 44,
+      "method": "centralized",
+      "metric_sha256": "481b706a5e30e60a5a666248e08512664aa8ed19e1c10881939cdbae1e97b888",
+      "weights_sha256": "8f3164d84028be3af88c558aa634da99d9590a9e5458ec589016da8e926e3788"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 44,
+      "method": "choco",
+      "metric_sha256": "28713432f003dcf49014af471d34cce873ab637fb5e903a3836bd8f1291f9edd",
+      "weights_sha256": "ca866b0d6a88595c446e14aa7d05f515fce6fea713bdc88527d4fe1ed3e28520"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 44,
+      "method": "cocoa",
+      "metric_sha256": "87c5c1a2ce219bf3d69449688c8120e1420266c868238c754cb594848efeaee9",
+      "weights_sha256": "0a2f70e62042993ee23583ba8dd7c5dcf985cc7a1e7c45c4f58cf06e841a379b"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 44,
+      "method": "cocoa_plus",
+      "metric_sha256": "912e5c82a62d31ca2eb2c3fbaa663e5bc96f0a37eed834a3227742424cdbfd48",
+      "weights_sha256": "5d43f4e33d793eb2f829832acd1dad44a5ed2a3cfacff6e5431ad26de17dcd2d"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 44,
+      "method": "cola",
+      "metric_sha256": "55c5a8f9eeba00e926ea762c73e6bd3abe4dc3c226b40c68b98aa765b0e6652c",
+      "weights_sha256": "b779676c7974c5e14d1ff4e5aca5f0168064730105ace39efffd432fe9af63b0"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 44,
+      "method": "fedavg",
+      "metric_sha256": "ead780c3b1149b7878f514ea7874a8cafca9b2efa944a1e4fc97210216abef47",
+      "weights_sha256": "68910e746405d6cbc8b4553424c3ee46c6ea16f94f8215ad10069b91358e5db3"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 44,
+      "method": "gadget",
+      "metric_sha256": "13ce960056bdd9afffd216fac47a8f129efe327b5100ddd1f781a3afd15bf030",
+      "weights_sha256": "d29c263783fce1b391fdd1e72805153c68cb819fdcde4d3ce370afe71d3fc07d"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 44,
+      "method": "sdca",
+      "metric_sha256": "6c67be48926aa0a605bb6dff1db54ad26623722a087f2d6fed3924e1d403969d",
+      "weights_sha256": "d7cfc945233f1ff7efa427ea6a78af836fdddb8b9b4213346bb8489b1390a6d6"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 45,
+      "method": "bdsvm",
+      "metric_sha256": "098836a7e74e5095c6d1511bbe94d7aea0b117e75870d08b1b14b4ca2d902f5b",
+      "weights_sha256": "d3364cf206eab820e23d8a3628c6c9768d894ffd671122f43d3dcdcbb95f4ad2"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 45,
+      "method": "centralized",
+      "metric_sha256": "0fd940941bb456a2b04a59a546463fa2bb9413bee0cc7c6c4bec803b86becee9",
+      "weights_sha256": "a1d7955bd28908d8c713bcd1baefab21566679323648958579560f605a9998e9"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 45,
+      "method": "choco",
+      "metric_sha256": "3114ee54333f2e41403ba0828f1a7eaeb9b8d05ba6288d6f411e5ff6b103c1a6",
+      "weights_sha256": "e2b9bffa72b17766d1ac58a3b196e911715573e2344eed7c3a8843615a980440"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 45,
+      "method": "cocoa",
+      "metric_sha256": "17ed1e2d4e0519f8f872b971cb51697da0faa483fbe5ea79a720e7babe46d0f1",
+      "weights_sha256": "5ce0f0642847ad94c29c60f12964f44e0a96fd977f39993f27c1450c3c629330"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 45,
+      "method": "cocoa_plus",
+      "metric_sha256": "919f095a28cddef29c52d4076673b16769492e53f9827f35cfd3006725b71350",
+      "weights_sha256": "1a92ef1a50e67f7064a9762a656d4adfb814f8ad3663b74c8456f75a661bbb39"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 45,
+      "method": "cola",
+      "metric_sha256": "053d1ed93ea4c9ca01a10773f37f9257b98c67625be16bf9950df30579c1fd72",
+      "weights_sha256": "05f45cb55f4b714ef2fecf679a1c5ec9555e5f7919dc89fb34aefc17f3b871d3"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 45,
+      "method": "fedavg",
+      "metric_sha256": "708233ce30bf710fe769b7ef21fd87ed60f7ade579650f51b34904fa742f5b48",
+      "weights_sha256": "1935998afe84df591d7647ad1a3edc08a11b1eab6671611af340fb5da72d0aba"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 45,
+      "method": "gadget",
+      "metric_sha256": "d144f0ac83fd0e65dfec43b67d1b43d674756ec491a495a3af0e4df1756eef48",
+      "weights_sha256": "19634083659deb15b159f934d213508ba402b2086e6ad06fd8ccb508724ae3c5"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 45,
+      "method": "sdca",
+      "metric_sha256": "11ce1a27285852e6742fc7e5d544b47d85a6f554973775718ca7f777064fe1c3",
+      "weights_sha256": "13341bcf9d42e1eb97bf86d977280ec56c6b01998b3354a4398539ec38078459"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 46,
+      "method": "bdsvm",
+      "metric_sha256": "b993533d26e7d6628b3dd931f9e0f2d8ffd9ff9c68e7c0c3a1b6b5f8e10a5eee",
+      "weights_sha256": "fd39f1c02a898b93b8f887bc5eb5c671649bac6ef50c71dd83af425deed417ee"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 46,
+      "method": "centralized",
+      "metric_sha256": "4e8df50c5db6c5d0d396da327426ce08954e4a5198a0e6217bb29d4834dda03a",
+      "weights_sha256": "57f41e822c9eefd64c14567e1cff82c560549488323247f778d5e32fe1a7ca4c"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 46,
+      "method": "choco",
+      "metric_sha256": "09e896fca8b28788fba8a3d8de8da212a6962266769aecf10f2e7f3f4912a789",
+      "weights_sha256": "b87b20831013659bf3316721935b6934e8f6fa06010772cafb99b0aca1d141dd"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 46,
+      "method": "cocoa",
+      "metric_sha256": "018c72f35f359d1bc55a329964a76707e8b9fabda072eeb310ae27d3e894caec",
+      "weights_sha256": "8981da26de4bb9ad511584ba8697e2aa0a18a079ba40231e7718358669fb4dbb"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 46,
+      "method": "cocoa_plus",
+      "metric_sha256": "b2ac0142d244e0b0149829a9bff7bdb11efc09092194011f574cae921e04d0db",
+      "weights_sha256": "50177e5535a9d6de330d62101e9654c104fcdf5bc59c37122c458c5d12948f76"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 46,
+      "method": "cola",
+      "metric_sha256": "a1fdb30acfd6f986aa036738794a7853b192430ae5b51b1eb06a76111d6ac26d",
+      "weights_sha256": "55d03e58d4be4babac2f38f3909f2b2fd770899785008ee3ed5e013bede52c8c"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 46,
+      "method": "fedavg",
+      "metric_sha256": "3f204c32fd1b87b97f195a3b25c6e9c08ae52f7548ffd1548ca910c6fe0f9c4d",
+      "weights_sha256": "8a8002e3ded4be530bf74d267940757576a74ccfff217030154dc820a43817cc"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 46,
+      "method": "gadget",
+      "metric_sha256": "6ec6e115c756547a4359dac5d7238d86969ca67fd5af65d42c68575f5ac1fc1c",
+      "weights_sha256": "595e0e2d455a672a2fe34ae9816fd9e8a4ade50fdf9551966b4427f93b867aaf"
+    },
+    {
+      "dataset": "webspam",
+      "seed": 46,
+      "method": "sdca",
+      "metric_sha256": "bc7969ff4a32c03c5562146393ad0fcb14b661166f00e327c8c762ee2a94db27",
+      "weights_sha256": "3d4dc2bee82483cf9742ab53fa34294ac4f162f728dd9a6e6d728a9c784dbbd2"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 42,
+      "method": "bdsvm",
+      "metric_sha256": "bdda73f5a5e6007fa0451cd24d8d8a62552ddd486af563e68da09a579ec5efb4",
+      "weights_sha256": "668064ae26bb6eae197262e7a3e241529a7327c2d09a10feb2e942d9f2b51075"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 42,
+      "method": "centralized",
+      "metric_sha256": "7e3c3960f6f9b7f83548cdaccc721954fb9ccef43f443a2fc3b5f232ab897308",
+      "weights_sha256": "783aa684d8fc056040966636b9a187a462fc11541269fc4d28600ada8d2c9969"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 42,
+      "method": "choco",
+      "metric_sha256": "4c37ab251895f72da6cb863f93ce6839a766fc582516626a9770035f68db3fed",
+      "weights_sha256": "49ac0c5c6277e02d462156232c2770e8fd972916999c1be26aba184d02e794c0"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 42,
+      "method": "cocoa",
+      "metric_sha256": "a0a0725e28d9c0d468fc39187e98e68b49a9f7b08c6b1759320e40de2e7027f9",
+      "weights_sha256": "55057775c3c9c4c2ca6faeb21c170395ded8c7bbc1710fd1bb44762bb570afd3"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 42,
+      "method": "cocoa_plus",
+      "metric_sha256": "80b8ce4a4e5fc0a65760f99097e54b2d67fb5b38fab4ade072f19c240c7e2cc9",
+      "weights_sha256": "1de2b85368bcb02788fd7529a4ded0e434069ea22830b0853783635378f13ff5"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 42,
+      "method": "cola",
+      "metric_sha256": "9a6ab14ea4ffd6f32d86def4c55fef58ecf08f9969009bd9ae2df158e072e6b9",
+      "weights_sha256": "ea48e689200228629777a53fca1558e11882c8c77b4eda9b72ad63235445b7e3"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 42,
+      "method": "fedavg",
+      "metric_sha256": "8c6d41c9648cdd201b1cbd3efdf1c909a6c4dd5cb38715dd5e9075eab32147b0",
+      "weights_sha256": "b4ce639887bb9685156305aae4bc6f8c9f50976bf91f91c44943e52501c776a5"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 42,
+      "method": "gadget",
+      "metric_sha256": "9bf984e9f8e32afc5ad264919b0b8786d0789737802c19ef9b8c824b7cdfea86",
+      "weights_sha256": "b4e7cfd31b9e7f0444d44e15ecfa34062d2fb40bcd7b18ae8c9075ce8f838187"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 42,
+      "method": "sdca",
+      "metric_sha256": "860beafb0532bdda01e8c269540234264fd663c4294dc11ea15eb361d79741f6",
+      "weights_sha256": "5dbaba6312bc1ca24d0bdba0c59f416952911ec155b30621b514c2a0390f740e"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 43,
+      "method": "bdsvm",
+      "metric_sha256": "7dc1918ff306232d87e1df3a6dd3612d3f560b91a4fe0361609ebcd5b38e6f75",
+      "weights_sha256": "1b5d47ddd70b8600b071cc80e017aeb56e17568d37f6294941e653e424112851"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 43,
+      "method": "centralized",
+      "metric_sha256": "a4e772eb7c80d9f70349ecc4e9e574b7210d134a5706e675be11990932bc88e4",
+      "weights_sha256": "51e619ba621af649a5c67f98007573d85908ac78d1defbe647bbb939f492a17c"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 43,
+      "method": "choco",
+      "metric_sha256": "4eb0f7b94a2bf164789fafd689d9e3470239bfd3585957b7041dda7ae0d65116",
+      "weights_sha256": "0c9b37608e29d91294c1baef200ae57d3428ad0458b6c7ad84fcc693fe88de88"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 43,
+      "method": "cocoa",
+      "metric_sha256": "dd2d44eefc5d9d61e2247f775a0c794aefbb6221733250f492e1ef75737c65aa",
+      "weights_sha256": "6abfc069407e37aeb024894983dc5c9dc394ce970c7ea4ddb56a29b3a4ed98e4"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 43,
+      "method": "cocoa_plus",
+      "metric_sha256": "558e85d0051ac8e39fa488107d45296499f451533972b8d6ceef89532793ff55",
+      "weights_sha256": "85c9336ae94942111dca877c140e62f5e4f2235a9c190fb445fe26456c3c85f2"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 43,
+      "method": "cola",
+      "metric_sha256": "ab143969ab8ba3356e163597c06487e1023ccb1dc6040d3ba4881969322bdc18",
+      "weights_sha256": "bf3fd3146974a6e5f934dd273f7aed5e6afcd22ae56583d8ed5e1bead56c467b"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 43,
+      "method": "fedavg",
+      "metric_sha256": "169ec494f90a3dd222cee111cf441215ec11002d1551e6b389e3922f2fb5f699",
+      "weights_sha256": "507e53cb964db6d122cae475e2b4d6b0b049a0638e7b3f59d762303ae23992e8"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 43,
+      "method": "gadget",
+      "metric_sha256": "a45bb0b9a535d490b7599575f8df99bcea5d0ff9f99cde14619cb20a46855bab",
+      "weights_sha256": "3ff735b4db346f62736520b827af37e323a9a89db1a7f7361ad6a21737549209"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 43,
+      "method": "sdca",
+      "metric_sha256": "5f22fb89c7fa7a8093726bb7e8a9d908aaeeda38def9b7b853ac5a88920b0c4a",
+      "weights_sha256": "cc4cf51c9d533d274f0489281b21e3f3590f1cb837ddf9fa1990c0c3f5bf210e"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 44,
+      "method": "bdsvm",
+      "metric_sha256": "0ad18ad48bcdada0b7d2bd84068916f424aaf4f72742a8f9b4baf059b8eadebb",
+      "weights_sha256": "8da07b309e71bf7c8d17169a659fa54865178638b911d8900e500b30e681c62f"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 44,
+      "method": "centralized",
+      "metric_sha256": "9298d01ac815136f20e2ddda12ddf9d1bb60f85e8ee204a017a704d366b07a28",
+      "weights_sha256": "3327bad9b0b1b4abfd55ad080f062cbd80b551571e021de05c6712ef167216b5"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 44,
+      "method": "choco",
+      "metric_sha256": "acd2c6b0f726bc8bd5abe7f1c332e27f65d87015527c1328887a65af82eeeae3",
+      "weights_sha256": "0d0b8543f6d7736067ffae23ccbdbf5a3ca58b09c9cecead30326c46439e6c7f"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 44,
+      "method": "cocoa",
+      "metric_sha256": "7f57e5c9557ca55af50265f1646a78dc4013a3c6963a3499aff37cbaa6bce3d4",
+      "weights_sha256": "71977b38003cbc487bdd8c91b77c19370fa4fd0a186f01cce70feb9ebbccc05f"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 44,
+      "method": "cocoa_plus",
+      "metric_sha256": "b777d242693644a8b1a3ab254db6b34a20cc6712c7edc7244c3bab200a792e86",
+      "weights_sha256": "308c1d90777450b7deb3cc5983df24fc40af550ce35a5806af750c826316142d"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 44,
+      "method": "cola",
+      "metric_sha256": "65a83315f7a35252eefce79ab8047841520cbdb8ad0ea458cd7b6938e6e9e94e",
+      "weights_sha256": "c26c399d719d2a8f9f3c5112473cfc4e4afe524e95d4b87452bc2031ab7191bf"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 44,
+      "method": "fedavg",
+      "metric_sha256": "53f0a85cd3465491b18653d24f07ef75ba65760c3f74be9e9a9034ca999cd4e3",
+      "weights_sha256": "fdbf3a6da759781e3ee9dc3d76a697e240d2c2a42768712af2b5fd1ad9c885f3"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 44,
+      "method": "gadget",
+      "metric_sha256": "65220d22f9f7a98332e1f69dd21dc406ea6a9ee62768dbc438fa23e4fc920fe9",
+      "weights_sha256": "41ecd8f2714b00f58229ba45b01fe8fdfade0f1996eba5e87bc2c80b52384401"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 44,
+      "method": "sdca",
+      "metric_sha256": "952b5746f49ac4af0df695aa2304900aec3a1a16d783f561e75729f9406034f4",
+      "weights_sha256": "df3ca0951f47d8a03c23f34bb1fcfe02f0a5b83029c297dd41747193d4f85ede"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 45,
+      "method": "bdsvm",
+      "metric_sha256": "4e47c45d859fa3ed8ef6f7f68644839f510e93bc060dedf7c6cfbfd349ade530",
+      "weights_sha256": "16530aa8ba77c9e2f86a2b4d97ec65463e10b65b5528a9e18a0bc9860b3d3358"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 45,
+      "method": "centralized",
+      "metric_sha256": "324eef84151be7b468872dacb560edc5ab9160cb8737370ec6059aedf9d2f501",
+      "weights_sha256": "7cf3564b4d6ca41887379e12a4701519260da586f07983861ed0cb4a91aaaa5a"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 45,
+      "method": "choco",
+      "metric_sha256": "70b876dd504b735d86307a37ea445e065dc98a5fe8947469acb2eb6640f41cf4",
+      "weights_sha256": "a124d5d6a0ccaa6b61759d255852dace1a987e89c179cfe6d78f20c5b61c9101"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 45,
+      "method": "cocoa",
+      "metric_sha256": "ca59a731cd3ae288330f97ce009e7ad7b0b4af0bb1a1c8972ef05729c3a1f45a",
+      "weights_sha256": "4897c3dd68fe4137cf5b961b7bc54e01ad899d3f222339297ffa334a646b4a8e"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 45,
+      "method": "cocoa_plus",
+      "metric_sha256": "8c0b820c44be931a884bc01e178931a7a2d66012b09de8ee64365349a084cd80",
+      "weights_sha256": "a922e6c15d5b04f4d5654791587d4c9681d4efbf1acc1021950951f1be3cce4f"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 45,
+      "method": "cola",
+      "metric_sha256": "81e1bd696f22fa38c93b31c89f73e2745d7356690a3becf1c8cc3c6f911ad5bc",
+      "weights_sha256": "439449f1ba7797572c71f9a779c6dcaf8e3d35c15c8a8ed11852e9a0b040b779"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 45,
+      "method": "fedavg",
+      "metric_sha256": "ea61629643bbe349d30cd13ef0d61abc3406a91ae6ba86ce82ee6a0455e3b98e",
+      "weights_sha256": "c537852da0b710b048c1aef6f9ad96d4de6966903ab1f508bcf01ce55168daa8"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 45,
+      "method": "gadget",
+      "metric_sha256": "5779192b74c10234852c81ecd643bf221b99991a37897e44eca1a432fa30bef6",
+      "weights_sha256": "2afbd295d366c46320921bc63cd22ab92f3851615c1cb897be787472669fbf39"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 45,
+      "method": "sdca",
+      "metric_sha256": "503568b521c99a293b12f1e663b5529f7e4503b21b30b9c68713df4ce87efd62",
+      "weights_sha256": "6849be28776dccac7e3d35a4b03dac7986a3a3fed368c810b7906a4fbefb3870"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 46,
+      "method": "bdsvm",
+      "metric_sha256": "9531159237dcac855df00c41622804fe1fd99388efd28b340db0cb79afd622d2",
+      "weights_sha256": "19e075fb6338a0fc781d9f6ea197525f71a6453e5cbdbc4f1d27d2aac13b9c66"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 46,
+      "method": "centralized",
+      "metric_sha256": "46f634e453edfcd4f6a241a2eba98d856826d746588eb878b4946e68dab26390",
+      "weights_sha256": "eedbbb8349ba6474ea386d2025086d72d1fabb89bcdd2884cd1228d04d1a1651"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 46,
+      "method": "choco",
+      "metric_sha256": "8ec6c02e27f0a23ae2ddb8bfb1032247a86aed3729fbd05653123c65e005e791",
+      "weights_sha256": "ddfaaa2fac17e1d594d5d5c1655fd982045d7eeded8daade8bea47315b589d3e"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 46,
+      "method": "cocoa",
+      "metric_sha256": "8bec8ab46f734af2a64139ff9f2f4e7cbe7b4df9a8cfb78c6bfd3e4b12e45001",
+      "weights_sha256": "7edd5fdc1b3b7bf60ae0921a1983e787c900d9cabda17623ab67300605ac01e6"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 46,
+      "method": "cocoa_plus",
+      "metric_sha256": "8077e6850e858264bd9b3c04da1473be72395af6c88fb555f90cdca8e6c7d1ae",
+      "weights_sha256": "bcfbb6584b6817f41053bf3d1d02e102843a2d71582752c7910723b13480be5d"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 46,
+      "method": "cola",
+      "metric_sha256": "1d74e765d99f0eb6bf45ca12d4987e980323b9655760fdc0086daea6ec63d02d",
+      "weights_sha256": "47ce8f0aca8873aea05e12dec63cbe9bb1c53e8a04a718818bca10447e6df103"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 46,
+      "method": "fedavg",
+      "metric_sha256": "5796e77b1f58decfd4ff36ee34a8a05c6c62047be4e90a5d8783b6d4a348e49b",
+      "weights_sha256": "a1818d5d29281fe6e37956d85720eacb3cda861d11c25ad60a3fdd6509e3533e"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 46,
+      "method": "gadget",
+      "metric_sha256": "2f65c35777dd0e0a30e3f51b717eb6bbdf3f002d2a98a6777a49dcbc32a7ef54",
+      "weights_sha256": "eb6eda119ab80e7a7b0525f568863ec0e9e939c2f774dd112c050a88d79b4123"
+    },
+    {
+      "dataset": "w8a",
+      "seed": 46,
+      "method": "sdca",
+      "metric_sha256": "6f52d208caf7e37f7b9980a710c8cde6253067ec20aec9b15b36f8c4919af777",
+      "weights_sha256": "afb63425fc0d487afbc5422f158a8a3505636e293de52b7ee146de801a650bfe"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 42,
+      "method": "bdsvm",
+      "metric_sha256": "ab64cf86b28412295a61fb9ac09853cdd2a4eaaeaaad758fb7c37b33bffe5a59",
+      "weights_sha256": "efe08dbaef535ce5b312099e41527f090fa1c67674bd4bb2899d66fd27b54bd9"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 42,
+      "method": "centralized",
+      "metric_sha256": "2960b4f8f365dd92dea2fadf25adc85677baa466ebaddd6398d32570b64ba1fe",
+      "weights_sha256": "6da0fc547b8f53d57ee88ecd37b5ee2896b4735995e5c78524dff90ca79f5b19"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 42,
+      "method": "choco",
+      "metric_sha256": "8c25e70561759ae8e81677d23e20e48c0bd2caf0970acf751b6f7fc6d78b27fd",
+      "weights_sha256": "49de42bd0209db9df178ebb27a9ce6f98a7cc3eff92cc73f1aa5ce5587d8daae"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 42,
+      "method": "cocoa",
+      "metric_sha256": "b4bf013928f5c7e899ef93aebaa6fe59516e518b6f803aea05b6680cf6ac4bea",
+      "weights_sha256": "cb8f9a54ff610c753d88b6ef90ab67cf7e929892ce81486a465b9fa4147f741d"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 42,
+      "method": "cocoa_plus",
+      "metric_sha256": "1de61bf81df1c1c09d3d3b743f345cc8b3af2455d0a57f54cdae29cc3bf7fe18",
+      "weights_sha256": "3c64e781246c11cf33893f72fd5e4832d25c89fa54fc7c3909d1309a83d7f50c"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 42,
+      "method": "cola",
+      "metric_sha256": "e61441cb3de2c83fdce18f9aa167548dc0348494da3bcf0c7297a18ee6879ead",
+      "weights_sha256": "238a11f0b9b1471d4d9bfd84f73e751698e38ce62a1db141be253989b3e6f753"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 42,
+      "method": "fedavg",
+      "metric_sha256": "895deb576f5bbf7c31c26fa9b8594b1730ab65478280c6f6d1704ac982d1d3d8",
+      "weights_sha256": "1bac7fd5b1ab5b9a8901bb3506aaa6c32d476777c2188daa6a34b1b9ee0f18fe"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 42,
+      "method": "gadget",
+      "metric_sha256": "4c4548acf201a32bcc9730d44839bee39baea2ffd0cf03a68de6e2b8c9148e23",
+      "weights_sha256": "88debf998d943fedf8c4db0bfd68f2528ba5d96aab23e4fae7ca2492fc53e4be"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 42,
+      "method": "sdca",
+      "metric_sha256": "2b500e6964a15989c7d29bc7f14151293bb911f2df7447244837268aa408c9fc",
+      "weights_sha256": "1aa89f215ce19b4f29481099bf17ab0100d408e14d1752e7167c5bd372257453"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 43,
+      "method": "bdsvm",
+      "metric_sha256": "9858e416693d7085a24a0d68e63d6cad705ecd0c36a077aa906f759cf46c2ffe",
+      "weights_sha256": "1766f9989e2e642b29c9813bb7b4372c19a2dc56abfc53c4ff4c67665ea929cc"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 43,
+      "method": "centralized",
+      "metric_sha256": "b1cb2cfed1767071bb76416bb0f1d11326f784c6b2cd14bcfbd47b2955acb494",
+      "weights_sha256": "9080a0f9d9b88e37cd28ff4f4e8b9f5d830135f76bfcc9f21f40cfe99fc57323"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 43,
+      "method": "choco",
+      "metric_sha256": "e7882ce8aea7ae94bb61de2552d90eddb018a803f024c928e5e26e0d11ccffd5",
+      "weights_sha256": "922dacbfd6eb3a29a950154c73abe25b1ecbeacb28f9668c975b84a0a4911c7a"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 43,
+      "method": "cocoa",
+      "metric_sha256": "9a47619e56c19146452e6097f937b4fe5ae4355d59cfed2877ff0d3023e90d7f",
+      "weights_sha256": "0b95da64314f7c9d61f3593c7ec4a5c3e80e77c466ca24c71987a6e8aa26d3d7"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 43,
+      "method": "cocoa_plus",
+      "metric_sha256": "9d04e5eafeae52425422abc1d8bceced134dfcfb6f83abae85441464d74d78b1",
+      "weights_sha256": "145679c5ec63e0dc9a8e28ce3f61c4e933689ac09fd22f970d42720cb8dfbdd9"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 43,
+      "method": "cola",
+      "metric_sha256": "5c21bb4acb3fe6a1d3dfd4f78c0b638ddea55c0a4158346921752eea6754f636",
+      "weights_sha256": "e479719aa0c70b514e4feb223f431d502cc82aaeb012336e34eac20d7c5c8a96"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 43,
+      "method": "fedavg",
+      "metric_sha256": "16437b36e71d21c9cc1db2d9ba8bd8a8264ca4b97a2b4fcfc043d705d5fb3abe",
+      "weights_sha256": "73d949a45d7e8f62bb3ad2aeecf82047bab631807c6e23eff337c4ef5b6be534"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 43,
+      "method": "gadget",
+      "metric_sha256": "b876d344205625cd7479d9edd4f0d67f99e09aed706c02dea8000ed26faa4dc6",
+      "weights_sha256": "7f741b5f06442c36db342ed99f70348b81daa6167da9e06fc5640bd5c928558c"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 43,
+      "method": "sdca",
+      "metric_sha256": "50d8f3c704536ba1be672c92d2ac442dcce6047c030b63c00c3dc5247e585f40",
+      "weights_sha256": "ed69b2d634007e78285bde432e2e1ba48f277afea64624758b4a6cc0f37f958c"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 44,
+      "method": "bdsvm",
+      "metric_sha256": "dc2d63324f64d24df2711fb847d132e744d10d8d2c2f916296e32ed517d42331",
+      "weights_sha256": "9fec7b16ab788da6fce86782bef9e1fc2e131a49855c0155d99eb606693fa71b"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 44,
+      "method": "centralized",
+      "metric_sha256": "fc0f30d68aa25a72ff18c3b1016868a4743142cb96e743e521811bc7f8e50be4",
+      "weights_sha256": "1b819f1dbd01ea8d85ec74667e2d1c6599875f8dd04e6d6041a66d7d290397b3"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 44,
+      "method": "choco",
+      "metric_sha256": "47e6fe88ed9c16a7fcb27039213fad2cb9b1146a8884761f6605217851020e7f",
+      "weights_sha256": "1edb0dfea539f8ffc715d575d7bfb83d9ebd6b042266da267da2020575d12c06"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 44,
+      "method": "cocoa",
+      "metric_sha256": "d1de15da27296371a5790c7ab5e7a2aa2d513e65b641c42186976372581ded89",
+      "weights_sha256": "46f3f986981ae7910b9adf1b137d31af4e5cd081daab960f4bdd2feeff8534e2"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 44,
+      "method": "cocoa_plus",
+      "metric_sha256": "89cd89485bdbc26dbeaa4142c0c1a6bcb0758a369d3ee194f3cecc9d35298075",
+      "weights_sha256": "2ca5f8acd4f1924a038f84291efdc9e45962652d82dd2083e432d5dbe0f9edde"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 44,
+      "method": "cola",
+      "metric_sha256": "7061adfb91be4c12d94962bfa792507003e27e1a0601b532b598d2d999cec16f",
+      "weights_sha256": "c686a6469f2ed15dbf58473acebd1397337e8e2352f384f5aed15e96f7806037"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 44,
+      "method": "fedavg",
+      "metric_sha256": "111ecb3513457f6eaa2ccf2497e6daf99d19b9f9c62bb2da6532bccb72e23e7a",
+      "weights_sha256": "7a883bdd5b60a9a35c11df79ccdc83926ff9abb3f405a73e27978236fff7bf55"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 44,
+      "method": "gadget",
+      "metric_sha256": "228edceb8c9f1b7f1dcc1c3a45981cd940249c6350a5543d198a677a98f34c90",
+      "weights_sha256": "a87a3fe8023166bb89ba85459938107b25099f3ee06eb053177876c7c98b829d"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 44,
+      "method": "sdca",
+      "metric_sha256": "70592b002cf458706ba6a801f1802d37fb35e32e9f7d1b7aed4b1d91cf9c3164",
+      "weights_sha256": "f351fe3324f9e322b11b738ddcdaa9fdb53e67eeade70b84858bef4783c92427"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 45,
+      "method": "bdsvm",
+      "metric_sha256": "57413b08c45c6704a747d7a53660403ce1011b1d8802f2f807df2e4fb44b9b79",
+      "weights_sha256": "c54d035d3fb17ea6177cf2d7c724c1f9f7cad6994d421766b944645e9b2d45a2"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 45,
+      "method": "centralized",
+      "metric_sha256": "84b99e825ca16d4d9cb91eaf957beaa65e0ef72ec4ebf46ad8e4fb4c249179e2",
+      "weights_sha256": "24bcf651987926f8edec31e9c4d142ac1ac9bdf314d1f47cd029d5684ad7d102"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 45,
+      "method": "choco",
+      "metric_sha256": "034f2b502ab6d4c5de79261dced970689d19c754b13262821e360f56bdc90c2b",
+      "weights_sha256": "bc17579c9cd1586d977e298da41361777ebbc39afcf1dc4e644296af89e1154e"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 45,
+      "method": "cocoa",
+      "metric_sha256": "1e626a73b45a7654358b1c15103fdcae5dd622cd67dfa203691c95feb17476a4",
+      "weights_sha256": "37fa4b60e5461af13f7abd23d7877399eda03183290e87133a60e2669d4b3f9b"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 45,
+      "method": "cocoa_plus",
+      "metric_sha256": "a3234399b264f43fed6c3c481701a18cb36bd8ca0e1ef5a1fea1818a28193613",
+      "weights_sha256": "ae226bb00c3472208456957fc0c8228efb8586649d55944933df6df863e15208"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 45,
+      "method": "cola",
+      "metric_sha256": "0a8301d1ec69bc9cd5d85bd7333c6159a241afb1da374724f9d8df442a93cbb7",
+      "weights_sha256": "2a477951d2c15758ae64734070d89ec35ce4add8f3c5c053df2f50ec942b37ac"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 45,
+      "method": "fedavg",
+      "metric_sha256": "47c2c21bc018db748af499a519401602bbc1b8217766da4166d73be41ab26961",
+      "weights_sha256": "a83ef14126122dfae2bc9b25d1a21d62275f6d953e5f96420b1ae6df978eb233"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 45,
+      "method": "gadget",
+      "metric_sha256": "1c05d047b1ba77c4e7f868f8cdf6391d70bccabd7d9dc955b0657007b0877b8e",
+      "weights_sha256": "b302991ef54dfbfe667c8ee0b125538d6a099f7987009551a645b1b9e1fe1b7c"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 45,
+      "method": "sdca",
+      "metric_sha256": "4d62affe80ca2afa6268bdd9e352dba3f71a526ae2ec5e6e3f25ff14eedadb46",
+      "weights_sha256": "35ab00fe82c4892a59d050e7d048567d8c872f350441d80cbc9d3b779e4d62ab"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 46,
+      "method": "bdsvm",
+      "metric_sha256": "a311add497e25bc101385e7da0c1f4a32df546660bfb2a39e12cda97972a5004",
+      "weights_sha256": "3b289223b90eda0c553ee03f3d3b8e6a2f52e5c1e2c1312ae67a58a0f446bbd8"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 46,
+      "method": "centralized",
+      "metric_sha256": "1095bb6cb2aa84b8c0e094df8bad8b7934640c101acb37a44fbde24006f2b3f3",
+      "weights_sha256": "a7bf1f44bf2e8e06b1b8eb7c962e96c82babaf67b777d565bc4ec9fbbac3462a"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 46,
+      "method": "choco",
+      "metric_sha256": "fcbf1d396c954c729501f59041e6c9fb4ce4a962cd45e6b3f0da0a26ee88f631",
+      "weights_sha256": "6544f907aaf01621237c387065d953310ad4e70ce1240c9ed378b3fed8ec69e0"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 46,
+      "method": "cocoa",
+      "metric_sha256": "a7f5ae4218ebad76587b1a4b411f11e7a7cc3e112bda57e8b877c57ec270c6ba",
+      "weights_sha256": "0736d1323f4612c41ab3bbce2eacf7d9318254a3926b4cb7d26407ff0da5cf92"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 46,
+      "method": "cocoa_plus",
+      "metric_sha256": "089bc8890a7e92e0daa8e19b68e28207c37e08ea29bd72d42ec7a915f554e3f2",
+      "weights_sha256": "7e730ada7a368e8c0ba891ef5c9176720ed86b826d73c67a714dcf115697a0c2"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 46,
+      "method": "cola",
+      "metric_sha256": "4069ba60dae761b29e82cbe20c06cc75e24ec1354391d601424725652cba993f",
+      "weights_sha256": "db63dd42bef3bab518adbb1c3378063290573e2b075b03952ccdaaea36786c55"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 46,
+      "method": "fedavg",
+      "metric_sha256": "c84dd7dadf66a414b38afe688a9a3c8fbb922ccff3fc67da3bc61d180b22b821",
+      "weights_sha256": "fb687704b1141be1f04243c505dae16122a4fda2d05aff074d7926e01cea5fb0"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 46,
+      "method": "gadget",
+      "metric_sha256": "29cd19703a2c07adb8d667548a2f87dd7e93a0475e6ffe67296f2b10097f4bd5",
+      "weights_sha256": "40ce4d911109978cf84c9fafa7be8f40065bbb4038a66edc096e38f4ae0e6a4b"
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 46,
+      "method": "sdca",
+      "metric_sha256": "7a4dcc7f929a4e68abed9713637fe5481bde0689d93e965f50a5f1bc6b360b5b",
+      "weights_sha256": "0bf7049cd1a781e815a0f6dcc45cb25a20ca05f753c1bfbf5fb10201d9104456"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 42,
+      "method": "bdsvm",
+      "metric_sha256": "c92b2be629636a4e4e3a2d3531b01533057c057847eb9f8eb3fbc74b13ba2b42",
+      "weights_sha256": "509ab9345cd27f83514bf732cd9e164a624798d7b3ce865b523ec7bbbd89b778"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 42,
+      "method": "centralized",
+      "metric_sha256": "40db7a6ad2c26c1ff6c23be5c2de2487623fabb123a0584e599fe312b8ca36e0",
+      "weights_sha256": "f842c3cea83bd969ae903672284868bca9006b933fc7373d8a1d93ac9364d305"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 42,
+      "method": "choco",
+      "metric_sha256": "71ea2e8fbae260fd4469ec62b1eb1d944c4d1af427e1968b01fc6b694b985e92",
+      "weights_sha256": "35690986f98f92bc4ad7737b67ef7cba2a3cd6863221f1775fd2f47dd222a70d"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 42,
+      "method": "cocoa",
+      "metric_sha256": "5472730133ec00556255dbfe76c7166edc2daf23dae7559b00fded1e64b7e490",
+      "weights_sha256": "94b034d3a63c662cb876f78316883654a3813e4eb1e653e1708e5dab17b839fe"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 42,
+      "method": "cocoa_plus",
+      "metric_sha256": "5ec1bc79ba2fe36101bfabf04206501b7b8f1abe741218e669b83d0ba634de0a",
+      "weights_sha256": "a3683fda74cb35dcbf4bc617702d515c1be286192a229fb177aa3b1a0dea08b1"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 42,
+      "method": "cola",
+      "metric_sha256": "6c7fe3a24886f02b923d4865b32ddd5132682aa0ace0064c9c8dbfc97c9900e7",
+      "weights_sha256": "372235f3491e504966ab37f427869984dc3cdd9ec8b8884fdfd20346da4d7fcb"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 42,
+      "method": "fedavg",
+      "metric_sha256": "25478b922e1dafbb8fbf21a3ef5bede660234acf3008cb763934f25b374eb3c0",
+      "weights_sha256": "9ce826ca928859b43cfcbe35b0ed9920e63433440d3c36e11534184dbaed9e50"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 42,
+      "method": "gadget",
+      "metric_sha256": "f85e9f57324512a74639722e9bc9e22afdcec79566f4c8eaaffae8f9c9fdc441",
+      "weights_sha256": "c1f9e41b88a00a04c23e8f0d6f31667a6951baa17560607cb0ee1546bb6d553b"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 42,
+      "method": "sdca",
+      "metric_sha256": "4d1e47b5f4150776fb3491c29012bc9d83a2e55d041ac8518d984d1d24574553",
+      "weights_sha256": "1b1d662b3f51ba944f0062405551774f954b60b06d079d543dbbbd2d6c37cc5f"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 43,
+      "method": "bdsvm",
+      "metric_sha256": "524f28f80b3473171d2600533e3258795b4e3105db142e4931859aedf078764b",
+      "weights_sha256": "d50403fabf9af17934d050f7287732f9ece0f7d1e6ae5ef8e70cdb343f7be54a"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 43,
+      "method": "centralized",
+      "metric_sha256": "72a3f1fbce5d4d94e7a16b62acb9c3c65fc40a8c54a96d84696eb9959b2a836b",
+      "weights_sha256": "d76d16c6d89350571146193ecf5443f3cef25aeb08c0a6b411ec1d7d66336ebf"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 43,
+      "method": "choco",
+      "metric_sha256": "712f2de4c82f48bfafd1716b29c6f24dc0cbe81e71284959d41c8c05e8304a57",
+      "weights_sha256": "fd93759c6604cdc1eec4e6738d55f4126559db889fdd21bc1945ebfd7f8ec307"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 43,
+      "method": "cocoa",
+      "metric_sha256": "97024206e9008756d95af5d44b873a6275a52ac78bc10f65f585af1f2563cab5",
+      "weights_sha256": "b7d3d2d25d802ecb71ba924a8cbf36171dfba998e27ace60e85462b35f1f234f"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 43,
+      "method": "cocoa_plus",
+      "metric_sha256": "459e3e3450bc9565355ddddb319b23789f17ad773a6b39780b8eea5a9b9060f3",
+      "weights_sha256": "17432b8c591469e7555441532013375c790eafbcdf2f3f9c22e65452bceaac15"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 43,
+      "method": "cola",
+      "metric_sha256": "fcd9394da71ccd80372ecaa07e7d2ccce9606ae47c6b82e731e8f8453dd9274f",
+      "weights_sha256": "a7326cefd1f922a61408638234f314b6dbb9a90cded8c363a616d406ce2e837a"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 43,
+      "method": "fedavg",
+      "metric_sha256": "bb9cccf410a2fff54266fc0ec8f9c1c3d3f1e0d4e1ad01926942ad81c8434411",
+      "weights_sha256": "b0a95afbb50e82fc4a175e4c3662e509d9606eb6f30c65fe7bf043adba293bf4"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 43,
+      "method": "gadget",
+      "metric_sha256": "aadf84711bbbfd2ea2b7fbf6028c2b55a8cb60f88277be88fbe2369626545868",
+      "weights_sha256": "b6d8bcac2fdfafbc29b5e7085667a8d90e00708adca6aa6ea6a3cb78453b22a6"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 43,
+      "method": "sdca",
+      "metric_sha256": "a088a29e0f9c1f47c2f6e7b7268d1d62b973dee1cbec29f641e2db4ca584ee07",
+      "weights_sha256": "0cc0724c335787369f0d80825ce861917336133178c78e1fa6e31c1e39d3ba34"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 44,
+      "method": "bdsvm",
+      "metric_sha256": "b86ff5960267fdd94ea9f09b9b532d45ee966abbc2d8880f2973a02713aabdb3",
+      "weights_sha256": "cbf12ac0ed959500cda4b80b904241530194778ef2ea45786d21729cc34b74d9"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 44,
+      "method": "centralized",
+      "metric_sha256": "49f76d7ff967abb82cded8d645033356fbe85c30f9443a02f43dbf89d09f4832",
+      "weights_sha256": "1cd3ba55f50ec50f556c3897fc336b6ff7fec2b5fb6f21ffdd395af8aff51a0d"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 44,
+      "method": "choco",
+      "metric_sha256": "db56357d941fec646706cb72816885203a3fd08238b01a569d9b9ca251c3ac4d",
+      "weights_sha256": "68f923a0c6ceee5077ccd9f0770e8d51e4a7bef971230cad7a8bc8edc7ce00c8"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 44,
+      "method": "cocoa",
+      "metric_sha256": "7fbf28412659d02f4e55be9fbc4211aba286acd362eb16983ec738cac4ac0d3a",
+      "weights_sha256": "e96389f0a374eaa064694515834acf5c3f6b0d3d7e248499330b02b12cb1e1ef"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 44,
+      "method": "cocoa_plus",
+      "metric_sha256": "a78b04808c52bc7dbb17ace0135ec089c8bcc2d0dd88a41073d7f6d4fdec683c",
+      "weights_sha256": "e4ef935c0797b7278a2525470f91e3b5b3c20ae1aa9a1109f7b119d6573990c0"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 44,
+      "method": "cola",
+      "metric_sha256": "b1050b0ed673608a37d3329712f868e07066424143ae50473ba71413620c2273",
+      "weights_sha256": "30f67bcbf1b7ac93b330932ea1f9d40f761b370996c395a075fa7573a3be1f5d"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 44,
+      "method": "fedavg",
+      "metric_sha256": "87fc31c6d1ea0017b5dea65ad5c548d0c5c0b33f1d74f44225c9685910e2e4d7",
+      "weights_sha256": "6b256bc09509a738a11df21338dbc26984f09ae01314d22a7aa3cd84b93e4e21"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 44,
+      "method": "gadget",
+      "metric_sha256": "ca9e64d927ef47dc67c4052a3bf29183bf28372b2e48a4d2641485ef263083e1",
+      "weights_sha256": "fe55c54855bdb2ea6c100249f57c085b5149762f1b91529b9b94dff7bc11e4dd"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 44,
+      "method": "sdca",
+      "metric_sha256": "950432fd24be9bde245247597e4cfb3198f41d5ad98e552d2da7e319e56edc92",
+      "weights_sha256": "117f88d95f81101dc6a1878f3acbf36f2a0637cf1cb9223509527e02a56a47e8"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 45,
+      "method": "bdsvm",
+      "metric_sha256": "776be32ee7819e5b79ee9df659f4c6a03ce0faf89de12b05c34a0c16ef15bd52",
+      "weights_sha256": "9833dc3498d16f60d4b94d4bdaf32bbbfb56d998f22910a63d2b18d0a0cbcc58"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 45,
+      "method": "centralized",
+      "metric_sha256": "13f48aad6cf4e43da44e90931be23e4e51581ef9de95fa565e9ac11898ea2ff4",
+      "weights_sha256": "1454ff4e32c7664f5d97f591ae51a3d0f1c4497abfba0ae49058a893ebb48515"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 45,
+      "method": "choco",
+      "metric_sha256": "fbdc6484814a82d43245255ac9fe25e3a9a04978b51dc01d7264ab2133b35814",
+      "weights_sha256": "4024231097cd144f8fd991398c36484a2a66f05a33c794b9f308e1b0a7abc60e"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 45,
+      "method": "cocoa",
+      "metric_sha256": "498306a36c07e5392c7b185abb353e565f732d22add7211ef7826145b48f0df1",
+      "weights_sha256": "1281a1bf51cc6caebe633c503e2dbbec69d40c23cba13f5334cfbe86037e2421"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 45,
+      "method": "cocoa_plus",
+      "metric_sha256": "a33e66c7c01b098307eb30c360aacfb3c0558b417288549868a693582c0af29b",
+      "weights_sha256": "a5dcb7366c21a5932faf6d97969503d4a1e83f47cbfd3b569281fd6850b686fe"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 45,
+      "method": "cola",
+      "metric_sha256": "718a6aa2b60972b0c21228ce53b2eceaf5c1e9807fa02dfc726363123381e252",
+      "weights_sha256": "4b074f48863d62951e923fc053c5dcd80c5b5410422c164c386a65204db2c8b1"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 45,
+      "method": "fedavg",
+      "metric_sha256": "ea5f0059813735bb0e3b9448f1bb8dd56a3ee8802c76a43d10a8922e2b7a633b",
+      "weights_sha256": "9cf00ee4a72634cb701558ab8f66dfa86dd01632ac4302f3303051a60c470841"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 45,
+      "method": "gadget",
+      "metric_sha256": "ab6cd5dd0b698bd440ffe9bdbe9e33790c465ad3f2ab5e6ad379a51e3b94873b",
+      "weights_sha256": "e096017f51f603b316b4617098bfc417031283a7b4f4628fd77a434cf211ef21"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 45,
+      "method": "sdca",
+      "metric_sha256": "71e625a9a67bbe2194bcad547c72b0aa8fba6902f99b16127ccf052106974a11",
+      "weights_sha256": "28ac60f7cec35cd768afb32f4a83de3992182531387a9ae2c61a9e9437c7127e"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 46,
+      "method": "bdsvm",
+      "metric_sha256": "a184b541516cc88e8f0484fe65c67862b97da04825cf11c389dba34ab8f9d173",
+      "weights_sha256": "86132269512fb01449cb03d3d1c203f44eaf24bf6677d73418808411316846ce"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 46,
+      "method": "centralized",
+      "metric_sha256": "d4f11424d8914ede17dee1db0581f1bb48cb796193489a12f3c45bb32c661d27",
+      "weights_sha256": "08cf9ab68c3908c0b6be40b5126376495b04ed70a2b93ea8644eec4c2f107d38"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 46,
+      "method": "choco",
+      "metric_sha256": "fe1c1e9d18cf26c396b0da816df9dbf2034b6969dc2eff4eb5dc06336f46f495",
+      "weights_sha256": "6f09ebbb055381f16fb15f8e531dfd7ce5d21f7c727f3fe8cd4674bb11e982d5"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 46,
+      "method": "cocoa",
+      "metric_sha256": "94d4e9a191dde738d699d74983968694ab2b2d6b0f2ffe561f42bb9ecfd51e8c",
+      "weights_sha256": "297d5ed67caed4e4760bbcb32226420b2429d27e9fbacad1b94ce9a1ff84b255"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 46,
+      "method": "cocoa_plus",
+      "metric_sha256": "1e58a0f157a946fd8d46a32c0fb078c633612cfe6d8c259123bce5af7fc9aef2",
+      "weights_sha256": "f552126f1b6653551da9aa207bf0c916be83e8319454551285dcff58e1796f5a"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 46,
+      "method": "cola",
+      "metric_sha256": "ad9e7e0f53e656a52f547e941806e830010ca7db8210e665db1f051e4302f539",
+      "weights_sha256": "3ea26ec47944d3e23e6e595cd8efa4dcd16b60d280fee0af59f792113d09aff2"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 46,
+      "method": "fedavg",
+      "metric_sha256": "2cf8e53ee7f1498e242e5284f98e8199547bf2b02557921f956a9ac635623454",
+      "weights_sha256": "1117c8925a35fc5d5df3a40f292c871a345ab76be7c66ca82331ea9108a229be"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 46,
+      "method": "gadget",
+      "metric_sha256": "62d20321a52ec6e96e6e156b29dfe4c28fbf0c869023fd06bcc223bba1cf31e5",
+      "weights_sha256": "8fffb953f197bdb97557b9c2d98944efdf41dce914d6630bc437fe6318b67f7f"
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 46,
+      "method": "sdca",
+      "metric_sha256": "6d0bc7e06226ab7a9d94d3f303e82bc17db7d11e50fb899322c2c3f4d50e8a46",
+      "weights_sha256": "724ace178d0b30257150ac571d148c313ce5b6f308965b5f94e8bf2ed1f39388"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 42,
+      "method": "bdsvm",
+      "metric_sha256": "19c3ee2e613967575357b6d4902fb9451f29078ac88f89a199d16e0219b1db9e",
+      "weights_sha256": "71289d869c559b83222a0bb1a0fbb285b3d1d8a015a38f5d1d8ab6f85fbdb2bc"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 42,
+      "method": "centralized",
+      "metric_sha256": "8146e25d2ab1086313aa518fcec826fd63a34bffb7fe1370702657f03e44117c",
+      "weights_sha256": "c09566fc467f2e4edb604bd4475da03d74e4201793bc10cecb69b9f6cf1616df"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 42,
+      "method": "choco",
+      "metric_sha256": "e1e69f4976e4a611716859e47834d61ae36344328d14f8eaccd8063b07e8c92c",
+      "weights_sha256": "16a64f7cd758d417b0bbc80603250016d43dc1490430ab20373a65ba44c023b9"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 42,
+      "method": "cocoa",
+      "metric_sha256": "ecc3db798595ff2418b93fe289b8b0b486fa4bd4150d9763bf8c07a83f7a4acf",
+      "weights_sha256": "ed4f84a74b9db44bd95624d956f8c59803a12feb82f1d7756b9be87989cc6d39"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 42,
+      "method": "cocoa_plus",
+      "metric_sha256": "2712ed94be9771a355690ae97807f19f2400eb625db332784cbf4617a047960a",
+      "weights_sha256": "68fe964ca5f0346434f925675c4b266eec480268bf3349ed7cd0765618ffcd7e"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 42,
+      "method": "cola",
+      "metric_sha256": "bfd9d5b04555449e45340f17013e57c32b707566b596cbe04d052769e01146d2",
+      "weights_sha256": "7c05c1704b80ac1800e3e802e8b3fe4708ce32e562aa15dc8bbcb4fd4b412a3b"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 42,
+      "method": "fedavg",
+      "metric_sha256": "412e2d6fbe6f8cd5318067977945e0fe33ac3557ee2fbdbe6a8a2cd0de55a156",
+      "weights_sha256": "69cb00250d6727d9bf138a7c0dce4f86248d0d945003258c5c66c6063cde7c35"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 42,
+      "method": "gadget",
+      "metric_sha256": "1879353a7564970596b198d147344f809b6a6a239c325b99196c2327ae5a1a27",
+      "weights_sha256": "38d9d4fac0699c7dba8241cf3fd7afa839994e53b0e29c1770e2af9566180409"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 42,
+      "method": "sdca",
+      "metric_sha256": "5a67873150098827b7a860e7f68ce64d64e8043febf0278a507e26f32bc6fd01",
+      "weights_sha256": "581b74baf9f9c760cb4c7d373f408d4b370e878c208380a45cbbdce0f093dd7d"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 43,
+      "method": "bdsvm",
+      "metric_sha256": "e473100208a65f882115bf8fd5f32a6b9f0a1207dff6d64ce7c7f96e1a2c342a",
+      "weights_sha256": "95e1031e49df2c274755af9746243d1e85dfb4aa5bb8eea29383e639621a0e0d"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 43,
+      "method": "centralized",
+      "metric_sha256": "b97ec05e072491fbe4c6447358cc3196ce9db8d6d9e9014e459519f00eae36c1",
+      "weights_sha256": "4096608b373cd5ada8127829e014a1ca2d32c9c080ee6f60ccfaf0dea05cdbfe"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 43,
+      "method": "choco",
+      "metric_sha256": "72718a98a1a310f1f3a6b2d6347d0e2e3dd4f913f6ff94466db4da34da6ede8e",
+      "weights_sha256": "7b0d85c1f8ec2292c3f0f8ee191084f40bdb70ce6c0739302092be29e765541d"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 43,
+      "method": "cocoa",
+      "metric_sha256": "c3bd079c4efa3d524e3792872ae20781219b38c1741c4d5b077c82f731212d62",
+      "weights_sha256": "8ae5aebaceea64fcd5bacf1a2ef76e6684a9509be854f514ebb1c1bc366bad5a"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 43,
+      "method": "cocoa_plus",
+      "metric_sha256": "131b5f0777101492473eed69e023a852eea5c983409940b9a52f43613b9211ad",
+      "weights_sha256": "b53d31e63d8045390d1c6bba77e34e1f884e5ea0f895ba13cfaa8c593f0e1dc7"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 43,
+      "method": "cola",
+      "metric_sha256": "318684053fe966691fbcf3f9077cc88cdaeb384a8f4f23556d2898394343068e",
+      "weights_sha256": "3a0685c5ae7a05ed36249aa1687a2e77c924127b35420f5005ccea4554788716"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 43,
+      "method": "fedavg",
+      "metric_sha256": "c71a8863758e9bfc8bbeb16ee0afeb00e8159455213f1dcd03c0e22dc0101e80",
+      "weights_sha256": "aabca6165ac8b786b22972c3d71f29d96dfe0b253c69e18f5803926cc50af940"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 43,
+      "method": "gadget",
+      "metric_sha256": "75a1a0bf3f4ec06fff62811a70bda1390192ff908d02402995721a12b003007f",
+      "weights_sha256": "293cfd6b2b516439675c58a97ccd34922dc91f1fd1c601907554ed73e63c098a"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 43,
+      "method": "sdca",
+      "metric_sha256": "41ac6df5bc7375628fe2ee58b36f1d23a6046987e8e16c840e6adcedfca89bbe",
+      "weights_sha256": "95cb51b033cf9c3f7fe2fe6d26a35084e6d7667f2350a7d44d246dcdf9a8a9a6"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 44,
+      "method": "bdsvm",
+      "metric_sha256": "015f748d579b5bad0873c1fb37e75dbe8f2e1a52c8526185393bed1ba8266c6c",
+      "weights_sha256": "39411c976a368d2313fdddf96ce640ca5ffce3d68bef149f210a9e6144347d94"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 44,
+      "method": "centralized",
+      "metric_sha256": "b3da38683b6f4c724f1376a840cb3aa8520b58dd9192f1aab1517ee51bc62335",
+      "weights_sha256": "1c6f72ff0545ef8cdb8c8d6bd20f044ddf055237ae29727dcb6e47ffd0e6b9c6"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 44,
+      "method": "choco",
+      "metric_sha256": "56a85ceac4a61ef3d58fd93dc191cb55d5f300bd8f9242838e0d20bc915170cf",
+      "weights_sha256": "cfaeaef00b9c2e69ea2758140257788fb2f5b4dc216e9e0ef8594bbcecf6bce7"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 44,
+      "method": "cocoa",
+      "metric_sha256": "b3f800d9d03c97a4d79335815c26a624b363fbe9aeabf65a7bf97b41c9e5573c",
+      "weights_sha256": "8273d4fc8e8e49bb8079c21c4da9e9c195fed1b32a15088524d469067b7a2e08"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 44,
+      "method": "cocoa_plus",
+      "metric_sha256": "522c8323eb77bb1fddb5c105a4c52f0fee01aa099de38af360fa32e0c47658ec",
+      "weights_sha256": "cedbec4714418a9424a1105740e556ad2d21c0f1386af65c3b0811322e08a5ba"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 44,
+      "method": "cola",
+      "metric_sha256": "ed0008d44f875e89eac923c8666c6f72d0ad17723f7e9cce0383ee6fb9e78966",
+      "weights_sha256": "86479f2c588c6a3d5bc9354630fd4bbfec313b1628373e29784a98a3100f3434"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 44,
+      "method": "fedavg",
+      "metric_sha256": "924b23a48aa56ef7239ff11d0c1df110511c470c6095383ceb0f760981abca7a",
+      "weights_sha256": "becd5c71feb301af311f8ee05f5ee5b0f0399d1530371e5bf4965b278f9128e6"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 44,
+      "method": "gadget",
+      "metric_sha256": "f1f09f03a06ec3750455a338c3bd34fedca55892eae075264e1ddf771d96fbe4",
+      "weights_sha256": "5fa2a6ca81f0d8aa1bf50f214aedc19deb528868a5c3cfb2e83cbe0b714c8460"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 44,
+      "method": "sdca",
+      "metric_sha256": "67c4e192cfbe9083fc2eefffcd178f9a879c58c191fd8e1ae943c27c83359b9d",
+      "weights_sha256": "71aad8fbee13cd5537b9bf6cb98c974431bff5e8763452e548f333949521d0b9"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 45,
+      "method": "bdsvm",
+      "metric_sha256": "643d6e28394036ba906937ef00f735935aad07ac56606e0b640fdcd7d18fcf84",
+      "weights_sha256": "4c73dd14169a7de76ec80a18a99fbefc0e5ee664379db5fcdbd290ededaa157c"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 45,
+      "method": "centralized",
+      "metric_sha256": "65304f2534b9c99fba12be6f7442428d826015f658d5d964158eb98a6f767026",
+      "weights_sha256": "b812e7d95ddfbb5f75260e44879436b0e2ed76260f63918d255f938419e31dbb"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 45,
+      "method": "choco",
+      "metric_sha256": "5c84c40390c9dc9837609b64d2b00629381f128b878f31d90e87d6932222364d",
+      "weights_sha256": "26800be98536c5cabd59401c303028a4cefd466f6224e3eb04ce72a199b46222"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 45,
+      "method": "cocoa",
+      "metric_sha256": "ab4604c2f55c9b0e0a8e470cfc339badc44eb8a01ebc6c7dcc6bd0c7fe4d005d",
+      "weights_sha256": "74e5c35fe3d7fb866f2e7515fd4a5b890b84ee31a02d63ccb2f7ed5927a8a6f5"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 45,
+      "method": "cocoa_plus",
+      "metric_sha256": "a38f0d196d893d07e1dfe7bd5bd1f542977a99c4b862980656cf1806b1bd983e",
+      "weights_sha256": "59abfb15089d7dd4d307a3a08b17b74e6cb68f9ff0fb8e78f243201051b6f587"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 45,
+      "method": "cola",
+      "metric_sha256": "95c087f1c6f729fbac135d1c82e35f3842b78a037a60af18e833c7f5c9a019fd",
+      "weights_sha256": "9546f081b64ca51a6502cf088418c276fe6bcc523251f2506972a6ea5f7c7fd2"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 45,
+      "method": "fedavg",
+      "metric_sha256": "9ab0c2ffc8e1da6ced8baba3db63719158dcabcc37b5522560ee1b822aaeff00",
+      "weights_sha256": "ed296ec2f088bd2930f3ce556c05043ae301f195e4348c5c4553884db5c41082"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 45,
+      "method": "gadget",
+      "metric_sha256": "acc4f826f2e003714419538deae83cf82882b29650e9746b8737f8c524cbf993",
+      "weights_sha256": "4e1cba40f575e3862a25a4a09efe12e4e7f798fdfd22518007e97a43c4365d5e"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 45,
+      "method": "sdca",
+      "metric_sha256": "b3c4a1bab0308789b7fa5ab3efc9a15403675183aa3e3e7d61f31e071ded6907",
+      "weights_sha256": "c5749e195b0d7aae6c7b4b0a1b040ba0fa4e412128669d568650812e43cb1912"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 46,
+      "method": "bdsvm",
+      "metric_sha256": "41f685b649b0871ac26d32b39294f6da75fff4d79a044f250456bacd2ff8d884",
+      "weights_sha256": "1a40ebe6cf5148e189b08b5bb70542cf838123547186dd0f05d91de847197e91"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 46,
+      "method": "centralized",
+      "metric_sha256": "9b8af697de6c73ee99fbc747c972eb6676aa93b4f86c1919eae88ffa6e290cf2",
+      "weights_sha256": "5f00e02576188782c1bd80b5bb8dcdc533e978159dc8ad4384d81029325d9bf4"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 46,
+      "method": "choco",
+      "metric_sha256": "584bcb6f8b43014f2e3c2ed39ff0ea6f12586193d3d782bf4e9ef1c9d4f103ed",
+      "weights_sha256": "1024e071cad5c1a40b5242e0e4293174755fb7cf853501200b3c89f548c84216"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 46,
+      "method": "cocoa",
+      "metric_sha256": "34825a468ec17173b0c9e954dbaa95d99f6a76e773ff1b80569030cca6244055",
+      "weights_sha256": "7cfae2c2b212cc03d370388d1204cfe08a071d4ecd499c61e84b79405f3e764a"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 46,
+      "method": "cocoa_plus",
+      "metric_sha256": "d5f7264b61360c30775b286e1a50d8210a4f7015a1b9d14d31e35c9cbb999b31",
+      "weights_sha256": "f71e045d73ae360e1caabd1fc9b7bae2297db90f58f1feb580b11e6617790fa0"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 46,
+      "method": "cola",
+      "metric_sha256": "0afa5c9309032d76691673d231f1187a95b38c6a888ae41c10d4c99cca42b226",
+      "weights_sha256": "7f39f2c973b61068984e8333a47e2ff5c3f2fede39fc0866a40e62b42b61a4af"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 46,
+      "method": "fedavg",
+      "metric_sha256": "3bb07e6b23349bf9ba00008c0398b18695b113c189e2d97716091f4e70395bf4",
+      "weights_sha256": "d5bff3be4ec5b40184008c5e88cf849763e081a79a779716beb39afee258c79c"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 46,
+      "method": "gadget",
+      "metric_sha256": "22be6a96fd2ded6769e4b0f0a986cc63331c1d42bca598575514e029e439403d",
+      "weights_sha256": "7be7b0b766fc0b7570a3d6f6ed72e6b8e9b670196c28275a9c4a4cf3354a1ea0"
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 46,
+      "method": "sdca",
+      "metric_sha256": "74913345fdea918c969d4f4abd175a216eca92f677d67f2fbd4d4a9e916f95cf",
+      "weights_sha256": "549b8b60db339c7c25d10f00985a113cc4f6b040f667fad88eac64b4dc118d49"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 42,
+      "method": "bdsvm",
+      "metric_sha256": "ed981c00f353a33fd9fde8322932c5d51637d15b10c5261445abfc9315383097",
+      "weights_sha256": "63361f7346a310f03bf949f2d37c8a81965b1e84049c0d1981b42d8e562ac451"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 42,
+      "method": "centralized",
+      "metric_sha256": "07f45b0cc404fd3359d747909008e14a34bf28806ef3cfba53cf35206d202c95",
+      "weights_sha256": "06ce64a0639b2d3079192196186e72973105ad8618a8e6d3daf7b81e9350d61f"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 42,
+      "method": "choco",
+      "metric_sha256": "3ee4d2d57073fc150598a878487bb7077b8cdcfb6151f5f5fb80f574d675d6a4",
+      "weights_sha256": "1f039834cdf6cc113369870f96c88e2b83fd91b39a0807ef6e77f50d6c331a97"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 42,
+      "method": "cocoa",
+      "metric_sha256": "bf63586c9ee816b3d1ac0837321c587b24b7477c69c3413c51059171986347c2",
+      "weights_sha256": "f6c7e85059ec2457d2bd9c50e7a1a9154968ed581ca66a4a447b95e66c1bbb8a"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 42,
+      "method": "cocoa_plus",
+      "metric_sha256": "2e160f53c9a85619b84df9eb056c6765817109c0677e3a4b543e68828d857c38",
+      "weights_sha256": "ac3b852ca5726fdb2c9827c4e2462263ec1d59a9d2b495a49b925695f6d10f9b"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 42,
+      "method": "cola",
+      "metric_sha256": "b1d1090fdae8ab8e9aca489abac60c64caeececa7fc5c2dfd46bf4dc888ef696",
+      "weights_sha256": "eb81063f3b64aca067ba88baba39688e936805181e0d97035c415546a8cc7c15"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 42,
+      "method": "fedavg",
+      "metric_sha256": "0f1f36282102e2939ce2ac962a980d17adcd302fe5c9dc54f971ebcad957a09c",
+      "weights_sha256": "03291c29482e3fce4ec84e4fbee442aae0db0dda4ed48eb3f9f0a97aeb0b1264"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 42,
+      "method": "gadget",
+      "metric_sha256": "8deb117b15e202c50587f1dfd427bc123803abfaba553784b30eff7ea721ea56",
+      "weights_sha256": "84e6f2393be1ee9d28715a780314d4456f63f9038ea092c30a8d0341d446face"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 42,
+      "method": "sdca",
+      "metric_sha256": "09e1a9734297cf9ce6a7ef99ffff10931a9b0d8d25005c8f3f6b79cafc105a19",
+      "weights_sha256": "f4fe6d01343b5d52993bea6c33021038d7a5da2c09dc9ec7bc77a08d15b3c6dc"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 43,
+      "method": "bdsvm",
+      "metric_sha256": "3646feaab48972a0fb6dec72abfe805328ecbd694126c7a16576a9e9b7962801",
+      "weights_sha256": "eb6340dab8fadea89f1ee059226a9560169781a2fff31e88af32a38dfca66e17"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 43,
+      "method": "centralized",
+      "metric_sha256": "f009627b63bfaf4b580204ce1087fe86e287b1c1edf14ced192f1aba9a1ee6be",
+      "weights_sha256": "673a2c3e2efdfc23d8dc84bc191e0f039811202f0a05530fa9c3036a4db975dd"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 43,
+      "method": "choco",
+      "metric_sha256": "bb453f63e9fab0e6b1d8aafd925f1a426c943b2db1b18bf99c80a9fdd9fe6baf",
+      "weights_sha256": "12a959e933a871b08717b6b64ce67a675a255af23201d77a89aba74d0139919c"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 43,
+      "method": "cocoa",
+      "metric_sha256": "809f73eb9e4111cbafc2c1015aebdccacddc220341113d5a3e5230f2f4e27224",
+      "weights_sha256": "22c2f0d1a5f72f8038692a206b3d7762312201d29c1e414107099dbf569755b0"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 43,
+      "method": "cocoa_plus",
+      "metric_sha256": "04532866002d3b1f41e04e96b699d6a41a0cd18e1325ddd9cbca028a09db4186",
+      "weights_sha256": "d3af8c139945d2a9456c6032dbea29264babe0fbadaca38ca1ac0bf4ed135844"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 43,
+      "method": "cola",
+      "metric_sha256": "3f85ae4646274698c1a1deb7a80e94118e41d07fd53a7844387d1c525ffce218",
+      "weights_sha256": "a9fe2e6e20f5e4d5cc1f1eb5d8fea0966453762518178e635c48d15b86b43dd7"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 43,
+      "method": "fedavg",
+      "metric_sha256": "c35efc7fbc2eb4a4773b246c3405d9bc9c800a1d816ced3c27792cde0d4dfc14",
+      "weights_sha256": "9e491f680a6c016a9566410d02fcd28bd360599d5e0efee9f387d5d53e1b6fc5"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 43,
+      "method": "gadget",
+      "metric_sha256": "1518f76bae6a275a9d85834a4444213402f6ed1add1aa16ddaeebe63af34cc23",
+      "weights_sha256": "e3ef964ea04f360cf2061976f44898d54efbc973ff479b107fa3b6293d923b93"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 43,
+      "method": "sdca",
+      "metric_sha256": "c6f73bf2b834e7763e2e6a784c3d394bd000f8bec08c42992f59294f07bd7580",
+      "weights_sha256": "25ba20ee36cc226820d07f984071c1ffcc24843a9731d368a85aba8eddc68a6f"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 44,
+      "method": "bdsvm",
+      "metric_sha256": "3615cf487ad44f51ce70bbd5d0f035b28ad5cc093e5a68a8545dd623e4dddbbd",
+      "weights_sha256": "f30acaa8ac00d1448b54929db6f7bd167c0799df665be79887fa984986f5a5a5"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 44,
+      "method": "centralized",
+      "metric_sha256": "56a8838c45f1aa6a8cf08fb071219162e240f3a5a9a98d6d351309ff4c9351b8",
+      "weights_sha256": "8c1a1ffde34031cf4ae3d84bd2917b11ea571a7db2366a37b20ee746ccba1f03"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 44,
+      "method": "choco",
+      "metric_sha256": "3c466d28a61f0e73c311fe15e77be89144153455a53b8b4b19a30486443b7a26",
+      "weights_sha256": "32f77b1abf48f6e5f023e0e4403943ea910379f9acaf41664078b971793f2ca8"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 44,
+      "method": "cocoa",
+      "metric_sha256": "aaa84258920810038ad3ded6c3f8790561f8782597a9ad85ebae57a288b047ec",
+      "weights_sha256": "d6c1b2577f649ea1cc2c615da67b6cd77678c6cea176d92bd3d3beddf24c3901"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 44,
+      "method": "cocoa_plus",
+      "metric_sha256": "1798dc4fba639e729a0e17948df2e5bc06c0da69bdc88443aa06b7f3ceeda153",
+      "weights_sha256": "dc3ebf543b2220117cb6d2b71aa4c0548b55975614895dd939adf2197204355c"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 44,
+      "method": "cola",
+      "metric_sha256": "4a54334fbe092ff5915dd1d273464448921c988939a5a8ced717c9b1d95b2e89",
+      "weights_sha256": "195ae40413cc8861769a659fe4950a1a01c5dde53c7e7ea18affd5646b7c6ed4"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 44,
+      "method": "fedavg",
+      "metric_sha256": "6bfdfa9c2fea941a1be7561baeb807e84d0782a7f6e3171429b9f0d9649fd866",
+      "weights_sha256": "4e05bce82d955e455f25d3ad2a476edddb543fbc4b72fba5439d2f2b3289197f"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 44,
+      "method": "gadget",
+      "metric_sha256": "9dd2811c36914854765b74bfe943ef9533d847153ad7716d5cdfc04a848a57d8",
+      "weights_sha256": "f5ccf6943e858c60126affb88bad26a442dd5d1bac3dea86c7c36eb69515a3b0"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 44,
+      "method": "sdca",
+      "metric_sha256": "cf7ab621e223729e3de79988bcacaf42899dc1fbf544486d0f2442ca53400227",
+      "weights_sha256": "3e90760fbe2167f574d89f64c962ba40fecf1b214322292de349f2811cff5474"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 45,
+      "method": "bdsvm",
+      "metric_sha256": "1028faf555857bd45a0450b13cc141c6189b89d036d60592b2fe9da926912172",
+      "weights_sha256": "3cccd15730a79a95aba91ff6c9cfb2bf2b296f3e7f43911e86e1bab2db130883"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 45,
+      "method": "centralized",
+      "metric_sha256": "13ec9d9164fa21a035b69074abc462cd9397a72b1dcd620198c84c1fe1b6cd0e",
+      "weights_sha256": "0d2fba0dcd0912dc7d1207fdb36a929fafeeb06683060ce29b10234211905677"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 45,
+      "method": "choco",
+      "metric_sha256": "1da199d8738215aa7de0af48c4af13d73338e4955ac090f7c4d0170133f10732",
+      "weights_sha256": "2fab6c8f9639a2d201feca7d0934aa534c8fbc6fca253e7ef2dd691c2deac9be"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 45,
+      "method": "cocoa",
+      "metric_sha256": "cd72fab76e76cd03c9520a8d0b7805f384bd7369894f750574c7b91a53b343d8",
+      "weights_sha256": "bb7d3c635c72a0d4d1ea93038dad888895e8dd42b532e4a433ed69a66190ed37"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 45,
+      "method": "cocoa_plus",
+      "metric_sha256": "f4b647813d231d78ac5478124bdfaeb0936c858c40459c8a9b070c50cf879e1f",
+      "weights_sha256": "8193f8c74f4c4c9afffb7516cd59386478951e1fa971aee42e42ba2a059d843d"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 45,
+      "method": "cola",
+      "metric_sha256": "c31ba44834143a8d7a34b8e3a7da3bd1a22950361bd67eead8980cf6e4e756e6",
+      "weights_sha256": "a278a60065468424ba71412d011b10d1508b5c817a5c7909c8f98b7a4a2e59fc"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 45,
+      "method": "fedavg",
+      "metric_sha256": "2b9a6c816892a458cc6cbd1f0c919d69b9eca55a7d012f8fa92a2e546b3eeef8",
+      "weights_sha256": "fd437e4c8d6e2796a3ecced83ddd86e7b7eaf1e7f2fb8293f51493aea6b3e326"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 45,
+      "method": "gadget",
+      "metric_sha256": "32680e0210db99c60937f1189157cf778a7d609b91aedae5083d8b5b1961527e",
+      "weights_sha256": "dcc5da591dfcab788ae281c8973d9c1e7a85cdfaa025bbdd07a915c98a5416c0"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 45,
+      "method": "sdca",
+      "metric_sha256": "f8b2b343e9b77e7c76bd631ccfdda73a276596813c715ba1e7c0b89eacdb5c73",
+      "weights_sha256": "627c89e0bed377959ab9683d971fc29a7fa92270525d62111a9ebe0dc89c4e8d"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 46,
+      "method": "bdsvm",
+      "metric_sha256": "262081257334b194019d83bbce36f63043f6031dd3b6e452401e28ac110b2c6e",
+      "weights_sha256": "79645b776aec816ba46c1a8dd2bd22cf9664f05a1d90eb5e8708de2a0d957371"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 46,
+      "method": "centralized",
+      "metric_sha256": "0e5483c54550d958b073ab2e7271eb7a54e0a22bfeb9ddeb3068bc5c10d2c2a9",
+      "weights_sha256": "cafed9f927962c1f2cf3ccfe04132a94f2fd0c65b5b5714252250a748d51d386"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 46,
+      "method": "choco",
+      "metric_sha256": "69a672d33772659fb40dfaf618bd6ae593fdc18f0699b7833645fe02408fc499",
+      "weights_sha256": "3c1ec57a973eed5b04a9e87aa28783bbe477666c4589ed3cc8461484f767af21"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 46,
+      "method": "cocoa",
+      "metric_sha256": "a3dc740e09a0ab3e85ea0de1ac6c72c718d1a6aec26b77f95f67587b01e7123f",
+      "weights_sha256": "f4e35bf41d6c94119600054ae3805d8d2550b859394354097437515a37bb5544"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 46,
+      "method": "cocoa_plus",
+      "metric_sha256": "a706a193840a2bb2da43bba3b9c0107adda922a15738e3adfb15dd3212e0a3ac",
+      "weights_sha256": "f76795d6b9dbc6f12be2347f1bbe79f9c7bdf98a5bb02330c7f96367b804f7cc"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 46,
+      "method": "cola",
+      "metric_sha256": "cae1a30857282215ef05e6bd0cf2b8fe51f12bf2fb504c7224317964a71be668",
+      "weights_sha256": "a3ea851b82b19e7d59020ec9fcd908c563803ff5000c2a2635679376e017ee6e"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 46,
+      "method": "fedavg",
+      "metric_sha256": "1fccf04b2a447873f4a548b13f0a41a5d462ebc3c92062474b1f0c09e02b3f55",
+      "weights_sha256": "2c0979aff07899d9674ed03ef196982fa493efc1488d272d47403993e8c9a8f2"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 46,
+      "method": "gadget",
+      "metric_sha256": "e8328422882e68af64e8f2677c0c4c836c7c54e96708bc26a14a98a67ef754f3",
+      "weights_sha256": "911af069b5c390c7202c48a24759507acdba1c4eb90eba9e8dbdaf37da4a1dc6"
+    },
+    {
+      "dataset": "gisette",
+      "seed": 46,
+      "method": "sdca",
+      "metric_sha256": "7b08e046b0e16306593c1bd33a00233ce813e692b6b2a14413f4e478ee719feb",
+      "weights_sha256": "99e718ee34cabcece487e9160e72a4c9e307ac2f30beec163122a16f12f321c2"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 42,
+      "method": "bdsvm",
+      "metric_sha256": "a28d0c081f5af2d34e4bd771cfe8d892889cb9d6ea7a21099ce7bda5f36bb970",
+      "weights_sha256": "ed6e2fb6a17d1563e5d20129259b53f66b358ba80a61d0eb6b00af4465cecb24"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 42,
+      "method": "centralized",
+      "metric_sha256": "35a2264c27a20ffc8a0998759446ba48689b9365a15ded4b77e3159f26cdd279",
+      "weights_sha256": "4f82c29ae510c3986606d9d0c35a0d31bdb69b9a02e7864732761141f46352c3"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 42,
+      "method": "choco",
+      "metric_sha256": "9dce9d3dbd4bfb98190509640668cdfe545c1ea74b5e600cc232993352e4bbe3",
+      "weights_sha256": "3b79872c796bfe0fd5e5a29ed26439df984eab62dbc11e64958b4a35bbedf011"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 42,
+      "method": "cocoa",
+      "metric_sha256": "c5a54eb088c1242fcd1675dadde54ffebbe8e1d62b3a0097bc558934844053ed",
+      "weights_sha256": "ef49604e2d37bbe600bf656669f81d19e8bfdcd49b36bb4a93d5e6b09bbd3c43"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 42,
+      "method": "cocoa_plus",
+      "metric_sha256": "d9048bc884b1aee589f4de0402b00cdd72b0b9725a50af74c83f028e23ddee7b",
+      "weights_sha256": "33d502ee4e4a6b6871adf93f7970bf247b11a908ba94eda2ea55e99f7a7410e5"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 42,
+      "method": "cola",
+      "metric_sha256": "6a27a2225a64293cf11a8cfd6ec0219ee00473f7775303611e0ba81231120c38",
+      "weights_sha256": "e8933beaaf7904444fefcbfbbca7c380cb3a49a92c7cedf41f3326c63594e869"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 42,
+      "method": "fedavg",
+      "metric_sha256": "085288307ad359c50b39608f0c18d77b80ddc2d72b7d134feaba0020d55ffa0b",
+      "weights_sha256": "398c6677f75de56077577cd894f959aa68482b55de5b4e9c9968fe8275bab79e"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 42,
+      "method": "gadget",
+      "metric_sha256": "e8fe783e3fb04b3ce727a8d17bf17bb8682b4d6e7593a4ba3845ad73904eb298",
+      "weights_sha256": "17cb91a0600f2c526e53611296ecfb6c2cbc63f0dc11bc1605def0072d5dc817"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 42,
+      "method": "sdca",
+      "metric_sha256": "a7eecba31b51e9a99933ccaa02e8116c98c15d2b41791fbe1fb82f8354da776a",
+      "weights_sha256": "6162e8fc34602a890c0d30cf0a192dea1af9e522f06ce7ec4ec93792acc4b261"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 43,
+      "method": "bdsvm",
+      "metric_sha256": "2b45d2fee2d603cb7bc5798cc71f1da32f87edca81870f2d36a9eb792ea58bc7",
+      "weights_sha256": "fcf53fb5b4ac173d88430719c00016418339572fe13531eeeed389b5104d5ae2"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 43,
+      "method": "centralized",
+      "metric_sha256": "16582fee74fd7c9a79a3a7d14ee70f781b8205e3d97b3c09923f038d8c3ce16b",
+      "weights_sha256": "afb9e70cc50cfaa13b6f874c488e08ce4b0ebb0da4494feba725697d274548e5"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 43,
+      "method": "choco",
+      "metric_sha256": "949342cb5d72767bfc815f70cf86c6787f108fd86992cee866e10cf034435c55",
+      "weights_sha256": "361d8d2632bb3680fbf08a6be92c1683b5b5298fe9e094dcb91d233a60079840"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 43,
+      "method": "cocoa",
+      "metric_sha256": "da3ff2b7b5551e40254479f2c0405a21a87a8af8c0f6c44bb83aa034cf4feb79",
+      "weights_sha256": "d83071a2df60155aaff2da5c65508193f83b597be12c3556ff0edbfad49f45ef"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 43,
+      "method": "cocoa_plus",
+      "metric_sha256": "bd7d2a2717cb8c6ec425c22dd4fa9aa4614c4b3b4b0d08d41c43084539caaaf5",
+      "weights_sha256": "a4feded3ec89806d0bf9e650604a2163ba6e0efdfaf4ccaff7ca440dbbcc2edb"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 43,
+      "method": "cola",
+      "metric_sha256": "000776098f889f7b1498a8f59c82bfaa041a3ff07a8ddb662ce594cb33bbe196",
+      "weights_sha256": "8d1dc1c4f9f78ba138274ed6a2013fd5b45adac4bf23d01a60d8c1faf08ba161"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 43,
+      "method": "fedavg",
+      "metric_sha256": "69778d9b5498dae9512a2e09d045de768fd2d98196476b1d70def8bd464a293c",
+      "weights_sha256": "d7339a694a1b15912cfe4bfce1a07aa6275f4bbf4a4b34685dafcca77e121efd"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 43,
+      "method": "gadget",
+      "metric_sha256": "c314941a835318125a8b96f52152ca9e376d2296da6df0fe8c6ab54749820367",
+      "weights_sha256": "95f3462940dadeb778041d132d2befb13ed99fec81972833dc9ae84a16c81658"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 43,
+      "method": "sdca",
+      "metric_sha256": "4ee3fd53cffa2e44b6c5be343ac02b395a9578694150b9716cc98882b3188e2d",
+      "weights_sha256": "7364a32fda7e449ae432cf5a7b181739430b84c0f1024d46c0afd098f6f47e85"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 44,
+      "method": "bdsvm",
+      "metric_sha256": "65937ff8e09ca5eadb4d739c2a19cd15e284c219bdb07711e003e7de4adb063a",
+      "weights_sha256": "aeac585cb156c628e7194b27c774fd3c320a1b3f6dcc6abe36177977ede955fb"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 44,
+      "method": "centralized",
+      "metric_sha256": "21171c035fd7a70ef2eb51d7eadb4a34a031a986761af8daa678d1ced20eee3f",
+      "weights_sha256": "21a79df38f351f6201d524403c4f87eac0cbb2f0a66c193d1e27a65888a2b7b0"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 44,
+      "method": "choco",
+      "metric_sha256": "c6c5b6ba4e34b3d8d954ab9d580b6575e72709a3516563a814df30bb2cc9796f",
+      "weights_sha256": "6f5ae8c24787129257e02745282bd57e91cf4108e251906b603c002c0f21a847"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 44,
+      "method": "cocoa",
+      "metric_sha256": "b0a09eb6253ccad3e2d3855771f5f5fba3bbd3433c2549ca32ee76acba57af5b",
+      "weights_sha256": "d16a9a51e9d8fd8019e32133a2a3d14c3d60aa08a304ee8b44d1365409adc173"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 44,
+      "method": "cocoa_plus",
+      "metric_sha256": "bb83c56391f5f1e8c3935d55703e2806b6593efefb51562806b094e070b2b8ae",
+      "weights_sha256": "7c401ce1c7de1df23b9428d53c671c790ca278ea11734b419256864dd1092142"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 44,
+      "method": "cola",
+      "metric_sha256": "cb6144c912039622f1040764a6b5c8b48e901053921ef76b3edf6322ad15d0ac",
+      "weights_sha256": "0898013d7aabf86f9927c94a9c459dd8ca275be7744d97951bba8daf06dd4884"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 44,
+      "method": "fedavg",
+      "metric_sha256": "07072e988ae85d6dd467715c25dae73bf1bfd5d8777da66d944f76acc1860e92",
+      "weights_sha256": "497f62d61a18aaf0cc02a976d0b881e5fed639feba5fd2dddd51ae88421cb9da"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 44,
+      "method": "gadget",
+      "metric_sha256": "60bfdbd5d0dc3dd6ac23d3be9207a7d0ee42356edb2b549207087a5126ba9f30",
+      "weights_sha256": "2d994382616511f8d262ad6acc26a9810f6992b8c1588eeb33b88d5f0ef8ad23"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 44,
+      "method": "sdca",
+      "metric_sha256": "c95f14c84d1c1fc75214efa8e1f8d20998f7e617aabc8372b782e9ff25cf2a07",
+      "weights_sha256": "3e66c81a5992ef3b49dbb406842dd38e4435339f027ce9efa43bbfd051e38a94"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 45,
+      "method": "bdsvm",
+      "metric_sha256": "4510a57e9966d2d735dc93f4f9a96da01d240249822d8916629d4601e6881696",
+      "weights_sha256": "beb45c142430aeeb09df3cd2af27877c60cdba11c892e6059e7587e51261e274"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 45,
+      "method": "centralized",
+      "metric_sha256": "4823ca80737132b5ffd4ca9c6426da8bb412568e8b8f63ebc282ce08c3dfb932",
+      "weights_sha256": "9fade6e6b27889772a062f0f2e1bbb2063c73a25eba8176cc5459c7706e163a4"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 45,
+      "method": "choco",
+      "metric_sha256": "e1cad16d4905dedec4c421467ff5ec79707424ddcc07f5d232defc008a23d0a5",
+      "weights_sha256": "e7d1a3393892e30901f19ec07381d690cd139cd85906e1769a9760db92b14047"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 45,
+      "method": "cocoa",
+      "metric_sha256": "f42efd7579d579d8e3fe19ceca7c6c45b7bdbf168c185a4a1911f6c025f2889c",
+      "weights_sha256": "64f8046883eead746c362e187ba01077105178ae43128895f85778560d826583"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 45,
+      "method": "cocoa_plus",
+      "metric_sha256": "3ae72f265c310a5d0aade7236ffe6c955f2832c9a2ceefcf830c127cad96b5ed",
+      "weights_sha256": "1cdaffef5a3d7a8332882461840967a5f1d07a82ba9011d1c2bf36999aca4f75"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 45,
+      "method": "cola",
+      "metric_sha256": "942e4256447e698d3a0aaa4a9ed75b59aaefdde21b8a7b1db9a35803703f46b9",
+      "weights_sha256": "420c41a3163f6f5686f78f897900ca49424d6c091cbfec5935882a7b38a3d70d"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 45,
+      "method": "fedavg",
+      "metric_sha256": "b0436ce4a3d29e1959557b9b62478504356e83ee8cf80ccad7c15e5d58143957",
+      "weights_sha256": "e1cc8e63852521572eebeec0d2529350f496085a13be8078da662b774bf4abed"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 45,
+      "method": "gadget",
+      "metric_sha256": "d7bca521671f8b3e9b04f965df9dcc58951d686d22bfb17abf0a519673f5eb40",
+      "weights_sha256": "3b47c4f1ca9db1971e279915ab8c5b0002c8c26a5eeef7f194d643a26947e2e1"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 45,
+      "method": "sdca",
+      "metric_sha256": "55cab54e0c2aca7e906ddfe9ee04911f771ef9c2b7dc0530596a5dbb42c17ac6",
+      "weights_sha256": "1f3ea02f51f23f9e1181f24d9fa9cf7d00a871fdd5dd7b894b7b5cdcb2e9c954"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 46,
+      "method": "bdsvm",
+      "metric_sha256": "ad76ce5a4ef6d28eef03d44b637d3da60f37b2debf322826066eef1b098e3613",
+      "weights_sha256": "090cebd98536c3b32ff3661953c6d081dc24d07daa60f17d2c131683090f29a4"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 46,
+      "method": "centralized",
+      "metric_sha256": "c605b7003e55b12a9269040150da79bab8e47cefe78135bbe2f2f7e0ef79968d",
+      "weights_sha256": "18e61ad68e7cf6823db3dab05d0a01644252cb60c68efaa0944af273e52e287b"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 46,
+      "method": "choco",
+      "metric_sha256": "d9d6eec5acffe023b554b274851a660b3ed4f87fe368775ad0b20685d0fbdb64",
+      "weights_sha256": "066f0a8c194463d82ebc4173471d1dcd256712282f63da7cc5485296962f7fb7"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 46,
+      "method": "cocoa",
+      "metric_sha256": "fb3a08da60642239044617dd78cf75e408a2bf32d4aeea0652e5d50469baa56d",
+      "weights_sha256": "be8ec2e94e62ceba6d148d8b61fa32fef7c396f1eb73c51bc0157269b05f4e88"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 46,
+      "method": "cocoa_plus",
+      "metric_sha256": "3f528a5874154b60119756dc51be254d81a3a5ee868942e24b7363476d438a1f",
+      "weights_sha256": "049f3d2b3a14c190814d61036e5b89b72e52f4552597b0b16fa8bca629cff2ef"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 46,
+      "method": "cola",
+      "metric_sha256": "98eb026ea88e47fad351e0f87d685f1478d27e7916d0d4a5bf4d63b0f8ad0c2a",
+      "weights_sha256": "29e17492b247da4faf61cc6236ac12119550b27354b5cc29c60750a9154b3286"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 46,
+      "method": "fedavg",
+      "metric_sha256": "83189eb0c1eab5a556801ec17119b26540417433bd85be17024eca3216c31508",
+      "weights_sha256": "bd21c26afe55957c5e8dbb68ae0b7a814d01f6d67063684a3d9c448c20b2e48f"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 46,
+      "method": "gadget",
+      "metric_sha256": "5fdf3518aefa401c844d687d90933117c9a0e574ea1afd347d67c6b84668146a",
+      "weights_sha256": "08cfef9450d4581d9faa69ff739af5f193fddcd2daec7983319c1fcf0014be7a"
+    },
+    {
+      "dataset": "covtype",
+      "seed": 46,
+      "method": "sdca",
+      "metric_sha256": "41348db9af5a21b2213ff94589d853f560b3a270a9de6f2b1a8efa20b66dea83",
+      "weights_sha256": "6be001b5f3940a60e6f18242034ea01efe2c5e76080e3aae06b34e1a3d6d6bd9"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 42,
+      "method": "bdsvm",
+      "metric_sha256": "79306be0abebe5d2d52de19f3314dc0f61feb6ff3ca201449830a33dd3a74456",
+      "weights_sha256": "13c07731342bee486a5eea5c7ff2c6f618391650167c362fd001bf24e8721a83"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 42,
+      "method": "centralized",
+      "metric_sha256": "4afa846839c9a309c64009425186caa9b142e91810d742d3cc725acb249b4920",
+      "weights_sha256": "b3c15e97ce25ba2541e297a30b444e6ee2bf46e34f9ef52e0ab0b6a47f3bb85e"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 42,
+      "method": "choco",
+      "metric_sha256": "5c053815031168595b89b5d65b03f92186419be32fccd4d890cc0ff0c8016fb1",
+      "weights_sha256": "69557c5699b46a84e65e062b219c5238acbe113eb514c6906b88120fa73db616"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 42,
+      "method": "cocoa",
+      "metric_sha256": "a31225a7d9c29a023bc5582132ba277ec2bcdbab963adeec68c05bc9afaf4c20",
+      "weights_sha256": "4c9d64e0117b7c849ea69a32dc4228360275f3acaad5c9e3d5906c96c1209b6c"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 42,
+      "method": "cocoa_plus",
+      "metric_sha256": "367a3d9bed720a70b6ed1ff3696f5a57a308e1240b707088639ea6b5f7b03809",
+      "weights_sha256": "0fe0310567debea0582bef8855597719365c26d1a42641c4d5306baa79802c2b"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 42,
+      "method": "cola",
+      "metric_sha256": "9073d0b104b4cb6bcb34d5d537a8d1832799304f14a529f8440ace087cede13e",
+      "weights_sha256": "8ab73f6d5659ae7b3e897615da73b1594e849cb4b8a3d60628a61a78af911c94"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 42,
+      "method": "fedavg",
+      "metric_sha256": "7336e423146e29c4aef0fa5273bf9d24e6b4e44dd91ef75dd4b33f75d5a8d94c",
+      "weights_sha256": "0f6f7f211d537d55b75c3d6cbe18f85edd32d9f1f78ceb3fc83a71a3ef50e73c"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 42,
+      "method": "gadget",
+      "metric_sha256": "7271ada2730c0e27ac3883483265a7ac07398e2167e03ca8612ea08cdccce316",
+      "weights_sha256": "7e5b482ab1df98970f24a659fbd27318cf0f2f2890c50fffa11ba06745a11a68"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 42,
+      "method": "sdca",
+      "metric_sha256": "12171a2fcde5c90bbe0490d726b500511dbc1cfcfe953494922f7ac78e0f3ba6",
+      "weights_sha256": "8a231b31b678dfa8620528c838583b34364d4126e741fb519c5085c3d5096421"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 43,
+      "method": "bdsvm",
+      "metric_sha256": "f33fa00ba75addfda65f37f206907f0a001579d6fc9336d14627a9be8757f2a1",
+      "weights_sha256": "bafdcf2cd3ce3444dd241931c281b105e779d6dae0062b3cb02a3e2b0af41e46"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 43,
+      "method": "centralized",
+      "metric_sha256": "ca8819387439577482ab04362c3d332589543e18c3e5d32ee7e0ded8d6bb0a74",
+      "weights_sha256": "1a08d86937a6468bb4577b25d8c552959e3f61750aabcb6b2730a1cea5820916"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 43,
+      "method": "choco",
+      "metric_sha256": "531a5c5dc0ab1f8de91ff6f3af0a8d3e6efe432cc766e667f37d273da34e4442",
+      "weights_sha256": "3a699c6b9ad80f58a7e29e253fac9378ef9ad3f9f32c86f8cda972fe28268a81"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 43,
+      "method": "cocoa",
+      "metric_sha256": "6cfce74f4537506e97b3d4c8feaf89b01180ae6bbd1cddf3444c255989a4d93c",
+      "weights_sha256": "604a2767f1211e2f0fc5147ebb1e4cb334c2cea30093ecdcd770f56d35f9fb25"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 43,
+      "method": "cocoa_plus",
+      "metric_sha256": "c4535a1c37045fe6fe06d621db2536ccda6327e00def503176559255978f3466",
+      "weights_sha256": "8bf60c3a1eb7719af7beab85edc575ccaa556019fd829430d49204d3bd539179"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 43,
+      "method": "cola",
+      "metric_sha256": "a4833f1f5d87559086205678c2e8b1b0bbf0ed554d6923c567299171efc49658",
+      "weights_sha256": "17c567b877f4c4a3d179f9da629ca947e222f79eb936f7ebdb2f05ee7a44722d"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 43,
+      "method": "fedavg",
+      "metric_sha256": "8b96a2a8a3427cadf5efd4f43340d84d551b36ebd8680c88e599620f2afcbcbd",
+      "weights_sha256": "36970280ac2efe7f3f4f60a0dc70aa20603a222e04a8d922b6b7d758daa8d2ac"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 43,
+      "method": "gadget",
+      "metric_sha256": "2099d7eafb14c544f032295b6946ec672e3c1411129782454b1d5a6a30701ff9",
+      "weights_sha256": "deeb4ac45302a0c1bd4fdabf8dda438263c927ee89fa2596fb62f56499707368"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 43,
+      "method": "sdca",
+      "metric_sha256": "e6f313757f9a77276b532256934652d6a9f78e78bf1a6b51b5a603f880a9b28d",
+      "weights_sha256": "e652949603b4cc8d38545c7970d6281943cb7d6aee2dfb0107e34b2a0dea6e5a"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 44,
+      "method": "bdsvm",
+      "metric_sha256": "1bb29ce64417c33f82000689e4ae3a706d37a2a2676d5e53867c5f6ce172db74",
+      "weights_sha256": "83dee32fe5b30b99e09b831165e7bf5806b62f6019346f043103178530469a67"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 44,
+      "method": "centralized",
+      "metric_sha256": "e937f8f3c0df736ae2f1de8ec781ae8d655d5f8b23714d7739e66a896b934d95",
+      "weights_sha256": "9590ef20dbb0348b91eac42b8400e481edc10991e61f1491b90ebaf41871c7c2"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 44,
+      "method": "choco",
+      "metric_sha256": "120fc937e1c115a681fde07723f95d7b0566140241b98bb15a8934dfb92e6b86",
+      "weights_sha256": "932b4a7bfa072c3fe7fcea404ae7eedaff74bb46546e1757dff8e491cebcb744"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 44,
+      "method": "cocoa",
+      "metric_sha256": "150b6633bea2590035cd3e08137c94122e3974155da277d523b13bc94926b77a",
+      "weights_sha256": "a4ca73ce3dd1bb2afb84aae6ce85d3a7d748e295b5b89efe85aef68ae307b6db"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 44,
+      "method": "cocoa_plus",
+      "metric_sha256": "a70ee590a33eac2df553ecdd9ab8e210dd966380af33ec72d206d403729b0893",
+      "weights_sha256": "237d0041114f5a09c8e1a22a2f7822ac433e0bd37f3a21b74970db9a7a77dd88"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 44,
+      "method": "cola",
+      "metric_sha256": "90d24c34a43e8ee3e2ffd109fca06f687f61fb70b906215315c559bb21d55a2e",
+      "weights_sha256": "574095ba772d0bbce6e648d8ef6fce6349936f36d2876acdb3ae60003b52b18f"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 44,
+      "method": "fedavg",
+      "metric_sha256": "98eec89f5556a9d63a39ee3ed32c30c04c95674a7db386ef26eb1a3259fc14db",
+      "weights_sha256": "8ba3e0cdca9311fb9e0673501d1581e0f2747bbea903ec1c88f67f68120e4a75"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 44,
+      "method": "gadget",
+      "metric_sha256": "5c84146a10982cd7ff69ea1bd37db260912dfdbd5ae7c33d91d449456d0ab539",
+      "weights_sha256": "a12bef4a07652e818541db9a4e7988adddb53700a50b5df315e4bad6f612ee2f"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 44,
+      "method": "sdca",
+      "metric_sha256": "877e0a25a7299a20dc244ba5b6fa8cd7d1b781a8c599799c0bab1b0294c4c718",
+      "weights_sha256": "6dd4fd26b2504d910cac148a19438231b2e0cf007af6cabaf70b624a4562f4f2"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 45,
+      "method": "bdsvm",
+      "metric_sha256": "27487e755077d8527cb3620011e0498149ad8efd7959ab9182f02bef7cffb735",
+      "weights_sha256": "b22351ce9b5f9536f9d662d7ba708a3e8c875f8419dade2c4a6b897d992b05ce"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 45,
+      "method": "centralized",
+      "metric_sha256": "a79faa2bb068d0e8c7d389896fa748a895cba8f399abd9dc177b19c8161a3da5",
+      "weights_sha256": "9bb9ad265f02c2da167e9ad327ecb9ff999aeed8920bf3808b979e23cf7369b3"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 45,
+      "method": "choco",
+      "metric_sha256": "8c87336e16a6aa4646ad106b3ba9d5da8420a7b0c0ced54e8f9b7487c5dfcbb0",
+      "weights_sha256": "15c215836ec0c2c73036e74ed011a332b93f90ba543ade7f8d261ef43087add0"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 45,
+      "method": "cocoa",
+      "metric_sha256": "cfdbafb93bcfda34462ab983dcb39381ea8b1e2c541474fb924767ef2b9e5981",
+      "weights_sha256": "327cbdf411c80d44d06603b2c6aef58d688f798f866977e439b3a0bccb10a904"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 45,
+      "method": "cocoa_plus",
+      "metric_sha256": "b31e41e9a2dccc0ce5d8be6ab98dc151d4861399e0bce32e8e22f0ddd3ae2207",
+      "weights_sha256": "f8674a1e6d1c360289e34ec9d9fcdb58dba322fb83745ee2630d74e200864020"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 45,
+      "method": "cola",
+      "metric_sha256": "62176f1d3d966a079b8c24f3677b8034e0c4703c875e642b38b4d9edd9b2114c",
+      "weights_sha256": "b09fc86415fcc5b9b7463216aed389bfe12a9abd2f619320f8055f816ff66b2e"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 45,
+      "method": "fedavg",
+      "metric_sha256": "7da620a00fec04b65771f02e686e33f4d9587c8c77465da140c8b51dddaeb7a0",
+      "weights_sha256": "8c378d9ae910d8773bcbafe0753fbdfd66a9f070557f3166ebb57f2672047410"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 45,
+      "method": "gadget",
+      "metric_sha256": "b8e13bfdd253437fcb2f524c370b1e2a8c27519f7500b14485e6047d8f9614ad",
+      "weights_sha256": "60af01a49a6ad8c347f55c46de51173fb1c14b43ff29d52566121e8fc53388b3"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 45,
+      "method": "sdca",
+      "metric_sha256": "85e4ea56e7363b74a768a028e925f2c2668f6adb0b055faa9eb748382cfbcbd1",
+      "weights_sha256": "aad73fe27ec5543eb840e04b333801c4efcd9c495bdd8bdcc2a2262ce36554ca"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 46,
+      "method": "bdsvm",
+      "metric_sha256": "9a7007c10acfc93b0caa897780dbfffd45a1aeb0b9b3bc8ee3537d95ca3819e3",
+      "weights_sha256": "08dfcfae1cbc3865469730754d176e1c615c96c62dce9232612a6cdd6dc28647"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 46,
+      "method": "centralized",
+      "metric_sha256": "9d6633d4f8c242dea05433f3ba2a4308079fbc4b6b25a774d213cd2feac647f6",
+      "weights_sha256": "ee46fc9598f51ab9a5c46a5337573a72af5db4062e4ae703636e43433a585d17"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 46,
+      "method": "choco",
+      "metric_sha256": "e571784628803426af028a52a15e5e77f2073639101043f56af444bbc7d32e47",
+      "weights_sha256": "573d9ceac9d1f398dc3bb763806b0e3d7016a7a7e064a129dee3af4a610af8af"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 46,
+      "method": "cocoa",
+      "metric_sha256": "6e4e2cf517df44e5ebdcf7747449b9ca957e4c419efafd1e9bb58dd2b7d648c8",
+      "weights_sha256": "07b726f49fded4d1ac9b24add4f5424cd9df069c859ab5ddcdacc861484b7422"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 46,
+      "method": "cocoa_plus",
+      "metric_sha256": "ae6cf46bb066530e9a4240bf369a82b0c3d901d8ea6c69e9d302e42bfc7a8003",
+      "weights_sha256": "b878fd97c121a5d4ac944d6183762686ceeb755e265a1c540d86da2e5b124fbc"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 46,
+      "method": "cola",
+      "metric_sha256": "9ed87f41730c2aaf09c647fa034b26fad59bfc596c84ba353fd349fa67246adb",
+      "weights_sha256": "aae04e16a43ba3f08d660d459255f62e793998a0255a0331eabe0389a8776f17"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 46,
+      "method": "fedavg",
+      "metric_sha256": "a4eaf0ee385ad239743ddd6dae1b2199fdecd458667391e503f2be687c4cb73e",
+      "weights_sha256": "e61f2f3eb6a5fd8767d4f26d17330bb0526e94b6f204730878c2d5da66cb7ace"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 46,
+      "method": "gadget",
+      "metric_sha256": "369dab800e77ce4d0672c39f2063039960da1d0a46f18b71da2f6f41a11e906f",
+      "weights_sha256": "e9c3e9418ffbf2497252cce9c92225db2545b48d384dc1098a539e23619b9e6b"
+    },
+    {
+      "dataset": "a9a",
+      "seed": 46,
+      "method": "sdca",
+      "metric_sha256": "11ef574101cc02be2cb747b075697e58c63bf219f96713e562245f31a479bf5e",
+      "weights_sha256": "394d027e867de21dd08fa3fccbd753ee6cd069d470b6ba41427419e424d377eb"
+    }
+  ]
+}

@@ -1,0 +1,425 @@
+{
+  "passed": true,
+  "records": 360,
+  "phase": "random_graph_learning",
+  "checks": [
+    "independent train/ref/dual/model/test arithmetic",
+    "independent graph and selected3/versioned/full-dense wire arithmetic",
+    "frozen engine SHA",
+    "compiled1 and all reported threadpools3",
+    "Numba mask3 and no new JIT signatures",
+    "all360 full five-seed matrix, no capped/infeasible subset"
+  ],
+  "cases": [
+    {
+      "dataset": "a9a",
+      "seed": 42,
+      "reference_gap": 9.633210533155356e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "a9a",
+      "seed": 43,
+      "reference_gap": 9.920493921677931e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "a9a",
+      "seed": 44,
+      "reference_gap": 9.976434465097661e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "a9a",
+      "seed": 45,
+      "reference_gap": 9.912181665461262e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "a9a",
+      "seed": 46,
+      "reference_gap": 9.791274062254107e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "w8a",
+      "seed": 42,
+      "reference_gap": 9.041782211088867e-06,
+      "empty_feature_training_rows": 4203,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "w8a",
+      "seed": 43,
+      "reference_gap": 8.99341905657991e-06,
+      "empty_feature_training_rows": 4203,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "w8a",
+      "seed": 44,
+      "reference_gap": 9.639904417740874e-06,
+      "empty_feature_training_rows": 4203,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "w8a",
+      "seed": 45,
+      "reference_gap": 7.699041312342336e-06,
+      "empty_feature_training_rows": 4203,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "w8a",
+      "seed": 46,
+      "reference_gap": 9.655671023400814e-06,
+      "empty_feature_training_rows": 4203,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 42,
+      "reference_gap": 7.359521076416575e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 43,
+      "reference_gap": 7.399859686008092e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 44,
+      "reference_gap": 6.6828488795578345e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 45,
+      "reference_gap": 7.276362783775747e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "ijcnn1",
+      "seed": 46,
+      "reference_gap": 8.6977402876387e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 42,
+      "reference_gap": 7.509528932525544e-06,
+      "empty_feature_training_rows": 80,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0,
+      "loaded_openmp_capacity_exceeds_active_numba_mask": 0
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 43,
+      "reference_gap": 6.948691624847347e-06,
+      "empty_feature_training_rows": 88,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0,
+      "loaded_openmp_capacity_exceeds_active_numba_mask": 0
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 44,
+      "reference_gap": 6.682173717520445e-06,
+      "empty_feature_training_rows": 82,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0,
+      "loaded_openmp_capacity_exceeds_active_numba_mask": 0
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 45,
+      "reference_gap": 8.71319373346724e-06,
+      "empty_feature_training_rows": 84,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0,
+      "loaded_openmp_capacity_exceeds_active_numba_mask": 0
+    },
+    {
+      "dataset": "real-sim",
+      "seed": 46,
+      "reference_gap": 7.348975689547288e-06,
+      "empty_feature_training_rows": 86,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0,
+      "loaded_openmp_capacity_exceeds_active_numba_mask": 0
+    },
+    {
+      "dataset": "gisette",
+      "seed": 42,
+      "reference_gap": 4.709618590457569e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "gisette",
+      "seed": 43,
+      "reference_gap": 4.504701065029471e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "gisette",
+      "seed": 44,
+      "reference_gap": 4.617134648801549e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "gisette",
+      "seed": 45,
+      "reference_gap": 3.6274462029519717e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "gisette",
+      "seed": 46,
+      "reference_gap": 4.74372061382285e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "covtype",
+      "seed": 42,
+      "reference_gap": 9.87675055685866e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "covtype",
+      "seed": 43,
+      "reference_gap": 9.731173879701238e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "covtype",
+      "seed": 44,
+      "reference_gap": 9.775376141996084e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "covtype",
+      "seed": 45,
+      "reference_gap": 9.76205832603494e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "covtype",
+      "seed": 46,
+      "reference_gap": 8.78963167250113e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 42,
+      "reference_gap": 9.164029589503464e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0,
+      "loaded_openmp_capacity_exceeds_active_numba_mask": 0
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 43,
+      "reference_gap": 6.5445051165291535e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0,
+      "loaded_openmp_capacity_exceeds_active_numba_mask": 0
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 44,
+      "reference_gap": 7.034911349040884e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0,
+      "loaded_openmp_capacity_exceeds_active_numba_mask": 0
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 45,
+      "reference_gap": 8.356063924574997e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0,
+      "loaded_openmp_capacity_exceeds_active_numba_mask": 0
+    },
+    {
+      "dataset": "rcv1",
+      "seed": 46,
+      "reference_gap": 9.949024552091679e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0,
+      "loaded_openmp_capacity_exceeds_active_numba_mask": 0
+    },
+    {
+      "dataset": "webspam",
+      "seed": 42,
+      "reference_gap": 4.991805721166198e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "webspam",
+      "seed": 43,
+      "reference_gap": 8.817511494008112e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "webspam",
+      "seed": 44,
+      "reference_gap": 8.142449124337592e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "webspam",
+      "seed": 45,
+      "reference_gap": 7.372849495534961e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    },
+    {
+      "dataset": "webspam",
+      "seed": 46,
+      "reference_gap": 8.208720876701214e-06,
+      "empty_feature_training_rows": 0,
+      "passed": 9,
+      "capped": 0,
+      "budget_infeasible": 0,
+      "actual_isolated_runs": 0
+    }
+  ]
+}

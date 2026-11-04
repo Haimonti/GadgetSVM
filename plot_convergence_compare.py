@@ -9,12 +9,15 @@ import numpy as np
 
 LABELS = {'centralized': 'Centralized', 'sdca': 'SDCA', 'bdsvm': 'BDSVM',
           'fedavg': 'FedAvg', 'cocoa': 'CoCoA', 'cocoa_plus': 'CoCoA+',
-          'fdr_svm': 'FDR-SVM', 'fedssl': 'FedSSL'}
+          'fdr_svm': 'FDR-SVM', 'fedssl': 'FedSSL',
+          'gadget':'GADGET', 'cola':'CoLA', 'choco':'CHOCO-SVM'}
 COLORS = {'centralized': '#444444', 'sdca': '#28638E', 'bdsvm': '#B68B29',
           'fedavg': '#C37343', 'cocoa': '#73864D', 'cocoa_plus': '#485B27',
-          'fdr_svm': '#AF6B8F', 'fedssl': '#5995C1'}
+          'fdr_svm': '#AF6B8F', 'fedssl': '#5995C1',
+          'gadget':'#7B559D','cola':'#248F91','choco':'#AF6B8F'}
 STYLES = {'sdca': '-', 'bdsvm': '--', 'fedavg': '-.', 'cocoa': ':',
-          'cocoa_plus': '--', 'fdr_svm': '-', 'fedssl': '-.'}
+          'cocoa_plus': '--', 'fdr_svm': '-', 'fedssl': '-.',
+          'gadget':'-.','cola':'-','choco':':'}
 
 
 def load_results(directory):

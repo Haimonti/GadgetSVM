@@ -40,6 +40,7 @@ scaling takes its place.
 """
 
 import numpy as np
+import os
 
 from src.peersim_python.core.common_state import CommonState
 from src.peersim_python.sdca_protocol import SDCAProtocol
@@ -110,13 +111,19 @@ class CoCoAGossipProtocol(SDCAProtocol):
         #         sigma-weighted local progress of the reference solver.
         w_loc = self.w.copy()
         dalpha = np.zeros(self.n, dtype=np.float64)
+        if os.environ.get('SVM_COMPILED_LOCAL') == '1':
+            from p2p._linear_fast import dual_steps
+            draws=np.array([CommonState.r.randrange(self.n) for _ in range(self.local_steps)],dtype=np.int64)
+            new,_=dual_steps(indptr,indices,data,y,alpha,self.w,draws,lam_n,sigma,1.)
+            return new-alpha
 
         for _ in range(self.local_steps):
             i = CommonState.r.randrange(self.n)
             start, end = indptr[i], indptr[i + 1]
             cols, vals = indices[start:end], data[start:end]
             norm_sq = float(np.dot(vals, vals))
-            if norm_sq < 1e-12:
+            if norm_sq == 0.:
+                dalpha[i] = float(y[i]) - alpha[i]
                 continue
             yi = float(y[i])
             a = (alpha[i] + dalpha[i]) * yi            # unsigned, in [0, 1]

@@ -1,0 +1,1515 @@
+{
+  "passed": true,
+  "records": 300,
+  "complete": false,
+  "timing_outer_sha256": "4972b66eb2f83a81e4c3b67755678902482aad16c18cdefeb8a3658fd539fcdf",
+  "learning_outer_sha256": "2cf0384d1211bd70deb8be292a9cec385e1495cf89868f29dc8e477e6df5e08f",
+  "cached": [
+    {
+      "path": "output/study/w8a/seed_42/bdsvm_timing.json",
+      "metric_sha256": "196aa46ed8a80fe759ad9010535b4e68540906aec956bcac9e8ddd0ff290bcbc",
+      "weights_sha256": "668064ae26bb6eae197262e7a3e241529a7327c2d09a10feb2e942d9f2b51075"
+    },
+    {
+      "path": "output/study/w8a/seed_42/centralized_timing.json",
+      "metric_sha256": "dcc0edf0691866cc59f95f9fb67bfc62ed9aef521825bcd41919bd8598c1a4f6",
+      "weights_sha256": "783aa684d8fc056040966636b9a187a462fc11541269fc4d28600ada8d2c9969"
+    },
+    {
+      "path": "output/study/w8a/seed_42/choco_timing.json",
+      "metric_sha256": "9ea832f9b6bed557605a36120bd900dfb3bf8674abcb8a1a1c95a58f7488773a",
+      "weights_sha256": "49ac0c5c6277e02d462156232c2770e8fd972916999c1be26aba184d02e794c0"
+    },
+    {
+      "path": "output/study/w8a/seed_42/cocoa_plus_timing.json",
+      "metric_sha256": "de5c89605b515e10959c82212ca84503f4ed691284d9eed5432ef26bcdec29ba",
+      "weights_sha256": "1de2b85368bcb02788fd7529a4ded0e434069ea22830b0853783635378f13ff5"
+    },
+    {
+      "path": "output/study/w8a/seed_42/cocoa_timing.json",
+      "metric_sha256": "42ba2c9fddf5bf49b8e2343b8c0ff511ef0834c241eadaeaad18df14d726ca2f",
+      "weights_sha256": "55057775c3c9c4c2ca6faeb21c170395ded8c7bbc1710fd1bb44762bb570afd3"
+    },
+    {
+      "path": "output/study/w8a/seed_42/cola_timing.json",
+      "metric_sha256": "b42dd5ad52ea93152fe6c558b695bd181e753361bb33d06316d5f4a2abbace18",
+      "weights_sha256": "ea48e689200228629777a53fca1558e11882c8c77b4eda9b72ad63235445b7e3"
+    },
+    {
+      "path": "output/study/w8a/seed_42/fedavg_timing.json",
+      "metric_sha256": "ccafdf928aca8cfaec35a2f7bbe1b44b73cbdc303769a9f7d09524c3ef447c17",
+      "weights_sha256": "b4ce639887bb9685156305aae4bc6f8c9f50976bf91f91c44943e52501c776a5"
+    },
+    {
+      "path": "output/study/w8a/seed_42/gadget_timing.json",
+      "metric_sha256": "855bf8df5bf2c5c676b603cf2868d36e957645c8c9bbf9972f5d4312a2ebb376",
+      "weights_sha256": "b4e7cfd31b9e7f0444d44e15ecfa34062d2fb40bcd7b18ae8c9075ce8f838187"
+    },
+    {
+      "path": "output/study/w8a/seed_42/sdca_timing.json",
+      "metric_sha256": "f0910b13d9682b0bfaf431b3ea026af3ea17f41223498aaaef869c3bf84e63b5",
+      "weights_sha256": "5dbaba6312bc1ca24d0bdba0c59f416952911ec155b30621b514c2a0390f740e"
+    },
+    {
+      "path": "output/study/w8a/seed_43/bdsvm_timing.json",
+      "metric_sha256": "39552439bc1cb422b3ca6a7d30b98acf20577e8d4d15666832576426b7a46e29",
+      "weights_sha256": "1b5d47ddd70b8600b071cc80e017aeb56e17568d37f6294941e653e424112851"
+    },
+    {
+      "path": "output/study/w8a/seed_43/centralized_timing.json",
+      "metric_sha256": "89146b4c7f6bfe6260ba2b857fb67c28c5b4884cca47c44a08cd3baa1b520bc1",
+      "weights_sha256": "51e619ba621af649a5c67f98007573d85908ac78d1defbe647bbb939f492a17c"
+    },
+    {
+      "path": "output/study/w8a/seed_43/choco_timing.json",
+      "metric_sha256": "1542bc566a9417f745a7857d2885ecf00a3bd05a77fe9da153aa5b8c587ef225",
+      "weights_sha256": "0c9b37608e29d91294c1baef200ae57d3428ad0458b6c7ad84fcc693fe88de88"
+    },
+    {
+      "path": "output/study/w8a/seed_43/cocoa_plus_timing.json",
+      "metric_sha256": "4919629d89af871c26080651fc63f4adf3489c831870841fa25d9ebbb9975b09",
+      "weights_sha256": "85c9336ae94942111dca877c140e62f5e4f2235a9c190fb445fe26456c3c85f2"
+    },
+    {
+      "path": "output/study/w8a/seed_43/cocoa_timing.json",
+      "metric_sha256": "24f5f1cb9bebda2ec81c3b590720685dc10df42d4d2a5d43ef5e4562baf7090a",
+      "weights_sha256": "6abfc069407e37aeb024894983dc5c9dc394ce970c7ea4ddb56a29b3a4ed98e4"
+    },
+    {
+      "path": "output/study/w8a/seed_43/cola_timing.json",
+      "metric_sha256": "4f6030504a73d477ca45d93578f5c3226a46c48ee7abba159fc8389118f05c28",
+      "weights_sha256": "bf3fd3146974a6e5f934dd273f7aed5e6afcd22ae56583d8ed5e1bead56c467b"
+    },
+    {
+      "path": "output/study/w8a/seed_43/fedavg_timing.json",
+      "metric_sha256": "5480aec23a4d942a73682382b0199eb6da79f56798fb1b963e52539f10545ce2",
+      "weights_sha256": "507e53cb964db6d122cae475e2b4d6b0b049a0638e7b3f59d762303ae23992e8"
+    },
+    {
+      "path": "output/study/w8a/seed_43/gadget_timing.json",
+      "metric_sha256": "d4035a7606a8081bf39faa068d7863bb8bdc9ce26bd8d10c2e6ea9f4f101ec28",
+      "weights_sha256": "3ff735b4db346f62736520b827af37e323a9a89db1a7f7361ad6a21737549209"
+    },
+    {
+      "path": "output/study/w8a/seed_43/sdca_timing.json",
+      "metric_sha256": "3535795c27eec02c6fcf444eb12a047423923e658d062f6f3a7e301b8da41b13",
+      "weights_sha256": "cc4cf51c9d533d274f0489281b21e3f3590f1cb837ddf9fa1990c0c3f5bf210e"
+    },
+    {
+      "path": "output/study/w8a/seed_44/bdsvm_timing.json",
+      "metric_sha256": "bb9733bad65457ff2cb4f694377437505cfaf5679ecc5674fc0338005d3adf5d",
+      "weights_sha256": "8da07b309e71bf7c8d17169a659fa54865178638b911d8900e500b30e681c62f"
+    },
+    {
+      "path": "output/study/w8a/seed_44/centralized_timing.json",
+      "metric_sha256": "48e66014bbec3b3d2a13ef9052d7a857d5024c8b69367faf78ed40502f4cfd6a",
+      "weights_sha256": "3327bad9b0b1b4abfd55ad080f062cbd80b551571e021de05c6712ef167216b5"
+    },
+    {
+      "path": "output/study/w8a/seed_44/choco_timing.json",
+      "metric_sha256": "6e90de5e0a3e3dc1ebc45312386d84e2dad80ba9faeb52ebafa043a58deb497a",
+      "weights_sha256": "0d0b8543f6d7736067ffae23ccbdbf5a3ca58b09c9cecead30326c46439e6c7f"
+    },
+    {
+      "path": "output/study/w8a/seed_44/cocoa_plus_timing.json",
+      "metric_sha256": "696ae282bcef8146425bd3ae551070fe61e57c1b78a4f88d424046fcf4db4c9d",
+      "weights_sha256": "308c1d90777450b7deb3cc5983df24fc40af550ce35a5806af750c826316142d"
+    },
+    {
+      "path": "output/study/w8a/seed_44/cocoa_timing.json",
+      "metric_sha256": "926f106d8b316e144250b591f11961be775b9332f8d70143273e56511c5fb34f",
+      "weights_sha256": "71977b38003cbc487bdd8c91b77c19370fa4fd0a186f01cce70feb9ebbccc05f"
+    },
+    {
+      "path": "output/study/w8a/seed_44/cola_timing.json",
+      "metric_sha256": "c3e851a99766ac96e9757b7ecad5232994a3ff72194224a2ac6861b08f77c8d4",
+      "weights_sha256": "c26c399d719d2a8f9f3c5112473cfc4e4afe524e95d4b87452bc2031ab7191bf"
+    },
+    {
+      "path": "output/study/w8a/seed_44/fedavg_timing.json",
+      "metric_sha256": "ef024c9e20039af1f76e13c750585db9539c8d499c7b4660abfab9a42d40d14e",
+      "weights_sha256": "fdbf3a6da759781e3ee9dc3d76a697e240d2c2a42768712af2b5fd1ad9c885f3"
+    },
+    {
+      "path": "output/study/w8a/seed_44/gadget_timing.json",
+      "metric_sha256": "e4a164b401715b3546e42d790279960b379cf310a69372353b97f9d58a7ff252",
+      "weights_sha256": "41ecd8f2714b00f58229ba45b01fe8fdfade0f1996eba5e87bc2c80b52384401"
+    },
+    {
+      "path": "output/study/w8a/seed_44/sdca_timing.json",
+      "metric_sha256": "d8e5ab11d4b3e8aa91fd3ac4e47de9414ab74ba904fee5c4327b57de1d62bb66",
+      "weights_sha256": "df3ca0951f47d8a03c23f34bb1fcfe02f0a5b83029c297dd41747193d4f85ede"
+    },
+    {
+      "path": "output/study/w8a/seed_45/bdsvm_timing.json",
+      "metric_sha256": "ba4b17c2479ccff5a7d933cffa51ac778a80ce93d0faa89cc0b4dac41cfa4445",
+      "weights_sha256": "16530aa8ba77c9e2f86a2b4d97ec65463e10b65b5528a9e18a0bc9860b3d3358"
+    },
+    {
+      "path": "output/study/w8a/seed_45/centralized_timing.json",
+      "metric_sha256": "9dd4e57e703467cc4e517abbdfcdeb24874db4a612c32414b31ad63726aed439",
+      "weights_sha256": "7cf3564b4d6ca41887379e12a4701519260da586f07983861ed0cb4a91aaaa5a"
+    },
+    {
+      "path": "output/study/w8a/seed_45/choco_timing.json",
+      "metric_sha256": "238b10c5409ecc109dbdf68677e7ccc01a4d30a9bb9c9dd02b5a4b1246ef84bf",
+      "weights_sha256": "a124d5d6a0ccaa6b61759d255852dace1a987e89c179cfe6d78f20c5b61c9101"
+    },
+    {
+      "path": "output/study/w8a/seed_45/cocoa_plus_timing.json",
+      "metric_sha256": "4c55d115d0eb60cb4a6bf80aaaa8c38ca4cdefe8be7afd71fab26d4e00bec429",
+      "weights_sha256": "a922e6c15d5b04f4d5654791587d4c9681d4efbf1acc1021950951f1be3cce4f"
+    },
+    {
+      "path": "output/study/w8a/seed_45/cocoa_timing.json",
+      "metric_sha256": "c39b82c90aef240cf43d07bbc4389f0b26b32266b001381804913d22768ad443",
+      "weights_sha256": "4897c3dd68fe4137cf5b961b7bc54e01ad899d3f222339297ffa334a646b4a8e"
+    },
+    {
+      "path": "output/study/w8a/seed_45/cola_timing.json",
+      "metric_sha256": "72dc846b91ec874e717919931894e0c509f837274ea1c730c68f371148e7fa4d",
+      "weights_sha256": "439449f1ba7797572c71f9a779c6dcaf8e3d35c15c8a8ed11852e9a0b040b779"
+    },
+    {
+      "path": "output/study/w8a/seed_45/fedavg_timing.json",
+      "metric_sha256": "61b7e451bd6719d7cee4ff2607fa500cbac42d4991b30e27e42380f18d36e12e",
+      "weights_sha256": "c537852da0b710b048c1aef6f9ad96d4de6966903ab1f508bcf01ce55168daa8"
+    },
+    {
+      "path": "output/study/w8a/seed_45/gadget_timing.json",
+      "metric_sha256": "ad2022792f1f2bd4bceefe162a66a05398b29247f87c658cb1f514cd1dc97b0d",
+      "weights_sha256": "2afbd295d366c46320921bc63cd22ab92f3851615c1cb897be787472669fbf39"
+    },
+    {
+      "path": "output/study/w8a/seed_45/sdca_timing.json",
+      "metric_sha256": "66996f1f879846bf04449cf95d3c9e929315343204c56f4564e9a99b61eab484",
+      "weights_sha256": "6849be28776dccac7e3d35a4b03dac7986a3a3fed368c810b7906a4fbefb3870"
+    },
+    {
+      "path": "output/study/w8a/seed_46/bdsvm_timing.json",
+      "metric_sha256": "9a7a81971a09a20a8ac441e8684427cdb55dd53a9516326ab22454ebf0f31c4b",
+      "weights_sha256": "19e075fb6338a0fc781d9f6ea197525f71a6453e5cbdbc4f1d27d2aac13b9c66"
+    },
+    {
+      "path": "output/study/w8a/seed_46/centralized_timing.json",
+      "metric_sha256": "d8fafda06dc1a22d4d7d01abf29c4162b90eccc657d0e5b8fa581f616af4be25",
+      "weights_sha256": "eedbbb8349ba6474ea386d2025086d72d1fabb89bcdd2884cd1228d04d1a1651"
+    },
+    {
+      "path": "output/study/w8a/seed_46/choco_timing.json",
+      "metric_sha256": "317fa67ff277ad70e2497782333fd25a328282e02f45e7b6b9ed4f21e82008de",
+      "weights_sha256": "ddfaaa2fac17e1d594d5d5c1655fd982045d7eeded8daade8bea47315b589d3e"
+    },
+    {
+      "path": "output/study/w8a/seed_46/cocoa_plus_timing.json",
+      "metric_sha256": "4599260625e137e5b90314086d69551a390cbd37a92286e5024a61ad17b87db9",
+      "weights_sha256": "bcfbb6584b6817f41053bf3d1d02e102843a2d71582752c7910723b13480be5d"
+    },
+    {
+      "path": "output/study/w8a/seed_46/cocoa_timing.json",
+      "metric_sha256": "f6667d262f8d149dfaa30531a815bbcc5fb4b535ba2ccddc24466d52eb15d66b",
+      "weights_sha256": "7edd5fdc1b3b7bf60ae0921a1983e787c900d9cabda17623ab67300605ac01e6"
+    },
+    {
+      "path": "output/study/w8a/seed_46/cola_timing.json",
+      "metric_sha256": "87ffa021e81330ec72d7f4f644d6a6dc33811db38487dd07cf867d025fc27ba5",
+      "weights_sha256": "47ce8f0aca8873aea05e12dec63cbe9bb1c53e8a04a718818bca10447e6df103"
+    },
+    {
+      "path": "output/study/w8a/seed_46/fedavg_timing.json",
+      "metric_sha256": "1d624c66ab1ed7f5ae6f10c45c531cb0da3b89eca6ca16302e33e5f30a4a3725",
+      "weights_sha256": "a1818d5d29281fe6e37956d85720eacb3cda861d11c25ad60a3fdd6509e3533e"
+    },
+    {
+      "path": "output/study/w8a/seed_46/gadget_timing.json",
+      "metric_sha256": "01981e0b6824a91462e7c9d5261dbbf89b74216113a9679bc94b2b689104dbdd",
+      "weights_sha256": "eb6eda119ab80e7a7b0525f568863ec0e9e939c2f774dd112c050a88d79b4123"
+    },
+    {
+      "path": "output/study/w8a/seed_46/sdca_timing.json",
+      "metric_sha256": "072fe2c9bc90a692d57c746ddd8e355f248d8c1ebd6c5ca82c83c40daa7000b0",
+      "weights_sha256": "afb63425fc0d487afbc5422f158a8a3505636e293de52b7ee146de801a650bfe"
+    },
+    {
+      "path": "output/study/real-sim/seed_42/bdsvm_timing.json",
+      "metric_sha256": "c5d129dfaf44b46a5613d9581eea921bf757e70e6d03fcb0e7095d9ea2e61980",
+      "weights_sha256": "efe08dbaef535ce5b312099e41527f090fa1c67674bd4bb2899d66fd27b54bd9"
+    },
+    {
+      "path": "output/study/real-sim/seed_42/centralized_timing.json",
+      "metric_sha256": "3863e077607ff1308df3ffe44bb2aaa0c94893c60f2f5423356b7fdee369791e",
+      "weights_sha256": "6da0fc547b8f53d57ee88ecd37b5ee2896b4735995e5c78524dff90ca79f5b19"
+    },
+    {
+      "path": "output/study/real-sim/seed_42/choco_timing.json",
+      "metric_sha256": "79b6b531d6b84a29138ccfa3d20b31f583373df270ebbc477468fa611d79798e",
+      "weights_sha256": "49de42bd0209db9df178ebb27a9ce6f98a7cc3eff92cc73f1aa5ce5587d8daae"
+    },
+    {
+      "path": "output/study/real-sim/seed_42/cocoa_plus_timing.json",
+      "metric_sha256": "5519038216c231189e7d3c6951c7d0f3f67c793cb74c9706444dff0aee611bf5",
+      "weights_sha256": "3c64e781246c11cf33893f72fd5e4832d25c89fa54fc7c3909d1309a83d7f50c"
+    },
+    {
+      "path": "output/study/real-sim/seed_42/cocoa_timing.json",
+      "metric_sha256": "3d6f4e901c37fb523161ca1bd8a96e9825afd8d3cd5d35e32706882a4413cefe",
+      "weights_sha256": "cb8f9a54ff610c753d88b6ef90ab67cf7e929892ce81486a465b9fa4147f741d"
+    },
+    {
+      "path": "output/study/real-sim/seed_42/cola_timing.json",
+      "metric_sha256": "a4d8ee27c4e81f8c9cd8a1fe41b355c22fc4b07d96e59240a726128f1468247e",
+      "weights_sha256": "238a11f0b9b1471d4d9bfd84f73e751698e38ce62a1db141be253989b3e6f753"
+    },
+    {
+      "path": "output/study/real-sim/seed_42/fedavg_timing.json",
+      "metric_sha256": "20f75dd0b8cce7dfc3595e4340ed66cfd39168bc5272c6d55f3c10f98aa04716",
+      "weights_sha256": "1bac7fd5b1ab5b9a8901bb3506aaa6c32d476777c2188daa6a34b1b9ee0f18fe"
+    },
+    {
+      "path": "output/study/real-sim/seed_42/gadget_timing.json",
+      "metric_sha256": "399397877a5017cb70e6f36effe00b665789f2bb1a28947cad768dd5a3bbc759",
+      "weights_sha256": "88debf998d943fedf8c4db0bfd68f2528ba5d96aab23e4fae7ca2492fc53e4be"
+    },
+    {
+      "path": "output/study/real-sim/seed_42/sdca_timing.json",
+      "metric_sha256": "30187403c611d832ae9c0e6731de106bd041879d3ee20d22d688c789bb949446",
+      "weights_sha256": "1aa89f215ce19b4f29481099bf17ab0100d408e14d1752e7167c5bd372257453"
+    },
+    {
+      "path": "output/study/real-sim/seed_43/bdsvm_timing.json",
+      "metric_sha256": "e4caf6a4b7c114571474e9727cdabef4553283770962ecc9f25b910d07ea40d0",
+      "weights_sha256": "1766f9989e2e642b29c9813bb7b4372c19a2dc56abfc53c4ff4c67665ea929cc"
+    },
+    {
+      "path": "output/study/real-sim/seed_43/centralized_timing.json",
+      "metric_sha256": "47038bd8973b0ec000d7792e4ce842369ffab613d18b734310452b29349415fc",
+      "weights_sha256": "9080a0f9d9b88e37cd28ff4f4e8b9f5d830135f76bfcc9f21f40cfe99fc57323"
+    },
+    {
+      "path": "output/study/real-sim/seed_43/choco_timing.json",
+      "metric_sha256": "2e6ba08fbffe615c6a448f56956f64bea7110f17b5be252ddaa9cfb5e8807458",
+      "weights_sha256": "922dacbfd6eb3a29a950154c73abe25b1ecbeacb28f9668c975b84a0a4911c7a"
+    },
+    {
+      "path": "output/study/real-sim/seed_43/cocoa_plus_timing.json",
+      "metric_sha256": "5ce392df258bdcad7c60bbb2d366832ed87fa58d64e87d2322062d6fa8c36b4d",
+      "weights_sha256": "145679c5ec63e0dc9a8e28ce3f61c4e933689ac09fd22f970d42720cb8dfbdd9"
+    },
+    {
+      "path": "output/study/real-sim/seed_43/cocoa_timing.json",
+      "metric_sha256": "917d1dca7680700a25f43d9a953102ad4d7d0027ce50d208aa8555ef26c0e2c6",
+      "weights_sha256": "0b95da64314f7c9d61f3593c7ec4a5c3e80e77c466ca24c71987a6e8aa26d3d7"
+    },
+    {
+      "path": "output/study/real-sim/seed_43/cola_timing.json",
+      "metric_sha256": "68ee45209789e661739bb3355498a5258a2b218ec278aa7bc654d9b8cc62934e",
+      "weights_sha256": "e479719aa0c70b514e4feb223f431d502cc82aaeb012336e34eac20d7c5c8a96"
+    },
+    {
+      "path": "output/study/real-sim/seed_43/fedavg_timing.json",
+      "metric_sha256": "64a9b0e7d0f1851a77ac013c47da9e7a02f30b59ef4b2ee81c0ada79a7ac4ed9",
+      "weights_sha256": "73d949a45d7e8f62bb3ad2aeecf82047bab631807c6e23eff337c4ef5b6be534"
+    },
+    {
+      "path": "output/study/real-sim/seed_43/gadget_timing.json",
+      "metric_sha256": "fce0f8d6f7e5ab5ff61df192c81ef2ec1e22e16548b7b43a6c2f817ce7ab2784",
+      "weights_sha256": "7f741b5f06442c36db342ed99f70348b81daa6167da9e06fc5640bd5c928558c"
+    },
+    {
+      "path": "output/study/real-sim/seed_43/sdca_timing.json",
+      "metric_sha256": "9e4ac834dfe97c0ecb512b525a778303318e4f177cbc7e583a13ec548d132274",
+      "weights_sha256": "ed69b2d634007e78285bde432e2e1ba48f277afea64624758b4a6cc0f37f958c"
+    },
+    {
+      "path": "output/study/real-sim/seed_44/bdsvm_timing.json",
+      "metric_sha256": "33e4ccc73522b7be984514590460ec3003af3ecd2995e1b1722af4e44fb623a0",
+      "weights_sha256": "9fec7b16ab788da6fce86782bef9e1fc2e131a49855c0155d99eb606693fa71b"
+    },
+    {
+      "path": "output/study/real-sim/seed_44/centralized_timing.json",
+      "metric_sha256": "5cf182c1667c630e703e2b8632c2eade4b8d58cf1fd7b58ad57ff3301427cb27",
+      "weights_sha256": "1b819f1dbd01ea8d85ec74667e2d1c6599875f8dd04e6d6041a66d7d290397b3"
+    },
+    {
+      "path": "output/study/real-sim/seed_44/choco_timing.json",
+      "metric_sha256": "e9775dfe56f469ae7ab4011aa80b09d5610441db857ab919928b1ec93a036989",
+      "weights_sha256": "1edb0dfea539f8ffc715d575d7bfb83d9ebd6b042266da267da2020575d12c06"
+    },
+    {
+      "path": "output/study/real-sim/seed_44/cocoa_plus_timing.json",
+      "metric_sha256": "aa391ca5a5c77518ad81fa529cddab0eecef475dccacb96d1bfce934b4e961aa",
+      "weights_sha256": "2ca5f8acd4f1924a038f84291efdc9e45962652d82dd2083e432d5dbe0f9edde"
+    },
+    {
+      "path": "output/study/real-sim/seed_44/cocoa_timing.json",
+      "metric_sha256": "1728d8bbac8dfc9f3ac9624046df466dc406cd411e4ec420a1d3cfe430298208",
+      "weights_sha256": "46f3f986981ae7910b9adf1b137d31af4e5cd081daab960f4bdd2feeff8534e2"
+    },
+    {
+      "path": "output/study/real-sim/seed_44/cola_timing.json",
+      "metric_sha256": "8694feb2cdba038bcbd298a7cf22ba31dfb2c8fe3c5260abfb08cc2c2bb56d6b",
+      "weights_sha256": "c686a6469f2ed15dbf58473acebd1397337e8e2352f384f5aed15e96f7806037"
+    },
+    {
+      "path": "output/study/real-sim/seed_44/fedavg_timing.json",
+      "metric_sha256": "48fc70a9d62c50202e1db323c4f152d5f4a1134506513203f51c0bf60ef04942",
+      "weights_sha256": "7a883bdd5b60a9a35c11df79ccdc83926ff9abb3f405a73e27978236fff7bf55"
+    },
+    {
+      "path": "output/study/real-sim/seed_44/gadget_timing.json",
+      "metric_sha256": "b99eeae6effafda5b1ff73f929705fbe888d3f95065457cc52d79d526eb9fe5b",
+      "weights_sha256": "a87a3fe8023166bb89ba85459938107b25099f3ee06eb053177876c7c98b829d"
+    },
+    {
+      "path": "output/study/real-sim/seed_44/sdca_timing.json",
+      "metric_sha256": "02714ea38dea030eebfa69cfccc3f7cb4345211f6f3e2b6e13f3f0f680cee851",
+      "weights_sha256": "f351fe3324f9e322b11b738ddcdaa9fdb53e67eeade70b84858bef4783c92427"
+    },
+    {
+      "path": "output/study/real-sim/seed_45/bdsvm_timing.json",
+      "metric_sha256": "3cb0a82c941fc967eefffc4c2ba84637ae45bd72581d40251ce779551d0847ed",
+      "weights_sha256": "c54d035d3fb17ea6177cf2d7c724c1f9f7cad6994d421766b944645e9b2d45a2"
+    },
+    {
+      "path": "output/study/real-sim/seed_45/centralized_timing.json",
+      "metric_sha256": "d4bbe3e41abc72470b0e628aeb144008aef0a58bce5708ce283b3fbcaeaa7495",
+      "weights_sha256": "24bcf651987926f8edec31e9c4d142ac1ac9bdf314d1f47cd029d5684ad7d102"
+    },
+    {
+      "path": "output/study/real-sim/seed_45/choco_timing.json",
+      "metric_sha256": "626fd6337b3e8b6913d0ae0e448a6e0a59318b623e0906128e8ca3956d8d476c",
+      "weights_sha256": "bc17579c9cd1586d977e298da41361777ebbc39afcf1dc4e644296af89e1154e"
+    },
+    {
+      "path": "output/study/real-sim/seed_45/cocoa_plus_timing.json",
+      "metric_sha256": "bce252e365264b69533b84814c5d93cffcb47b8ce67eff11d7b926c72f70d7d1",
+      "weights_sha256": "ae226bb00c3472208456957fc0c8228efb8586649d55944933df6df863e15208"
+    },
+    {
+      "path": "output/study/real-sim/seed_45/cocoa_timing.json",
+      "metric_sha256": "ec449ae82e60d20708a52df6a6eec3199131c0fcb42c43617528a45e140c9cc4",
+      "weights_sha256": "37fa4b60e5461af13f7abd23d7877399eda03183290e87133a60e2669d4b3f9b"
+    },
+    {
+      "path": "output/study/real-sim/seed_45/cola_timing.json",
+      "metric_sha256": "86388c3ea328ac679c312904db435af0365287cccead3b8887f054ff6a82094e",
+      "weights_sha256": "2a477951d2c15758ae64734070d89ec35ce4add8f3c5c053df2f50ec942b37ac"
+    },
+    {
+      "path": "output/study/real-sim/seed_45/fedavg_timing.json",
+      "metric_sha256": "91bf796c78b42e78806d859ddd21379e40c1718299cd58a2487ec19763d70466",
+      "weights_sha256": "a83ef14126122dfae2bc9b25d1a21d62275f6d953e5f96420b1ae6df978eb233"
+    },
+    {
+      "path": "output/study/real-sim/seed_45/gadget_timing.json",
+      "metric_sha256": "37124830af643706b714c12bc6d53aeef54756223e25b03dfacda4779a5aafa4",
+      "weights_sha256": "b302991ef54dfbfe667c8ee0b125538d6a099f7987009551a645b1b9e1fe1b7c"
+    },
+    {
+      "path": "output/study/real-sim/seed_45/sdca_timing.json",
+      "metric_sha256": "0147a952e075e42ac2dcc906464960caa3f60250629775035a6046fc598f94ef",
+      "weights_sha256": "35ab00fe82c4892a59d050e7d048567d8c872f350441d80cbc9d3b779e4d62ab"
+    },
+    {
+      "path": "output/study/real-sim/seed_46/bdsvm_timing.json",
+      "metric_sha256": "938539275ebb8b56ec7f80ecf8fee272938e76b8c7d2aa312b668100b624ffbb",
+      "weights_sha256": "3b289223b90eda0c553ee03f3d3b8e6a2f52e5c1e2c1312ae67a58a0f446bbd8"
+    },
+    {
+      "path": "output/study/real-sim/seed_46/centralized_timing.json",
+      "metric_sha256": "ec5520d73dad8b2553e90fdb7efdfaad6ee82e3c3e3ee3cf8ce5e43590dd1c5e",
+      "weights_sha256": "a7bf1f44bf2e8e06b1b8eb7c962e96c82babaf67b777d565bc4ec9fbbac3462a"
+    },
+    {
+      "path": "output/study/real-sim/seed_46/choco_timing.json",
+      "metric_sha256": "08752cc26db348956e4a7ae45b23c48db36f82541070af848a10457a26f898b3",
+      "weights_sha256": "6544f907aaf01621237c387065d953310ad4e70ce1240c9ed378b3fed8ec69e0"
+    },
+    {
+      "path": "output/study/real-sim/seed_46/cocoa_plus_timing.json",
+      "metric_sha256": "bc230d998cc446ab542fa25581434773dec1fa501dd46f26def38151cf68055d",
+      "weights_sha256": "7e730ada7a368e8c0ba891ef5c9176720ed86b826d73c67a714dcf115697a0c2"
+    },
+    {
+      "path": "output/study/real-sim/seed_46/cocoa_timing.json",
+      "metric_sha256": "06e1a43964fa56ffd9fa29b5616abbae3d1eac7fca4f704e1579788ded89f1f9",
+      "weights_sha256": "0736d1323f4612c41ab3bbce2eacf7d9318254a3926b4cb7d26407ff0da5cf92"
+    },
+    {
+      "path": "output/study/real-sim/seed_46/cola_timing.json",
+      "metric_sha256": "8d32cbb24633775ed0a14d806aa86449125121bb3502cfc9b1086f31fe574530",
+      "weights_sha256": "db63dd42bef3bab518adbb1c3378063290573e2b075b03952ccdaaea36786c55"
+    },
+    {
+      "path": "output/study/real-sim/seed_46/fedavg_timing.json",
+      "metric_sha256": "d6a4e64a07e3788d2abe4639d072f3a8a2827c59faf76492ed1925f176600c2f",
+      "weights_sha256": "fb687704b1141be1f04243c505dae16122a4fda2d05aff074d7926e01cea5fb0"
+    },
+    {
+      "path": "output/study/real-sim/seed_46/gadget_timing.json",
+      "metric_sha256": "e94a1effb6f649ae9b940ffc5e0223a472538a9d15dbc84508b9ce7a5c34c1b7",
+      "weights_sha256": "40ce4d911109978cf84c9fafa7be8f40065bbb4038a66edc096e38f4ae0e6a4b"
+    },
+    {
+      "path": "output/study/real-sim/seed_46/sdca_timing.json",
+      "metric_sha256": "6e4caa5cc0a0e03094c3881b0d4b615b452ef361042f0f955a0a6146ae6f4b9e",
+      "weights_sha256": "0bf7049cd1a781e815a0f6dcc45cb25a20ca05f753c1bfbf5fb10201d9104456"
+    },
+    {
+      "path": "output/study/rcv1/seed_42/bdsvm_timing.json",
+      "metric_sha256": "af04fd1764b439c947b2333c6c11299bd6884a20bc9f994c5ae6b2b48af4bebb",
+      "weights_sha256": "509ab9345cd27f83514bf732cd9e164a624798d7b3ce865b523ec7bbbd89b778"
+    },
+    {
+      "path": "output/study/rcv1/seed_42/centralized_timing.json",
+      "metric_sha256": "4be6af888260249077dc070255300101c1ba0f9f10616200250d4c0e7f771da3",
+      "weights_sha256": "f842c3cea83bd969ae903672284868bca9006b933fc7373d8a1d93ac9364d305"
+    },
+    {
+      "path": "output/study/rcv1/seed_42/choco_timing.json",
+      "metric_sha256": "d74135e058640ac7671a2792a856181122e00e93c4f1973a37fb0b044909bcd9",
+      "weights_sha256": "35690986f98f92bc4ad7737b67ef7cba2a3cd6863221f1775fd2f47dd222a70d"
+    },
+    {
+      "path": "output/study/rcv1/seed_42/cocoa_plus_timing.json",
+      "metric_sha256": "ec8f2d982a45e3ae8a8d8348eacc48a253eb47136ec4ff00ae4fa49a8e465303",
+      "weights_sha256": "a3683fda74cb35dcbf4bc617702d515c1be286192a229fb177aa3b1a0dea08b1"
+    },
+    {
+      "path": "output/study/rcv1/seed_42/cocoa_timing.json",
+      "metric_sha256": "9001a2a4e606103c19d837afcc636227c88f5b00d3b3f052e028b5c33676025d",
+      "weights_sha256": "94b034d3a63c662cb876f78316883654a3813e4eb1e653e1708e5dab17b839fe"
+    },
+    {
+      "path": "output/study/rcv1/seed_42/cola_timing.json",
+      "metric_sha256": "c0153e369276b5b2b73ad8bd525a85a18a168ae79f8440ee9eb08569d485873a",
+      "weights_sha256": "372235f3491e504966ab37f427869984dc3cdd9ec8b8884fdfd20346da4d7fcb"
+    },
+    {
+      "path": "output/study/rcv1/seed_42/fedavg_timing.json",
+      "metric_sha256": "81333b42fc35fea4d721a650868ddf74d11f2f5a18e165d82584c2744cfc1a6b",
+      "weights_sha256": "9ce826ca928859b43cfcbe35b0ed9920e63433440d3c36e11534184dbaed9e50"
+    },
+    {
+      "path": "output/study/rcv1/seed_42/gadget_timing.json",
+      "metric_sha256": "51423d1beb95fa7c4b2f2218e170debed0c65e59708af1b5952e1a398105395d",
+      "weights_sha256": "c1f9e41b88a00a04c23e8f0d6f31667a6951baa17560607cb0ee1546bb6d553b"
+    },
+    {
+      "path": "output/study/rcv1/seed_42/sdca_timing.json",
+      "metric_sha256": "9b7fbf81b9a53de2e9a5fd40602277621e1d93bbb567365acdf4800de97ec33f",
+      "weights_sha256": "1b1d662b3f51ba944f0062405551774f954b60b06d079d543dbbbd2d6c37cc5f"
+    },
+    {
+      "path": "output/study/rcv1/seed_43/bdsvm_timing.json",
+      "metric_sha256": "37629429349969bbbead996ff07151e83f2e64aa15c030466c3f7cf218744df4",
+      "weights_sha256": "d50403fabf9af17934d050f7287732f9ece0f7d1e6ae5ef8e70cdb343f7be54a"
+    },
+    {
+      "path": "output/study/rcv1/seed_43/centralized_timing.json",
+      "metric_sha256": "9baa892e9ff447dbb18cb4a471b335753ce215b3bd3606c8f1823b20f174048b",
+      "weights_sha256": "d76d16c6d89350571146193ecf5443f3cef25aeb08c0a6b411ec1d7d66336ebf"
+    },
+    {
+      "path": "output/study/rcv1/seed_43/choco_timing.json",
+      "metric_sha256": "9b6989f01a96e87518fac1b16fad20b389774207d30172a9aef731f204108ece",
+      "weights_sha256": "fd93759c6604cdc1eec4e6738d55f4126559db889fdd21bc1945ebfd7f8ec307"
+    },
+    {
+      "path": "output/study/rcv1/seed_43/cocoa_plus_timing.json",
+      "metric_sha256": "ffc4ca34c7274aaa401ebb925e9292b8bc392aec016fc1998804578deca100d5",
+      "weights_sha256": "17432b8c591469e7555441532013375c790eafbcdf2f3f9c22e65452bceaac15"
+    },
+    {
+      "path": "output/study/rcv1/seed_43/cocoa_timing.json",
+      "metric_sha256": "f51ea75b7535370f32d96ebd6b42a677f7ea50ff149abe7c543d67847ed60418",
+      "weights_sha256": "b7d3d2d25d802ecb71ba924a8cbf36171dfba998e27ace60e85462b35f1f234f"
+    },
+    {
+      "path": "output/study/rcv1/seed_43/cola_timing.json",
+      "metric_sha256": "a9a6f51f48ac41e472fb009cf354bf2be130584addbce32b3df9f565ab60bf42",
+      "weights_sha256": "a7326cefd1f922a61408638234f314b6dbb9a90cded8c363a616d406ce2e837a"
+    },
+    {
+      "path": "output/study/rcv1/seed_43/fedavg_timing.json",
+      "metric_sha256": "3e82b37e814b76c90ba6925b97a2d0e4cacf7d99e4fe690da46685d43396f2f5",
+      "weights_sha256": "b0a95afbb50e82fc4a175e4c3662e509d9606eb6f30c65fe7bf043adba293bf4"
+    },
+    {
+      "path": "output/study/rcv1/seed_43/gadget_timing.json",
+      "metric_sha256": "2674196fd38ed07f15a8e7f59608f6828c18f91a456e4c8d02df691341996a00",
+      "weights_sha256": "b6d8bcac2fdfafbc29b5e7085667a8d90e00708adca6aa6ea6a3cb78453b22a6"
+    },
+    {
+      "path": "output/study/rcv1/seed_43/sdca_timing.json",
+      "metric_sha256": "0855680cb859d93db109fecef846421e3e99e2da38465514448b419295e7174b",
+      "weights_sha256": "0cc0724c335787369f0d80825ce861917336133178c78e1fa6e31c1e39d3ba34"
+    },
+    {
+      "path": "output/study/rcv1/seed_44/bdsvm_timing.json",
+      "metric_sha256": "b79d8eb10f92b8002f51cf191105027a720d731426c3fc2b53aefc7b8404ece0",
+      "weights_sha256": "cbf12ac0ed959500cda4b80b904241530194778ef2ea45786d21729cc34b74d9"
+    },
+    {
+      "path": "output/study/rcv1/seed_44/centralized_timing.json",
+      "metric_sha256": "60adf345ce271082a880e98f7da6a7dceb321871d41a497853dd65d1a0bc2479",
+      "weights_sha256": "1cd3ba55f50ec50f556c3897fc336b6ff7fec2b5fb6f21ffdd395af8aff51a0d"
+    },
+    {
+      "path": "output/study/rcv1/seed_44/choco_timing.json",
+      "metric_sha256": "1d20e07d1fd42582a47e5c9b377c07d03f35f79e071d32c45ecfb3477809fb4f",
+      "weights_sha256": "68f923a0c6ceee5077ccd9f0770e8d51e4a7bef971230cad7a8bc8edc7ce00c8"
+    },
+    {
+      "path": "output/study/rcv1/seed_44/cocoa_plus_timing.json",
+      "metric_sha256": "f8003d540952721c36b7bbcbc81c1abe834e2d528a31390a49806a03976ded02",
+      "weights_sha256": "e4ef935c0797b7278a2525470f91e3b5b3c20ae1aa9a1109f7b119d6573990c0"
+    },
+    {
+      "path": "output/study/rcv1/seed_44/cocoa_timing.json",
+      "metric_sha256": "76f4f127a40e221b63ab5df91726c89a23d0646443492ffed10c26e6fa92e440",
+      "weights_sha256": "e96389f0a374eaa064694515834acf5c3f6b0d3d7e248499330b02b12cb1e1ef"
+    },
+    {
+      "path": "output/study/rcv1/seed_44/cola_timing.json",
+      "metric_sha256": "41fbea9554db149d0164e97d6909e293e93acdbfb434fee6edf24e1904d58258",
+      "weights_sha256": "30f67bcbf1b7ac93b330932ea1f9d40f761b370996c395a075fa7573a3be1f5d"
+    },
+    {
+      "path": "output/study/rcv1/seed_44/fedavg_timing.json",
+      "metric_sha256": "36c22c5ea67440d8ff65024adf0911760b8e848bbe2ca19d63c8705a1b0d021c",
+      "weights_sha256": "6b256bc09509a738a11df21338dbc26984f09ae01314d22a7aa3cd84b93e4e21"
+    },
+    {
+      "path": "output/study/rcv1/seed_44/gadget_timing.json",
+      "metric_sha256": "ee47c008672466fc0b39e2c4e0d9223fce7db16c5772aac8bddd1b4c328643ec",
+      "weights_sha256": "fe55c54855bdb2ea6c100249f57c085b5149762f1b91529b9b94dff7bc11e4dd"
+    },
+    {
+      "path": "output/study/rcv1/seed_44/sdca_timing.json",
+      "metric_sha256": "08a83ff614f56b6bc3f0c4a4eb68df477adf46c8cf0e77e8994481b5cbde3061",
+      "weights_sha256": "117f88d95f81101dc6a1878f3acbf36f2a0637cf1cb9223509527e02a56a47e8"
+    },
+    {
+      "path": "output/study/rcv1/seed_45/bdsvm_timing.json",
+      "metric_sha256": "39a476be417d604e216b90306f27356c2e17a5122dcc86c1dca3f0ade84b1cb1",
+      "weights_sha256": "9833dc3498d16f60d4b94d4bdaf32bbbfb56d998f22910a63d2b18d0a0cbcc58"
+    },
+    {
+      "path": "output/study/rcv1/seed_45/centralized_timing.json",
+      "metric_sha256": "5b0a225766105047adc1c7dc452cb60620846b907c089081b905589f3e053caa",
+      "weights_sha256": "1454ff4e32c7664f5d97f591ae51a3d0f1c4497abfba0ae49058a893ebb48515"
+    },
+    {
+      "path": "output/study/rcv1/seed_45/sdca_timing.json",
+      "metric_sha256": "28dc87b13036fcafdd90ef87c8a57bdec95c514ee537b8deb4a97cf38b4c642a",
+      "weights_sha256": "28ac60f7cec35cd768afb32f4a83de3992182531387a9ae2c61a9e9437c7127e"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_42/bdsvm_timing.json",
+      "metric_sha256": "bcd153331c32c10fbefdbde05b5716c3a8380df6d9e7750a927dcbd65cae625c",
+      "weights_sha256": "71289d869c559b83222a0bb1a0fbb285b3d1d8a015a38f5d1d8ab6f85fbdb2bc"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_42/centralized_timing.json",
+      "metric_sha256": "90557f5b0ac3c8c01a1e12e18459a16751a2ec3b2d9ae8f2dd8799059363dd0a",
+      "weights_sha256": "c09566fc467f2e4edb604bd4475da03d74e4201793bc10cecb69b9f6cf1616df"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_42/choco_timing.json",
+      "metric_sha256": "83b5c973f97790c6f0a20de564c64b454ac9653fe032a861aa9b5b414b16c04f",
+      "weights_sha256": "16a64f7cd758d417b0bbc80603250016d43dc1490430ab20373a65ba44c023b9"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_42/cocoa_plus_timing.json",
+      "metric_sha256": "1faef26e32c5e99ce7c04db4e9b474395156bda155ef861fcf4686600c2dea5f",
+      "weights_sha256": "68fe964ca5f0346434f925675c4b266eec480268bf3349ed7cd0765618ffcd7e"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_42/cocoa_timing.json",
+      "metric_sha256": "6fcc919da34667baff113a16f584d854b2ad17ff30229c5043d36ae2e69547fa",
+      "weights_sha256": "ed4f84a74b9db44bd95624d956f8c59803a12feb82f1d7756b9be87989cc6d39"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_42/cola_timing.json",
+      "metric_sha256": "7910fb1c47351b2a2808c6f26b32dcb44b7b17a12bae48b91b23dc4d2130b0dd",
+      "weights_sha256": "7c05c1704b80ac1800e3e802e8b3fe4708ce32e562aa15dc8bbcb4fd4b412a3b"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_42/fedavg_timing.json",
+      "metric_sha256": "bec881a765774108683f9c2a39a34e7191666a9fab2680ef5d6ae6040dca1dbe",
+      "weights_sha256": "69cb00250d6727d9bf138a7c0dce4f86248d0d945003258c5c66c6063cde7c35"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_42/gadget_timing.json",
+      "metric_sha256": "241a705f4c5272d5bb0c75261fe30863ab1cf2b7131f1bc18e2a50da65400068",
+      "weights_sha256": "38d9d4fac0699c7dba8241cf3fd7afa839994e53b0e29c1770e2af9566180409"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_42/sdca_timing.json",
+      "metric_sha256": "13f5827d10c0acf3fd095d0e3f617732f514360ca2571267f26a78d480b55a63",
+      "weights_sha256": "581b74baf9f9c760cb4c7d373f408d4b370e878c208380a45cbbdce0f093dd7d"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_43/bdsvm_timing.json",
+      "metric_sha256": "2aef3496d167f43a9d7dbac5631cb323cbe3e79152c928e58b1f888e83ab48c7",
+      "weights_sha256": "95e1031e49df2c274755af9746243d1e85dfb4aa5bb8eea29383e639621a0e0d"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_43/centralized_timing.json",
+      "metric_sha256": "1f2bea3990602705f43f6c4da31cd8db32cf87132d9ba8c8c4151b3c80dc2858",
+      "weights_sha256": "4096608b373cd5ada8127829e014a1ca2d32c9c080ee6f60ccfaf0dea05cdbfe"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_43/choco_timing.json",
+      "metric_sha256": "ea5a6e0286038fa3338673854ef0ad2e675789329c907711d967ef70943c75e4",
+      "weights_sha256": "7b0d85c1f8ec2292c3f0f8ee191084f40bdb70ce6c0739302092be29e765541d"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_43/cocoa_plus_timing.json",
+      "metric_sha256": "bbdb571630f33035e9a09ee77e63660086046b192f831a4f1a6aa32404ddd753",
+      "weights_sha256": "b53d31e63d8045390d1c6bba77e34e1f884e5ea0f895ba13cfaa8c593f0e1dc7"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_43/cocoa_timing.json",
+      "metric_sha256": "1aa7a0f08397e7a3062e0c8c79fe1bd892271694fe41b1077b1a8785d08a7989",
+      "weights_sha256": "8ae5aebaceea64fcd5bacf1a2ef76e6684a9509be854f514ebb1c1bc366bad5a"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_43/cola_timing.json",
+      "metric_sha256": "fd736eb97bf4ae02eabe53d3982f5e2c08bbab33f1a6d12a09b0585d57155e4e",
+      "weights_sha256": "3a0685c5ae7a05ed36249aa1687a2e77c924127b35420f5005ccea4554788716"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_43/fedavg_timing.json",
+      "metric_sha256": "a4ec9e1b0da4c980a149c0ec106e9bf2732bb2045f08b763f8dad58f37a36844",
+      "weights_sha256": "aabca6165ac8b786b22972c3d71f29d96dfe0b253c69e18f5803926cc50af940"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_43/gadget_timing.json",
+      "metric_sha256": "f9a888266e3fbc6542ff20f545c447c81df80a6a7b1c701abda4129e75a9bf8d",
+      "weights_sha256": "293cfd6b2b516439675c58a97ccd34922dc91f1fd1c601907554ed73e63c098a"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_43/sdca_timing.json",
+      "metric_sha256": "37034ad7eef86f7cfc38ef9cceea2985f4a67b7a5c38887b70286f2e24aafd0e",
+      "weights_sha256": "95cb51b033cf9c3f7fe2fe6d26a35084e6d7667f2350a7d44d246dcdf9a8a9a6"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_44/bdsvm_timing.json",
+      "metric_sha256": "79e206492fbfb7bf15d16e7d9a45ed7fe31d8464f06004f40654da279095e658",
+      "weights_sha256": "39411c976a368d2313fdddf96ce640ca5ffce3d68bef149f210a9e6144347d94"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_44/centralized_timing.json",
+      "metric_sha256": "0ccd7d97cebabab268a7580961cd2d6bae8cd5f5c05214576dd3230983e13065",
+      "weights_sha256": "1c6f72ff0545ef8cdb8c8d6bd20f044ddf055237ae29727dcb6e47ffd0e6b9c6"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_44/choco_timing.json",
+      "metric_sha256": "88c42c1913219c8c690d1b3122bee59e847dcc5e0e12673a6d1bcf363b924159",
+      "weights_sha256": "cfaeaef00b9c2e69ea2758140257788fb2f5b4dc216e9e0ef8594bbcecf6bce7"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_44/cocoa_plus_timing.json",
+      "metric_sha256": "835e8696fc6c24531fe295a119bc2feca53b696195e591bc3a48ca8108b763ef",
+      "weights_sha256": "cedbec4714418a9424a1105740e556ad2d21c0f1386af65c3b0811322e08a5ba"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_44/cocoa_timing.json",
+      "metric_sha256": "935070be3400249791c0da77b5b0fa6b983887f798df2e31e36b748839268684",
+      "weights_sha256": "8273d4fc8e8e49bb8079c21c4da9e9c195fed1b32a15088524d469067b7a2e08"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_44/cola_timing.json",
+      "metric_sha256": "66e8f85d38419e99270369cfc1b6705b1c0702a7cb52e08d81a1bf66b2a67e54",
+      "weights_sha256": "86479f2c588c6a3d5bc9354630fd4bbfec313b1628373e29784a98a3100f3434"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_44/fedavg_timing.json",
+      "metric_sha256": "6684306dbb63d3c884603bf3b4573ce90da6c38223f69da63c44407711aed847",
+      "weights_sha256": "becd5c71feb301af311f8ee05f5ee5b0f0399d1530371e5bf4965b278f9128e6"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_44/gadget_timing.json",
+      "metric_sha256": "e2a0f36b6242f2f00da6ed6ccd0da9758983afbd7b14cbc60fb193a0f1c5c59d",
+      "weights_sha256": "5fa2a6ca81f0d8aa1bf50f214aedc19deb528868a5c3cfb2e83cbe0b714c8460"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_44/sdca_timing.json",
+      "metric_sha256": "a31ee795c557ff6dacd5ff1cceb8a169f4292a42e700d4bddbe98d6a57ff9b16",
+      "weights_sha256": "71aad8fbee13cd5537b9bf6cb98c974431bff5e8763452e548f333949521d0b9"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_45/bdsvm_timing.json",
+      "metric_sha256": "f7f45de03473493e0eb8c40b1f0def37181fc4e9b1b37099b1ed7b30836ed59a",
+      "weights_sha256": "4c73dd14169a7de76ec80a18a99fbefc0e5ee664379db5fcdbd290ededaa157c"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_45/centralized_timing.json",
+      "metric_sha256": "55c0a49fc813a347a4bc53d7ff2b881a2ec4e2334156292bcb3778b55eb0c673",
+      "weights_sha256": "b812e7d95ddfbb5f75260e44879436b0e2ed76260f63918d255f938419e31dbb"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_45/choco_timing.json",
+      "metric_sha256": "1244b839c6ca167c04c16642e868110cc099f10426024eae0fb3c3af4691c084",
+      "weights_sha256": "26800be98536c5cabd59401c303028a4cefd466f6224e3eb04ce72a199b46222"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_45/cocoa_plus_timing.json",
+      "metric_sha256": "4ffd40bd3df1163364456a2a8dd7efe24b83ff5198341d45984328bb4854197a",
+      "weights_sha256": "59abfb15089d7dd4d307a3a08b17b74e6cb68f9ff0fb8e78f243201051b6f587"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_45/cocoa_timing.json",
+      "metric_sha256": "039380dc94dc035cd69eb94f05ac58762d31e3ee429f732c3f7ea71dda284826",
+      "weights_sha256": "74e5c35fe3d7fb866f2e7515fd4a5b890b84ee31a02d63ccb2f7ed5927a8a6f5"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_45/cola_timing.json",
+      "metric_sha256": "e1cf69cab883aaa1b70c6f3be85ecbe8463f7789eed4f178ff124279f10e9f2b",
+      "weights_sha256": "9546f081b64ca51a6502cf088418c276fe6bcc523251f2506972a6ea5f7c7fd2"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_45/fedavg_timing.json",
+      "metric_sha256": "8327c990a0191275cb3021f78253c6953f71abbb1f415162e31e2f3b8825aa22",
+      "weights_sha256": "ed296ec2f088bd2930f3ce556c05043ae301f195e4348c5c4553884db5c41082"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_45/gadget_timing.json",
+      "metric_sha256": "784a9c2dd5e63e7312e84ff2e12bf5f8f5775c8f4bed60e0eaadea29427fbb74",
+      "weights_sha256": "4e1cba40f575e3862a25a4a09efe12e4e7f798fdfd22518007e97a43c4365d5e"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_45/sdca_timing.json",
+      "metric_sha256": "1f1db3a13cb6a57c4b28f3e7812b1d3827c4136fe42ea07bbb8d25712b2b1074",
+      "weights_sha256": "c5749e195b0d7aae6c7b4b0a1b040ba0fa4e412128669d568650812e43cb1912"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_46/bdsvm_timing.json",
+      "metric_sha256": "7e8c0fec2416cc2d6b59ead8356088c99d18c8c555106942f72f957e6a7d87c7",
+      "weights_sha256": "1a40ebe6cf5148e189b08b5bb70542cf838123547186dd0f05d91de847197e91"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_46/centralized_timing.json",
+      "metric_sha256": "ca5afa3459f60c1c5c0407451709b678f4914989bdc358ed03cdda7fa6e57c42",
+      "weights_sha256": "5f00e02576188782c1bd80b5bb8dcdc533e978159dc8ad4384d81029325d9bf4"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_46/choco_timing.json",
+      "metric_sha256": "844496cee1cc20254076bf6ed9647f7394c1cbd8fa2d2951877a53a695442cef",
+      "weights_sha256": "1024e071cad5c1a40b5242e0e4293174755fb7cf853501200b3c89f548c84216"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_46/cocoa_plus_timing.json",
+      "metric_sha256": "cfcee4316daef25283408855b5d3cc243cb462460afad8348bf86fc831fcf03c",
+      "weights_sha256": "f71e045d73ae360e1caabd1fc9b7bae2297db90f58f1feb580b11e6617790fa0"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_46/cocoa_timing.json",
+      "metric_sha256": "5c694547aea0d1199c619aca19f2a69f986af03e306f67d3965693fd673c3d52",
+      "weights_sha256": "7cfae2c2b212cc03d370388d1204cfe08a071d4ecd499c61e84b79405f3e764a"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_46/cola_timing.json",
+      "metric_sha256": "8c91016c97d87e9eb411eab626c107a6dca820fc8a9111b674c93ac7ada83a55",
+      "weights_sha256": "7f39f2c973b61068984e8333a47e2ff5c3f2fede39fc0866a40e62b42b61a4af"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_46/fedavg_timing.json",
+      "metric_sha256": "d61084cf8f693e32f3dfbb49785038c8838fb461ee2337b685c28a8be6f39147",
+      "weights_sha256": "d5bff3be4ec5b40184008c5e88cf849763e081a79a779716beb39afee258c79c"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_46/gadget_timing.json",
+      "metric_sha256": "daadded4ca5179b3904e71a6f153357e7f7d080e717b10009c03c61de3b16893",
+      "weights_sha256": "7be7b0b766fc0b7570a3d6f6ed72e6b8e9b670196c28275a9c4a4cf3354a1ea0"
+    },
+    {
+      "path": "output/study/ijcnn1/seed_46/sdca_timing.json",
+      "metric_sha256": "80d1c0839f785387d8cb6942b647573fa429c99eed31c3b2c287d79ef39972a9",
+      "weights_sha256": "549b8b60db339c7c25d10f00985a113cc4f6b040f667fad88eac64b4dc118d49"
+    },
+    {
+      "path": "output/study/gisette/seed_42/bdsvm_timing.json",
+      "metric_sha256": "ebfc8117631b097e314b682f3ebc91a63b12b4e59144fb8eab048ade1555433b",
+      "weights_sha256": "63361f7346a310f03bf949f2d37c8a81965b1e84049c0d1981b42d8e562ac451"
+    },
+    {
+      "path": "output/study/gisette/seed_42/centralized_timing.json",
+      "metric_sha256": "07e56ad74211ae0103575597eebfe225dce54b6579ef873e1c941c0a58ac52e6",
+      "weights_sha256": "06ce64a0639b2d3079192196186e72973105ad8618a8e6d3daf7b81e9350d61f"
+    },
+    {
+      "path": "output/study/gisette/seed_42/choco_timing.json",
+      "metric_sha256": "b865c1518130abb27dd674c1ae8c85be2d37689833e15e0d6ebdb812f439fcc9",
+      "weights_sha256": "1f039834cdf6cc113369870f96c88e2b83fd91b39a0807ef6e77f50d6c331a97"
+    },
+    {
+      "path": "output/study/gisette/seed_42/cocoa_plus_timing.json",
+      "metric_sha256": "acf2ec0adee44fcdd0e3922078e1b95bb1ec8b54abe9555a193e7053406340f7",
+      "weights_sha256": "ac3b852ca5726fdb2c9827c4e2462263ec1d59a9d2b495a49b925695f6d10f9b"
+    },
+    {
+      "path": "output/study/gisette/seed_42/cocoa_timing.json",
+      "metric_sha256": "57ea8a4092d2d6c646625c10395d5d464965eb17b250189ee87d476350d75d0e",
+      "weights_sha256": "f6c7e85059ec2457d2bd9c50e7a1a9154968ed581ca66a4a447b95e66c1bbb8a"
+    },
+    {
+      "path": "output/study/gisette/seed_42/cola_timing.json",
+      "metric_sha256": "898b4730ff5f694ee54fe0bd15487cefe9ae1ec6dadddf2c51066c31e4dca871",
+      "weights_sha256": "eb81063f3b64aca067ba88baba39688e936805181e0d97035c415546a8cc7c15"
+    },
+    {
+      "path": "output/study/gisette/seed_42/fedavg_timing.json",
+      "metric_sha256": "4ef2a91620dc34f5127813212c14d03dfd90f156c30d5332c0c86010550283e1",
+      "weights_sha256": "03291c29482e3fce4ec84e4fbee442aae0db0dda4ed48eb3f9f0a97aeb0b1264"
+    },
+    {
+      "path": "output/study/gisette/seed_42/gadget_timing.json",
+      "metric_sha256": "db243adcc2dc190a8878e68b915e7858197f064c76833f4938fb9df63b8bbf43",
+      "weights_sha256": "84e6f2393be1ee9d28715a780314d4456f63f9038ea092c30a8d0341d446face"
+    },
+    {
+      "path": "output/study/gisette/seed_42/sdca_timing.json",
+      "metric_sha256": "d335e9f677ba4179e2947118f08b1d3776dd573d1460b67fce67f64eae3bbf1d",
+      "weights_sha256": "f4fe6d01343b5d52993bea6c33021038d7a5da2c09dc9ec7bc77a08d15b3c6dc"
+    },
+    {
+      "path": "output/study/gisette/seed_43/bdsvm_timing.json",
+      "metric_sha256": "4dd399bbe22a33339909d513355bdfad04ed5c8df37ff90d887eb1293e72c36b",
+      "weights_sha256": "eb6340dab8fadea89f1ee059226a9560169781a2fff31e88af32a38dfca66e17"
+    },
+    {
+      "path": "output/study/gisette/seed_43/centralized_timing.json",
+      "metric_sha256": "0f54844a94771bea125bb48fba01c2bafc86618eaf462010cf8495d2f2ee93e1",
+      "weights_sha256": "673a2c3e2efdfc23d8dc84bc191e0f039811202f0a05530fa9c3036a4db975dd"
+    },
+    {
+      "path": "output/study/gisette/seed_43/choco_timing.json",
+      "metric_sha256": "e444e97de0dda4ce71eb3059c3c6b261eb16c3b815825158549f47fbfc750c63",
+      "weights_sha256": "12a959e933a871b08717b6b64ce67a675a255af23201d77a89aba74d0139919c"
+    },
+    {
+      "path": "output/study/gisette/seed_43/cocoa_plus_timing.json",
+      "metric_sha256": "3cce00dbaad3f6d4c58c3953d8759330e7ebc43164a268ba0d6b16c736cad025",
+      "weights_sha256": "d3af8c139945d2a9456c6032dbea29264babe0fbadaca38ca1ac0bf4ed135844"
+    },
+    {
+      "path": "output/study/gisette/seed_43/cocoa_timing.json",
+      "metric_sha256": "ed9da0de6188151c8621269c3ebba77872ba2e6040c5f61106a942b6d624ddb3",
+      "weights_sha256": "22c2f0d1a5f72f8038692a206b3d7762312201d29c1e414107099dbf569755b0"
+    },
+    {
+      "path": "output/study/gisette/seed_43/cola_timing.json",
+      "metric_sha256": "72edaee2514a10a7860f679cf372b65da8f769afa51994504caabba6a3046e1a",
+      "weights_sha256": "a9fe2e6e20f5e4d5cc1f1eb5d8fea0966453762518178e635c48d15b86b43dd7"
+    },
+    {
+      "path": "output/study/gisette/seed_43/fedavg_timing.json",
+      "metric_sha256": "b90b36e1d55335f84c85cbddda01637c08072323580913decd12d56fd7148053",
+      "weights_sha256": "9e491f680a6c016a9566410d02fcd28bd360599d5e0efee9f387d5d53e1b6fc5"
+    },
+    {
+      "path": "output/study/gisette/seed_43/gadget_timing.json",
+      "metric_sha256": "6bb5c591e24a2aac71ec28441f53e5d2f11174af2645d7be4114bbd771477ddd",
+      "weights_sha256": "e3ef964ea04f360cf2061976f44898d54efbc973ff479b107fa3b6293d923b93"
+    },
+    {
+      "path": "output/study/gisette/seed_43/sdca_timing.json",
+      "metric_sha256": "ae850d1b066474149c9e32346f6766c51c05e1f8d5752caea24b3795b7f46a34",
+      "weights_sha256": "25ba20ee36cc226820d07f984071c1ffcc24843a9731d368a85aba8eddc68a6f"
+    },
+    {
+      "path": "output/study/gisette/seed_44/bdsvm_timing.json",
+      "metric_sha256": "494f0886317019b1c5c5818c39d35608b2718adaad6d95a481ed480a090b2fdb",
+      "weights_sha256": "f30acaa8ac00d1448b54929db6f7bd167c0799df665be79887fa984986f5a5a5"
+    },
+    {
+      "path": "output/study/gisette/seed_44/centralized_timing.json",
+      "metric_sha256": "12e1e548f00722daac23efcd79b47a9f16727322b78b495c2ff544f8904b71d2",
+      "weights_sha256": "8c1a1ffde34031cf4ae3d84bd2917b11ea571a7db2366a37b20ee746ccba1f03"
+    },
+    {
+      "path": "output/study/gisette/seed_44/choco_timing.json",
+      "metric_sha256": "ff0a933e44338edf293f45973ce76b46f6a371279a36ebdedad81f61e2fad77a",
+      "weights_sha256": "32f77b1abf48f6e5f023e0e4403943ea910379f9acaf41664078b971793f2ca8"
+    },
+    {
+      "path": "output/study/gisette/seed_44/cocoa_plus_timing.json",
+      "metric_sha256": "5f862b7b7c236015866699ab989522f46b8ff0489767e9fd8dfc1817e8d4922f",
+      "weights_sha256": "dc3ebf543b2220117cb6d2b71aa4c0548b55975614895dd939adf2197204355c"
+    },
+    {
+      "path": "output/study/gisette/seed_44/cocoa_timing.json",
+      "metric_sha256": "4ec2d97537cfe490ac00b334fd50a2717508a46d30c0069b430ef89740d1bb3a",
+      "weights_sha256": "d6c1b2577f649ea1cc2c615da67b6cd77678c6cea176d92bd3d3beddf24c3901"
+    },
+    {
+      "path": "output/study/gisette/seed_44/cola_timing.json",
+      "metric_sha256": "451ff59f542c6ab17c9fd4480a47b6bddc9799ac49ae114ae50cdba9aff1cc27",
+      "weights_sha256": "195ae40413cc8861769a659fe4950a1a01c5dde53c7e7ea18affd5646b7c6ed4"
+    },
+    {
+      "path": "output/study/gisette/seed_44/fedavg_timing.json",
+      "metric_sha256": "84c7c709d63677a80ed762b055a6b1444e6ac38e786f1f4c960a3b61786db910",
+      "weights_sha256": "4e05bce82d955e455f25d3ad2a476edddb543fbc4b72fba5439d2f2b3289197f"
+    },
+    {
+      "path": "output/study/gisette/seed_44/gadget_timing.json",
+      "metric_sha256": "24e9855e70ef2a74dea4335b2edc9142b4f7d5d7d7335cd61a7880e64a9f0e9a",
+      "weights_sha256": "f5ccf6943e858c60126affb88bad26a442dd5d1bac3dea86c7c36eb69515a3b0"
+    },
+    {
+      "path": "output/study/gisette/seed_44/sdca_timing.json",
+      "metric_sha256": "94f8790324d5fcc6cf480883dc30c13cf2eb49658a0e1546becd54f9269505d5",
+      "weights_sha256": "3e90760fbe2167f574d89f64c962ba40fecf1b214322292de349f2811cff5474"
+    },
+    {
+      "path": "output/study/gisette/seed_45/bdsvm_timing.json",
+      "metric_sha256": "2ae96f67adda69309099b30b46e966004fe82cc7b660c3d1083ae2e36f0a4487",
+      "weights_sha256": "3cccd15730a79a95aba91ff6c9cfb2bf2b296f3e7f43911e86e1bab2db130883"
+    },
+    {
+      "path": "output/study/gisette/seed_45/centralized_timing.json",
+      "metric_sha256": "cec5ce8579b701f37959980914b2748c6bc15ae37da061348fbddd8f00ab575f",
+      "weights_sha256": "0d2fba0dcd0912dc7d1207fdb36a929fafeeb06683060ce29b10234211905677"
+    },
+    {
+      "path": "output/study/gisette/seed_45/choco_timing.json",
+      "metric_sha256": "01e0e94617cfbc10a35b9d38ae40faa28f2c5e90825c81ee30d6c8c75f26d58a",
+      "weights_sha256": "2fab6c8f9639a2d201feca7d0934aa534c8fbc6fca253e7ef2dd691c2deac9be"
+    },
+    {
+      "path": "output/study/gisette/seed_45/cocoa_plus_timing.json",
+      "metric_sha256": "f1c7457ad24308db83cb62ff3fb137b9ff0b70ac073f8f8791d66a7fe71bd3b2",
+      "weights_sha256": "8193f8c74f4c4c9afffb7516cd59386478951e1fa971aee42e42ba2a059d843d"
+    },
+    {
+      "path": "output/study/gisette/seed_45/cocoa_timing.json",
+      "metric_sha256": "45ce32ce48efc5f7b750d40e2defd92ad44fa45e4e21796e880edf910133939e",
+      "weights_sha256": "bb7d3c635c72a0d4d1ea93038dad888895e8dd42b532e4a433ed69a66190ed37"
+    },
+    {
+      "path": "output/study/gisette/seed_45/cola_timing.json",
+      "metric_sha256": "2fd8147050fcdb6ea0d2dda39abf35dc98d1ec663194fc8decd196a9cd74f063",
+      "weights_sha256": "a278a60065468424ba71412d011b10d1508b5c817a5c7909c8f98b7a4a2e59fc"
+    },
+    {
+      "path": "output/study/gisette/seed_45/fedavg_timing.json",
+      "metric_sha256": "7ca32ae848ac7de0bd2b1c8424a09617c8e66a0ddb2da92d9bcbbb4125988b52",
+      "weights_sha256": "fd437e4c8d6e2796a3ecced83ddd86e7b7eaf1e7f2fb8293f51493aea6b3e326"
+    },
+    {
+      "path": "output/study/gisette/seed_45/gadget_timing.json",
+      "metric_sha256": "a714ba74f47fae93db70fba3e4020c8fa6bd821235cc5d70c3143b20d224a689",
+      "weights_sha256": "dcc5da591dfcab788ae281c8973d9c1e7a85cdfaa025bbdd07a915c98a5416c0"
+    },
+    {
+      "path": "output/study/gisette/seed_45/sdca_timing.json",
+      "metric_sha256": "67fbb49cc91c78f47287a1543716b6a5d3b000c127655ba8dd1673a781af52bb",
+      "weights_sha256": "627c89e0bed377959ab9683d971fc29a7fa92270525d62111a9ebe0dc89c4e8d"
+    },
+    {
+      "path": "output/study/gisette/seed_46/bdsvm_timing.json",
+      "metric_sha256": "86a226b5f47374fc1134e32ec2b54d987c0395a8e35a4578c49362a4cfa3ef6a",
+      "weights_sha256": "79645b776aec816ba46c1a8dd2bd22cf9664f05a1d90eb5e8708de2a0d957371"
+    },
+    {
+      "path": "output/study/gisette/seed_46/centralized_timing.json",
+      "metric_sha256": "5ee5abbbdc377ec157f7e557683b9d68129c8c1ab2900fc3b04e224b889c7405",
+      "weights_sha256": "cafed9f927962c1f2cf3ccfe04132a94f2fd0c65b5b5714252250a748d51d386"
+    },
+    {
+      "path": "output/study/gisette/seed_46/choco_timing.json",
+      "metric_sha256": "576666daa7292153dbae68b7d19511891bc7d7a615e26ff16f8ee5de1812a2c7",
+      "weights_sha256": "3c1ec57a973eed5b04a9e87aa28783bbe477666c4589ed3cc8461484f767af21"
+    },
+    {
+      "path": "output/study/gisette/seed_46/cocoa_plus_timing.json",
+      "metric_sha256": "65112fe9b112ecb1d382eb7e5051f3a88cfbfa83da663da71b1072bf258ffbaa",
+      "weights_sha256": "f76795d6b9dbc6f12be2347f1bbe79f9c7bdf98a5bb02330c7f96367b804f7cc"
+    },
+    {
+      "path": "output/study/gisette/seed_46/cocoa_timing.json",
+      "metric_sha256": "d18f7987b14d99ee9b4c12e92d5ec431ea2a0f0eea2083015e3976c7053a08f5",
+      "weights_sha256": "f4e35bf41d6c94119600054ae3805d8d2550b859394354097437515a37bb5544"
+    },
+    {
+      "path": "output/study/gisette/seed_46/cola_timing.json",
+      "metric_sha256": "6011d9434d05bf4e2feff1918a62c25ac42f27db58a0be669521dceae60f7518",
+      "weights_sha256": "a3ea851b82b19e7d59020ec9fcd908c563803ff5000c2a2635679376e017ee6e"
+    },
+    {
+      "path": "output/study/gisette/seed_46/fedavg_timing.json",
+      "metric_sha256": "8a716f6c0ed825d4bb84b219f8d727c22a074fda909e4eb3852b7e81f7e4c937",
+      "weights_sha256": "2c0979aff07899d9674ed03ef196982fa493efc1488d272d47403993e8c9a8f2"
+    },
+    {
+      "path": "output/study/gisette/seed_46/gadget_timing.json",
+      "metric_sha256": "49373fe2a46837c9b26397c53d3b419f17c1e9f1e4c1511845ab6ea86392b7d8",
+      "weights_sha256": "911af069b5c390c7202c48a24759507acdba1c4eb90eba9e8dbdaf37da4a1dc6"
+    },
+    {
+      "path": "output/study/gisette/seed_46/sdca_timing.json",
+      "metric_sha256": "8df5a84bd45cab0b711511a7b6a2dac360daa3ed43e09c8d2ce1f828dad151ce",
+      "weights_sha256": "99e718ee34cabcece487e9160e72a4c9e307ac2f30beec163122a16f12f321c2"
+    },
+    {
+      "path": "output/study/covtype/seed_42/bdsvm_timing.json",
+      "metric_sha256": "0fe56489512ccf6862946e0789b89b29dcf49552fa1a41274dce719d7a1f6b6f",
+      "weights_sha256": "ed6e2fb6a17d1563e5d20129259b53f66b358ba80a61d0eb6b00af4465cecb24"
+    },
+    {
+      "path": "output/study/covtype/seed_42/centralized_timing.json",
+      "metric_sha256": "69ad6f7ee15bd8766448c5a5f1c70da1af7f4123f35ea190afe7c77eabb99539",
+      "weights_sha256": "4f82c29ae510c3986606d9d0c35a0d31bdb69b9a02e7864732761141f46352c3"
+    },
+    {
+      "path": "output/study/covtype/seed_42/choco_timing.json",
+      "metric_sha256": "759fe87a6d4b135992645a4563eb06d3e24c9c39e41d300401d7591955768bf4",
+      "weights_sha256": "3b79872c796bfe0fd5e5a29ed26439df984eab62dbc11e64958b4a35bbedf011"
+    },
+    {
+      "path": "output/study/covtype/seed_42/cocoa_plus_timing.json",
+      "metric_sha256": "544e655f3fc355600cb4cce967564e031714cc2ab4eab6b6733089964ec852dd",
+      "weights_sha256": "33d502ee4e4a6b6871adf93f7970bf247b11a908ba94eda2ea55e99f7a7410e5"
+    },
+    {
+      "path": "output/study/covtype/seed_42/cocoa_timing.json",
+      "metric_sha256": "0633aaa74d0abe22d546bd061d698c1540d109df43d43e8ddf81bfef420cb97b",
+      "weights_sha256": "ef49604e2d37bbe600bf656669f81d19e8bfdcd49b36bb4a93d5e6b09bbd3c43"
+    },
+    {
+      "path": "output/study/covtype/seed_42/cola_timing.json",
+      "metric_sha256": "8e02946798f0937dd04f413bb3d0922abd4449f056bfc3944f7b91aacc7c2477",
+      "weights_sha256": "e8933beaaf7904444fefcbfbbca7c380cb3a49a92c7cedf41f3326c63594e869"
+    },
+    {
+      "path": "output/study/covtype/seed_42/fedavg_timing.json",
+      "metric_sha256": "817d14ea6a4bcb5356b6187ccf2baa6497a24ecf3c9558a95cb844c78216e0a2",
+      "weights_sha256": "398c6677f75de56077577cd894f959aa68482b55de5b4e9c9968fe8275bab79e"
+    },
+    {
+      "path": "output/study/covtype/seed_42/gadget_timing.json",
+      "metric_sha256": "e497fd6a397a9fe378f80f0e52122d8343fce04948a1c33c68c1cbadb00ff148",
+      "weights_sha256": "17cb91a0600f2c526e53611296ecfb6c2cbc63f0dc11bc1605def0072d5dc817"
+    },
+    {
+      "path": "output/study/covtype/seed_42/sdca_timing.json",
+      "metric_sha256": "7af078f953ac01ad2ddb4b9c7264a3b79b8bc2181797e9f04c28612764f2594f",
+      "weights_sha256": "6162e8fc34602a890c0d30cf0a192dea1af9e522f06ce7ec4ec93792acc4b261"
+    },
+    {
+      "path": "output/study/covtype/seed_43/bdsvm_timing.json",
+      "metric_sha256": "f31eca4c4fd13eab38b48cae88f61cd30b752a5108cd2d418d4c6511a15e7a69",
+      "weights_sha256": "fcf53fb5b4ac173d88430719c00016418339572fe13531eeeed389b5104d5ae2"
+    },
+    {
+      "path": "output/study/covtype/seed_43/centralized_timing.json",
+      "metric_sha256": "9ea85e3efe4e32b643ef8249742a248d005e88b0d928feac8cf8dd758ca50aef",
+      "weights_sha256": "afb9e70cc50cfaa13b6f874c488e08ce4b0ebb0da4494feba725697d274548e5"
+    },
+    {
+      "path": "output/study/covtype/seed_43/choco_timing.json",
+      "metric_sha256": "ffadb551316c508356faf823ffe69274906c4c4767ba466da82b36a985d79fcf",
+      "weights_sha256": "361d8d2632bb3680fbf08a6be92c1683b5b5298fe9e094dcb91d233a60079840"
+    },
+    {
+      "path": "output/study/covtype/seed_43/cocoa_plus_timing.json",
+      "metric_sha256": "83237d0ff3fbd803d61b7d71da2c55bb07a451e70e8d1f2490fbc5afbd15047f",
+      "weights_sha256": "a4feded3ec89806d0bf9e650604a2163ba6e0efdfaf4ccaff7ca440dbbcc2edb"
+    },
+    {
+      "path": "output/study/covtype/seed_43/cocoa_timing.json",
+      "metric_sha256": "ef915b89066e34ad6bb1167dc7b24505166cf572b4be30be0271f80a0a8694b6",
+      "weights_sha256": "d83071a2df60155aaff2da5c65508193f83b597be12c3556ff0edbfad49f45ef"
+    },
+    {
+      "path": "output/study/covtype/seed_43/cola_timing.json",
+      "metric_sha256": "918e655090fe1afa942dd28418081102d112e5b0d85bf7ea83ac3d3debf70dcc",
+      "weights_sha256": "8d1dc1c4f9f78ba138274ed6a2013fd5b45adac4bf23d01a60d8c1faf08ba161"
+    },
+    {
+      "path": "output/study/covtype/seed_43/fedavg_timing.json",
+      "metric_sha256": "da332d83cb437371fa49e14cb16a1d27ed71c63f539f0707c34e1978ed463a33",
+      "weights_sha256": "d7339a694a1b15912cfe4bfce1a07aa6275f4bbf4a4b34685dafcca77e121efd"
+    },
+    {
+      "path": "output/study/covtype/seed_43/gadget_timing.json",
+      "metric_sha256": "d86cbc434bf217757654bc2b50672cef6b83b61b7cceffb4478091013a944e0f",
+      "weights_sha256": "95f3462940dadeb778041d132d2befb13ed99fec81972833dc9ae84a16c81658"
+    },
+    {
+      "path": "output/study/covtype/seed_43/sdca_timing.json",
+      "metric_sha256": "8dcbad6fdf69ff1836c39f2ead354b2e3e13f2d3ba2242a08509311962b824a2",
+      "weights_sha256": "7364a32fda7e449ae432cf5a7b181739430b84c0f1024d46c0afd098f6f47e85"
+    },
+    {
+      "path": "output/study/covtype/seed_44/bdsvm_timing.json",
+      "metric_sha256": "eaa70d6c89832aee4a7184e7faaa2935eac47da3b441ba1b267d45d30d677542",
+      "weights_sha256": "aeac585cb156c628e7194b27c774fd3c320a1b3f6dcc6abe36177977ede955fb"
+    },
+    {
+      "path": "output/study/covtype/seed_44/centralized_timing.json",
+      "metric_sha256": "beb44102ddd4fc5e390d53cad6f0a1f4448b12e80ebcb83d1fe3418c106eb398",
+      "weights_sha256": "21a79df38f351f6201d524403c4f87eac0cbb2f0a66c193d1e27a65888a2b7b0"
+    },
+    {
+      "path": "output/study/covtype/seed_44/choco_timing.json",
+      "metric_sha256": "7869c1dab3d55f6313f0f3931a8a20f761c077a9668cadff77ca2b52f501a47b",
+      "weights_sha256": "6f5ae8c24787129257e02745282bd57e91cf4108e251906b603c002c0f21a847"
+    },
+    {
+      "path": "output/study/covtype/seed_44/cocoa_plus_timing.json",
+      "metric_sha256": "b9e9be63fcca8ea13749a39cf57d90f2e5d8556faa415fb5c659972eb11ff037",
+      "weights_sha256": "7c401ce1c7de1df23b9428d53c671c790ca278ea11734b419256864dd1092142"
+    },
+    {
+      "path": "output/study/covtype/seed_44/cocoa_timing.json",
+      "metric_sha256": "780c90beb3124ce2bc42698451b7a25e5b89f05a3f2056790a42d0b5688657a4",
+      "weights_sha256": "d16a9a51e9d8fd8019e32133a2a3d14c3d60aa08a304ee8b44d1365409adc173"
+    },
+    {
+      "path": "output/study/covtype/seed_44/cola_timing.json",
+      "metric_sha256": "89144290e43a9a97f691a896c43d82171b12b5ea83edea94bc08aa6e3de5f697",
+      "weights_sha256": "0898013d7aabf86f9927c94a9c459dd8ca275be7744d97951bba8daf06dd4884"
+    },
+    {
+      "path": "output/study/covtype/seed_44/fedavg_timing.json",
+      "metric_sha256": "4fa9bb70e3300260e7be91e7c963b120c62f9b95038d8ea78906160c22b36741",
+      "weights_sha256": "497f62d61a18aaf0cc02a976d0b881e5fed639feba5fd2dddd51ae88421cb9da"
+    },
+    {
+      "path": "output/study/covtype/seed_44/gadget_timing.json",
+      "metric_sha256": "489faf59b071bc9fed17eb3d0205eb111b9ca2d945117793af0af9a1a4797e05",
+      "weights_sha256": "2d994382616511f8d262ad6acc26a9810f6992b8c1588eeb33b88d5f0ef8ad23"
+    },
+    {
+      "path": "output/study/covtype/seed_44/sdca_timing.json",
+      "metric_sha256": "4027668c66ff9dd0083ae9367c373e4b6a0b6ce0eddecb5079d412dfcd2ba4a1",
+      "weights_sha256": "3e66c81a5992ef3b49dbb406842dd38e4435339f027ce9efa43bbfd051e38a94"
+    },
+    {
+      "path": "output/study/covtype/seed_45/bdsvm_timing.json",
+      "metric_sha256": "450a9ffc95aed90e5820abc9a4fe9f8afc7c06380b03974ad58204173b35dd6d",
+      "weights_sha256": "beb45c142430aeeb09df3cd2af27877c60cdba11c892e6059e7587e51261e274"
+    },
+    {
+      "path": "output/study/covtype/seed_45/centralized_timing.json",
+      "metric_sha256": "e56d32d14f865f0a025b0b8e3edcde52551c74a208939a43b2eebf6aa0fd88ad",
+      "weights_sha256": "9fade6e6b27889772a062f0f2e1bbb2063c73a25eba8176cc5459c7706e163a4"
+    },
+    {
+      "path": "output/study/covtype/seed_45/choco_timing.json",
+      "metric_sha256": "1d341530576c82954c94838242071ad583e5aa374178d8f0ae1ab3166e475e97",
+      "weights_sha256": "e7d1a3393892e30901f19ec07381d690cd139cd85906e1769a9760db92b14047"
+    },
+    {
+      "path": "output/study/covtype/seed_45/cocoa_plus_timing.json",
+      "metric_sha256": "6260ecbf928ebf951f98e270f3fd8c556390842642db1c397b5c3b8828e4448f",
+      "weights_sha256": "1cdaffef5a3d7a8332882461840967a5f1d07a82ba9011d1c2bf36999aca4f75"
+    },
+    {
+      "path": "output/study/covtype/seed_45/cocoa_timing.json",
+      "metric_sha256": "c61938acda0e22a18e187416085f150e53f7381a1a8ec3d4006b0ca1aef926b7",
+      "weights_sha256": "64f8046883eead746c362e187ba01077105178ae43128895f85778560d826583"
+    },
+    {
+      "path": "output/study/covtype/seed_45/cola_timing.json",
+      "metric_sha256": "066500983125b0f4da2c4e533af9b02c39ddfa0af643bfad34c87f4158e219c7",
+      "weights_sha256": "420c41a3163f6f5686f78f897900ca49424d6c091cbfec5935882a7b38a3d70d"
+    },
+    {
+      "path": "output/study/covtype/seed_45/fedavg_timing.json",
+      "metric_sha256": "b3939cfa62c0cb4fe7dda8a13a09d04aebf789b4517f7ac66bef500a678f680a",
+      "weights_sha256": "e1cc8e63852521572eebeec0d2529350f496085a13be8078da662b774bf4abed"
+    },
+    {
+      "path": "output/study/covtype/seed_45/gadget_timing.json",
+      "metric_sha256": "9fd73896b0656470caeb5017b8afff731c3915c20e92ac515c651352b45131dc",
+      "weights_sha256": "3b47c4f1ca9db1971e279915ab8c5b0002c8c26a5eeef7f194d643a26947e2e1"
+    },
+    {
+      "path": "output/study/covtype/seed_45/sdca_timing.json",
+      "metric_sha256": "94e761161dd1c9caea4d13eb34e47d7fae3f17c262c6d7bfa6991e735f38fb8b",
+      "weights_sha256": "1f3ea02f51f23f9e1181f24d9fa9cf7d00a871fdd5dd7b894b7b5cdcb2e9c954"
+    },
+    {
+      "path": "output/study/covtype/seed_46/bdsvm_timing.json",
+      "metric_sha256": "73b5781f7f2f05616133b2775092f3ef2ee0f596bb052f6b80450e20e4420264",
+      "weights_sha256": "090cebd98536c3b32ff3661953c6d081dc24d07daa60f17d2c131683090f29a4"
+    },
+    {
+      "path": "output/study/covtype/seed_46/centralized_timing.json",
+      "metric_sha256": "64d46a9e9965797c49a54487cc81fc360fd1637eaaf68da45ce3a3b6288b91be",
+      "weights_sha256": "18e61ad68e7cf6823db3dab05d0a01644252cb60c68efaa0944af273e52e287b"
+    },
+    {
+      "path": "output/study/covtype/seed_46/choco_timing.json",
+      "metric_sha256": "b6e6f4093f323441c7ace1186962db6a28e8b1e6dbf1bfd6441f4f694b2be472",
+      "weights_sha256": "066f0a8c194463d82ebc4173471d1dcd256712282f63da7cc5485296962f7fb7"
+    },
+    {
+      "path": "output/study/covtype/seed_46/cocoa_plus_timing.json",
+      "metric_sha256": "24e2708ad4bef76f4247d0b78a7d6d5b3b7895aee0396db87ef275d8b70b91e2",
+      "weights_sha256": "049f3d2b3a14c190814d61036e5b89b72e52f4552597b0b16fa8bca629cff2ef"
+    },
+    {
+      "path": "output/study/covtype/seed_46/cocoa_timing.json",
+      "metric_sha256": "023193a4e23c72fd2aae87a438d4ecfc8bc325f050b6e7f7db4341fd7a911fa2",
+      "weights_sha256": "be8ec2e94e62ceba6d148d8b61fa32fef7c396f1eb73c51bc0157269b05f4e88"
+    },
+    {
+      "path": "output/study/covtype/seed_46/cola_timing.json",
+      "metric_sha256": "c24c9ca6f3cbe6032ab3191632e5c7753d7b7c0db9ed015d288404c1ef87b05e",
+      "weights_sha256": "29e17492b247da4faf61cc6236ac12119550b27354b5cc29c60750a9154b3286"
+    },
+    {
+      "path": "output/study/covtype/seed_46/fedavg_timing.json",
+      "metric_sha256": "9608496590b67dd20b553b4a51642e9461f3e0a898c77da772eb3d5f1c649d7e",
+      "weights_sha256": "bd21c26afe55957c5e8dbb68ae0b7a814d01f6d67063684a3d9c448c20b2e48f"
+    },
+    {
+      "path": "output/study/covtype/seed_46/gadget_timing.json",
+      "metric_sha256": "226701db2903e8d7f40da7e39f5ccfa9cb000b5423e1d2c4dac6c4d19b667b57",
+      "weights_sha256": "08cfef9450d4581d9faa69ff739af5f193fddcd2daec7983319c1fcf0014be7a"
+    },
+    {
+      "path": "output/study/covtype/seed_46/sdca_timing.json",
+      "metric_sha256": "bcb9d2153da4047cf5301c090b4fb00346ef7683ca2cc4360156c04dd59a022d",
+      "weights_sha256": "6be001b5f3940a60e6f18242034ea01efe2c5e76080e3aae06b34e1a3d6d6bd9"
+    },
+    {
+      "path": "output/study/a9a/seed_42/bdsvm_timing.json",
+      "metric_sha256": "71a6ca4061affff0b571a2e3db12c295098ede395697d0e5df9d34b6e0ca098f",
+      "weights_sha256": "13c07731342bee486a5eea5c7ff2c6f618391650167c362fd001bf24e8721a83"
+    },
+    {
+      "path": "output/study/a9a/seed_42/centralized_timing.json",
+      "metric_sha256": "145429e9c58a3bcd7a2312b2a4e8dab062e1fa96093f72c4e9ececa7c72935ad",
+      "weights_sha256": "b3c15e97ce25ba2541e297a30b444e6ee2bf46e34f9ef52e0ab0b6a47f3bb85e"
+    },
+    {
+      "path": "output/study/a9a/seed_42/choco_timing.json",
+      "metric_sha256": "b760287f931b57db14609a222c3731ad7951055ff158804f78f51f3dc21a6939",
+      "weights_sha256": "69557c5699b46a84e65e062b219c5238acbe113eb514c6906b88120fa73db616"
+    },
+    {
+      "path": "output/study/a9a/seed_42/cocoa_plus_timing.json",
+      "metric_sha256": "68c7e79b4a730138121fcdb336ad5266abee26716736569a11555a398f631bbc",
+      "weights_sha256": "0fe0310567debea0582bef8855597719365c26d1a42641c4d5306baa79802c2b"
+    },
+    {
+      "path": "output/study/a9a/seed_42/cocoa_timing.json",
+      "metric_sha256": "a4688f708d378a0bdbaf5a96200a7a5a91d8f8074e7c4c1ab24beac1d00a43c5",
+      "weights_sha256": "4c9d64e0117b7c849ea69a32dc4228360275f3acaad5c9e3d5906c96c1209b6c"
+    },
+    {
+      "path": "output/study/a9a/seed_42/cola_timing.json",
+      "metric_sha256": "4819aec189efbbd31532ef4ebd4549f8e3cd59e18eef4f5eeecec8a62ce112f9",
+      "weights_sha256": "8ab73f6d5659ae7b3e897615da73b1594e849cb4b8a3d60628a61a78af911c94"
+    },
+    {
+      "path": "output/study/a9a/seed_42/fedavg_timing.json",
+      "metric_sha256": "dcff6a0cf001e7b49c775fc34aa6f9122da50e5dc899ecd7b8af598946ebe402",
+      "weights_sha256": "0f6f7f211d537d55b75c3d6cbe18f85edd32d9f1f78ceb3fc83a71a3ef50e73c"
+    },
+    {
+      "path": "output/study/a9a/seed_42/gadget_timing.json",
+      "metric_sha256": "ed6f5bb34cf90d55764b4e3c45f4854d3fa9ef8f2ded73f6a155a1d71deaa94c",
+      "weights_sha256": "7e5b482ab1df98970f24a659fbd27318cf0f2f2890c50fffa11ba06745a11a68"
+    },
+    {
+      "path": "output/study/a9a/seed_42/sdca_timing.json",
+      "metric_sha256": "6261c76744f5a35b5fc7d7436162b54e39e9c949fabd63a3658ff711c742a828",
+      "weights_sha256": "8a231b31b678dfa8620528c838583b34364d4126e741fb519c5085c3d5096421"
+    },
+    {
+      "path": "output/study/a9a/seed_43/bdsvm_timing.json",
+      "metric_sha256": "ee50275628b0d1f4650dc2a05a5ab42a1fe44519886976594e9ad07cde878314",
+      "weights_sha256": "bafdcf2cd3ce3444dd241931c281b105e779d6dae0062b3cb02a3e2b0af41e46"
+    },
+    {
+      "path": "output/study/a9a/seed_43/centralized_timing.json",
+      "metric_sha256": "6762d92e4218a3b15264e538d5c3580ce9c3effd24f681365d6b4b6eecbd5171",
+      "weights_sha256": "1a08d86937a6468bb4577b25d8c552959e3f61750aabcb6b2730a1cea5820916"
+    },
+    {
+      "path": "output/study/a9a/seed_43/choco_timing.json",
+      "metric_sha256": "9910f2af3a27249819bfde744a90452a9ac30e9343e5a11e52b92d518fd61135",
+      "weights_sha256": "3a699c6b9ad80f58a7e29e253fac9378ef9ad3f9f32c86f8cda972fe28268a81"
+    },
+    {
+      "path": "output/study/a9a/seed_43/cocoa_plus_timing.json",
+      "metric_sha256": "eb5f330585a4e6f19de1ad8a96ca79dffb8dffd7eace12ba2346b05fda06b240",
+      "weights_sha256": "8bf60c3a1eb7719af7beab85edc575ccaa556019fd829430d49204d3bd539179"
+    },
+    {
+      "path": "output/study/a9a/seed_43/cocoa_timing.json",
+      "metric_sha256": "27b14408d2f93e36e92b8bf96983f9209263b88607288ceaa1c668d99fee1023",
+      "weights_sha256": "604a2767f1211e2f0fc5147ebb1e4cb334c2cea30093ecdcd770f56d35f9fb25"
+    },
+    {
+      "path": "output/study/a9a/seed_43/cola_timing.json",
+      "metric_sha256": "126087f1bfd602431c4ea8006c4455f478e5fea1849bb6de4fc024f605f49a95",
+      "weights_sha256": "17c567b877f4c4a3d179f9da629ca947e222f79eb936f7ebdb2f05ee7a44722d"
+    },
+    {
+      "path": "output/study/a9a/seed_43/fedavg_timing.json",
+      "metric_sha256": "c059fcaae4f548b6916cf73418d6995a6f5bb744e603f50eeacf16a14f84b6e5",
+      "weights_sha256": "36970280ac2efe7f3f4f60a0dc70aa20603a222e04a8d922b6b7d758daa8d2ac"
+    },
+    {
+      "path": "output/study/a9a/seed_43/gadget_timing.json",
+      "metric_sha256": "e87161df0c1cbd9e08d0cfb18c1b1556f8bcb6b7fc9b7ec7ba96feaef4b3f483",
+      "weights_sha256": "deeb4ac45302a0c1bd4fdabf8dda438263c927ee89fa2596fb62f56499707368"
+    },
+    {
+      "path": "output/study/a9a/seed_43/sdca_timing.json",
+      "metric_sha256": "cc836ce9a5096c91bc9c598bc3d76273c160913b0c5c9e74d3fa7169ff55b627",
+      "weights_sha256": "e652949603b4cc8d38545c7970d6281943cb7d6aee2dfb0107e34b2a0dea6e5a"
+    },
+    {
+      "path": "output/study/a9a/seed_44/bdsvm_timing.json",
+      "metric_sha256": "d95cd9ba189f25e8d6ccd6b232cb2172e22424d1b41e8250d9d8c06d3f3b4dce",
+      "weights_sha256": "83dee32fe5b30b99e09b831165e7bf5806b62f6019346f043103178530469a67"
+    },
+    {
+      "path": "output/study/a9a/seed_44/centralized_timing.json",
+      "metric_sha256": "6da119b55ab02512747d15161b965cb559d50821101e811363575314ad1fe924",
+      "weights_sha256": "9590ef20dbb0348b91eac42b8400e481edc10991e61f1491b90ebaf41871c7c2"
+    },
+    {
+      "path": "output/study/a9a/seed_44/choco_timing.json",
+      "metric_sha256": "1650279048700fc49d4f8ce7b96450b4d86a30eb6dd355ac47acce292730ce2b",
+      "weights_sha256": "932b4a7bfa072c3fe7fcea404ae7eedaff74bb46546e1757dff8e491cebcb744"
+    },
+    {
+      "path": "output/study/a9a/seed_44/cocoa_plus_timing.json",
+      "metric_sha256": "1905f8c0091fd59ed7e177bdaaa85d9d2877e3edd85840c9b9504b34ff905ddb",
+      "weights_sha256": "237d0041114f5a09c8e1a22a2f7822ac433e0bd37f3a21b74970db9a7a77dd88"
+    },
+    {
+      "path": "output/study/a9a/seed_44/cocoa_timing.json",
+      "metric_sha256": "a64092855bad4d844eb58fb25fd9bcc6fa5504b40d15da623fc3751016b29ea9",
+      "weights_sha256": "a4ca73ce3dd1bb2afb84aae6ce85d3a7d748e295b5b89efe85aef68ae307b6db"
+    },
+    {
+      "path": "output/study/a9a/seed_44/cola_timing.json",
+      "metric_sha256": "c408518ffed49d06f4eafb327c02609caf29d58e00074450ed13c6f071f83bb1",
+      "weights_sha256": "574095ba772d0bbce6e648d8ef6fce6349936f36d2876acdb3ae60003b52b18f"
+    },
+    {
+      "path": "output/study/a9a/seed_44/fedavg_timing.json",
+      "metric_sha256": "cdd12f371eae1ab08b650e25dd3ca956f4951bfe57aeec90ca9ca661f55368a1",
+      "weights_sha256": "8ba3e0cdca9311fb9e0673501d1581e0f2747bbea903ec1c88f67f68120e4a75"
+    },
+    {
+      "path": "output/study/a9a/seed_44/gadget_timing.json",
+      "metric_sha256": "6c57c95c7f1da035050e27c867c7db95f61da7eda932612e228c9c215bcb3bc3",
+      "weights_sha256": "a12bef4a07652e818541db9a4e7988adddb53700a50b5df315e4bad6f612ee2f"
+    },
+    {
+      "path": "output/study/a9a/seed_44/sdca_timing.json",
+      "metric_sha256": "9c6fec94bb1dce242db2fcf4b24de1fb42ff6d890aadceefe0bd17db6f4de91a",
+      "weights_sha256": "6dd4fd26b2504d910cac148a19438231b2e0cf007af6cabaf70b624a4562f4f2"
+    },
+    {
+      "path": "output/study/a9a/seed_45/bdsvm_timing.json",
+      "metric_sha256": "3580f8b9eca2f4c97f0bb070ca850f1271f0bd796b1333dbe02f83d29aa1d0cd",
+      "weights_sha256": "b22351ce9b5f9536f9d662d7ba708a3e8c875f8419dade2c4a6b897d992b05ce"
+    },
+    {
+      "path": "output/study/a9a/seed_45/centralized_timing.json",
+      "metric_sha256": "05f4b27f36449564d7b131135ddf2c2f693eb7855b62dec0c9ba772c44cd7d3a",
+      "weights_sha256": "9bb9ad265f02c2da167e9ad327ecb9ff999aeed8920bf3808b979e23cf7369b3"
+    },
+    {
+      "path": "output/study/a9a/seed_45/choco_timing.json",
+      "metric_sha256": "7a14c1d2c5f9ce0d88952f46efe6a93af86e26f53e14d0c3b233dc1a244ada55",
+      "weights_sha256": "15c215836ec0c2c73036e74ed011a332b93f90ba543ade7f8d261ef43087add0"
+    },
+    {
+      "path": "output/study/a9a/seed_45/cocoa_plus_timing.json",
+      "metric_sha256": "d244121f062c0d270020fe35319997ba1b758b67dcfb8dce3fed94eafb7c2edc",
+      "weights_sha256": "f8674a1e6d1c360289e34ec9d9fcdb58dba322fb83745ee2630d74e200864020"
+    },
+    {
+      "path": "output/study/a9a/seed_45/cocoa_timing.json",
+      "metric_sha256": "994dd1e1e4069370d7e25e318fdb59fe3356519a0e4529c8125e3e504ff38e12",
+      "weights_sha256": "327cbdf411c80d44d06603b2c6aef58d688f798f866977e439b3a0bccb10a904"
+    },
+    {
+      "path": "output/study/a9a/seed_45/cola_timing.json",
+      "metric_sha256": "7e13867cfd9720a851c2dd37e47b869f028c720a97fc9cac02b6add693182a75",
+      "weights_sha256": "b09fc86415fcc5b9b7463216aed389bfe12a9abd2f619320f8055f816ff66b2e"
+    },
+    {
+      "path": "output/study/a9a/seed_45/fedavg_timing.json",
+      "metric_sha256": "0f4125121e2caee98b05c8e25718008c1c3ce7c08a072697e1b753314ba6c3ae",
+      "weights_sha256": "8c378d9ae910d8773bcbafe0753fbdfd66a9f070557f3166ebb57f2672047410"
+    },
+    {
+      "path": "output/study/a9a/seed_45/gadget_timing.json",
+      "metric_sha256": "f325440ea784a73547a536d9d61a39baf0dd3bf7ea2e6f551498ea76960f0e79",
+      "weights_sha256": "60af01a49a6ad8c347f55c46de51173fb1c14b43ff29d52566121e8fc53388b3"
+    },
+    {
+      "path": "output/study/a9a/seed_45/sdca_timing.json",
+      "metric_sha256": "6831d5c06ecf10e60e19240f795730e89bfaa1e3803e26ac985385492b74b60b",
+      "weights_sha256": "aad73fe27ec5543eb840e04b333801c4efcd9c495bdd8bdcc2a2262ce36554ca"
+    },
+    {
+      "path": "output/study/a9a/seed_46/bdsvm_timing.json",
+      "metric_sha256": "3f0e473a9ec0660935c2175b163374158041e33ac37c7d6a0ed35c03d060f7db",
+      "weights_sha256": "08dfcfae1cbc3865469730754d176e1c615c96c62dce9232612a6cdd6dc28647"
+    },
+    {
+      "path": "output/study/a9a/seed_46/centralized_timing.json",
+      "metric_sha256": "5b5b513644fdb490ec9df98d541ab558ca58b10e8c038ad3f6ba3536c1e4ad16",
+      "weights_sha256": "ee46fc9598f51ab9a5c46a5337573a72af5db4062e4ae703636e43433a585d17"
+    },
+    {
+      "path": "output/study/a9a/seed_46/choco_timing.json",
+      "metric_sha256": "28e32e117ad1bf538bb3adfed5e1de1d1231ca8efb0087b6cf14b21a058d2b07",
+      "weights_sha256": "573d9ceac9d1f398dc3bb763806b0e3d7016a7a7e064a129dee3af4a610af8af"
+    },
+    {
+      "path": "output/study/a9a/seed_46/cocoa_plus_timing.json",
+      "metric_sha256": "b1bdf752b6efb0a27b71c2c7b4ef575d28e406aa5b6fe825af4de96138bd3219",
+      "weights_sha256": "b878fd97c121a5d4ac944d6183762686ceeb755e265a1c540d86da2e5b124fbc"
+    },
+    {
+      "path": "output/study/a9a/seed_46/cocoa_timing.json",
+      "metric_sha256": "c8876418eb76c0454a4069f9ec2cb72d7e339514b02dbbb8f2165fe5ea86ca85",
+      "weights_sha256": "07b726f49fded4d1ac9b24add4f5424cd9df069c859ab5ddcdacc861484b7422"
+    },
+    {
+      "path": "output/study/a9a/seed_46/cola_timing.json",
+      "metric_sha256": "8adad60d041141bfb7ad13b855fbbf39e02ab0718ca52e910bb5b7b5e8169aae",
+      "weights_sha256": "aae04e16a43ba3f08d660d459255f62e793998a0255a0331eabe0389a8776f17"
+    },
+    {
+      "path": "output/study/a9a/seed_46/fedavg_timing.json",
+      "metric_sha256": "ec68ca1d1de2e234911a4322f6345a33c06a9ad6eb6848ce29263c72e419913f",
+      "weights_sha256": "e61f2f3eb6a5fd8767d4f26d17330bb0526e94b6f204730878c2d5da66cb7ace"
+    },
+    {
+      "path": "output/study/a9a/seed_46/gadget_timing.json",
+      "metric_sha256": "814914793fd05015495044ba27938c21532376d0f34e1f6fe1e3b868491b16f0",
+      "weights_sha256": "e9c3e9418ffbf2497252cce9c92225db2545b48d384dc1098a539e23619b9e6b"
+    },
+    {
+      "path": "output/study/a9a/seed_46/sdca_timing.json",
+      "metric_sha256": "16d90b468124df76e7c9d63de729c2cc6e9e51f31033e19ed4a465dbb8589526",
+      "weights_sha256": "394d027e867de21dd08fa3fccbd753ee6cd069d470b6ba41427419e424d377eb"
+    }
+  ],
+  "source_sha": {
+    "job.py": "d3fec57aca364124fe17c38a5ab87d67bb6d30b2a4d987c47bb7acdcd46ebe0d",
+    "replay_case.py": "e7ff3c52b3017601d1705a8973961dea82bea514e00cd8d46385a59a609b27a3",
+    "engine_manifest.json": "0d661b63db7c161169722df5d46652369c6af410a6f006f196026bedee60b695",
+    "independent_wire.py": "8d3fa5d7aa24df956506247dd163abd16018a24e79f5961b80d00326cd7e21e1"
+  }
+}

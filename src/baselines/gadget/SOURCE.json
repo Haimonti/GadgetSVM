@@ -1,0 +1,142 @@
+{
+  "repository": "Haimonti/GadgetSVM",
+  "branch": "sreekar",
+  "commit": "ccc7e62a4e67b6c12dd45d13a366f91db5c98864",
+  "files": [
+    {
+      "path": "src/baselines/gadget/__init__.py",
+      "git_blob_sha": "1481eea308b417361817eba86fa26c334cbcd875",
+      "sha256": "4a874f0085f0c0e4c988fab9ce8d6b04b71846a05f3372f453571f6889d8c6a1"
+    },
+    {
+      "path": "src/baselines/gadget/observers.py",
+      "git_blob_sha": "260c12c1978e79c1c257ee4f81c7a11625ac9020",
+      "sha256": "0860bb3f8242e7bea57b9649a54957104d22e9ae01305239fad5a13bd0407585"
+    },
+    {
+      "path": "src/baselines/gadget/pegasos_protocol.py",
+      "git_blob_sha": "915808bfd1ccdcda30b0c2f56a0aafd22cd84489",
+      "sha256": "639dbc6c74e04b4c9757e435832b1964831e68fa67e4efa604f8c90472e4716e"
+    },
+    {
+      "path": "src/baselines/gadget/simulation.py",
+      "git_blob_sha": "40d11ebd5727f1eb63ac64d7010c6e3169827ce0",
+      "sha256": "a5c77a54b6f91da8fda56c6628df0f0017faf331af2fb6bab141607b841fa18a"
+    },
+    {
+      "path": "src/config.py",
+      "git_blob_sha": "ccb40fac748e43e25966a5615dc36faca7912209",
+      "sha256": "63fa2be15c54d373069c0e8a30ccdf4ebd019529e368d5236b28970b1ff8181b"
+    },
+    {
+      "path": "src/peersim_python/__init__.py",
+      "git_blob_sha": "6ee79afe02d135c2a34374bfeaf4400960575e84",
+      "sha256": "193c9dbd290387888fdbd0286bf72c4ed36435fa790ff052dc85930d0421d2c9"
+    },
+    {
+      "path": "src/peersim_python/aggregator.py",
+      "git_blob_sha": "fd0770bdfb55501998b37a3b4d16aa75082dd26d",
+      "sha256": "a0972f0eff7df8b9553826b8b0a9f625d45181503cb042ec8fd0db522f8f9a41"
+    },
+    {
+      "path": "src/peersim_python/cdsim/__init__.py",
+      "git_blob_sha": "76f8363611740e190cbf69ec4ad484f4a19bf8fe",
+      "sha256": "442017db2c6dbb7b7d89bb56fa75653a8e8caaacb081e2ca2563f630dac7f327"
+    },
+    {
+      "path": "src/peersim_python/cdsim/cd_protocol.py",
+      "git_blob_sha": "263a096524036926950d8e153cddac3a2a9fbdd5",
+      "sha256": "2a5c32f4d5d611e5b989f2a15c46d6a5c21d7cf49fae29775fce806fcae4ee86"
+    },
+    {
+      "path": "src/peersim_python/cdsim/cd_simulator.py",
+      "git_blob_sha": "d8708d0433c2a276e15c02b6758362c8d525a973",
+      "sha256": "93c539717f134199969e3958d257b13489043e97d5f316261ecc0af5aeac10d2"
+    },
+    {
+      "path": "src/peersim_python/cdsim/cd_state.py",
+      "git_blob_sha": "5bb3d90170f8a28bfc2825e9723ff92884ec064a",
+      "sha256": "589484455971b6b9faca8f805af132928e928162f2c572f4bccb9501a270b575"
+    },
+    {
+      "path": "src/peersim_python/cdsim/full_next_cycle.py",
+      "git_blob_sha": "e89faae2522063ca6de52a96060a094efa9d3ebd",
+      "sha256": "f1e563f1e9b1d1e752f0b439c0b6a2439e063bd9ebca8a65e39d4ffd96785633"
+    },
+    {
+      "path": "src/peersim_python/core/__init__.py",
+      "git_blob_sha": "629be9cdfd9b555ca095341e338cbb1f0dd5adb4",
+      "sha256": "1bac9c405ba2b65de3333a78f3d9be6fd77e328ec7b27e85f365972e4ac98439"
+    },
+    {
+      "path": "src/peersim_python/core/common_state.py",
+      "git_blob_sha": "baa612f3cef82c8f63a1e433c0e1f5e8973ad23a",
+      "sha256": "2e99193613c5c541b6667c73a9bbacbbaeeaddaacb39de025fbd9875ee2dc2c8"
+    },
+    {
+      "path": "src/peersim_python/core/control.py",
+      "git_blob_sha": "ca61c2d1b97dc5ac79a6d20fe5cc020dc94c0b7e",
+      "sha256": "8b3c4ec2e9288201cb9fe62758976d287bc12c726f4abfa4ff69a86bccba6103"
+    },
+    {
+      "path": "src/peersim_python/core/fallible.py",
+      "git_blob_sha": "d3464f40ac5771706fbd5aceaee988b72d9a51a3",
+      "sha256": "d729fb8c98cdbd4915376754c49972ce3b6fa15ed9b78a1995a2098a4cee5ca4"
+    },
+    {
+      "path": "src/peersim_python/core/general_node.py",
+      "git_blob_sha": "afe9742ad53e65b0288aad27fc85d40a31f6e32c",
+      "sha256": "0fa010f8adc2af717d433d5fe9ac217fa4219be8907693eb7dd3d26946ba1ddf"
+    },
+    {
+      "path": "src/peersim_python/core/linkable.py",
+      "git_blob_sha": "3cdb6c9a1d0d8fc6971fef7c981787d2eff5fe52",
+      "sha256": "94e2887e4fdccf2f9e759df5a53240311b257a74ac6b76045763bddd7be6d050"
+    },
+    {
+      "path": "src/peersim_python/core/network.py",
+      "git_blob_sha": "9a94508efe338c0d955711426bb53e040a189a79",
+      "sha256": "ae6ad9ea6e16f210d4e961327abe529b1969cddcd97783e8453a91f04fac987d"
+    },
+    {
+      "path": "src/peersim_python/core/protocol.py",
+      "git_blob_sha": "6a8fa7599d3ae277b672fc3d390c150c1d7af58a",
+      "sha256": "df6820100c30248de7af0049f59ea671b9b75bd300b46bfd893b18eb99055da6"
+    },
+    {
+      "path": "src/peersim_python/core/scheduler.py",
+      "git_blob_sha": "502f67f59f65ab085989c74f6a9cc689fa51dbf0",
+      "sha256": "9cc84f371a3915d6f22a118e48ac78b1e3d5f3ca5735c3963062c0c7625697f9"
+    },
+    {
+      "path": "src/peersim_python/dynamics.py",
+      "git_blob_sha": "c450454b4808640c59ca0f635ee77e66022bf742",
+      "sha256": "ca27162c170c0c05e27687b521c86c7e81a1217aad02cf2e64e744a7f2e47168"
+    },
+    {
+      "path": "src/peersim_python/gossip_protocol.py",
+      "git_blob_sha": "c6c0ba208fff191c490803c478612da0af2505d5",
+      "sha256": "981490608c0a6ef6c5200308b6856b858b4e9f88c14a3bf4131c64aff7c15a90"
+    },
+    {
+      "path": "src/peersim_python/graph.py",
+      "git_blob_sha": "22fa08faf11962c5e6f2b1c1fa25e69d05e71721",
+      "sha256": "95bcccab808a8fa7d4ef507cc4079e47c4b710ba4ed412084f921e2bbb0564eb"
+    },
+    {
+      "path": "src/peersim_python/idle_protocol.py",
+      "git_blob_sha": "8bf578f080edfa16e7d6c4746141bb80db3a0527",
+      "sha256": "a9047cada77d0d8468ff1ba0489233142dafda4620ce8d97e9c4c93997742bdc"
+    },
+    {
+      "path": "src/peersim_python/logger.py",
+      "git_blob_sha": "a174e5111e9f85fc387bc76e9e41765c57c30bb0",
+      "sha256": "acb5e347b0287d6e97499ff4d764ce30912dcec5a6071507eb7996b179ea2f14"
+    },
+    {
+      "path": "src/scripts/data_sharding.py",
+      "git_blob_sha": "cde62ec2e13662cd775b38fd03c546a054388957",
+      "sha256": "a279b4168a5995a318fc87d1a5d752ec8b296b104ac82ffb2f0ac40cef3e56a8"
+    }
+  ]
+}

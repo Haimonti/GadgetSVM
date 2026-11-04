@@ -1,0 +1,118 @@
+{
+  "a9a": {
+    "source_data": [
+      {
+        "name": "a9a",
+        "bytes": 2329875,
+        "sha256": "f5d5ffd8d865ff41328e7ee043e4b020816914ff6843ff15b98905ddbedce906"
+      },
+      {
+        "name": "a9a.t",
+        "bytes": 1164628,
+        "sha256": "1f448a153f0320399a7e40836eb207655b0bde0f21fc941cc472193daa9f5de9"
+      }
+    ],
+    "train_samples": 32561,
+    "test_samples": 16281,
+    "features": 123
+  },
+  "w8a": {
+    "source_data": [
+      {
+        "name": "w8a",
+        "bytes": 3478238,
+        "sha256": "6a9fa8fd5f524303240a5db07d4b3d4a51e8b7b4b20a914105d8e3e8c81640f2"
+      },
+      {
+        "name": "w8a.t",
+        "bytes": 1045870,
+        "sha256": "618929ecb01bebb841daec4cae4aa07b97832d29b08652452775598929547fde"
+      }
+    ],
+    "train_samples": 49749,
+    "test_samples": 14951,
+    "features": 300
+  },
+  "ijcnn1": {
+    "source_data": [
+      {
+        "name": "ijcnn1",
+        "bytes": 7744897,
+        "sha256": "16506cad788cf7c9607454150ed1994788204bac2ff4c9cb3b320036b6950d3f"
+      },
+      {
+        "name": "ijcnn1.t",
+        "bytes": 14213968,
+        "sha256": "e7b0bbd518641980dc322746c6bc59d019d3153934e6258e48f9d8cfae2c4bb8"
+      }
+    ],
+    "train_samples": 49990,
+    "test_samples": 91701,
+    "features": 22
+  },
+  "real-sim": {
+    "source_data": [
+      {
+        "name": "real-sim",
+        "bytes": 90377515,
+        "sha256": "0fd9b12b6dc60dab7885a7367b286a53aac5d92057dc1083ab13ade275120270"
+      }
+    ],
+    "train_samples": 57848,
+    "test_samples": 14461,
+    "features": 20958
+  },
+  "gisette": {
+    "source_data": [
+      {
+        "name": "gisette.binary.scale",
+        "bytes": 89019441,
+        "sha256": "5db8fdd9f7b00e8b08db464dc7e1e133efda932331ee3cfabdad95eff56accb7"
+      }
+    ],
+    "train_samples": 4800,
+    "test_samples": 1200,
+    "features": 5000
+  },
+  "covtype": {
+    "source_data": [
+      {
+        "name": "covtype.uci.binary.scale",
+        "bytes": 127616833,
+        "sha256": "6a7ed1b306f72f0f11b6d6291f7407c9e3c99be26194617c65d675163bd455b1"
+      }
+    ],
+    "train_samples": 464810,
+    "test_samples": 116202,
+    "features": 54
+  },
+  "rcv1": {
+    "source_data": [
+      {
+        "name": "rcv1_train.binary",
+        "bytes": 36542228,
+        "sha256": "602a02985f2d6b00832603f56c4f41a6b73c04a14197da885f1b2177c2da590d"
+      },
+      {
+        "name": "rcv1_test.binary",
+        "bytes": 1207864838,
+        "sha256": "4501ba1f410eef3bbf33f963d26e9e7f2f5bae75864e0f0ee23e123004a7fde1"
+      }
+    ],
+    "train_samples": 20242,
+    "test_samples": 677399,
+    "features": 47236
+  },
+  "webspam": {
+    "source_data": [
+      {
+        "name": "webspam_unigram.svm",
+        "bytes": 400425663,
+        "sha256": "b419536e610747fa5530910cfc686257d05bb0e9433777bb5eb4da631a37c84f"
+      }
+    ],
+    "train_samples": 280000,
+    "test_samples": 70000,
+    "features": 254
+  }
+}

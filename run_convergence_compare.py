@@ -17,7 +17,8 @@ import traceback
 import warnings
 
 ROOT = Path(__file__).resolve().parent
-METHODS = ['centralized', 'sdca', 'bdsvm', 'fedavg', 'cocoa', 'cocoa_plus']
+METHODS = ['centralized', 'sdca', 'bdsvm', 'fedavg', 'cocoa', 'cocoa_plus',
+           'gadget', 'cola', 'choco']
 
 
 def write_json(path, value):
@@ -25,13 +26,20 @@ def write_json(path, value):
 
 
 def child(args):
+    import psutil
+    process = psutil.Process()
+    requested_affinity = os.environ.get('SVM_CPU_AFFINITY')
+    if requested_affinity:
+        process.cpu_affinity([int(v) for v in requested_affinity.split(',')])
+    actual_affinity = process.cpu_affinity()
     import numpy as np
     import scipy.sparse as sp
     from src.config import CONFIG
     from src.data_sharding import load_shards
     from run_compare import DATASET_KEYWORDS, DATASET_PATH_KEYS
 
-    CONFIG.update(DATASET=DATASET_KEYWORDS[args.dataset],
+    CONFIG.update(DATASET=DATASET_KEYWORDS[args.dataset], SEED=args.seed,
+                  TOPOLOGY=args.topology, GOSSIP_K=args.gossip_k,
                   CONVERGENCE_PATIENCE=args.patience,
                   CONVERGENCE_WINDOW=args.window, CONVERGENCE_RTOL=args.rtol,
                   WARM_START=False,CONVERGENCE_RULE='adjacent_windows',
@@ -45,10 +53,14 @@ def child(args):
     y = np.concatenate([p['y'] for p in worker_data])
     Xt, yt = worker_data[0]['X_test'], worker_data[0]['y_test']
     method = args.child
+    if os.environ.get('SVM_COMPILED_LOCAL') == '1':
+        from p2p._linear_fast import warmup
+        warmup()
     if method == 'fedavg':
         CONFIG['CONVERGENCE_RULE'] = 'adjacent_windows'
         CONFIG['CONVERGENCE_STABILITY_WINDOW'] = args.patience
     started = time.perf_counter()
+    started_cpu = time.process_time()
     if method == 'centralized':
         from sklearn.svm import LinearSVC
         from sklearn.exceptions import ConvergenceWarning
@@ -89,6 +101,9 @@ def child(args):
             assembly = FedAvgSimulation(CONFIG, worker_data)
         elif method in ('cocoa', 'cocoa_plus'):
             assembly = CoCoASimulation(CONFIG, worker_data, variant=method)
+        elif method in ('gadget', 'cola', 'choco'):
+            from src.linear_baseline_simulation import LinearBaselineSimulation
+            assembly = LinearBaselineSimulation(CONFIG, worker_data, method)
         else:
             raise ValueError('Use run_ssl_tabular.py for the explicit neural tabular adaptation')
         if assembly.sim is None:
@@ -124,8 +139,31 @@ def child(args):
         result['neighbor_schedule_sha256_first_100']=hashlib.sha256(json.dumps(prefix).encode()).hexdigest()
         if method == 'bdsvm':
             result['parameters'] = assembly.params
+        if method in ('gadget', 'cola', 'choco'):
+            result['mixing_matrix'] = [p.W.tolist() for p in protos]
+            result['schedule_policy'] = ('synchronous barrier; all graph neighbors'
+                if method != 'gadget' else 'shuffle activations; one bidirectional pair per activation')
+            result['parameters'] = {
+                'local_coordinate_steps': protos[0].local_steps if method == 'cola' else None,
+                'gadget_samples_per_activation': 1 if method == 'gadget' else None,
+                'choco_top_fraction': protos[0].fraction if method == 'choco' else None,
+                'choco_consensus_lr': protos[0].gamma if method == 'choco' else None,
+                'choco_initial_lr': protos[0].lr if method == 'choco' else None,
+                'choco_batch': protos[0].batch if method == 'choco' else None,
+                'choco_loss_adaptation': 'hinge subgradient' if method == 'choco' else None,
+            }
+        if method == 'cola':
+            vmean = np.mean([p.v for p in protos], axis=0)
+            Ax = np.sum([p.local_product for p in protos], axis=0)
+            result['cola_invariant_max_error'] = float(np.max(np.abs(vmean-Ax)))
+            global_w = protos[0].C * Ax
+            primal = float(np.maximum(0, 1-y*(X@global_w)).mean()+.5*CONFIG['LAMBDA']*(global_w@global_w))
+            dual = float(sum(p.y@p.alpha for p in protos)/len(y)-.5*CONFIG['LAMBDA']*(global_w@global_w))
+            result['global_duality_gap_at_stop'] = primal-dual
     result.update(dataset=CONFIG['DATASET'], train_samples=len(y), test_samples=len(yt),
                   features=X.shape[1], threads=args.threads,
+                  local_backend=('numba float64; pre-timing warmup; no fastmath'
+                      if os.environ.get('SVM_COMPILED_LOCAL') == '1' else 'python'),
                   stopping=dict(patience=args.patience, window=args.window, rtol=args.rtol,
                       rule=CONFIG.get('CONVERGENCE_RULE', 'objective_patience'),
                       stability_window=CONFIG.get('CONVERGENCE_STABILITY_WINDOW'),
@@ -133,6 +171,28 @@ def child(args):
                   config={k: str(v) if isinstance(v, Path) else v for k, v in CONFIG.items()},
                   source_data=[dict(name=p.name, bytes=p.stat().st_size,
                       sha256=hashlib.sha256(p.read_bytes()).hexdigest()) for p in paths])
+    hardware_path = os.environ.get('SVM_HARDWARE_TOPOLOGY')
+    hardware = json.loads(Path(hardware_path).read_text()) if hardware_path else None
+    result['execution_hardware'] = {
+        'cpu_affinity': actual_affinity,
+        'affinity_requested': bool(requested_affinity),
+        'topology': hardware,
+        'process_cpu_seconds_training_and_final_evaluation': time.process_time()-started_cpu,
+        'phase': 'isolated_timing' if args.timing else 'parallel_learning',
+    }
+    from threadpoolctl import threadpool_info
+    result['execution_hardware']['threadpools'] = threadpool_info()
+    local_draws = {'sdca':CONFIG['SDCA_LOCAL_STEPS'],'fedavg':CONFIG['SDCA_LOCAL_STEPS'],
+                   'cocoa':CONFIG['SDCA_LOCAL_STEPS'],'cocoa_plus':CONFIG['SDCA_LOCAL_STEPS'],
+                   'cola':CONFIG['SDCA_LOCAL_STEPS'],'gadget':1,'choco':128}
+    result['local_compute_budget'] = {
+        'profile':'native_algorithm',
+        'solver_sample_draws_per_peer_round':local_draws.get(method),
+        'batch_size':128 if method=='choco' else None,
+        'full_shard_IRWLS_per_round':method=='bdsvm',
+        'linear_system_dimension':result.get('parameters',{}).get('P',0)+1 if method=='bdsvm' else None,
+        'note':'Sample draws are not equal FLOPs; full-shard preparation, model vector operations and solves differ.'
+    }
     filename = f'{method}_timing.json' if args.timing else f'{method}_metrics.json'
     result['test_evaluations'] = len(result['per_node_accuracy']) if converged else 0
     write_json(args.out / filename, result)
@@ -152,6 +212,8 @@ def invoke(args, method, timing=False):
         '--child', method, '--out', str(args.out), '--cycles', str(args.cycles),
         '--patience', str(args.patience), '--window', str(args.window),
         '--rtol', str(args.rtol), '--threads', str(args.threads)]
+    command += ['--seed', str(args.seed), '--topology', args.topology,
+                '--gossip-k', str(args.gossip_k)]
     if timing:
         command.append('--timing')
     suffix = 'timing' if timing else 'run'
@@ -174,6 +236,9 @@ def main():
     ap.add_argument('--rtol', type=float, default=1e-3)
     ap.add_argument('--jobs', type=int, default=len(METHODS))
     ap.add_argument('--threads', type=int, default=None)
+    ap.add_argument('--seed', type=int, default=42)
+    ap.add_argument('--topology', choices=['random_kout','ring','full','star','mesh'], default='random_kout')
+    ap.add_argument('--gossip-k', type=int, default=3)
     ap.add_argument('--child', choices=METHODS)
     ap.add_argument('--timing', action='store_true')
     ap.add_argument('--only', nargs='+', choices=METHODS, default=METHODS)

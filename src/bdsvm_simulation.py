@@ -104,9 +104,11 @@ class BDSVMSimulation:
     LINKABLE_PID = 0   # IdleProtocol (neighbour list)
     BDSVM_PID = 1      # BDSVMGossipProtocol (learner)
 
-    def __init__(self, config, worker_data, params=None, eta=BDSVM_ETA):
+    def __init__(self, config, worker_data, params=None, eta=BDSVM_ETA,
+                 protocol_cls=None):
         self.config = config
         self.worker_data = worker_data
+        self.protocol_cls = protocol_cls or BDSVMGossipProtocol
         self.params = dict(params if params is not None
                            else params_for(config["DATASET"]))
         self.params.setdefault('kernel','linear')
@@ -144,7 +146,7 @@ class BDSVMSimulation:
 
         prototype = GeneralNode([
             IdleProtocol(),
-            BDSVMGossipProtocol(gossip_k=cfg["GOSSIP_K"], **self.params),
+            self.protocol_cls(gossip_k=cfg["GOSSIP_K"], **self.params),
         ])
         Network.reset(cfg["NUM_WORKERS"], prototype)
         logger.info("network",

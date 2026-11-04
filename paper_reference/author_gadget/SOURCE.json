@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/Haimonti/GadgetSVM",
+  "commit": "a0273addeb3ab1960cafe0568f732be5f3cdd757",
+  "reason": "Last inspected historical standard GADGET path; master entry now executes ASG",
+  "hashes": {
+    "SPegasosGadget.java": "e7da4c2bdf5b25b67200ddd162af36cd06c277590cd7e9a06f306aeb0c5c3b20",
+    "GadgetProtocol.java": "566562d0f2da3e914c7df4ff336bf7a54cc298911cdfb7a5b69c66c317e7b062"
+  }
+}

@@ -167,11 +167,19 @@ class SDCAProtocol(GossipProtocol):
         else:
             order = [i % self.n for i in range(count)]
 
+        import os
+        if os.environ.get('SVM_COMPILED_LOCAL') == '1':
+            from p2p._linear_fast import dual_steps
+            new,updated=dual_steps(indptr,indices,data,y,alpha,w,
+                                   np.asarray(order,dtype=np.int64),lam_n,1.,self.step_scale)
+            self.alpha[:]=new;self.w[:]=updated
+            return
         for i in order:
             start, end = indptr[i], indptr[i + 1]
             cols, vals = indices[start:end], data[start:end]
             norm_sq = float(np.dot(vals, vals))
-            if norm_sq < 1e-12:
+            if norm_sq == 0.:
+                alpha[i] += self.step_scale * (float(y[i]) - alpha[i])
                 continue
             yi = float(y[i])
             margin = yi * float(np.dot(w[cols], vals))

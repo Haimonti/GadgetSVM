@@ -1,0 +1,24 @@
+{
+  "repository": "https://github.com/epfml/cola",
+  "commit": "c87ba35b3fa54166744585549cd0c85ce279c2ed",
+  "hashes": {
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "Dockerfile": "aa9cb9c7457fe8577b87fb63eb80e5b9cc4f7f15587579e039cb217064e21891",
+    "Makefile": "f673a8ed10d385a8eae46e52a26ba029aca8d5e6f52e47d194905e55f90a1195",
+    "run_cola.py": "fe55d4dcc7121ee8d851138c1827d88a78ccb9f24f2b97badf29f1ba8fff0310",
+    "README.md": "58bff9452c9183cb71e8209e2ac33a37ad353d8ac222c441a215a8da6bdd4dd1",
+    "setup.py": "0084232c9b1bee58718a0a76ed48eb20f0fbd3c87321a2fe76e707494891e91a",
+    "split_dataset.py": "96f269950ca2c5ed3e34963c4cf5c38c5aff72247c2c2b8a62864ed248c6f1e5",
+    "cola/monitor.py": "a5645690c92b490b1b2856bfd7848619714588ff6386d2e9f3cd6ef60ef403c9",
+    "cola/graph.py": "3135bf6487221b84f0721f53642ff90d0599917124ef6a29a79bc0be9a03bbbe",
+    "cola/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cola/cocoasolvers.py": "dcaa58435f57892c6c834686a54337d5276ee7abb6226ddaa07f9078d5f29d1c",
+    "cola/dataset.py": "4e3d46787e77a418bddd65dbca299e857500a01caae0e494112b5f8a5ab8cacf",
+    "cola/communication.py": "17f9f1fc24bff9a76a778573f70839ba936037779cc8ae96bdb35c7e36b4dc6a",
+    "cola/algo.py": "c0cbca69c7839d2053292dab60ff54334e667b0262ea5b16eb1c42db138c86f7",
+    "fast_cd/svm.pyx": "f0f2724cfa45a977a3e30cbe600cec608c47860cea6714e5d3e4730a56019f8b",
+    "fast_cd/elasticnet.pyx": "043074de8c808a910ef49cf2b6d2a00feb161e612fbd16908b1c5f2c74af8cf9",
+    "fast_cd/solver.py": "82c9fde1554eb120b2c5f234e075d05ed8d8b32b2dd2bd71abee51a81a6701c4",
+    "fast_cd/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

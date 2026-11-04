@@ -1,0 +1,13 @@
+{
+  "repository": "https://github.com/epfml/ChocoSGD",
+  "commit": "3cb976a54499c2cdc8ea68e001217b42b58870ae",
+  "hashes": {
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "README.md": "ac9f69ce48d61710c3f4d3767a791e417b8f4e3325ccbd685477765f9e229343",
+    "convex_code/logistic.py": "520dd043924febb56a1943c3a52a6fe294d5ed8f7823513c53248d8629538860",
+    "convex_code/base_logistic.py": "726f6ce90ee0a7a77acaf61d20d44a31f687c8160be9c3932da3b105d0fcaf23",
+    "convex_code/parameters.py": "acfd479f53ebe689d2781f99a37b90baaee22168fd8990f9257be70bc7b2524c",
+    "convex_code/constants.py": "a016f82667272d81aa1ef7313e6acc7d5a5acdd9d22e590bd0d2834e2131e4cc",
+    "convex_code/README.md": "3901bf4c0bb6a0ac838d1df3c1969dae2a00c5941447626401ad8a7c9f71d59d"
+  }
+}
