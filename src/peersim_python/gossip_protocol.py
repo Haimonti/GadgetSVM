@@ -40,7 +40,17 @@ class GossipProtocol(CDProtocol):
 
     # ---- the per-cycle gossip loop (fixed; shared by every tenant) ----------
     def nextCycle(self, node, pid):
-        if not self.ready() or self.stopped:
+        if not self.ready():
+            return
+        if self.stopped:
+            # A converged node stops TRAINING. A learner whose consensus needs every
+            # node's final state (e.g. versioned contributions) keeps RELAYING what
+            # its neighbours have not yet received from it — otherwise its last
+            # update may never reach the nodes still running, and they freeze just
+            # above the threshold (observed: 7/10 nodes latched, 3 stuck forever).
+            if self.relays_when_stopped():
+                self._drain_and_merge()
+                self._relay(node, pid)
             return
         self._drain_and_merge()   # 1. receive + fold neighbours' payloads in
         self.local_update()       # 2. local training step (may set the increment)
@@ -115,3 +125,11 @@ class GossipProtocol(CDProtocol):
         table); a learner whose payload is a plain vector (e.g. model-averaging a
         weight array) overrides this to ``payload.copy()``."""
         return dict(payload)
+
+    def relays_when_stopped(self):
+        """Whether a stopped node keeps forwarding unseen state (default: silent)."""
+        return False
+
+    def _relay(self, node, pid):
+        """Forward-only step of a stopped node; learners that relay override this."""
+        return None

@@ -9,8 +9,10 @@ the protocol logic, not the runtime.
 
 This package is the shared, learner-agnostic distribution engine. The models
 that ride on it are separate tenant packages — `src/linear_sdca/`,
-`src/baselines/gadget/`, `src/nonlinear_sdca/` and `src/baselines/mom_ndsvm/` — each with its own protocol, observers
-and `Simulation`, all run from the shared entry point `src/scripts/main.py`.
+`src/baselines/gadget/`, `src/nonlinear_sdca/`, `src/baselines/cola/` and
+`src/baselines/choco/` — each with its own protocol, observers and `Simulation`,
+all run from the shared entry point `src/scripts/main.py`. (Forero and Fed-KSVM
+run standalone in their papers' own setups.)
 
 Layout: `core/` and `cdsim/` are the ported PeerSim engine (one class per file);
 `gossip_protocol.py` + `aggregator.py` are the reusable gossip substrate (the
