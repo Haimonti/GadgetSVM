@@ -49,6 +49,8 @@ class PegasosProtocol(GossipProtocol):
         self.prev_obj = None
         self.converge_count = 0
         self.stop_cycle = None
+        self.compressor = None          # optional message compression (quantization ablation)
+        self._sent_nbytes = None
 
     def clone(self):
         # Fresh, empty protocol per node — never deep-copy the (large) shard.
@@ -92,16 +94,21 @@ class PegasosProtocol(GossipProtocol):
         self.w = np.asarray(merged, dtype=np.float64)
 
     def outgoing_payload(self):
-        # Model averaging: gossip the absolute weight vector.
-        return self.w
+        # Model averaging: gossip the absolute weight vector (decoded, if a
+        # compressor is set — receivers average what they can reconstruct).
+        if self.compressor is None:
+            self._sent_nbytes = self.d * 8
+            return self.w
+        decoded, self._sent_nbytes = self.compressor(self.w)
+        return decoded
 
     def _copy_payload(self, payload):
         # The payload is a plain weight vector, not a dict — copy as an array.
         return payload.copy()
 
     def payload_nbytes(self):
-        # one float64 weight vector of length d
-        return self.d * 8
+        # one encoded weight vector of length d (dense float64 by default)
+        return self._sent_nbytes if self._sent_nbytes is not None else self.d * 8
 
     def local_update(self):
         self._pegasos_steps(self.local_steps)

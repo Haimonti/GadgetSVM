@@ -17,18 +17,22 @@ import scipy.sparse as sp
 
 from src.peersim_python.cdsim import CDState
 from src.peersim_python.core import Control, Network
+from src.peersim_python.compression import Compressor
 from src.peersim_python.logger import logger
 
 
 class PegasosDataInitializer(Control):
     """Assign each node its shard and the run's constants (GADGET baseline)."""
 
-    def __init__(self, pid, worker_data, lambda_reg, gossip_k, local_steps=None):
+    def __init__(self, pid, worker_data, lambda_reg, gossip_k, local_steps=None,
+                 compressor_spec="full", seed=0):
         self.pid = pid
         self.worker_data = worker_data
         self.lambda_reg = lambda_reg
         self.gossip_k = gossip_k
         self.local_steps = local_steps
+        self.compressor_spec = compressor_spec
+        self.seed = seed
 
     def execute(self):
         n_global = sum(int(wd["n_local"]) for wd in self.worker_data)
@@ -36,6 +40,8 @@ class PegasosDataInitializer(Control):
         for i, wd in enumerate(self.worker_data):
             proto = Network.get(i).getProtocol(self.pid)
             proto.gossip_k = self.gossip_k
+            proto.compressor = Compressor(self.compressor_spec,
+                                          np.random.default_rng([self.seed, i, 3]))
             proto.set_data(
                 wd["X_csr"], wd["y"], wd["X_test"], wd["y_test"], self.lambda_reg,
             )

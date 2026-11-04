@@ -12,9 +12,7 @@ the model they assemble.
 
 from src.peersim_python.core import Network, GeneralNode, CommonState
 from src.peersim_python.idle_protocol import IdleProtocol
-from src.peersim_python.dynamics import (
-    WireKOut, WireRing, WireFull, WireStar, WireMesh,
-)
+from src.peersim_python.dynamics import make_topology
 from src.peersim_python.cdsim import CDSimulator
 from src.peersim_python.logger import logger
 
@@ -33,21 +31,6 @@ class GadgetSimulation:
         self.worker_data = worker_data
         self.sim = None
 
-    def _topology(self, name):
-        """Map a CONFIG topology name to the matching Wire* control (undirected)."""
-        if name == "random_kout":
-            return WireKOut(self.LINKABLE_PID, self.config["GOSSIP_K"], undir=True)
-        if name == "ring":
-            return WireRing(self.LINKABLE_PID, undir=True)
-        if name == "full":
-            return WireFull(self.LINKABLE_PID, undir=True)
-        if name == "star":
-            return WireStar(self.LINKABLE_PID, undir=True)
-        if name == "mesh":
-            return WireMesh(self.LINKABLE_PID, undir=True)
-        raise ValueError(
-            f"Unknown topology '{name}'. Choose: random_kout | ring | full | star | mesh"
-        )
 
     def build(self):
         cfg = self.config
@@ -63,10 +46,11 @@ class GadgetSimulation:
 
         # init.* — wire topology, then assign data shards
         initializers = [
-            self._topology(cfg["TOPOLOGY"]),
+            make_topology(cfg, self.LINKABLE_PID),
             PegasosDataInitializer(
                 self.PEGASOS_PID, self.worker_data, cfg["LAMBDA"], cfg["GOSSIP_K"],
                 local_steps=cfg.get("SDCA_LOCAL_STEPS"),
+                compressor_spec=cfg.get("COMPRESSOR", "full"), seed=cfg["SEED"],
             ),
         ]
         # control.* — global measurement. Two independent early stops (both
@@ -94,6 +78,7 @@ class GadgetSimulation:
         """Build (if needed) and run the experiment; returns the stopping cycle."""
         cfg = self.config
         cycles = cycles if cycles is not None else cfg["ROUNDS"]
+        self.budget = cycles
         if self.sim is None:
             self.build()
         self.sim.cycles = cycles
