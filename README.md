@@ -27,7 +27,7 @@ python src/scripts/ablation_runner.py -a <ablation|all> -d <dataset> [--seeds ..
 python src/scripts/ablation_runner.py --replot <ablation_run_dir>   # rebuild summary + plots
 ```
 
-- Models — linear: `sdca`, `central_sdca`, `gadget`, `cola`, `choco` · nonlinear: `nonlinear`, `ndsvm` (Forero), `fed_ksvm` · or `all`
+- Models — linear: `sdca`, `gadget`, `cola`, `choco` (`central_sdca` on hold) · nonlinear: `nonlinear`, `ndsvm` (Forero), `fed_ksvm` · or `all`
 - Datasets: `rcv`, `cov`, `gis`, `rsim`, `w8a`, `ijcnn`, `adult` (a9a), `webspam`, or `all`
 - One model → individual plots. Two or more → comparative plots.
 
@@ -104,7 +104,10 @@ The single `CONFIG` dict:
 | `src/linear_sdca/` | Gossip SDCA (linear) | Versioned per-origin dual contributions, accumulated | Duality gap |
 | `src/nonlinear_sdca/` | Kernel SDCA (RBF / polynomial) over a DSRR projection | Projected support vectors + duals | Duality gap (τ-consistent) |
 
-**Centralized baseline on PeerSim (one node)**
+**Centralized baseline — ON HOLD (being redesigned; not in any run, not in `MODELS` / `LINEAR_MODELS`)**
+
+While it is on hold there is no P*, so the suboptimality panel and the ablations'
+iterations / bytes to ε are omitted; every other metric is unaffected.
 
 | Package | Model | Sends | Convergence |
 |---|---|---|---|

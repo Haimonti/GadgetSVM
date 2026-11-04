@@ -11,7 +11,8 @@ recorded in comparison.json). `base` overrides apply to every setting.
 `ablation_runner.py` executes them; edit values here, not in the runner.
 """
 
-LINEAR_MODELS = ["central_sdca", "sdca", "gadget", "cola", "choco"]
+# central_sdca is on hold (being redesigned) and is not run; add it back here when ready
+LINEAR_MODELS = ["sdca", "gadget", "cola", "choco"]
 
 
 class Skip:

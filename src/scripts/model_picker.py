@@ -28,7 +28,8 @@ from src.peersim_python.logger import logger
 from src.scripts.dataset_keywords import select_dataset
 from src.scripts.data_sharding import load_shards
 
-MODELS = ["sdca", "central_sdca", "gadget", "cola", "choco", "nonlinear", "ndsvm", "fed_ksvm"]
+# central_sdca is on hold (being redesigned): not in MODELS, so no run includes it
+MODELS = ["sdca", "gadget", "cola", "choco", "nonlinear", "ndsvm", "fed_ksvm"]
 
 
 

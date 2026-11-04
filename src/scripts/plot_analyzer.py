@@ -57,7 +57,8 @@ COMP_ROOT = CODE_DIR / "results" / "comparative_plots"
 INDIV_ROOT = CODE_DIR / "results" / "individual_plots"
 
 # Models, their plot styling, group, and the per-model convergence series.
-ALGO_LIST = ["central_sdca", "sdca", "gadget", "cola", "choco", "nonlinear", "ndsvm", "fed_ksvm"]
+# central_sdca is on hold: not listed, so old central JSONs are not picked up by default
+ALGO_LIST = ["sdca", "gadget", "cola", "choco", "nonlinear", "ndsvm", "fed_ksvm"]
 ALGO_STYLE = {
     "central_sdca": ("Centralized SDCA", "*", "k"),
     "sdca":         ("SDCA (ours)", "o", "C0"),

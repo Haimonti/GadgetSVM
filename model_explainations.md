@@ -92,6 +92,8 @@ Think of a group building one sum together. Everyone writes their own number on 
 
 ### 1.2 `central_sdca`: centralized SDCA baseline (one PeerSim node, all data)
 
+> **On hold.** Being redesigned and not part of any run right now. The description below is the current code in `src/baselines/central_sdca/`.
+
 **Idea.** The linear baseline for our SDCA. It is the same SDCA coordinate rule with step scale 1, run on your PeerSim engine as a 1-node network that holds every shard and has no links, so it never communicates. This is "what if one computer had all the data". Code: `src/baselines/central_sdca/`.
 
 - **One round** = `NUM_WORKERS × SDCA_LOCAL_STEPS` = 40,960 steps, so its x-axis lines up with the distributed models.

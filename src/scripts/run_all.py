@@ -7,7 +7,7 @@
     python src/scripts/run_all.py --set ROUNDS=20000 EVAL_EVERY=50  # overrides for every run
 
 For every dataset it runs, in order:
-  1. LINEAR comparison     — sdca, central_sdca, gadget, cola, choco   -> comparative plots
+  1. LINEAR comparison     — sdca, gadget, cola, choco                 -> comparative plots
   2. NONLINEAR comparison  — nonlinear, ndsvm (Forero), fed_ksvm       -> comparative plots
   3. ABLATIONS (linear)    — every ablation in ablations.py            -> results/ablations/...
 Linear and nonlinear models are plotted separately (never mixed in one figure).
