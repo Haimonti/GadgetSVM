@@ -26,7 +26,7 @@ from pathlib import Path
 # Ensure the repo root is importable so `src.*` and root-level `data.*` resolve.
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
-from src.scripts.model_picker import MODELS, run_model
+from src.scripts.model_picker import MODELS, run_model, parse_overrides
 from src.peersim_python.logger import logger
 
 
@@ -40,12 +40,20 @@ def main():
                     "(individual for one model, comparative for two or more).")
     ap.add_argument("-m", "--models", "--algos", nargs="+", dest="models",
                     default=["all"], metavar="MODEL",
-                    help="models to run: sdca gadget nonlinear ndsvm or 'all' (default: all)")
+                    help=f"models to run: {' '.join(MODELS)} or 'all' (default: all)")
     ap.add_argument("-d", "--datasets", nargs="+", default=["all"], metavar="DATASET",
                     help="dataset keywords or 'all' (default: all)")
     ap.add_argument("--no-plots", action="store_true",
                     help="train + save JSON only, skip plotting")
+    ap.add_argument("--seeds", nargs="+", type=int, default=None, metavar="SEED",
+                    help="run every leg once per seed (default: CONFIG['SEED']); "
+                         "plots report mean ± std across seeds")
+    ap.add_argument("--set", nargs="+", default=[], metavar="KEY=VAL", dest="overrides",
+                    help="override CONFIG keys for this invocation, e.g. "
+                         "--set TOPOLOGY=ring NUM_WORKERS=16 LAMBDA=1e-5")
     args = ap.parse_args()
+    overrides = parse_overrides(args.overrides)
+    seeds = args.seeds or [None]
 
     models = list(MODELS) if "all" in args.models else args.models
     bad = [m for m in models if m not in MODELS]
@@ -65,7 +73,9 @@ def main():
     for ds in datasets:
         for model in models:
             try:
-                run_model(model, ds)
+                for seed in seeds:
+                    ov = dict(overrides, **({"SEED": seed} if seed is not None else {}))
+                    run_model(model, ds, overrides=ov)
                 outcomes[(model, ds)] = True
             except Exception as e:                       # noqa: BLE001 — one leg must not kill the sweep
                 outcomes[(model, ds)] = False
