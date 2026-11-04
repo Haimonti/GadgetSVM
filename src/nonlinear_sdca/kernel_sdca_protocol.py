@@ -1,4 +1,4 @@
-"""KernelSDCAProtocol — RBF kernel SDCA over DSRR-projected support vectors.
+"""KernelSDCAProtocol — kernel (RBF or polynomial) SDCA over DSRR-projected support vectors.
 
 A tenant of the generic `GossipProtocol`, the kernel counterpart of
 `src/peersim_python/sdca_protocol.py`. The engine, topology and per-cycle loop are
@@ -27,11 +27,11 @@ import numpy as np
 from src.peersim_python.core.common_state import CommonState
 from src.peersim_python.gossip_protocol import GossipProtocol
 from src.nonlinear_sdca.aggregator import SupportVectorAccumulator
-from src.nonlinear_sdca.kernel import rbf_gram, kernel_scores
+from src.nonlinear_sdca.kernel import kernel_scores, make_kernel
 
 
 class KernelSDCAProtocol(GossipProtocol):
-    """Kernel (RBF) SDCA learner; gossips projected support vectors, accumulates."""
+    """Kernel SDCA learner; gossips projected support vectors, accumulates."""
 
     def __init__(self):
         super().__init__(gossip_k=1, aggregator=SupportVectorAccumulator())
@@ -42,11 +42,15 @@ class KernelSDCAProtocol(GossipProtocol):
         self.local_steps = 1
         self.step_scale = 1.0
         self.version = 0
-        self.contributions = {}     # origin -> (version, X_hat_sv, alpha_sv, y_sv)
+        # origin -> (version, X_hat_sv, alpha_sv, y_sv, sv_index). Only the first four
+        # travel; sv_index (the block's row numbers in the origin's own shard) is the
+        # origin's private bookkeeping that the recovery step uses to find its raw rows.
+        self.contributions = {}
         self.metrics = []
         self.start = None
         # kernel / projection params (set in set_data)
         self.gamma = 0.1
+        self.kernel = None
         self.m = None
         self.dist = "sparse"
         self.tau = 0.0
@@ -55,6 +59,8 @@ class KernelSDCAProtocol(GossipProtocol):
         # instead of re-sending the whole accumulated table every cycle.
         self._sent = {}
         self._last_sweep_changed = True
+        # this node's private per-origin external score parts: origin -> (version, part)
+        self._ext_parts = {}
 
     def clone(self):
         """Fresh learner carrying only the fanout (the engine clones the prototype
@@ -65,8 +71,11 @@ class KernelSDCAProtocol(GossipProtocol):
 
     # ---- setup (called once per node by KernelDataInitializer) ---------------
     def set_data(self, X_csr, y, X_test, y_test, lambda_reg,
-                 seed, m, dist, gamma, tau):
-        """Project the shard with the shared DSRR matrix and cache the local Gram."""
+                 seed, m, dist, gamma, tau, kernel=None):
+        """Project the shard with the shared DSRR matrix and cache the local Gram.
+
+        The raw shard is kept on the node (never sent): DSRR's recovery step scores
+        with the learned duals and the ORIGINAL-space kernel (see KernelEvaluator)."""
         from src.nonlinear_sdca.projection import project_shard
 
         self.y = np.asarray(y, dtype=np.float64)
@@ -76,14 +85,21 @@ class KernelSDCAProtocol(GossipProtocol):
         self.m = int(m)
         self.dist = dist
         self.tau = float(tau)
+        self.kernel = kernel or make_kernel({"KERNEL": "rbf", "RBF_GAMMA": self.gamma})
+        self.X_raw = X_csr.tocsr()
+        self.X_test_raw = X_test.tocsr()
 
         self.Xhat, self.Xhat_test, _ = project_shard(
             X_csr, X_test, seed, self.m, self.dist
         )
+        self.m = self.Xhat.shape[1]      # actual reduced dim (= d when no reduction is possible)
         self.n = self.Xhat.shape[0]
         self.alpha = np.zeros(self.n, dtype=np.float64)
-        # local Gram K_local[i, j] = K(x_hat_i, x_hat_j); diag is 1 for RBF.
-        self.K_local = rbf_gram(self.Xhat, self.Xhat, self.gamma)
+        # local Gram K_local[i, j] = K(x_hat_i, x_hat_j); diag is 1 for RBF. Stored
+        # column-major: the sweep reads one column K[:, i] per step, which is then a
+        # contiguous read (same values; the RBF Gram is not bit-symmetric, so K[i] is
+        # not used in its place).
+        self.K_local = np.asfortranarray(self.kernel(self.Xhat, self.Xhat))
         # score cache split into the local-dual part (maintained incrementally
         # during a sweep) and the external part (recomputed on every merge).
         self.f_local = np.zeros(self.n, dtype=np.float64)
@@ -122,8 +138,8 @@ class KernelSDCAProtocol(GossipProtocol):
         # each support vector is an m-dim float64 plus its alpha + label; one int
         # version tag per origin block.
         total = 0
-        for _, (_, Xsv, alpha_sv, _) in self.contributions.items():
-            total += len(alpha_sv) * (self.m * 8 + 16) + 8
+        for entry in self.contributions.values():
+            total += len(entry[2]) * (self.m * 8 + 16) + 8
         return total
 
     def local_update(self):
@@ -167,12 +183,28 @@ class KernelSDCAProtocol(GossipProtocol):
         The kernel analogue of SDCA's `_rebuild_w`: only the OTHER origins' support
         vectors go here (our own dual lives in `f_local`), so the two parts never
         double-count this node's contribution.
+
+        Each origin's part K(SV_o, local) alpha_o / lam_n is kept in this node's own
+        private table `_ext_parts` (origin -> (version, part)) and recomputed only when
+        that origin's version changes; a block that did not change since the last
+        merge is not re-scored. The parts are summed in the same order as before, so
+        f_ext is the same number. The table holds only what this node has received.
         """
-        self.f_ext = np.zeros(self.n, dtype=np.float64)
-        for origin, (_, Xsv, alpha_sv, _) in self.contributions.items():
+        f_ext = np.zeros(self.n, dtype=np.float64)
+        parts = {}
+        for origin, entry in self.contributions.items():
+            version, Xsv, alpha_sv = entry[0], entry[1], entry[2]
             if origin == self.node_id or len(alpha_sv) == 0:
                 continue
-            self.f_ext += kernel_scores(Xsv, alpha_sv, self.Xhat, self.gamma) / self.lam_n
+            cached = self._ext_parts.get(origin)
+            if cached is not None and cached[0] == version:
+                part = cached[1]
+            else:
+                part = kernel_scores(Xsv, alpha_sv, self.Xhat, self.kernel) / self.lam_n
+            parts[origin] = (version, part)
+            f_ext += part
+        self._ext_parts = parts
+        self.f_ext = f_ext
 
     def _publish_contribution(self, bump=True):
         # Only advance the version (and re-snapshot the block) when this node's
@@ -188,6 +220,7 @@ class KernelSDCAProtocol(GossipProtocol):
             self.Xhat[sv].copy(),
             self.alpha[sv].copy(),
             self.y[sv].copy(),
+            sv.copy(),
         )
 
     # ---- model readout -------------------------------------------------------
@@ -200,7 +233,8 @@ class KernelSDCAProtocol(GossipProtocol):
             blocks_x.append(self.Xhat[sv])
             blocks_a.append(self.alpha[sv])
             blocks_y.append(self.y[sv])
-        for origin, (_, Xsv, alpha_sv, y_sv) in self.contributions.items():
+        for origin, entry in self.contributions.items():
+            Xsv, alpha_sv, y_sv = entry[1], entry[2], entry[3]
             if origin == self.node_id or len(alpha_sv) == 0:
                 continue
             blocks_x.append(Xsv)
@@ -214,11 +248,20 @@ class KernelSDCAProtocol(GossipProtocol):
 
     def accuracy(self):
         Xsv, alpha_sv, _ = self.all_support_vectors()
-        scores = kernel_scores(Xsv, alpha_sv, self.Xhat_test, self.gamma)
+        scores = kernel_scores(Xsv, alpha_sv, self.Xhat_test, self.kernel)
         preds = np.where(scores >= 0.0, 1.0, -1.0)
         return float(np.mean(preds == self.y_test))
 
-    def _gossip_push(self, node, pid):
+    def relays_when_stopped(self):
+        return True
+
+    def _relay(self, node, pid):
+        """A latched node stops training but keeps forwarding the blocks a neighbour
+        has not yet seen from it (latched neighbours included), so its final support
+        vectors reach the nodes still running — the same delta-send, same accounting."""
+        self._gossip_push(node, pid, include_stopped=True)
+
+    def _gossip_push(self, node, pid, include_stopped=False):
         """Versioned delta-send (overrides the generic full-table push).
 
         Transmit (and charge comm for) only the per-origin support-vector blocks a
@@ -235,7 +278,7 @@ class KernelSDCAProtocol(GossipProtocol):
             return
         for peer_index in CommonState.r.sample(range(deg), min(self.gossip_k, deg)):
             peer_proto = link.getNeighbor(peer_index).getProtocol(pid)
-            if peer_proto.stopped:
+            if peer_proto.stopped and not include_stopped:
                 continue
             seen = self._sent.setdefault(peer_proto.node_id, {})
             delta, nbytes = {}, 0

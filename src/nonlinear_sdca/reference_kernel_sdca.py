@@ -24,16 +24,16 @@ from src.config import CONFIG
 from src.scripts.dataset_keywords import select_dataset
 from src.scripts.data_sharding import load_shards
 from src.nonlinear_sdca.projection import project_shard
-from src.nonlinear_sdca.kernel import rbf_gram
+from src.nonlinear_sdca.kernel import make_kernel
 
 
 def _duality_gap(K, alpha, y, lam_n, lam, n, tau):
     f = (K @ alpha) / lam_n                              # score of every point
-    hinge = float(np.mean(np.maximum(0.0, (1.0 - tau) - y * f)))
+    hinge = float(np.mean(np.maximum(0.0, (1.0 - tau) - y * f)))   # margin (1 - tau)
     norm_h2 = float(np.dot(alpha, f) / lam_n)           # ||f||_H^2
     reg = (lam / 2.0) * norm_h2
     primal = hinge + reg
-    dual = float(np.dot(alpha, y)) / n - reg            # alpha.y = sum of unsigned
+    dual = (1.0 - tau) * float(np.dot(alpha, y)) / n - reg   # alpha.y = sum of unsigned
     return primal - dual, primal, hinge
 
 
@@ -53,9 +53,13 @@ def run(keyword, epochs):
     y = np.asarray(shard["y"], dtype=np.float64)
     y_test = np.asarray(shard["y_test"], dtype=np.float64)
     n = Xhat.shape[0]
-    K = rbf_gram(Xhat, Xhat, gamma)                     # n x n local Gram
+    kcfg = dict(cfg)
+    if kcfg.get("KERNEL", "rbf") == "poly" and kcfg.get("POLY_GAMMA") is None:
+        kcfg["POLY_GAMMA"] = 1.0 / shard["X_csr"].shape[1]    # same g for x and Ax
+    kernel = make_kernel(kcfg)
+    K = kernel(Xhat, Xhat)                              # n x n local Gram
     print(f"[ref] {keyword}: n={n}, projected d->m={m} ({dist}), "
-          f"gamma={gamma}, lambda={lam}, tau={tau}  ({time.time()-t0:.1f}s)")
+          f"kernel={cfg.get('KERNEL', 'rbf')}, gamma={gamma}, lambda={lam}, tau={tau}  ({time.time()-t0:.1f}s)")
 
     alpha = np.zeros(n, dtype=np.float64)
     f = np.zeros(n, dtype=np.float64)                   # f = (K @ alpha)/lam_n
@@ -81,9 +85,14 @@ def run(keyword, epochs):
               f"gap={gap:.3e}  support_vectors={n_sv}/{n}")
 
     # test accuracy from the support-vector expansion
-    scores = rbf_gram(Xhat, Xhat_test, gamma).T @ alpha
+    scores = kernel(Xhat, Xhat_test).T @ alpha
     acc = float(np.mean(np.where(scores >= 0.0, 1.0, -1.0) == y_test))
-    print(f"[ref] {keyword}: single-machine kernel-SDCA test accuracy = {acc:.4f}")
+    print(f"[ref] {keyword}: single-machine kernel-SDCA test accuracy = {acc:.4f}  (projected space)")
+    # DSRR recovery: same duals, original-space kernel on the raw points
+    sv = np.nonzero(alpha)[0]
+    rec = kernel(shard["X_csr"][sv], shard["X_test"]).T @ alpha[sv]
+    acc_rec = float(np.mean(np.where(rec >= 0.0, 1.0, -1.0) == y_test))
+    print(f"[ref] {keyword}: recovered (original-space) test accuracy = {acc_rec:.4f}")
     return acc
 
 
