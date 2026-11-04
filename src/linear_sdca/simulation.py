@@ -16,9 +16,7 @@ loads a dataset itself, so the engine stays data-agnostic.
 from src.peersim_python.core import Network, GeneralNode, CommonState
 from src.peersim_python.idle_protocol import IdleProtocol
 from src.linear_sdca.sdca_protocol import SDCAProtocol
-from src.peersim_python.dynamics import (
-    WireKOut, WireRing, WireFull, WireStar, WireMesh,
-)
+from src.peersim_python.dynamics import make_topology
 from src.linear_sdca.observers import DataInitializer, GlobalEvaluator
 from src.peersim_python.cdsim import CDSimulator
 from src.peersim_python.logger import logger
@@ -35,21 +33,6 @@ class Simulation:
         self.worker_data = worker_data
         self.sim = None
 
-    def _topology(self, name):
-        """Map a CONFIG topology name to the matching Wire* control (undirected)."""
-        if name == "random_kout":
-            return WireKOut(self.LINKABLE_PID, self.config["GOSSIP_K"], undir=True)
-        if name == "ring":
-            return WireRing(self.LINKABLE_PID, undir=True)
-        if name == "full":
-            return WireFull(self.LINKABLE_PID, undir=True)
-        if name == "star":
-            return WireStar(self.LINKABLE_PID, undir=True)
-        if name == "mesh":
-            return WireMesh(self.LINKABLE_PID, undir=True)
-        raise ValueError(
-            f"Unknown topology '{name}'. Choose: random_kout | ring | full | star | mesh"
-        )
 
     def build(self):
         cfg = self.config
@@ -65,12 +48,13 @@ class Simulation:
 
         # init.* — wire topology, then assign data shards
         initializers = [
-            self._topology(cfg["TOPOLOGY"]),
+            make_topology(cfg, self.LINKABLE_PID),
             DataInitializer(
                 self.SDCA_PID, self.worker_data, cfg["LAMBDA"], cfg["GOSSIP_K"],
                 warm_start=cfg.get("WARM_START", False),
                 local_steps=cfg.get("SDCA_LOCAL_STEPS"),
                 step_scale=cfg.get("SDCA_STEP_SCALE"),
+                compressor_spec=cfg.get("COMPRESSOR", "full"), seed=cfg["SEED"],
             ),
         ]
         # control.* — global measurement. Two independent early stops (both
@@ -83,6 +67,7 @@ class Simulation:
             stop_on_plateau=cfg.get("STOP_ON_PLATEAU", False),
             plateau_patience=cfg.get("PLATEAU_PATIENCE", 20),
             plateau_rel_eps=cfg.get("PLATEAU_REL_EPS", 1e-3),
+            stop_rule=cfg.get("STOP_RULE", "node_global_gap"),
         )]
 
         self.sim = CDSimulator(
@@ -97,6 +82,7 @@ class Simulation:
         """Build (if needed) and run the experiment; returns the stopping cycle."""
         cfg = self.config
         cycles = cycles if cycles is not None else cfg["ROUNDS"]
+        self.budget = cycles
         if self.sim is None:
             self.build()
         self.sim.cycles = cycles

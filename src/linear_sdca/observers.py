@@ -24,6 +24,7 @@ import scipy.sparse as sp
 
 from src.peersim_python.cdsim import CDState
 from src.peersim_python.core import Control, Network
+from src.peersim_python.compression import Compressor
 from src.peersim_python.logger import logger
 
 
@@ -31,7 +32,8 @@ class DataInitializer(Control):
     """Assign each node its shard and the global objective's constants."""
 
     def __init__(self, pid, worker_data, lambda_reg, gossip_k,
-                 warm_start=False, local_steps=None, step_scale=None):
+                 warm_start=False, local_steps=None, step_scale=None,
+                 compressor_spec="full", seed=0):
         self.pid = pid
         self.worker_data = worker_data
         self.lambda_reg = lambda_reg
@@ -39,6 +41,8 @@ class DataInitializer(Control):
         self.warm_start = warm_start
         self.local_steps = local_steps
         self.step_scale = step_scale
+        self.compressor_spec = compressor_spec
+        self.seed = seed
 
     def execute(self):
         n_global = sum(int(wd["n_local"]) for wd in self.worker_data)
@@ -46,6 +50,8 @@ class DataInitializer(Control):
         for i, wd in enumerate(self.worker_data):
             proto = Network.get(i).getProtocol(self.pid)
             proto.gossip_k = self.gossip_k
+            proto.compressor = Compressor(self.compressor_spec,
+                                          np.random.default_rng([self.seed, i, 3]))
             proto.set_data(
                 wd["X_csr"], wd["y"], wd["X_test"], wd["y_test"], self.lambda_reg,
             )
@@ -73,8 +79,18 @@ class GlobalEvaluator(Control):
 
     def __init__(self, pid, gap_threshold, eval_every=1, total_cycles=None,
                  stop_on_threshold=False, stop_on_plateau=False,
-                 plateau_patience=20, plateau_rel_eps=1e-3):
+                 plateau_patience=20, plateau_rel_eps=1e-3, stop_rule="node_global_gap"):
         self.pid = pid
+        # Which gap the early stop reads (the stopping-criterion ablation):
+        #   node_global_gap — per node, primal hinge over ALL training data (oracle
+        #                     evaluation; the default and the historical behaviour)
+        #   node_local_gap  — per node, primal hinge over the node's OWN shard only:
+        #                     the gap a node could actually compute by itself
+        #   mean_gap        — every node stops together once the mean global gap
+        #                     is below the threshold (a global oracle)
+        if stop_rule not in ("node_global_gap", "node_local_gap", "mean_gap"):
+            raise ValueError(f"unknown STOP_RULE '{stop_rule}'")
+        self.stop_rule = stop_rule
         self.gap_threshold = gap_threshold
         self.eval_every = max(1, int(eval_every))
         self.total_cycles = total_cycles
@@ -87,6 +103,7 @@ class GlobalEvaluator(Control):
         self.plateau_rel_eps = float(plateau_rel_eps)
         self._best_metric = float("inf")
         self._stall = 0
+        self.resumes = 0
         self._X_all = None
         self._y_all = None
 
@@ -130,22 +147,37 @@ class GlobalEvaluator(Control):
             alpha_sum = sum(entry[2] for entry in p.contributions.values())
             dual = float(alpha_sum / n_global - reg)
             gap = primal - dual
+            local_hinge = float(np.maximum(0.0, 1.0 - p.y * p.X.dot(p.w)).mean()) if p.n else 0.0
+            local_gap = local_hinge + reg - dual
             preds = np.where(p.X_test.dot(p.w) >= 0.0, 1.0, -1.0)
             consensus_error = float(np.linalg.norm(p.w - mean_w))
             is_complete = len(p.contributions) == len(protos)
             # Per-node early stop (latching): a node stops once its gap is below
             # threshold AND it has heard from every origin (so a partly-informed
             # node cannot falsely declare convergence). A stopped node stops
-            # training and gossiping, so its communication cost freezes here.
-            if (self.stop_on_threshold and not p.stopped
-                    and is_complete and gap < self.gap_threshold):
+            # training but still relays versions its neighbours lack (see
+            # SDCAProtocol._relay), and resumes if its gap rises again (below).
+            rule_gap = local_gap if self.stop_rule == "node_local_gap" else gap
+            if (self.stop_on_threshold and self.stop_rule != "mean_gap" and not p.stopped
+                    and is_complete and rule_gap < self.gap_threshold):
                 p.stopped = True
                 p.stop_cycle = cycle
+            elif (self.stop_on_threshold and self.stop_rule != "mean_gap" and p.stopped
+                    and rule_gap >= self.gap_threshold):
+                # Hysteresis: the dual is coupled across nodes, so once others' blocks
+                # moved, a latched node's own block may no longer be optimal and the
+                # stragglers cannot close the gap alone (measured: 7/10 latched, the
+                # rest frozen at 1.2e-4). A latched node whose gap rose back above the
+                # threshold therefore resumes; the run ends when all are below at once.
+                p.stopped = False
+                p.stop_cycle = None
+                self.resumes += 1
             p.metrics.append({
                 "round": cycle + 1,
                 "primal": primal,
                 "dual": dual,
                 "duality_gap": gap,
+                "local_gap_est": local_gap,
                 "hinge_loss": float(hinge),
                 "accuracy": float(np.mean(preds == p.y_test)),
                 "consensus_error": consensus_error,
@@ -157,6 +189,13 @@ class GlobalEvaluator(Control):
             gaps.append(gap)
             consensus_errors.append(consensus_error)
 
+        if (self.stop_on_threshold and self.stop_rule == "mean_gap"
+                and all(len(p.contributions) == len(protos) for p in protos)
+                and float(np.mean(gaps)) < self.gap_threshold):
+            for p in protos:
+                if not p.stopped:
+                    p.stopped, p.stop_cycle = True, cycle
+                    p.metrics[-1]["stopped"] = True
         n_stopped = sum(1 for p in protos if p.stopped)
         # Plateau tracking: an eval counts as progress only if the global mean
         # gap beats the best seen by at least `plateau_rel_eps` (relative);
@@ -172,7 +211,7 @@ class GlobalEvaluator(Control):
             f"cycle={cycle}  mean_gap={mean_gap:.3e}  "
             f"max_gap={np.max(gaps):.3e}  "
             f"max_consensus={np.max(consensus_errors):.3e}  "
-            f"stopped={n_stopped}/{len(protos)}  "
+            f"stopped={n_stopped}/{len(protos)} (resumes {self.resumes})  "
             f"stall={self._stall}/{self.plateau_patience}",
         )
         # Criterion 1 — convergence: every node reached the gap threshold.

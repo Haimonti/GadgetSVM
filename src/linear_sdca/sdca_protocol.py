@@ -53,6 +53,8 @@ class SDCAProtocol(GossipProtocol):
         self.step_scale = 1.0
         self.version = 0
         self.contributions = {}
+        self.compressor = None          # optional message compression (quantization ablation)
+        self._relayed = {}              # after latching: neighbour -> origin -> version sent
 
     def clone(self):
         # Fresh, empty protocol per node — never deep-copy the (large) shard.
@@ -110,8 +112,10 @@ class SDCAProtocol(GossipProtocol):
         self._rebuild_w()
 
     def payload_nbytes(self):
-        # per entry: one float64 vector + an int version + a float alpha sum
-        return len(self.contributions) * (self.d * 8 + 16)
+        # per entry: one encoded vector + an int version + a float alpha sum
+        if self.compressor is None:
+            return len(self.contributions) * (self.d * 8 + 16)
+        return sum(self.compressor.nbytes_of(e[1]) + 16 for e in self.contributions.values())
 
     def local_update(self):
         self._run_local_steps(self.local_steps, random_order=True)
@@ -129,9 +133,14 @@ class SDCAProtocol(GossipProtocol):
     def _publish_contribution(self, bump=True):
         if bump:
             self.version += 1
+        contribution = self._contribution()
+        if self.compressor is not None and not self.compressor.lossless:
+            # lossy: publish the decoded contribution (what every receiver sees);
+            # versions are absolute vectors, so the error never accumulates
+            contribution = self.compressor(contribution)[0]
         self.contributions[self.node_id] = (
             self.version,
-            self._contribution(),
+            contribution,
             float(np.dot(self.alpha, self.y)),   # sum of unsigned a_i, for the dual
         )
         self._rebuild_w()
@@ -200,3 +209,32 @@ class SDCAProtocol(GossipProtocol):
         self._run_local_steps(self.n, random_order=False)
         self._publish_contribution()
         self.warm_start_done = True
+
+    # ---- after convergence: relay, don't train ---------------------------------
+    def relays_when_stopped(self):
+        return True
+
+    def _entry_nbytes(self, entry):
+        vec = 8 * self.d if self.compressor is None else self.compressor.nbytes_of(entry[1])
+        return vec + 16
+
+    def _relay(self, node, pid):
+        """A latched node forwards, to GOSSIP_K random neighbours (latched or not),
+        only the contribution versions it has not already sent to that neighbour —
+        so its final contribution reaches the nodes still running, and each version
+        crosses each link at most once after latching (bytes counted)."""
+        link = node.getProtocol(self.LINKABLE_PID)
+        deg = link.degree()
+        if deg == 0:
+            return
+        relayed = self._relayed
+        for peer_index in CommonState.r.sample(range(deg), min(self.gossip_k, deg)):
+            peer = link.getNeighbor(peer_index).getProtocol(pid)
+            seen = relayed.setdefault(peer.node_id, {})
+            delta = {o: e for o, e in self.contributions.items() if e[0] > seen.get(o, -1)}
+            if not delta:
+                continue
+            peer.inbox.append(delta)
+            self.comm_bytes += sum(self._entry_nbytes(e) for e in delta.values())
+            for o, e in delta.items():
+                seen[o] = e[0]
