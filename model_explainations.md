@@ -1,6 +1,6 @@
 # Model explanations: what each model does, as currently set up
 
-This file describes the code as it is now. For each model it gives the idea, what happens in one round, what gets sent, when it stops, which settings matter, and what makes it slow. Default values are taken from `src/config.py`. Exact file paths are listed in `code-file-logic.md`.
+This file describes the code as it is now. For each model it gives the idea, what happens in one round, what gets sent, when it stops, which settings matter, and what makes it slow. Default values are taken from `src/config.py`. Exact file paths are listed in `README.md`.
 
 ---
 
@@ -49,7 +49,7 @@ P(w) = λ/2 ‖w‖²  +  (1/n) Σ_i max(0, 1 − y_i · f(x_i))
 | `budget` | The run used all `ROUNDS = 5000` (or the model's own budget) without either of the above, so it **did not converge**. |
 | `fixed_budget` | The run was designed to use its whole budget (CHOCO only). |
 
-Known issue: `GAP_THRESHOLD = 1e-4` is an absolute number. On gisette, P* ≈ 2.1e-4, so 1e-4 is about 50% of the optimum value. Most SDCA runs therefore end on `plateau` rather than `converged`. See the end of `code-file-logic.md`.
+Known issue: `GAP_THRESHOLD = 1e-4` is an absolute number. On gisette, P* ≈ 2.1e-4, so 1e-4 is about 50% of the optimum value. Most SDCA runs therefore end on `plateau` rather than `converged`. See the end of `README.md`.
 
 **Communication accounting.**
 - `comm_bytes` counts every byte a node sends. Dense float64 is 8 bytes per number.
