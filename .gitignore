@@ -21,3 +21,7 @@ __pycache__/
 notes/
 artifacts/
 MAINRESULTS/
+
+# Local working notes (not shared for now)
+changes.txt
+research_notes/
